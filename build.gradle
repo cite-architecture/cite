@@ -7,7 +7,27 @@ version = '0.15.0'
 
 
 apply from: "versions.gradle"
-apply from: "pub.gradle"
+
+if (hasProperty('pub')) {
+    System.err.print "Using configuration data from ${pub}"
+    File confFile = new File(pub)
+    if (! confFile.exists()) {
+        throw new Exception("No publication configuration file ${pub} found.")
+    } else {
+        apply from: pub
+    }
+
+} else {
+    File confFile = new File("pub.gradle")
+    if (! confFile.exists()) {
+        throw new Exception("No publication configuration file ${confFile} found\
+.")
+    } else {
+        println "Using default configuration in 'pub.gradle'"
+        apply from: "pub.gradle"
+    }
+}
+
 
 
 repositories {

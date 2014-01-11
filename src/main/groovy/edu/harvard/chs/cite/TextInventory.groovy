@@ -17,6 +17,10 @@ import groovy.xml.StreamingMarkupBuilder
 */
 class TextInventory {
 
+
+    /** Debugging level. */
+    Integer debug = 0
+
     /** List of data values that violate the TextInventory definition. */
     def errorList = []
 
@@ -485,26 +489,47 @@ throws Exception {
 
 
 
+
+    /** Finds ISO language code for a specified version of a work.
+    * @param urnStr URN value of the work in question.
+    * @returns ISO language code.
+    * @throws Exception if urnStr is not a valid CTS URN value.
+    */
     String languageForVersion(String urnStr) 
     throws Exception {
         try {
             CtsUrn urn = new CtsUrn(urnStr)
             return languageForVersion(urn)
+
         } catch (Exception e) {
             throw e
         }
     }
 
 
+
+    /** Finds ISO language code for a specified version of a work.
+    * @param urnStr URN value of the work in question.
+    * @returns ISO language code.
+    */
     String languageForVersion(CtsUrn urn) {
+        if (debug > 0)  {
+            System.err.println "${urn} at work level " + urn.getWorkLevel()
+        }
+
         switch (urn.getWorkLevel()) {
             case CtsUrn.WorkLevel.WORK : 
                 return languageForWork(urn)
             break
 
             case CtsUrn.WorkLevel.VERSION : 
-                switch (typeForVersion(urn)) {
 
+                if (debug > 0)  {
+                System.err.println "${urn} at version level  is type" + typeForVersion(urn)
+            }
+
+               switch (typeForVersion(urn)) {
+                
                 case VersionType.TRANSLATION:
                     return translationLanguages[urn.toString()]
                 break
