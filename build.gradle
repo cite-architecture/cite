@@ -3,11 +3,14 @@ apply plugin:  "groovy"
 apply plugin:  "maven"
 
 group = "edu.harvard.chs"
-version = '0.14.2'
+version = '0.15.0'
 
 
-// Keep version back deliberately
-String groovyversion = '2.0.6'
+apply from: "versions.gradle"
+apply from: "pub.gradle"
+
+
+
 
 repositories {
     mavenCentral()
