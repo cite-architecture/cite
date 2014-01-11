@@ -1,0 +1,29 @@
+<grammar
+    datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
+    xmlns="http://relaxng.org/ns/structure/1.0"
+    xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
+    xmlns:cts="http://chs.harvard.edu/xmlns/cts">
+    <start>
+        
+                <element
+                    name="cts:prevnext">
+                    <element
+                        name="cts:prev">
+                        <element
+                            name="cts:urn">
+                            <text/>
+                        </element>
+                    </element>
+                
+                    <element
+                        name="cts:next">
+                        <element
+                            name="cts:urn">
+                            <text/>
+                        </element>
+                    </element>
+                    
+                </element>
+            
+    </start>
+</grammar>
