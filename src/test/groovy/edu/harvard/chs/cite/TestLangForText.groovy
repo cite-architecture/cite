@@ -13,6 +13,9 @@ class TestLangForText extends GroovyTestCase {
     String editionUrn = "urn:cts:greekLit:tlg0012.tlg001.msBm1"
     String translationUrn = "urn:cts:greekLit:tlg5026.met.chs01"
 
+
+    String editionWithPassage = "urn:cts:greekLit:tlg0012.tlg001.msA:1.1-1.10"
+
     @Test void testLangVal() {
         TextInventory inv = new TextInventory(invFile)
 
@@ -21,6 +24,9 @@ class TestLangForText extends GroovyTestCase {
 
         assert inv.languageForWork(translationUrn) == "grc"
         assert inv.languageForVersion(translationUrn) == "eng"
+
+
+        assert inv.languageForWork(editionWithPassage) == "grc"
 
     }
 

@@ -381,7 +381,7 @@ class TextInventory {
     * @throws Exception if invalid data values found.
     */
     TextInventory (File f) 
-throws Exception {
+    throws Exception {
         try {
             this.initFromText(f.getText(enc))
         } catch (Exception e) {
@@ -487,6 +487,65 @@ throws Exception {
         return nsMapList[urn.toString()]
     }
 
+
+
+    /** Determines if a URN represents a text in the inventory.
+    * @param urn The URN to test.
+    * @returns true if the URN is in the inventory.
+    */
+    boolean urnInInventory(CtsUrn urn) {
+        def nsStruct = this.ctsnamespaces.find { it[0] == urn.getCtsNamespace()}
+
+        switch (urn.getWorkLevel()) {
+            case CtsUrn.WorkLevel.VERSION:
+                switch (typeForVersion(urn)) {
+                case VersionType.EDITION:
+                    String ed = "urn:cts:${urn.getCtsNamespace()}:${urn.getTextGroup()}.${urn.getWork()}.${urn.getVersion()}"
+                def edStruct = this.editions.find {it[0] == ed}
+                String tg = "urn:cts:${urn.getCtsNamespace()}:${urn.getTextGroup()}"
+                def tgStruct = this.textgroups.find {it[0] == tg}
+                String wk = "urn:cts:${urn.getCtsNamespace()}:${urn.getTextGroup()}.${urn.getWork()}"
+                def wkStruct = this.works.find {it[0] == wk }
+                return ((nsStruct != null) && (tgStruct != null) && (wkStruct != null))
+                break
+
+                case VersionType.TRANSLATION:
+                    String trans = "urn:cts:${urn.getCtsNamespace()}:${urn.getTextGroup()}.${urn.getWork()}.${urn.getVersion()}"
+                def transStruct = this.translations.find {it[0] == trans}
+                String tg = "urn:cts:${urn.getCtsNamespace()}:${urn.getTextGroup()}"
+                def tgStruct = this.textgroups.find {it[0] == tg}
+                String wk = "urn:cts:${urn.getCtsNamespace()}:${urn.getTextGroup()}.${urn.getWork()}"
+                def wkStruct = this.works.find {it[0] == wk }
+                return ((nsStruct != null) && (tgStruct != null) && (wkStruct != null))
+
+                break
+
+                default:
+                    System.err.println "TYpe is " + typeForVersion(urn)
+                break
+            } 
+
+            case CtsUrn.WorkLevel.WORK:
+                String tg = "urn:cts:${urn.getCtsNamespace()}:${urn.getTextGroup()}"
+            def tgStruct = this.textgroups.find {it[0] == tg}
+            String grp = "urn:cts:${urn.getCtsNamespace()}:${urn.getTextGroup()}.${urn.getWork()}"
+            def wkStruct = this.works.find {it[0] == grp }
+            return ((nsStruct != null) && (tgStruct != null) && (wkStruct != null))
+            break
+
+            case CtsUrn.WorkLevel.GROUP:
+            String tg = "urn:cts:${urn.getCtsNamespace()}:${urn.getTextGroup()}"
+            def tgStruct = this.textgroups.find {it[0] == tg}
+            return ((nsStruct != null) && (tgStruct != null))
+            break
+
+            default: 
+                System.err.println "Level " + urn.getWorkLevel()
+            return true
+            break
+        }
+        return false
+    }
 
 
 

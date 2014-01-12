@@ -1,0 +1,78 @@
+<?xml-model href="TextInventory.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<TextInventory tiid="hmt" tiversion="4.0" xmlns="http://chs.harvard.edu/xmlns/cts/ti"
+    xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <ctsnamespace abbr="greekLit" ns="chs.harvard.edu/ctsns/greekLit">
+        <description xml:lang="eng"> The &quot;First Thousand Years of Greek&quot; project's inventory of
+            Greek texts. </description>
+    </ctsnamespace>
+    <collection id="fufolio" isdefault="yes">
+        <dc:title xml:lang="eng" >Texts for research published by Furman University.</dc:title>
+        <dc:creator > Christopher W. Blackwell </dc:creator>
+        <dc:coverage xml:lang="eng" >Texts under editing. </dc:coverage>
+        <dc:description xml:lang="eng" >Misc. texts in English, French, Greek, and Latin </dc:description>
+        <dc:rights xml:lang="eng" > Licensed under the terms of the
+            Creative Commons Attribution-ShareAlike 3.0 Unported license (CC BY-SA 3.0). </dc:rights>
+    </collection>
+
+    
+    <textgroup urn="urn:cts:greekLit:tlg0031">
+        <groupname xml:lang="eng">New Testament</groupname>
+        <groupname xml:lang="lat">Novum Testamentum</groupname>
+        <work urn="urn:cts:greekLit:tlg0031.tlg001" xml:lang="grc">
+            <title xml:lang="eng">The Gospel According to Matthew</title>
+            <title xml:lang="lat">Evangelium secundum Matthaeum</title>
+            <title xml:lang="grc">ΚΑΤΑ ΜΑΘΘΑΙΟΝ</title>
+            <edition urn="urn:cts:greekLit:tlg0031.tlg001.fugnt001">
+                <label xml:lang="eng">Westcott and Hort - Matthew</label>
+                <description xml:lang="eng">Mathew - Based on Wescott and Hort, from the Perseus Digital
+                    Library text.</description>
+                <online docname="WH_Matthew.xml">
+                    <validate schema="chstei.rng"/>
+                    <namespaceMapping abbreviation="tei" nsURI="http://www.tei-c.org/ns/1.0"/>
+                    <citationMapping>
+                        <citation label="Chapter" scope="/tei:TEI/tei:text/tei:body"
+                            xpath="/tei:div[@type='chapter' and @n='?']">
+                            <citation label="version"
+                                scope="/tei:TEI/tei:text/tei:body/tei:div[@type='chapter' and @n='?']"
+                                xpath="/tei:div[@type='verse' and @n='?']"/>
+                        </citation>
+                    </citationMapping>
+                </online>
+            </edition>
+            <translation urn="urn:cts:greekLit:tlg0031.tlg001.fu001" xml:lang="eng">
+                <label xml:lang="eng">The King James Version - Matthew</label>
+                <description xml:lang="eng">Mathew - The KJV, from the Project Gutenberg text.</description>
+                <online docname="KJV_Matthew.xml">
+                    <validate schema="chstei.rng"/>
+                    <namespaceMapping abbreviation="tei" nsURI="http://www.tei-c.org/ns/1.0"/>
+                    <citationMapping>
+                        <citation label="Chapter" scope="/tei:TEI/tei:text/tei:body"
+                            xpath="/tei:div[@type='chapter' and @n='?']">
+                            <citation label="Verse"
+                                scope="/tei:TEI/tei:text/tei:body/tei:div[@type='chapter' and @n='?']"
+                                xpath="/tei:div[@type='verse' and @n='?']"/>
+                        </citation>
+                    </citationMapping>
+                </online>
+            </translation>
+            <translation urn="urn:cts:greekLit:tlg0031.tlg001.fu002" xml:lang="lat">
+                <label xml:lang="lat">Biblia Sacra, Vulgata Editionis - Matthew</label>
+                <description xml:lang="eng">The Latin Vulgate</description>
+                <online docname="Vulgate_Matthew.xml">
+                    <validate schema="chstei.rng"/>
+                    <namespaceMapping abbreviation="tei" nsURI="http://www.tei-c.org/ns/1.0"/>
+                    <citationMapping>
+                        <citation label="Chapter" scope="/tei:TEI/tei:text/tei:body"
+                            xpath="/tei:div[@type='chapter' and @n='?']">
+                            <citation label="version"
+                                scope="/tei:TEI/tei:text/tei:body/tei:div[@type='chapter' and @n='?']"
+                                xpath="/tei:div[@type='verse' and @n='?']"/>
+                        </citation>
+                    </citationMapping>
+                </online>
+            </translation>
+        </work>
+    </textgroup>
+   
+    
+</TextInventory>
