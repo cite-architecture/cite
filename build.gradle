@@ -3,8 +3,7 @@ apply plugin:  "groovy"
 apply plugin:  "maven"
 
 group = "edu.harvard.chs"
-version = '0.15.0'
-
+version = '0.15.1'
 
 apply from: "versions.gradle"
 
