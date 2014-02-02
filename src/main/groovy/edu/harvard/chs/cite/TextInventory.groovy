@@ -178,38 +178,6 @@ class TextInventory {
         }
     }
 
-
-
-    /** Verifies that all <memberof> elements refer to
-    * collections declared by a <collection> element in the
-    * XML representation of a TextInventory.  Adds a one-line
-    * description of each error found to errorList.
-    * @param root Parsed root element of the inventory.
-    */
-    void checkCollectionMembers (groovy.util.Node root) {
-        def declaredColls = []
-        root[ti.collection].each {
-            declaredColls.add(it.'@id')
-        }
-
-
-        root[ti.textgroup][ti.work][ti.memberof].each { m ->
-            if (! declaredColls.containsAll(m.'@collection')) {
-                this.errorList.add("Undefined collection ${m.'@collection'}")
-            }
-        }
-        root[ti.textgroup][ti.work][ti.edition][ti.memberof].each { m ->
-            if (! declaredColls.containsAll(m.'@collection')) {
-                this.errorList.add("Undefined collection ${m.'@collection'}")
-            }
-        }
-        root[ti.textgroup][ti.work][ti.translation][ti.memberof].each { m ->
-            if (! declaredColls.containsAll(m.'@collection')) {
-                this.errorList.add("Undefined collection ${m.'@collection'}")
-            }
-        }
-    }
-
     /** Verifies that all textgroups belong to a CTS
     * namespace declared by a ctsnamespace element in the
     * XML representation of a TextInventory.  Adds a one-line
@@ -325,7 +293,6 @@ class TextInventory {
     throws Exception {
         checkUrnHierarchy(root)
         checkCtsNsDecl(root)
-        checkCollectionMembers(root)
         checkLangAttrs(root)
         checkXmlNsUsage(root)
 

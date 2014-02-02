@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?xml-model href="TextInventory.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<TextInventory
+    tiversion="5.0.rc.1"
+    xmlns="http://chs.harvard.edu/xmlns/cts"
+    xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <ctsnamespace
+        abbr="latinLit"
+        ns="http://www.stoa.org/ctsns/latinLit">
+        <description
+            xml:lang="eng">Stoa Latin lit. namespace</description>
+    </ctsnamespace>
+    
+    <textgroup
+        urn="urn:cts:latinLit:stoa0069">
+        <groupname
+            xml:lang="lat">Julius Caesar</groupname>
+         
+        <work
+            urn="urn:cts:latinLit:stoa0069.stoa001"
+            xml:lang="lat">
+            <title
+                xml:lang="lat">Commentarii de bello civili</title>
+          
+            <edition
+                urn="urn:cts:latinLit:stoa0069.stoa001.stoa001">
+                <label
+                    xml:lang="eng">du Pontet (Oxford)</label>
+                <description
+                    xml:lang="eng">In-progress edition based on the freely available edition of the
+                    Perseus Project, from the public domain text of du Pontet (Oxford, 1901).
+                    Section divisions are not yet properly aligned, and verification of markup
+                    structure is not yet complete. </description>
+                <online
+                    docname="caes-bc-p5.xml">
+                   
+                    <namespaceMapping
+                        abbreviation="unusedabbr"
+                        nsURI="http://www.tei-c.org/ns/1.0"/>
+                    <citationMapping>
+                        
+                        <citation
+                            label="book"
+                           scope="/tei:TEI/tei:text/tei:body"
+                            xpath="/tei:div[@n = '?']">
+                            <citation
+                                label="chapter"
+                                scope="/tei:TEI/tei:text/tei:body/tei:div[ @n='?']"
+                                xpath="/tei:div[@n = '?']">
+                                <citation
+                                    label="section"
+                                    scope="/tei:TEI/tei:text/tei:body/tei:div[@n='?']/tei:div[@n = '?']"
+                                    xpath="/tei:div[@n = '?']"/>
+                            </citation>
+                        </citation>
+                    </citationMapping>
+                </online>
+            </edition>
+            
+        </work>
+        
+    </textgroup>
+    
+</TextInventory>

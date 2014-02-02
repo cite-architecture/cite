@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?xml-model href="../../../schemas/inventories/cts/TextInventory.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<TextInventory
+    tiversion="4.0"
+    xmlns="http://chs.harvard.edu/xmlns/cts/ti"
+    xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <ctsnamespace
+        abbr="latinLit"
+        ns="http://www.stoa.org/ctsns/latinLit">
+        <description
+            xml:lang="eng">Stoa Latin lit. namespace</description>
+    </ctsnamespace>
+    <collection
+        id="demo"
+        isdefault="yes">
+        <dc:title
+            xml:lang="eng">Corpus for testing citation in cite library</dc:title>
+        <dc:creator>Neel Smith</dc:creator>
+        <dc:coverage
+            xml:lang="eng">Sample text of Caesar, Bell.Gall.</dc:coverage>
+        <dc:description
+            xml:lang="eng">Sample text of Caesar, Bell.Gall.</dc:description>
+        <dc:rights
+            xml:lang="eng">This TextInventory is licensed under the Creative Commons
+            Attribution-Share Alike 3.0 Unported License. For more information, see:
+            http://creativecommons.org/licenses/by-sa/3.0/</dc:rights>
+    </collection>
+    
+    <textgroup
+        urn="urn:cts:latinLit:stoa0069">
+        <groupname
+            xml:lang="la">Julius Caesar</groupname>
+        
+        <work
+            urn="urn:cts:latinLit:stoa0069.stoa001"
+            xml:lang="lat">
+            <title
+                xml:lang="lat">Commentarii de bello civili</title>
+            <translation urn="urn:cts:latinLit:stoa0069.stoa001.madeup" xml:lang="lat">
+              <label xml:lang="eng">Made up translation with invalid value for xml:lang attribute.</label>
+          </translation>
+            <edition
+                urn="urn:cts:latinLit:stoa0069.stoa001.stoa001">
+                <label
+                    xml:lang="eng">du Pontet (Oxford)</label>
+                <description
+                    xml:lang="eng">In-progress edition based on the freely available edition of the
+                    Perseus Project, from the public domain text of du Pontet (Oxford, 1901).
+                    Section divisions are not yet properly aligned, and verification of markup
+                    structure is not yet complete. </description>
+                <online
+                    docname="caes-bc-p5.xml">
+                    <validate
+                        schema="teilite.rng"/>
+                    <namespaceMapping
+                        abbreviation="tei"
+                        nsURI="http://www.tei-c.org/ns/1.0"/>
+                    <citationMapping>
+                        
+                        <citation
+                            label="book"
+                           scope="/tei:TEI/tei:text/tei:body"
+                            xpath="/tei:div[@n = '?']">
+                            <citation
+                                label="chapter"
+                                scope="/tei:TEI/tei:text/tei:body/tei:div[ @n='?']"
+                                xpath="/tei:div[@n = '?']">
+                                <citation
+                                    label="section"
+                                    scope="/tei:TEI/tei:text/tei:body/tei:div[@n='?']/tei:div[@n = '?']"
+                                    xpath="/tei:div[@n = '?']"/>
+                            </citation>
+                        </citation>
+                    </citationMapping>
+                </online>
+            </edition>
+            
+        </work>
+        
+    </textgroup>
+    
+</TextInventory>
