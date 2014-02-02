@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?xml-model href="../../../schemas/inventories/cts/TextInventory.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<?xml-model href="TextInventory.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
 <TextInventory
-    tiversion="4.0"
-    xmlns="http://chs.harvard.edu/xmlns/cts/ti"
+    tiversion="5.0.rc.1"
+    xmlns="http://chs.harvard.edu/xmlns/cts"
     xmlns:dc="http://purl.org/dc/elements/1.1/">
     <ctsnamespace
         abbr="latinLit"
@@ -11,22 +11,7 @@
         <description
             xml:lang="eng">Stoa Latin lit. namespace</description>
     </ctsnamespace>
-    <collection
-        id="demo"
-        isdefault="yes">
-        <dc:title
-            xml:lang="eng">Corpus for testing citation in cite library</dc:title>
-        <dc:creator>Neel Smith</dc:creator>
-        <dc:coverage
-            xml:lang="eng">Sample text of Caesar, Bell.Gall.</dc:coverage>
-        <dc:description
-            xml:lang="eng">Sample text of Caesar, Bell.Gall.</dc:description>
-        <dc:rights
-            xml:lang="eng">This TextInventory is licensed under the Creative Commons
-            Attribution-Share Alike 3.0 Unported License. For more information, see:
-            http://creativecommons.org/licenses/by-sa/3.0/</dc:rights>
-    </collection>
-    
+   
     <textgroup
         urn="urn:cts:latinLit:stoa0069">
         <groupname
@@ -51,8 +36,7 @@
                     structure is not yet complete. </description>
                 <online
                     docname="caes-bc-p5.xml">
-                    <validate
-                        schema="teilite.rng"/>
+                
                     <namespaceMapping
                         abbreviation="tei"
                         nsURI="http://www.tei-c.org/ns/1.0"/>
