@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-model href="file:/data/repos/bitbucket/cite/unittests/data/TextInventory.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<?xml-model href="TextInventory.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
 <TextInventory
   tiid="hmt"
-  tiversion="4.0"
-  xmlns="http://chs.harvard.edu/xmlns/cts/ti"
+  tiversion="5.0.rc.1"
+  xmlns="http://chs.harvard.edu/xmlns/cts"
   xmlns:dc="http://purl.org/dc/elements/1.1/">
   <ctsnamespace
     abbr="greekLit"
@@ -13,42 +13,8 @@
       texts. </description>
   </ctsnamespace>
   
-  <collection
-    id="mth"
-    isdefault="yes">
-    <dc:title
-      xml:lang="eng">On-line texts for CHS Multitext of Homer project </dc:title>
-    <dc:creator> Neel Smith </dc:creator>
-    <dc:creator> Christopher Blackwell </dc:creator>
-    <dc:coverage
-      xml:lang="eng"> All contents of diplomatic editions are edited from new digital images of the
-      manuscripts created by the HMT project. </dc:coverage>
-    <dc:description
-      xml:lang="eng"
-      xmlns="http://purl.org/dc/elements/1.1"> Six major MSS of the Iliad, and the parallel texts of
-      scholia from the same six MSS. </dc:description>
-    <dc:rights
-      xml:lang="eng"> Licensed under the terms of Creative Commons attribution-share-alike license.
-    </dc:rights>
-  </collection>
   
   
-  <collection
-    id="manuscripts"
-    isdefault="no">
-    <dc:title
-      xml:lang="eng">Manuscripts of Homeric texts </dc:title>
-    <dc:creator> Neel Smith </dc:creator>
-    <dc:creator> Christopher Blackwell </dc:creator>
-    <dc:coverage
-      xml:lang="eng"> All manuscripts of the Iliad cataloged by Allen. </dc:coverage>
-    <dc:description
-      xml:lang="eng"
-      xmlns="http://purl.org/dc/elements/1.1"> Manuscripts of the Iliad cataloged by Allen. </dc:description>
-    <dc:rights
-      xml:lang="eng"> Licensed under the terms of Creative Commons attribution-share-alike license.
-    </dc:rights>
-  </collection>
   
   
   
@@ -73,8 +39,7 @@
           xml:lang="eng"> Bm1 </label>
         <description
           xml:lang="eng"> Egerton 267 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msBm2">
@@ -82,8 +47,7 @@
           xml:lang="eng"> Bm2 </label>
         <description
           xml:lang="eng"> King's 16 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msBm3">
@@ -91,8 +55,7 @@
           xml:lang="eng"> Bm3 </label>
         <description
           xml:lang="eng"> Harley 1675 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msCa2">
@@ -100,8 +63,7 @@
           xml:lang="eng"> Ca2 </label>
         <description
           xml:lang="eng"> coll. Trinitatis Cant. 983 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msA">
@@ -111,8 +73,7 @@
           xml:lang="eng"> Venice: Marcianus Graecus Z.454 (=822). </description>
         <online
           docname="A_Iliad_p5uc.xml">
-          <validate
-            schema="chstei.rng"/>
+          
           <namespaceMapping
             abbreviation="tei"
             nsURI="http://www.tei-c.org/ns/1.0"/>
@@ -128,8 +89,7 @@
             </citation>
           </citationMapping>
         </online>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msAg">
@@ -137,8 +97,7 @@
           xml:lang="eng"> Ag </label>
         <description
           xml:lang="eng"> Angelicus 122 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msAthous">
@@ -146,8 +105,7 @@
           xml:lang="eng"> Athous </label>
         <description
           xml:lang="eng"> Vatopedi 592 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msB">
@@ -157,8 +115,7 @@
           xml:lang="eng"> Ven. 453 </description>
         <online
           docname="B_Iliad_p5.xml">
-          <validate
-            schema="chstei.rng"/>
+     
           <namespaceMapping
             abbreviation="tei"
             nsURI="http://www.tei-c.org/ns/1.0"/>
@@ -174,8 +131,7 @@
             </citation>
           </citationMapping>
         </online>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msBm4">
@@ -183,8 +139,7 @@
           xml:lang="eng"> Bm4 </label>
         <description
           xml:lang="eng"> Harley 1771 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msBm5">
@@ -192,8 +147,7 @@
           xml:lang="eng"> Bm5 </label>
         <description
           xml:lang="eng"> Harley 5600 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msBm6">
@@ -201,8 +155,7 @@
           xml:lang="eng"> Bm6 </label>
         <description
           xml:lang="eng"> Harley 5601 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msBm7">
@@ -210,8 +163,7 @@
           xml:lang="eng"> Bm7 </label>
         <description
           xml:lang="eng"> Harley 5672 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msBm8">
@@ -219,8 +171,7 @@
           xml:lang="eng"> Bm8 </label>
         <description
           xml:lang="eng"> Harley 5693 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msBm9">
@@ -228,8 +179,7 @@
           xml:lang="eng"> Bm9 </label>
         <description
           xml:lang="eng"> add. MSS 8232 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msC">
@@ -237,8 +187,7 @@
           xml:lang="eng"> C </label>
         <description
           xml:lang="eng"> Laur. 32.3 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msCa1">
@@ -246,8 +195,7 @@
           xml:lang="eng"> Ca1 </label>
         <description
           xml:lang="eng"> coll. Corporis Christi Cant. 81 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msCa3">
@@ -255,8 +203,7 @@
           xml:lang="eng"> Ca3 </label>
         <description
           xml:lang="eng"> Cambridge University Library 1290 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msD">
@@ -264,8 +211,7 @@
           xml:lang="eng"> D </label>
         <description
           xml:lang="eng"> Laur. 32.15 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msE1">
@@ -273,8 +219,7 @@
           xml:lang="eng"> E1 </label>
         <description
           xml:lang="eng"> Escorialensis 83 (Σ ii.7) </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msE2">
@@ -282,8 +227,7 @@
           xml:lang="eng"> E2 </label>
         <description
           xml:lang="eng"> Escorialensis 213 (Φ ii.19) </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msE3">
@@ -291,8 +235,7 @@
           xml:lang="eng"> E3 </label>
         <description
           xml:lang="eng"> Escorialensis 291 (Υ i.1) </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msE4">
@@ -300,8 +243,7 @@
           xml:lang="eng"> E4 </label>
         <description
           xml:lang="eng"> Escorialensis 509 (Ω i.12) </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msEt">
@@ -309,8 +251,7 @@
           xml:lang="eng"> Et </label>
         <description
           xml:lang="eng"> Etonensis 139 = Bl. 4.12 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msGe">
@@ -318,8 +259,7 @@
           xml:lang="eng"> Ge </label>
         <description
           xml:lang="eng"> Genavensis 44 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msGf">
@@ -327,8 +267,7 @@
           xml:lang="eng"> Gf </label>
         <description
           xml:lang="eng"> Grotta Ferrata Z α xxiv </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msH1">
@@ -336,8 +275,7 @@
           xml:lang="eng"> H1 </label>
         <description
           xml:lang="eng"> Holkham Hall, Norfolk, 263 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msH2">
@@ -345,8 +283,7 @@
           xml:lang="eng"> H2 </label>
         <description
           xml:lang="eng"> Holkham 264 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msL1">
@@ -354,8 +291,7 @@
           xml:lang="eng"> L1 </label>
         <description
           xml:lang="eng"> Laurentianus 31.5 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msL2">
@@ -363,8 +299,7 @@
           xml:lang="eng"> L2 </label>
         <description
           xml:lang="eng"> Laur. 32.15 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msL3">
@@ -372,8 +307,7 @@
           xml:lang="eng"> L3 </label>
         <description
           xml:lang="eng"> Laur. 32.4 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msL4">
@@ -381,8 +315,7 @@
           xml:lang="eng"> L4 </label>
         <description
           xml:lang="eng"> Laur. 32.5 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msL5">
@@ -390,8 +323,7 @@
           xml:lang="eng"> L5 </label>
         <description
           xml:lang="eng"> Laur. 32.6 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msL6">
@@ -399,8 +331,7 @@
           xml:lang="eng"> L6 </label>
         <description
           xml:lang="eng"> Laur. 32.8 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msL7">
@@ -408,8 +339,7 @@
           xml:lang="eng"> L7 </label>
         <description
           xml:lang="eng"> Laur. 32.10 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msL8">
@@ -417,8 +347,7 @@
           xml:lang="eng"> L8 </label>
         <description
           xml:lang="eng"> Laur. 32.11 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msL9">
@@ -426,8 +355,7 @@
           xml:lang="eng"> L9 </label>
         <description
           xml:lang="eng"> Laur. 32.18 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msL10">
@@ -435,8 +363,7 @@
           xml:lang="eng"> L10 </label>
         <description
           xml:lang="eng"> Laur. 32.22 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msL11">
@@ -444,8 +371,7 @@
           xml:lang="eng"> L11 </label>
         <description
           xml:lang="eng"> Laur. 32.25 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msL12">
@@ -453,8 +379,7 @@
           xml:lang="eng"> L12 </label>
         <description
           xml:lang="eng"> Laur. 32.27 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msL13">
@@ -462,8 +387,7 @@
           xml:lang="eng"> L13 </label>
         <description
           xml:lang="eng"> Laur. 32.28 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msL14">
@@ -471,8 +395,7 @@
           xml:lang="eng"> L14 </label>
         <description
           xml:lang="eng"> Laur. 32.31 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msL15">
@@ -480,8 +403,7 @@
           xml:lang="eng"> L15 </label>
         <description
           xml:lang="eng"> Laur. 32.38 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msL16">
@@ -489,8 +411,7 @@
           xml:lang="eng"> L16 </label>
         <description
           xml:lang="eng"> Laur. 32.47 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msL17">
@@ -498,8 +419,7 @@
           xml:lang="eng"> L17 </label>
         <description
           xml:lang="eng"> Laur. 91 sup. 1 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msL18">
@@ -507,8 +427,7 @@
           xml:lang="eng"> L18 </label>
         <description
           xml:lang="eng"> Laur. 91 sup. 2 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msL19">
@@ -516,8 +435,7 @@
           xml:lang="eng"> L19 </label>
         <description
           xml:lang="eng"> Conv. soppr. 48 (già Badia 36) </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msL20">
@@ -525,8 +443,7 @@
           xml:lang="eng"> L20 </label>
         <description
           xml:lang="eng"> Conv. soppr. 139 (già Badia 64) </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msLe1">
@@ -534,8 +451,7 @@
           xml:lang="eng"> Le1 </label>
         <description
           xml:lang="eng"> Leidensis Voss. graec. 64 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msLe2">
@@ -543,8 +459,7 @@
           xml:lang="eng"> Le2 </label>
         <description
           xml:lang="eng"> Leidensis 22, xviii </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msLi">
@@ -552,8 +467,7 @@
           xml:lang="eng"> Li </label>
         <description
           xml:lang="eng"> Lipsiensis 32 (ol. 1275) </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msM1">
@@ -561,8 +475,7 @@
           xml:lang="eng"> M1 </label>
         <description
           xml:lang="eng"> Ambrosianus 74 (A 181 supp.) </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msM2">
@@ -570,8 +483,7 @@
           xml:lang="eng"> M2 </label>
         <description
           xml:lang="eng"> Ambr. 89 (B 39 sup.) </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msM3">
@@ -579,8 +491,7 @@
           xml:lang="eng"> M3 </label>
         <description
           xml:lang="eng"> Ambr. 152 (B 150 sup.) </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msM4">
@@ -588,8 +499,7 @@
           xml:lang="eng"> M4 </label>
         <description
           xml:lang="eng"> Ambr. 281 (E 35 sup.) </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msM5">
@@ -597,8 +507,7 @@
           xml:lang="eng"> M5 </label>
         <description
           xml:lang="eng"> Ambr. 355 (F 101 sup.) </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msM6">
@@ -606,8 +515,7 @@
           xml:lang="eng"> M6 </label>
         <description
           xml:lang="eng"> Ambr. 441 (H 77 sup.) </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msM7">
@@ -615,8 +523,7 @@
           xml:lang="eng"> M7 </label>
         <description
           xml:lang="eng"> Ambr. 450 (I 4 sup.) </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msM8">
@@ -624,8 +531,7 @@
           xml:lang="eng"> M8 </label>
         <description
           xml:lang="eng"> Ambr. 463 (I 58 sup.) </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msM9">
@@ -633,8 +539,7 @@
           xml:lang="eng"> M9 </label>
         <description
           xml:lang="eng"> Ambr. 1057 (I 90 inf.) </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msM10">
@@ -642,8 +547,7 @@
           xml:lang="eng"> M10 </label>
         <description
           xml:lang="eng"> Ambr. 486 (L 73 sup.) </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msM11">
@@ -651,8 +555,7 @@
           xml:lang="eng"> M11 </label>
         <description
           xml:lang="eng"> Ambr. 502 A(L 116 sup.) </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msM12">
@@ -660,8 +563,7 @@
           xml:lang="eng"> M12 </label>
         <description
           xml:lang="eng"> Ambr. 532 (M 86 sup.) </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msM13">
@@ -669,8 +571,7 @@
           xml:lang="eng"> M13 </label>
         <description
           xml:lang="eng"> Ambr. 1015 (E 56 inf.) </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msM14">
@@ -678,8 +579,7 @@
           xml:lang="eng"> M14 </label>
         <description
           xml:lang="eng"> Ambr. 1046 (I 30 inf.) </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msM15">
@@ -687,8 +587,7 @@
           xml:lang="eng"> M15 </label>
         <description
           xml:lang="eng"> Ambr. 426 (H 22 sup.) </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msM16">
@@ -696,8 +595,7 @@
           xml:lang="eng"> M16 </label>
         <description
           xml:lang="eng"> Ambr. 576 (N 275 sup.) </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msM17">
@@ -705,8 +603,7 @@
           xml:lang="eng"> M17 </label>
         <description
           xml:lang="eng"> Ambr. 725 (R 119 sup.) </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msMa1">
@@ -714,8 +611,7 @@
           xml:lang="eng"> Ma1 </label>
         <description
           xml:lang="eng"> Madrid, Biblioteca Nacional. 4555 (18 Ir.) </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msMa2">
@@ -723,8 +619,7 @@
           xml:lang="eng"> Ma2 </label>
         <description
           xml:lang="eng"> Madrid 4560 (23 Ir.) </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msMa3">
@@ -732,8 +627,7 @@
           xml:lang="eng"> Ma3 </label>
         <description
           xml:lang="eng"> Madrid 4841 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msMc">
@@ -741,8 +635,7 @@
           xml:lang="eng"> Mc </label>
         <description
           xml:lang="eng"> Monte Cassino S 94 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msMo2">
@@ -750,8 +643,7 @@
           xml:lang="eng"> Mo2 </label>
         <description
           xml:lang="eng"> Estensis 104 (II. D 5) </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msMo1">
@@ -759,8 +651,7 @@
           xml:lang="eng"> Mo1 </label>
         <description
           xml:lang="eng"> Estensis 123 (III. D 4) </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msMon1">
@@ -768,8 +659,7 @@
           xml:lang="eng"> Mon1 </label>
         <description
           xml:lang="eng"> Munich, Hofbibliothek 111 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msMon2">
@@ -777,8 +667,7 @@
           xml:lang="eng"> Mon2 </label>
         <description
           xml:lang="eng"> Munich, Hofbibliothek 311 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msMon3">
@@ -786,8 +675,7 @@
           xml:lang="eng"> Mon3 </label>
         <description
           xml:lang="eng"> Munich, Hofbibliothek 519 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msN1">
@@ -795,8 +683,7 @@
           xml:lang="eng"> N1 </label>
         <description
           xml:lang="eng"> Napoli, Biblioteca nazionale III. E 37 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msN2">
@@ -804,8 +691,7 @@
           xml:lang="eng"> N2 </label>
         <description
           xml:lang="eng"> Napoli, Biblioteca nazionale II. F 1 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msN4">
@@ -813,8 +699,7 @@
           xml:lang="eng"> N4 </label>
         <description
           xml:lang="eng"> Napoli, Biblioteca nazionale II. F 3 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msN3">
@@ -822,8 +707,7 @@
           xml:lang="eng"> N3 </label>
         <description
           xml:lang="eng"> Napoli, Biblioteca nazionale II. F 2 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msO1">
@@ -831,8 +715,7 @@
           xml:lang="eng"> O1 </label>
         <description
           xml:lang="eng"> Barocci 96 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msO2">
@@ -840,8 +723,7 @@
           xml:lang="eng"> O2 </label>
         <description
           xml:lang="eng"> Barocci 203 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msO3">
@@ -849,8 +731,7 @@
           xml:lang="eng"> O3 </label>
         <description
           xml:lang="eng"> Laud. 41 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msO4">
@@ -858,8 +739,7 @@
           xml:lang="eng"> O4 </label>
         <description
           xml:lang="eng"> Laud. 54 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msO5">
@@ -867,8 +747,7 @@
           xml:lang="eng"> O5 </label>
         <description
           xml:lang="eng"> Auct. T 2. 7 (misc. 207) </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msO6">
@@ -876,8 +755,7 @@
           xml:lang="eng"> O6 </label>
         <description
           xml:lang="eng"> Canonici 43 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msO7">
@@ -885,8 +763,7 @@
           xml:lang="eng"> O7 </label>
         <description
           xml:lang="eng"> Canonici 66 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msO8">
@@ -894,8 +771,7 @@
           xml:lang="eng"> O8 </label>
         <description
           xml:lang="eng"> coll. Nov. Oxon. D 298 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msO9">
@@ -903,8 +779,7 @@
           xml:lang="eng"> O9 </label>
         <description
           xml:lang="eng"> ms. collegii Corporis Christi Oxon. CCCCLXX F 4. 12 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msP1">
@@ -912,8 +787,7 @@
           xml:lang="eng"> P1 </label>
         <description
           xml:lang="eng"> Paris Bibliothèque Nationale, grec 1805 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msP2">
@@ -921,8 +795,7 @@
           xml:lang="eng"> P2 </label>
         <description
           xml:lang="eng"> Paris grec 2680 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msP4">
@@ -930,8 +803,7 @@
           xml:lang="eng"> P4 </label>
         <description
           xml:lang="eng"> Paris grec 2682 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msP3">
@@ -939,8 +811,7 @@
           xml:lang="eng"> P3 </label>
         <description
           xml:lang="eng"> Paris grec 2681 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msP5">
@@ -948,8 +819,7 @@
           xml:lang="eng"> P5 </label>
         <description
           xml:lang="eng"> Paris grec 2683 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msP6">
@@ -957,8 +827,7 @@
           xml:lang="eng"> P6 </label>
         <description
           xml:lang="eng"> Paris grec 2684 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msP7">
@@ -966,8 +835,7 @@
           xml:lang="eng"> P7 </label>
         <description
           xml:lang="eng"> Paris grec 2685 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msP8">
@@ -975,8 +843,7 @@
           xml:lang="eng"> P8 </label>
         <description
           xml:lang="eng"> Paris grec 2686 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msP9">
@@ -984,8 +851,7 @@
           xml:lang="eng"> P9 </label>
         <description
           xml:lang="eng"> Paris grec 2687 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msP10">
@@ -993,8 +859,7 @@
           xml:lang="eng"> P10 </label>
         <description
           xml:lang="eng"> Paris grec 2697 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msP12">
@@ -1002,8 +867,7 @@
           xml:lang="eng"> P12 </label>
         <description
           xml:lang="eng"> Paris grec 2767 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msP11">
@@ -1011,8 +875,7 @@
           xml:lang="eng"> P11 </label>
         <description
           xml:lang="eng"> Paris grec 2766 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msP13">
@@ -1020,8 +883,7 @@
           xml:lang="eng"> P13 </label>
         <description
           xml:lang="eng"> Paris grec 2768 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msP14">
@@ -1029,8 +891,7 @@
           xml:lang="eng"> P14 </label>
         <description
           xml:lang="eng"> Paris grec 2830 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msP15">
@@ -1038,8 +899,7 @@
           xml:lang="eng"> P15 </label>
         <description
           xml:lang="eng"> Paris grec 2894 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msP16">
@@ -1047,8 +907,7 @@
           xml:lang="eng"> P16 </label>
         <description
           xml:lang="eng"> Paris supplément grec 144 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msP17">
@@ -1056,8 +915,7 @@
           xml:lang="eng"> P17 </label>
         <description
           xml:lang="eng"> Paris supplément grec 497 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msP19">
@@ -1065,8 +923,7 @@
           xml:lang="eng"> P19 </label>
         <description
           xml:lang="eng"> Paris supplément grec 656 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msP18">
@@ -1074,8 +931,7 @@
           xml:lang="eng"> P18 </label>
         <description
           xml:lang="eng"> Paris supplément grec 608 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msP20">
@@ -1083,8 +939,7 @@
           xml:lang="eng"> P20 </label>
         <description
           xml:lang="eng"> Paris supplément grec 679 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msP21">
@@ -1092,8 +947,7 @@
           xml:lang="eng"> P21 </label>
         <description
           xml:lang="eng"> Paris supplément grec 1095 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msPa">
@@ -1101,8 +955,7 @@
           xml:lang="eng"> Pa </label>
         <description
           xml:lang="eng"> Parma, Biblioteca Palatina HH. 11. 27 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msP22">
@@ -1110,8 +963,7 @@
           xml:lang="eng"> P22 </label>
         <description
           xml:lang="eng"> Paris supplément grec 1247 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msPal1">
@@ -1119,8 +971,7 @@
           xml:lang="eng"> Pal1 </label>
         <description
           xml:lang="eng"> Heidelberg 40 (Wilken p. 276) </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msPal2">
@@ -1128,8 +979,7 @@
           xml:lang="eng"> Pal2 </label>
         <description
           xml:lang="eng"> Heidelberg 222 (Wilken p. 282) </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msPe">
@@ -1137,8 +987,7 @@
           xml:lang="eng"> Pe </label>
         <description
           xml:lang="eng"> Perugia, Bibl. Comm. E 48 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msPi">
@@ -1146,8 +995,7 @@
           xml:lang="eng"> Pi </label>
         <description
           xml:lang="eng"> Pistoia, Bibl. Fortiguerri A 55 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msQ1">
@@ -1155,8 +1003,7 @@
           xml:lang="eng"> Q1 </label>
         <description
           xml:lang="eng"> Moscow, Library of the Ministry of Foreign Affairs </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msQ2">
@@ -1164,8 +1011,7 @@
           xml:lang="eng"> Q2 </label>
         <description
           xml:lang="eng"> Moscow, Bibliotheca S. Synodi, no 474 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msQ3">
@@ -1173,8 +1019,7 @@
           xml:lang="eng"> Q3 </label>
         <description
           xml:lang="eng"> Moscow, Library of the Ministry of Foreign Affairs </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msR1">
@@ -1182,8 +1027,7 @@
           xml:lang="eng"> R1 </label>
         <description
           xml:lang="eng"> Riccardianus 30 (K. II 10) </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msS">
@@ -1191,8 +1035,7 @@
           xml:lang="eng"> S </label>
         <description
           xml:lang="eng"> Stuttgart, Königliche öffentliche Bibliothek 5 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msT">
@@ -1200,8 +1043,7 @@
           xml:lang="eng"> T </label>
         <description
           xml:lang="eng"> British Library, Burney 86 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msR4">
@@ -1209,8 +1051,7 @@
           xml:lang="eng"> R4 </label>
         <description
           xml:lang="eng"> Riccardianus 896 (S. II 24) </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msR3">
@@ -1218,8 +1059,7 @@
           xml:lang="eng"> R3 </label>
         <description
           xml:lang="eng"> Riccardianus 32 (K. II 19) </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msR2">
@@ -1227,8 +1067,7 @@
           xml:lang="eng"> R2 </label>
         <description
           xml:lang="eng"> Riccardianus 62 (K. II 11) </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msU1">
@@ -1236,8 +1075,7 @@
           xml:lang="eng"> U1 </label>
         <description
           xml:lang="eng"> Venice, Marciana 431 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msU3">
@@ -1245,8 +1083,7 @@
           xml:lang="eng"> U3 </label>
         <description
           xml:lang="eng"> Venice, Marciana 456 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msU4">
@@ -1254,8 +1091,7 @@
           xml:lang="eng"> U4 </label>
         <description
           xml:lang="eng"> Venice, Marciana 458 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msU2">
@@ -1263,8 +1099,7 @@
           xml:lang="eng"> U2 </label>
         <description
           xml:lang="eng"> Venice, Marciana 455 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msU5">
@@ -1272,8 +1107,7 @@
           xml:lang="eng"> U5 </label>
         <description
           xml:lang="eng"> Venice, Marciana 459 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msU6">
@@ -1281,8 +1115,7 @@
           xml:lang="eng"> U6 </label>
         <description
           xml:lang="eng"> Venice, Marciana 459 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msU7">
@@ -1290,8 +1123,7 @@
           xml:lang="eng"> U7 </label>
         <description
           xml:lang="eng"> Venice, Marciana 514 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msU8">
@@ -1299,8 +1131,7 @@
           xml:lang="eng"> U8 </label>
         <description
           xml:lang="eng"> Venice, Marciana ix. 3 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msU9">
@@ -1308,8 +1139,7 @@
           xml:lang="eng"> U9 </label>
         <description
           xml:lang="eng"> Venice, Marciana ix. 2 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msU10">
@@ -1317,8 +1147,7 @@
           xml:lang="eng"> U10 </label>
         <description
           xml:lang="eng"> Venice, Marciana ix. 16 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msU11">
@@ -1326,8 +1155,7 @@
           xml:lang="eng"> U11 </label>
         <description
           xml:lang="eng"> Venice, Marciana ix. 21 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msU12">
@@ -1335,8 +1163,7 @@
           xml:lang="eng"> U12 </label>
         <description
           xml:lang="eng"> Venice, Marciana ix. 25 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msU13">
@@ -1344,8 +1171,7 @@
           xml:lang="eng"> U13 </label>
         <description
           xml:lang="eng"> Venice, Marciana ix. 33 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msV1">
@@ -1353,8 +1179,7 @@
           xml:lang="eng"> V1 </label>
         <description
           xml:lang="eng"> Vat. graec. 26 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msV2">
@@ -1362,8 +1187,7 @@
           xml:lang="eng"> V2 </label>
         <description
           xml:lang="eng"> Vat. graec. 27 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msV3">
@@ -1371,8 +1195,7 @@
           xml:lang="eng"> V3 </label>
         <description
           xml:lang="eng"> Vat. graec. 28 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msV4">
@@ -1380,8 +1203,7 @@
           xml:lang="eng"> V4 </label>
         <description
           xml:lang="eng"> Vat. graec. 29 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msV5">
@@ -1389,8 +1211,7 @@
           xml:lang="eng"> V5 </label>
         <description
           xml:lang="eng"> Vat. graec. 30 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msV6">
@@ -1398,8 +1219,7 @@
           xml:lang="eng"> V6 </label>
         <description
           xml:lang="eng"> Vat. graec. 31 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msV7">
@@ -1407,8 +1227,7 @@
           xml:lang="eng"> V7 </label>
         <description
           xml:lang="eng"> Vat. graec. 50 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msV8">
@@ -1416,8 +1235,7 @@
           xml:lang="eng"> V8 </label>
         <description
           xml:lang="eng"> Vat. graec. 97 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msV9">
@@ -1425,8 +1243,7 @@
           xml:lang="eng"> V9 </label>
         <description
           xml:lang="eng"> Vat. graec. 902 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msV10">
@@ -1434,8 +1251,7 @@
           xml:lang="eng"> V10 </label>
         <description
           xml:lang="eng"> Vat. graec. 903 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msV11">
@@ -1443,8 +1259,7 @@
           xml:lang="eng"> V11 </label>
         <description
           xml:lang="eng"> Vat. graec. 915 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msV12">
@@ -1452,8 +1267,7 @@
           xml:lang="eng"> V12 </label>
         <description
           xml:lang="eng"> Vat. graec. 1315 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msV13">
@@ -1461,8 +1275,7 @@
           xml:lang="eng"> V13 </label>
         <description
           xml:lang="eng"> Vat. graec. 1316 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msV14">
@@ -1470,8 +1283,7 @@
           xml:lang="eng"> V14 </label>
         <description
           xml:lang="eng"> Vat. graec. 1317 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msV15">
@@ -1479,8 +1291,7 @@
           xml:lang="eng"> V15 </label>
         <description
           xml:lang="eng"> Vat. graec. 1318 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msV16">
@@ -1488,8 +1299,7 @@
           xml:lang="eng"> V16 </label>
         <description
           xml:lang="eng"> Vat. graec. 1319 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msV17">
@@ -1497,8 +1307,7 @@
           xml:lang="eng"> V17 </label>
         <description
           xml:lang="eng"> Vat. graec. 1404 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msV18">
@@ -1506,8 +1315,7 @@
           xml:lang="eng"> V18 </label>
         <description
           xml:lang="eng"> Vat. graec. 1626 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msV19">
@@ -1515,8 +1323,7 @@
           xml:lang="eng"> V19 </label>
         <description
           xml:lang="eng"> Pal. 6 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msV20">
@@ -1524,8 +1331,7 @@
           xml:lang="eng"> V20 </label>
         <description
           xml:lang="eng"> Pal. 12 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msV21">
@@ -1533,8 +1339,7 @@
           xml:lang="eng"> V21 </label>
         <description
           xml:lang="eng"> Pal. 150 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msV22">
@@ -1542,8 +1347,7 @@
           xml:lang="eng"> V22 </label>
         <description
           xml:lang="eng"> Pal. 180 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msV23">
@@ -1551,8 +1355,7 @@
           xml:lang="eng"> V23 </label>
         <description
           xml:lang="eng"> Pal. 310 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msV26">
@@ -1560,8 +1363,7 @@
           xml:lang="eng"> V26 </label>
         <description
           xml:lang="eng"> Urbinas 138 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msV24">
@@ -1569,8 +1371,7 @@
           xml:lang="eng"> V24 </label>
         <description
           xml:lang="eng"> Urbinas 136 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msV25">
@@ -1578,8 +1379,7 @@
           xml:lang="eng"> V25 </label>
         <description
           xml:lang="eng"> Urbinas 137 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msV27">
@@ -1587,8 +1387,7 @@
           xml:lang="eng"> V27 </label>
         <description
           xml:lang="eng"> Ottobuoni 58 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msV28">
@@ -1596,8 +1395,7 @@
           xml:lang="eng"> V28 </label>
         <description
           xml:lang="eng"> Ottobuoni 303 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msV29">
@@ -1605,8 +1403,7 @@
           xml:lang="eng"> V29 </label>
         <description
           xml:lang="eng"> Ottobuoni 342 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msV30">
@@ -1614,8 +1411,7 @@
           xml:lang="eng"> V30 </label>
         <description
           xml:lang="eng"> Regina Sueciae 92 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msV31">
@@ -1623,8 +1419,7 @@
           xml:lang="eng"> V31 </label>
         <description
           xml:lang="eng"> Pio II 38 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msV32">
@@ -1632,8 +1427,7 @@
           xml:lang="eng"> V32 </label>
         <description
           xml:lang="eng"> Barberini I 161 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msV33">
@@ -1641,8 +1435,7 @@
           xml:lang="eng"> V33 </label>
         <description
           xml:lang="eng"> Barberini I 93 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msV34">
@@ -1650,8 +1443,7 @@
           xml:lang="eng"> V34 </label>
         <description
           xml:lang="eng"> Barberini I 110 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msV35">
@@ -1659,8 +1451,7 @@
           xml:lang="eng"> V35 </label>
         <description
           xml:lang="eng"> Barberini II 16 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msV36">
@@ -1668,8 +1459,7 @@
           xml:lang="eng"> V36 </label>
         <description
           xml:lang="eng"> cod. Ross. 986 (no, 16) </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msVe1">
@@ -1678,8 +1468,7 @@
         <description
           xml:lang="eng"> Rome, biblioteca Vittorio Emmanuele 6 (Collegio Romano), Madrid biblioteca
           Nacional 4626 (lxxi Iriarte) </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msVe2">
@@ -1687,8 +1476,7 @@
           xml:lang="eng"> Ve2 </label>
         <description
           xml:lang="eng"> bibl. Vittorio Emmanuele 8 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msVi1">
@@ -1696,8 +1484,7 @@
           xml:lang="eng"> Vi1 </label>
         <description
           xml:lang="eng"> Vienna, phil. 5, ol. 'L' </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msVi2">
@@ -1705,8 +1492,7 @@
           xml:lang="eng"> Vi2 </label>
         <description
           xml:lang="eng"> Vienna, phil. 39, ol. 'G' </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msVi3">
@@ -1714,8 +1500,7 @@
           xml:lang="eng"> Vi3 </label>
         <description
           xml:lang="eng"> Vienna, phil. 49 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msVi4">
@@ -1723,8 +1508,7 @@
           xml:lang="eng"> Vi4 </label>
         <description
           xml:lang="eng"> Vienna, phil. 61 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msVi5">
@@ -1732,8 +1516,7 @@
           xml:lang="eng"> Vi5 </label>
         <description
           xml:lang="eng"> Vienna, phil. 117, ol. 'H' </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msVi6">
@@ -1741,8 +1524,7 @@
           xml:lang="eng"> Vi6 </label>
         <description
           xml:lang="eng"> 176 in Kollarii supplementis ineditis...ex Windhagiana bibliotheca </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msVi7">
@@ -1750,8 +1532,7 @@
           xml:lang="eng"> Vi7 </label>
         <description
           xml:lang="eng"> Vienna, phil. 241 </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msW2">
@@ -1759,8 +1540,7 @@
           xml:lang="eng"> W2 </label>
         <description
           xml:lang="eng"> Breslau 25 (= Heyne Vrat. d) </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msW1">
@@ -1768,8 +1548,7 @@
           xml:lang="eng"> W1 </label>
         <description
           xml:lang="eng"> Breslau 24 (= Heyne Vrat. c) </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msW3">
@@ -1777,8 +1556,7 @@
           xml:lang="eng"> W3 </label>
         <description
           xml:lang="eng"> Breslau 26 (= Heyne Vrat. b) </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msW4">
@@ -1786,8 +1564,7 @@
           xml:lang="eng"> W4 </label>
         <description
           xml:lang="eng"> Breslau 27 (= Heyne Vrat. A) </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.msW5">
@@ -1795,8 +1572,7 @@
           xml:lang="eng"> W5 </label>
         <description
           xml:lang="eng"> Breslau 29 (= Heyne Vrat. a) </description>
-        <memberof
-          collection="manuscripts"/>
+        
       </edition>
     </work>
   </textgroup>
@@ -1818,8 +1594,7 @@
           xml:lang="eng"> English translation by Blackwell and Dué </label>
         <online
           docname="venA-metrical-summaries-eng.xml">
-          <validate
-            schema="chstei.rng"/>
+          
           <namespaceMapping
             abbreviation="tei"
             nsURI="http://www.tei-c.org/ns/1.0"/>
@@ -1839,8 +1614,7 @@
           xml:lang="eng"> Edition of the Venetus A, MS Ven. 454 </description>
         <online
           docname="venA-metrical-summaries.xml">
-          <validate
-            schema="chstei.rng"/>
+          
           <namespaceMapping
             abbreviation="tei"
             nsURI="http://www.tei-c.org/ns/1.0"/>
@@ -1876,8 +1650,7 @@
           MS. </description>
         <online
           docname="scholia-composite-normalized.xml">
-          <validate
-            schema="chstei.rng"/>
+       
           <namespaceMapping
             abbreviation="tei"
             nsURI="http://www.tei-c.org/ns/1.0"/>
@@ -1911,8 +1684,7 @@
           MS. </description>
         <online
           docname="scholia-composite-normalized.xml">
-          <validate
-            schema="chstei.rng"/>
+       
           <namespaceMapping
             abbreviation="tei"
             nsURI="http://www.tei-c.org/ns/1.0"/>
@@ -1946,8 +1718,7 @@
           MS. </description>
         <online
           docname="scholia-composite-normalized.xml">
-          <validate
-            schema="chstei.rng"/>
+          
           <namespaceMapping
             abbreviation="tei"
             nsURI="http://www.tei-c.org/ns/1.0"/>
@@ -1981,8 +1752,7 @@
           MS. </description>
         <online
           docname="scholia-composite-normalized.xml">
-          <validate
-            schema="chstei.rng"/>
+    
           <namespaceMapping
             abbreviation="tei"
             nsURI="http://www.tei-c.org/ns/1.0"/>
@@ -2016,8 +1786,7 @@
           MS. </description>
         <online
           docname="scholia-composite-normalized.xml">
-          <validate
-            schema="chstei.rng"/>
+         
           <namespaceMapping
             abbreviation="tei"
             nsURI="http://www.tei-c.org/ns/1.0"/>
@@ -2351,8 +2120,7 @@
           xml:lang="eng"> Edition of sole remaining fragment, in folio 8r of the Venetus A. </description>
         <online
           docname="tlg1194.tlg002.chs01.xml">
-          <validate
-            schema="teip5core.rng"/>
+    
           <namespaceMapping
             abbreviation="tei"
             nsURI="http://www.tei-c.org/ns/1.0"/>
@@ -2384,8 +2152,7 @@
           of his Recherches sur la Chréstomathie de Proclus </description>
         <online
           docname="tlg4036.tlg023.chs01.xml">
-          <validate
-            schema="teip5core.rng"/>
+          
           <namespaceMapping
             abbreviation="tei"
             nsURI="http://www.tei-c.org/ns/1.0"/>
@@ -2410,8 +2177,7 @@
           xml:lang="eng"> Electronic edition of the text in the Venetus A MS. </description>
         <online
           docname="tlg4036.tlg023.chs02.xml">
-          <validate
-            schema="teip5core.rng"/>
+          
           <namespaceMapping
             abbreviation="tei"
             nsURI="http://www.tei-c.org/ns/1.0"/>
