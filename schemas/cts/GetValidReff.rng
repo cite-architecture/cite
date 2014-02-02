@@ -4,23 +4,8 @@
   xmlns="http://relaxng.org/ns/structure/1.0"
   xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
   xmlns:cts="http://chs.harvard.edu/xmlns/cts">
-  <!--
-  
-  Relax NG schema for GetValidReff :  part of the Classical Text Services protocol (CTS)
-  
-  
-  Copyright 2005-2013 Neel Smith and licensed under the Creative Commons
-  Attribution-NonCommercial-ShareAlike License. To view a copy of this license, visit
-  http://creativecommons.org/licenses/by-nc-sa/1.0/ or send a letter to Creative Commons,
-  559 Nathan Abbott Way, Stanford, California 94305, USA.
-  
-  Originally prepared by Neel Smith, College of the Holy Cross:  nsmith@holycross.edu
-  
-  Currently maintained by Neel Smith for the Center for Hellenic Studies.
-  -->
-  <!--    This is the schema for a reply to the CTS GetValidReff request.
-     -->
- 
+
+
   <start>
     <element
       name="cts:GetValidReff">
@@ -32,7 +17,11 @@
           name="cts:reff">
           <zeroOrMore>
             <element name="cts:urn">
-              <text/>
+              <data
+                type="anyURI">
+                <param
+                  name="pattern">urn:cts:.+:.+\..+</param>
+              </data>
             </element>
           </zeroOrMore>
         </element>

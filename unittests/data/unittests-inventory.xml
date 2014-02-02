@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?xml-model href="TextInventory.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<TextInventory
+  tiversion="5.0.rc.1"
+  xmlns="http://chs.harvard.edu/xmlns/cts"
+  xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <ctsnamespace abbr="greekLit" ns="http://chs.harvard.edu/ctsns/greekLit"></ctsnamespace>
+  <ctsnamespace
+    abbr="latinLit"
+    ns="http://www.stoa.org/ctsns/latinLit">
+    <description
+      xml:lang="eng">Stoa Latin lit. namespace</description>
+  </ctsnamespace>
+  <textgroup
+    urn="urn:cts:latinLit:stoa0115">
+    <groupname
+      xml:lang="eng">Erasmus</groupname>
+    <work
+      urn="urn:cts:latinLit:stoa0115.stoa002"
+      xml:lang="lat">
+      <title
+        xml:lang="lat">Colloquia Familiaria</title>
+      <edition
+        urn="urn:cts:latinLit:stoa0115.stoa002.stoa01">
+        <label
+          xml:lang="eng">Scaife</label>
+        <online
+          docname="colloquia/erasmus.xml">
+         
+          <namespaceMapping
+            abbreviation="tei"
+            nsURI="http://www.tei-c.org/ns/1.0"/>
+          <citationMapping>
+            <!-- Preface: citation by p -->
+            <citation
+              label="section"
+              scope="/tei:TEI/tei:text/tei:body"
+              xpath="/tei:div[@type='preface' and @n='?']">
+              <citation
+                label="paragraph"
+                scope="/tei:TEI/tei:text/tei:body/tei:div[@type='preface' and @n='?']"
+                xpath="/tei:p[@n = '?']"/>
+            </citation>
+            <!-- Coll. 1: citation by p within topic -->
+            <citation
+              label="colloquium"
+              scope="/tei:TEI/tei:text/tei:body"
+              xpath="/tei:div[@type='colloquium' and @n='?']">
+              <citation
+                label="topic"
+                scope="/tei:TEI/tei:text/tei:body/tei:div[@type='colloquium' and @n='?']"
+                xpath="/tei:div[@type = 'topic' and @n = '?']">
+                <citation
+                  label="paragraph"
+                  scope="/tei:TEI/tei:text/tei:body/tei:div[@type='colloquium' and @n='?']/tei:div[@type = 'topic' and @n = '?']"
+                  xpath="/tei:p[@n = '?']"/>
+              </citation>
+            </citation>
+            <!-- Coll. 2:  citation by sp within topic -->
+            <citation
+              label="colloquium"
+              scope="/tei:TEI/tei:text/tei:body"
+              xpath="/tei:div[@type='colloquium' and @n='?']">
+              <citation
+                label="topic"
+                scope="/tei:TEI/tei:text/tei:body/tei:div[@type='colloquium' and @n='?']"
+                xpath="/tei:div[@type = 'topic' and @n = '?']">
+                <citation
+                  label="speech"
+                  scope="/tei:TEI/tei:text/tei:body/tei:div[@type='colloquium' and @n='?']/tei:div[@type = 'topic' and @n = '?']"
+                  xpath="/tei:sp[@n = '?']"/>
+              </citation>
+            </citation>
+          </citationMapping>
+        </online>
+      </edition>
+    </work>
+  </textgroup>
+  <textgroup
+    urn="urn:cts:greekLit:tlg0013">
+    <groupname
+      xml:lang="eng">Homeric Hymns</groupname>
+    <groupname
+      xml:lang="lat">Hymni Homerici</groupname>
+    <work
+      urn="urn:cts:greekLit:tlg0013.tlg011"
+      xml:lang="grc-c">
+      <title
+        xml:lang="lat">In Minervam</title>
+      <title
+        xml:lang="eng">Hymn to Athena</title>
+      
+      <edition
+        urn="urn:cts:greekLit:tlg0013.tlg011.chs01">
+        <label
+          xml:lang="eng">CHS</label>
+        <online
+          docname="tlg0013/tlg0013.tlg011.chs01.xml">
+  
+          <namespaceMapping
+            abbreviation="tei"
+            nsURI="http://www.tei-c.org/ns/1.0"/>
+          <citationMapping>
+            <citation
+              label="line"
+              scope="/tei:TEI/tei:text/tei:body"
+              xpath="/tei:l[@n = '?']"/>
+          </citationMapping>
+        </online>
+      </edition>
+      <translation
+        urn="urn:cts:greekLit:tlg0013.tlg011.chs02"
+        xml:lang="eng">
+        <label
+          xml:lang="eng">Evelyn-White</label>
+        <online
+          docname="tlg0013/tlg0013.tlg011.chs02.xml">
+          
+          <citationMapping>
+            <citation
+              label="line"
+              scope="/tei:TEI/tei:text/tei:body"
+              xpath="/tei:l[@n = '?']"/>
+          </citationMapping>
+        </online>
+      </translation>
+    </work>
+    <work
+      urn="urn:cts:greekLit:tlg0013.tlg012"
+      xml:lang="grc-c">
+      <title
+        xml:lang="eng">Hymn to Hera</title>
+      <translation
+        urn="urn:cts:greekLit:tlg0013.tlg012.chs02"
+        xml:lang="eng">
+        <label
+          xml:lang="eng">Evelyn-White</label>
+        <description xml:lang="eng">English translation by Hugh G. Evelyn-White, originally published in the Loeb
+          series, now in the public domain.</description>
+      </translation>
+    </work>
+  </textgroup>
+  <textgroup
+    urn="urn:cts:greekLit:tlg0012">
+    <groupname
+      xml:lang="eng">Homer</groupname>
+    <work
+      urn="urn:cts:greekLit:tlg0012.tlg001"
+      xml:lang="grc">
+      <title
+        xml:lang="eng">Iliad</title>
+      <edition
+        urn="urn:cts:greekLit:tlg0012.tlg001.oct">
+        <label
+          xml:lang="eng">Allen OCT</label>
+        <online
+          docname="tlg0012/oct-iliad.xml">
+        
+          <namespaceMapping
+            abbreviation="tei"
+            nsURI="http://www.tei-c.org/ns/1.0"/>
+          <citationMapping>
+            <citation
+              label="book"
+              scope="/tei:TEI/tei:text/tei:body"
+              xpath="/tei:div[@n = '?']">
+              <citation
+                label="line"
+                scope="/tei:TEI/tei:text/tei:body/tei:div[@n = '?']"
+                xpath="/tei:l[@n = '?']"/>
+            </citation>
+          </citationMapping>
+        </online>
+      </edition>
+    </work>
+  </textgroup>
+</TextInventory>

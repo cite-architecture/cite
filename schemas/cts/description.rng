@@ -4,27 +4,52 @@
     xmlns="http://relaxng.org/ns/structure/1.0"
     xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
     xmlns:cts="http://chs.harvard.edu/xmlns/cts">
-    
     <start>
-        <element
-            name="cts:description">
+        <choice>
             <element
-                name="cts:groupname">
+                name="cts:label">
+                <element
+                    name="cts:groupname">
+                    <text/>
+                </element>
+                <optional>
+                    <element
+                        name="cts:title">
+                        <data type="string">
+                        <param name="pattern">.+</param></data>
+                    </element>
+                </optional>
+                <optional>
+                    <element
+                        name="cts:work">
+                        <data type="string">
+                            <param name="pattern">.+</param></data>
+                    </element>
+                </optional>
+                <optional>
+                    <element
+                        name="cts:version">
+                        <data type="string">
+                            <param name="pattern">.+</param></data>
+                    </element>
+                </optional>
+                <optional>
+                    <element
+                        name="cts:citation">
+                        <data type="string">
+                            <param name="pattern">.+</param></data>
+                    </element>
+                </optional>
                 <text/>
             </element>
-            <optional>
-                <element
-                    name="cts:title">
-                    <text/>
-                </element>
-            </optional>
-            <optional>
-                <element
-                    name="cts:label">
-                    <text/>
-                </element>
-            </optional>
-        </element>
-      
+            <element
+                name="cts:label">
+                <data
+                    type="string">
+                    <param
+                        name="pattern">.+</param>
+                </data>
+            </element>
+        </choice>
     </start>
 </grammar>

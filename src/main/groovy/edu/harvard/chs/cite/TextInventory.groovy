@@ -30,7 +30,7 @@ class TextInventory {
     String enc = "UTF-8"
 
     /** XML namespace for the TextInventory vocabulary.    */
-    static groovy.xml.Namespace ti = new groovy.xml.Namespace("http://chs.harvard.edu/xmlns/cts/ti")
+    static groovy.xml.Namespace ti = new groovy.xml.Namespace("http://chs.harvard.edu/xmlns/cts")
 
     /** XML namespace for the CTS vocabulary.    */
     static groovy.xml.Namespace ctsns = new groovy.xml.Namespace("http://chs.harvard.edu/xmlns/cts")
@@ -259,12 +259,6 @@ class TextInventory {
                 }
                 if (xLang == workLang) {
                     errorList.add("Invalid language value for translation ${t.'@urn'}: same as language for work.")
-                }
-                if (xLang.size() != 3) {
-                    System.err.println "TextInventory: language code ${xLang} for translation ${t.'@urn'} not a 3-letter code."
-                }
-                if (workLang.size() != 3) {
-                    System.err.println "TextInventory: language code ${workLang} for work ${w.'@urn'} not a 3-letter code."
                 }
                 
             }
@@ -1037,7 +1031,14 @@ class TextInventory {
     * to this URN, or null if no match found.
     */
     CitationModel getCitationModel(String urnStr)  {
-        return this.citationModelMap[urnStr]
+      if (debug > 1) {
+	System.err.println "CM map keys are: " + this.citationModelMap.keySet()
+	System.err.println "Includes ${urnStr}? " + this.citationModelMap.keySet().contains(urnStr)
+	System.err.println "So we return a " + this.citationModelMap[urnStr].getClass()
+	def modelMap = this.citationModelMap[urnStr]
+	System.err.println "Number of its mappings = " + modelMap.mappings.size()
+      }
+      return this.citationModelMap[urnStr]
     }
 
 
@@ -1097,10 +1098,17 @@ class TextInventory {
         root[ti.textgroup].each { g ->
             def nameNode = g[ti.groupname][0]
             textgroups.add([g.'@urn',nameNode?.text()])
+	    if (debug > 1) {
+	      System.err.println "Found text group " + nameNode?.text()
+	    }
 
             g[ti.work].each { w ->
                 def titleNode = w[ti.title][0]
                 works.add([w.'@urn',titleNode?.text(), g.'@urn'])
+		if (debug > 1) {
+		  System.err.println "Found  work " + titleNode?.text()
+		}
+
                 //works.add(w.'@urn')
                 w.attributes().each { a ->
                     def k = a.getKey()
@@ -1114,13 +1122,28 @@ class TextInventory {
 
                 w[ti.edition].each { e ->
                     def labelNode = e[ti.label][0]
+
                     def online = e[ti.online]
                     boolean isOnline = (online.size() > 0)
+
+		    if (debug > 1) {
+		      System.err.println "Found  edition " + labelNode?.text()
+		      System.err.println "Online? " + isOnline
+		    }
+		    
                     editions.add([e.'@urn',labelNode?.text(),isOnline, w.'@urn'])
                     if (isOnline)  {
                         def firstOnline = online[0]
                         onlineMap[e.'@urn'] = firstOnline.'@docname'
+
                         citationModelMap[e.'@urn'] = new CitationModel(firstOnline)
+			if (debug > 1) {
+			  System.err.println "Make CM for " + firstOnline
+			  System.err.println " indexed from " + e.'@urn'
+			  System.err.println "Size of model map now " + citationModelMap.keySet().size()
+			  
+			  
+			}
 
                         def nsMaps = [:]
                         e[ti.online][ti.namespaceMapping].each { ns ->
@@ -1144,8 +1167,13 @@ class TextInventory {
                         }
                     }
                     def labelNode = tr[ti.label][0]
+
                     def online = tr[ti.online]
                     boolean isOnline = (online.size() > 0)
+		    if (debug > 1) {
+		      System.err.println "Found translation " + labelNode?.text()
+		      System.err.println "Online? " + isOnline
+		    }
                     translations.add([tr.'@urn',labelNode?.text(),isOnline, w.'@urn'])
                     if (isOnline)  {
                         def firstOnline = online[0]

@@ -14,7 +14,7 @@ package edu.harvard.chs.cite
 class CitationModel {
 
     /** The CTS TextIventory namespace  */
-    final groovy.xml.Namespace ti = new groovy.xml.Namespace("http://chs.harvard.edu/xmlns/cts/ti")
+    final groovy.xml.Namespace ti = new groovy.xml.Namespace("http://chs.harvard.edu/xmlns/cts")
 
 
 
@@ -38,8 +38,11 @@ class CitationModel {
     */
     CitationModel (groovy.util.Node onlineNode) {
 
-        def allSchemes = onlineNode[ti.citationMapping][0].children().findAll {
-            it.name().getLocalPart() == "citation"
+
+      def mapZero = onlineNode[ti.citationMapping][0]
+      if (mapZero) {
+	def allSchemes = mapZero.children().findAll {
+	  it.name().getLocalPart() == "citation"
         }
 
         allSchemes.each { hierarchy ->
@@ -49,6 +52,7 @@ class CitationModel {
 
         }
       }
+    }
 
 
     /**

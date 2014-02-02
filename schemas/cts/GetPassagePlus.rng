@@ -1,20 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-    
-    Relax NG schema for GetPassagePlus :  part of the Classical Text Services protocol (CTS)
-    
-    
-    Copyright 2005-2013 Neel Smith and licensed under the Creative Commons
-    Attribution-NonCommercial-ShareAlike License. To view a copy of this license, visit
-    http://creativecommons.org/licenses/by-nc-sa/1.0/ or send a letter to Creative Commons,
-    559 Nathan Abbott Way, Stanford, California 94305, USA.
-    
-    Originally prepared by Neel Smith, College of the Holy Cross:  nsmith@holycross.edu
-    
-    Currently maintained by Neel Smith for the Center for Hellenic Studies.
--->
-<!--    This is the schema for a reply to the CTS GetPassage request.
--->
 
 <grammar
     datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
@@ -32,7 +16,7 @@
                     <anyName/>
                 </attribute>
                 <element>
-                    <!-- why does this cause conflicting ID-types for attribute collection of memberof element? -->
+                    
                     <anyName/>
                     <ref
                         name="anything"/>
@@ -50,7 +34,11 @@
                 href="request.rng"/>
             <element
                 name="cts:reply">
-                <element name="cts:urn"><text></text></element>
+                <element name="cts:urn"><data
+                    type="anyURI">
+                    <param
+                        name="pattern">urn:cts:.+:.+\..+\..+:.+</param>
+                </data></element>
                 <externalRef href="description.rng"></externalRef>
                 <element name="cts:passage">
                 <ref
@@ -58,6 +46,7 @@
                 </element>
                 <externalRef href="prevnext.rng"></externalRef>
             </element>
+            <externalRef href="description.rng"></externalRef>
         </element>
     </start>
     

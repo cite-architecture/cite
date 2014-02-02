@@ -4,22 +4,9 @@
   xmlns="http://relaxng.org/ns/structure/1.0"
   xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
   xmlns:cts="http://chs.harvard.edu/xmlns/cts">
-  <!--
   
-  Relax NG schema for GetCapabilities :  part of the Classical Text Services protocol (CTS)
-  beginning with version 1.2.
   
-  Copyright 2007-2013 Neel Smith and licensed under the Creative Commons
-  Attribution-NonCommercial-ShareAlike License. To view a copy of this license, visit
-  http://creativecommons.org/licenses/by-nc-sa/1.0/ or send a letter to Creative Commons,
-  559 Nathan Abbott Way, Stanford, California 94305, USA.
-  
-  Originally prepared by Neel Smith, College of the Holy Cross:  nsmith@holycross.edu
-  
-  Currently maintained by Neel Smith for the Center for Hellenic Studies.
-  -->
-  <!--    This is the schema for a reply to the CTS GetCapabilities reuqest.
-     -->
+  <!--    This is the schema for a reply to the CTS GetCapabilities request.     -->
   <start>
     <element
       name="cts:GetCapabilities">

@@ -12,7 +12,6 @@
                     <anyName/>
                 </attribute>
                 <element>
-                    <!-- why does this cause conflicting ID-types for attribute collection of memberof element? -->
                     <anyName/>
                     <ref
                     name="anything"/>
