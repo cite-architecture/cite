@@ -19,12 +19,12 @@ package edu.harvard.chs.cite
 class CtsUrn {
     
     /** Version description String. */
-    final versionInfo = "Part of the CITE library, spring 2013."
+    final versionInfo = "Part of the CITE library complying with v. 5.0 of the CTS URN specification."
 
 
     // All member properties are initialized in constructor.
     /** String version of entire URN */
-    String asString
+    String rawString
 
     // colon-delimited top-level components:
     /** Abbreviation of the CTS Namespace.  In a CTS-aware environment,
@@ -366,7 +366,7 @@ class CtsUrn {
       * syntax and semantics of the draft CTS URN proposal.
       */
       CtsUrn (String urnStr) {
-      	     this.asString = urnStr
+      	     this.rawString = urnStr
 	     if (urnStr ==~ /^psurn:.*/) {
 	     	initializePseudoUrn(urnStr)
 
@@ -383,8 +383,13 @@ class CtsUrn {
       * the proposed CTS URN standard.
       * @returns The URN as a String.
       */
+
+  // CHANGE THIS:
       String toString() {
-      	     return asString
+	/* should return url encoded version of any subref strings and any
+	   numeric indics (b/c of [] notation)
+	 */
+	return rawString
       }
 
 
