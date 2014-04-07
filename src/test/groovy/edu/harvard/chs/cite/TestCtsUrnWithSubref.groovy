@@ -10,13 +10,22 @@ import org.junit.Test
 class TestCtsUrnWithSubref extends GroovyTestCase {
 
 
-    def subrefEg = "urn:cts:greekLit:tlg0012.tlg001.testlines:1.1@sub"
 
+    void testSubref() {
+      String noSubrefStr = "urn:cts:greekLit:tlg0012.tlg001:1.1"
+      CtsUrn psg = new CtsUrn(noSubrefStr)
+      shouldFail {
+	assert psg.hasSubref()
+      }
 
+      String subrefStr = "urn:cts:greekLit:tlg0012.tlg001:1.1@μῆνιν"
 
-    void testSub() {
-      CtsUrn u = new CtsUrn(subrefEg)
-      assert u
+      CtsUrn u = new CtsUrn(subrefStr)
+      assert u.hasSubref()
+
+      assert u.getSubref1() == "μῆνιν"
+      //assert u.getSubrefIdx1() == 1
+
     }
 
  
