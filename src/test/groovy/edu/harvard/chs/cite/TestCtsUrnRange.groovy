@@ -11,23 +11,33 @@ class TestCtsUrnRange extends GroovyTestCase {
 
 
     /**
-    * Tests constructors and toString() method of CtsUrn class.
+    * Tests distinction of points and valid ranges.
     */
-    void testConstructor() {
+    void testRangeMethods() {
 
+      String brokenRangeStr =  "urn:cts:greekLit:tlg0012.tlg001:1.25-"
       shouldFail {
-	def brokenRange = new CtsUrn("urn:cts:greekLit:tlg0012.tlg001:1.25-")
+	CtsUrn brokenRange = new CtsUrn(brokenRangeStr)
       }
 
 
-      def pointUrnStr = "urn:cts:greekLit:tlg1220.tlg001:1.1" 
+      String pointUrnStr = "urn:cts:greekLit:tlg1220.tlg001:1.1" 
       CtsUrn pointUrn = new CtsUrn(pointUrnStr)
       assert pointUrn.isRange() == false
+      shouldFail {
+	assert pointUrn.getRangeBegin()
+      }
+
+      shouldFail {
+	assert pointUrn.getRangeEnd()
+      }
 
       def testUrnStr = "urn:cts:greekLit:tlg1220.tlg001:1.1-1.24" 
       CtsUrn urn = new CtsUrn(testUrnStr)
-
       assert urn.isRange()
+      assert urn.getRangeBegin() == "1.1"
+      assert urn.getRangeEnd() == "1.24"
+
      }
 
 
