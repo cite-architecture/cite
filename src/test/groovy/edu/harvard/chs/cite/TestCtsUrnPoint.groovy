@@ -11,9 +11,9 @@ class TestCtsUrnPoint extends GroovyTestCase {
 
 
     /**
-    * Tests constructors of CtsUrn class.
+    * Tests constructors and toString() method of CtsUrn class.
     */
-    void testPointUrn() {
+    void testConstructor() {
       // only form of constructor: URN from String:
       shouldFail {
 	def badUrnSyntax = new CtsUrn("Dumb string")
@@ -22,13 +22,19 @@ class TestCtsUrnPoint extends GroovyTestCase {
 	def tooShortSyntax = new CtsUrn("urn:cts:greekLit:")
       }
 
-      def testUrnStr = "urn:cts:greekLit:tlg1220.tlg001:1" 
+      def testUrnStr = "urn:cts:greekLit:tlg1220.tlg001:1.1" 
       CtsUrn urn = new CtsUrn(testUrnStr)
 
-      // round trips OK:
+      // simple to round trip when there is no subref:
       assert urn.toString() == testUrnStr
 
 
+      def subRefStr = "urn:cts:greekLit:tlg1220.tlg001:1.1@μῆνιν" 
+      CtsUrn subRefUrn = new CtsUrn(subRefStr)
+      
+      System.err.println "Subref == " + subRefUrn.toString()
+
+      /*
       // access top-level components:
       assert urn.getCtsNamespace() == "greekLit"
       assert urn.getWorkComponent() == "tlg1220.tlg001"
@@ -49,6 +55,7 @@ class TestCtsUrnPoint extends GroovyTestCase {
       assert urn.getWork() == "tlg001"
 
 
+
       // A full URN for the work component is
       // useful for many applications:
       assert urn.getUrnWithoutPassage() == "urn:cts:greekLit:tlg1220.tlg001"
@@ -57,18 +64,8 @@ class TestCtsUrnPoint extends GroovyTestCase {
       // to and from String values:
       assert urn.labelForWorkLevel() == "work"
       assert urn.levelForLabel(urn.labelForWorkLevel()) == CtsUrn.WorkLevel.WORK	
+      */
 
-
-         urn = new CtsUrn("urn:cts:greekLit:tlg1220.tlg001.chs01")
-         assert urn.getVersion(true) == "greekLit:chs01"
-         assert urn.getVersion(false) == "chs01"
-         assert urn.getVersion() == "chs01"
-
-         urn = new CtsUrn("urn:cts:latinLit:stoa0054.stoa010.hc")
-
-
-
- 
      }
 
 
