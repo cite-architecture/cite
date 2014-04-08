@@ -23,12 +23,6 @@ class TestCtsUrnPoint extends GroovyTestCase {
       shouldFail {
 	CtsUrn emptySubref = new CtsUrn("urn:cts:greekLit:tlg1220.tlg001:1.1@")
       }
-      try {
-	CtsUrn emptySubref = new CtsUrn("urn:cts:greekLit:tlg1220.tlg001:1.1@" )
-      } catch (Exception e) {
-	println e
-      }
-
 
       String testUrnStr = "urn:cts:greekLit:tlg1220.tlg001:1.1" 
       CtsUrn urn = new CtsUrn(testUrnStr)
