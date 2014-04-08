@@ -67,15 +67,15 @@ class CtsUrn {
   /** First substring  */
   String subref1
   /** Optional index on first substring */
-  int subrefIdx1
+  Integer subrefIdx1
   /** Second substring in case of a range with two subreferences */
   String subref2
   /** Optional index on second substring */
-  int subrefIdx2
+  Integer subrefIdx2
 
 
   // NEEDS DEFINITION
-  int passageLevel
+  //int passageLevel
 
   /** CTS hierarchy of works. */
   enum WorkLevel {
@@ -83,7 +83,52 @@ class CtsUrn {
   }
 
 
+
+  /** Finds index of first subreference.
+   * @returns Integer value of subrefIdx1, or default
+   * value of 1.
+   * @throws Exception if subref1 is not defined.
+   */
+  Integer getSubrefIdx1() {
+    if ((this.subref1 == null) || (this.subref1 == "")) {
+      throw new Exception("CtsUrn: cannot index null subreference.")
+
+    } else {
+      if (this.subrefIdx1 == null) {
+	return 1
+      } else {
+	return this.subrefIdx1
+      }
+    }
+  }
+
+
+
+
+  /** Finds index of first subreference.
+   * @returns Integer value of subrefIdx1, or default
+   * value of 1.
+   * @throws Exception if subref1 is not defined.
+   */
+  Integer getSubrefIdx2() {
+    if ((this.subref2 == null) || (this.subref2 == "")) {
+      throw new Exception("CtsUrn: cannot index null subreference.")
+
+    } else {
+      if (this.subrefIdx2 == null) {
+	return 1
+      } else {
+	return this.subrefIdx2
+      }
+    }
+  }
+
+
+
+
+
   /** Gets workLevel property.
+   * @returns WorkLevel for this URN.
    */
   WorkLevel getWorkLevel() {
     return this.workLevel
@@ -93,6 +138,7 @@ class CtsUrn {
    * Private method assigns appropriate values to member properties
    * based on Urn String submitted to constructor.
    * @param urnString The values to assign, represented as a CTS Urn String.
+   * @throws Exception if urnString is not a syntactically valid CTS URN.
    */
   private void initializeUrn(String urnString) {
     def components = urnString.split(":")
@@ -203,6 +249,7 @@ class CtsUrn {
   }
 
   /** Gets second subreference string.
+   * @returns Subreference string on second node of a passage.
    * @throws Exception if second subreference string does not exist or is empty.
    */
   String getSubref2() {
@@ -215,7 +262,9 @@ class CtsUrn {
 
 
 
-
+  /** Gets first node reference of a range.
+   * @throws Exception if URN is not a range.
+   */
   String getRangeBegin() {
     if (this.isRange()) {
       return rangeBegin
@@ -224,6 +273,10 @@ class CtsUrn {
     }
   }
 
+
+  /** Gets second node reference of a range.
+   * @throws Exception if URN is not a range.
+   */
   String getRangeEnd() {
     if (this.isRange()) {
       return rangeEnd
@@ -232,8 +285,13 @@ class CtsUrn {
     }
   }
 
+
+  /** Determines if URN has a sub reference.
+   * @returns True if urn has a subreference. For a range URN,
+   * true if either node has a subreference.
+   */
   boolean hasSubref() {
-    return ((subref1) && (subref1 != ''))
+    return (((subref1) && (subref1 != '')) || ((subref2) && (subref2 != '')))
   }
 
   /**
@@ -264,13 +322,16 @@ class CtsUrn {
 
 
   /**
-   * "Private" method assigns appropriate values ot member
+   * "Private" method assigns appropriate values to member
    * properites if URN is a reference to a single node.
    * @param str The URN to parse, as a String.
+   * @throws Exception if indexed subreference not indexed with
+   * an integer.
    */    
   private void initializePoint(String str) {
     def splitSub = str.split(/@/)
     switch (splitSub.size()) {
+
     case 1:
     this.passageNode = splitSub[0]
     break
@@ -280,85 +341,91 @@ class CtsUrn {
     this.subref1 = splitSub[1]
     ArrayList subrefParts = indexSubref(this.subref1)
     this.subref1 = subrefParts[0]
-	      if (subrefParts.size() == 2) {
+    if (subrefParts.size() == 2) {
+      try {
+	this.subrefIdx1 = subrefParts[1].toInteger()
+      } catch (Exception e) {
+	throw e
+      }
+    }
+    break
 
-	      // try..catch this:
-	      this.subrefIdx1 = subrefParts[1].toInteger()
-	      }
-	      break
-	      }
-      	      
+    }
+    
+  }
+
+
+  
+  /**
+   * "Private" method assigns appropriate values ot member
+   * properites if URN is a reference to a range.
+   * @param str The URN to parse, as a String.
+   * @throws Exception if index is not an integer value.
+   */    
+  private void initializeRange(String str1, String str2) {
+
+    def splitSub = str1.split(/@/)
+    switch (splitSub.size()) {
+    case 1:
+    this.rangeBegin = splitSub[0]
+    break
+
+    case 2:
+    this.rangeBegin = splitSub[0]
+    this.subref1 = splitSub[1]
+    ArrayList subrefParts = indexSubref(this.subref1)
+    this.subref1 = subrefParts[0]
+    if (subrefParts.size() == 2) {
+      try {
+	this.subrefIdx1 = subrefParts[1].toInteger()
+      } catch (Exception e) {
+	throw e
       }
 
+    }
+    break
+
+    }
 
 
-      /**
-      * "Private" method assigns appropriate values ot member
-      * properites if URN is a reference to a range.
-      * @param str The URN to parse, as a String.
-      */    
-      private void initializeRange(String str1, String str2) {
+    splitSub = str2.split(/@/)
+    switch (splitSub.size()) {
+    case 1:
+    this.rangeEnd = splitSub[0]
+    break
 
-	def splitSub = str1.split(/@/)
-      	      switch (splitSub.size()) {
-	      case 1:
-	      this.rangeBegin = splitSub[0]
-
-	      break
-
-	      case 2:
-      	      this.rangeBegin = splitSub[0]
-	      this.subref1 = splitSub[1]
-	      ArrayList subrefParts = indexSubref(this.subref1)
- 	      this.subref1 = subrefParts[0]
-	      if (subrefParts.size() == 2) {
-
-	      // try..catch this:
-	      this.subrefIdx1 = subrefParts[1].toInteger()
-	      }
-	      break
-	      }
-
-
-	splitSub = str2.split(/@/)
-      	     switch (splitSub.size()) {
-	      case 1:
-	      this.rangeEnd = splitSub[0]
-
-	      break
-
-	      case 2:
-      	      this.rangeEnd = splitSub[0]
-	      this.subref2= splitSub[1]
-	      ArrayList subrefParts = indexSubref(this.subref2)
- 	      this.subref2 = subrefParts[0]
-	      if (subrefParts.size() == 2) {
-
-	      // try..catch this:
-	      this.subrefIdx2 = subrefParts[1].toInteger()
-	      }
-	      break
-	      }
+    case 2:
+    this.rangeEnd = splitSub[0]
+    this.subref2= splitSub[1]
+    ArrayList subrefParts = indexSubref(this.subref2)
+    this.subref2 = subrefParts[0]
+    if (subrefParts.size() == 2) {
+      try {
+	this.subrefIdx2 = subrefParts[1].toInteger()
+      } catch (Exception e) {
+	throw e
       }
+      break
+    }
+
+    }
+  }
 
 
+  /** CtsUrns are constructed from a String conforming to the
+   * syntax and semantics of the CTS URN specification.
+   * @throws Exception if urnStr is not a syntactically valid CTS URN.
+   */
+  CtsUrn (String urnStr) {
+    this.rawString = urnStr
+    try {
+      this.initializeUrn(urnStr)
+    } catch (Exception e) {
+      throw e
+    }
+  }
 
 
-      /** CtsUrns are constructed from a String conforming to the
-      * syntax and semantics of the CTS URN specification.
-      */
-      CtsUrn (String urnStr) {
-      	     this.rawString = urnStr
-	     if (urnStr ==~ /^psurn:.*/) {
-	     	initializePseudoUrn(urnStr)
-
-	     } else if (urnStr ==~ /^urn:.*/) {
-	       this.initializeUrn(urnStr)
-
-	     }	else {
-    	     	throw new Exception("Bad URN syntax: #${urnStr}#")
-	     }
-      }
       
       /**
       * Returns the CTS URN object as a String in the notation defined by
@@ -569,20 +636,6 @@ class CtsUrn {
 		   return "${ctsNamespace }:${exemplar}"
 	      } else {
 		  return exemplar
-	      }
-      }
-
-      /**
-      * Determines if the object is a valid Urn, or a Pseudo-Urn by
-      * looking to see if the work reference is qualified
-      * by a CTS namespace.
-      * @returns True if the object is a valid Urn, otherwise false.
-      */
-      boolean isUrn() {
-      	      if ((!ctsNamespace) || (ctsNamespace == "")) {
-	      return false
-	      } else {
-	      return true
 	      }
       }
 
