@@ -38,6 +38,14 @@ class TestCtsUrnWorkComponent extends GroovyTestCase {
     shouldFail {
       String noWork = groupUrn.getWork()
     }
+
+    shouldFail {
+      String noWork = groupUrn.getWork(true)
+    }
+
+    /*    shouldFail {
+      String noVersion = groupUrn.getVersion()
+      }*/
   }
 
   void testGroupAndWork() {
