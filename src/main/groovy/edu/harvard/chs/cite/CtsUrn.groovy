@@ -474,7 +474,12 @@ class CtsUrn {
   }
 
 
-
+  /** 
+   * Returns the URN value with work component reduced to a notional
+   * work level. 
+   * @returns The reduced URN, as a String.
+   * @throws Exception if notional work level is not defined.
+   */
   String reduceToWork() 
   throws Exception {
 
@@ -488,6 +493,30 @@ class CtsUrn {
       return  base + this.getPassageComponent()
     }
   }
+
+
+
+
+  /** 
+   * Returns the URN value with work component reduced to a version level.
+   * 
+   * @returns The reduced URN, as a String.
+   * @throws Exception if the URN is not defined at the version level.
+   */
+  String reduceToVersion() 
+  throws Exception {
+
+    if ((this.getWorkLevel() == WorkLevel.GROUP) || (this.getWorkLevel() == WorkLevel.WORK)) {
+      throw new Exception("CtsUrn: no version part of this URN")
+    }
+    String base = "urn:cts:" + this.ctsNamespace + ":" + this.getTextGroup() + "." + this.getWork() + "." + this.getVersion() + ":"
+    if (this.getPassageComponent() == null) {
+      return base
+    } else {
+      return  base + this.getPassageComponent()
+    }
+  }
+
 
 
     /** 

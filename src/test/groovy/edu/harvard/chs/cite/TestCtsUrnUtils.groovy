@@ -50,6 +50,37 @@ class TestCtsUrnUtils extends GroovyTestCase {
   }
 
 
+
+
+  void testReduceToVersion() {
+    String groupString = "urn:cts:greekLit:tlg0012"
+    CtsUrn groupUrn = new CtsUrn(groupString)
+    assert shouldFail {
+      String reduction = groupUrn.reduceToVersion()
+    }
+
+
+    String workString = "urn:cts:greekLit:tlg0012.tlg001:1.1"
+    CtsUrn workUrn = new CtsUrn(workString)
+    assert shouldFail {
+      String reduction = workUrn.reduceToVersion()
+    }
+
+    String versString = "urn:cts:greekLit:tlg0012.tlg001.msA:1.1"
+    CtsUrn versUrn = new CtsUrn(versString)
+    assert versUrn.reduceToVersion() == "urn:cts:greekLit:tlg0012.tlg001.msA:1.1"
+
+    String exemplarString = "urn:cts:greekLit:tlg0012.tlg001.msA.tokens:1.1.1"
+    CtsUrn exemplarUrn = new CtsUrn(exemplarString)
+    assert exemplarUrn.reduceToVersion() == "urn:cts:greekLit:tlg0012.tlg001.msA:1.1.1"
+
+    String emptyPsgString =  "urn:cts:greekLit:tlg0012.tlg001.msA:"
+    CtsUrn emptyPsgUrn = new CtsUrn(emptyPsgString)
+    assert emptyPsgUrn.reduceToVersion() == "urn:cts:greekLit:tlg0012.tlg001.msA:"
+  }
+
+
+
     void testPointUrn() {
 
 	 // access portions of reference component:
