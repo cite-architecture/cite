@@ -62,9 +62,11 @@ class TestLabelling extends GroovyTestCase {
     @Test void testWorkLanguages() {
         assert ti.languageForWork(iliadUrnStr) == "grc"
         assert ti.languageForWork(iliadUrn) == "grc"
-        assert ti.languageForWork(bogusReference) == null
+	assert shouldFail {
+String bogus = ti.languageForWork(bogusReference)
+	}
         assert shouldFail {
-            ti.languageForWork(invalidUrnString)
+	  ti.languageForWork(invalidUrnString)
         }
     }
 

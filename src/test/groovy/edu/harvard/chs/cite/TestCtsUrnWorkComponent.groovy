@@ -76,15 +76,49 @@ class TestCtsUrnWorkComponent extends GroovyTestCase {
     assert urn.getTextGroup() == "tlg1220"
     assert urn.getWork() == "tlg001"
 
-    
+
+    shouldFail {
+      String noVersion = urn.getVersion()
+    }
+
+    shouldFail {
+      String noVersion = urn.getVersion(true)
+    }
+
+    shouldFail {
+      String noExemplar = urn.getExemplar()
+    }
+
+    shouldFail {
+      String noExemplar = urn.getExemplar(true)
+    }
 
   }
 
 
-  void testVersionAndExemplar() {
+  void testVersion() {
     String versionUrnStr = "urn:cts:greekLit:tlg0012.tlg001.msA:1.10"
-    String tokenUrnStr = "urn:cts:greekLit:tlg0012.tlg001.msA.tokens:1.10.2"
+    CtsUrn urn = new CtsUrn(versionUrnStr)
+
+    assert urn.getVersion(true) == "greekLit:msA"
+    assert urn.getVersion(false) == "msA"
+    assert urn.getVersion() == "msA"
+
+
+
+    shouldFail {
+      String noExemplar = urn.getExemplar()
+    }
+
+    shouldFail {
+      String noExemplar = urn.getExemplar(true)
+    }
   }
 
+  void testExemplar() {
+    String tokenUrnStr = "urn:cts:greekLit:tlg0012.tlg001.msA.tokens:1.10.2"
+    CtsUrn urn = new CtsUrn(tokenUrnStr)
+    assert urn.getExemplar() == "tokens"
+  }
 
 }
