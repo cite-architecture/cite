@@ -14,15 +14,17 @@ class TestCtsUrnWorkComponent extends GroovyTestCase {
 
 
   void testWorkLevel() {
+    String groupStr = "urn:cts:latinLit:stoa0115"
+    CtsUrn groupUrn = new CtsUrn(groupStr)
+    assert groupUrn.getWorkLevel().toString() == "GROUP"
+
     String workStr = "urn:cts:latinLit:stoa0115.stoa002:preface.1"
     CtsUrn workUrn = new CtsUrn(workStr)
     assert workUrn.getWorkLevel().toString() == "WORK"
     
-
     String versionStr = "urn:cts:latinLit:stoa0115.stoa002.stoa01"
     CtsUrn versionUrn = new CtsUrn(versionStr)
     assert versionUrn.getWorkLevel().toString() == "VERSION"
-
 
     String exemplarStr = "urn:cts:latinLit:stoa0115.stoa002.stoa01.tokenized"
     CtsUrn exemplarUrn = new CtsUrn(exemplarStr)
@@ -35,17 +37,29 @@ class TestCtsUrnWorkComponent extends GroovyTestCase {
     String groupStr = "urn:cts:greekLit:tlg0012"
     CtsUrn groupUrn = new CtsUrn(groupStr)
     assert groupUrn.getTextGroup() == "tlg0012"
+
     shouldFail {
       String noWork = groupUrn.getWork()
     }
-
     shouldFail {
       String noWork = groupUrn.getWork(true)
     }
 
-    /*    shouldFail {
-      String noVersion = groupUrn.getVersion()
-      }*/
+   shouldFail {
+     String noVersion = groupUrn.getVersion()
+   }
+   shouldFail {
+     String noVersion = groupUrn.getVersion(true)
+   }
+
+
+   shouldFail {
+     String noExemplar = groupUrn.getExemplar()
+   }
+   shouldFail {
+     String noVersion = groupUrn.getExemplar(true)
+   }
+
   }
 
   void testGroupAndWork() {
