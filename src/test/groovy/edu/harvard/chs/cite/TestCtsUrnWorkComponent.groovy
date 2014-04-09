@@ -10,7 +10,25 @@ import org.junit.Test
 class TestCtsUrnWorkComponent extends GroovyTestCase {
 
 
-  String subrefEg = "urn:cts:latinLit:stoa0115.stoa002:preface.1@nunc"
+
+
+
+  void testWorkLevel() {
+    String workStr = "urn:cts:latinLit:stoa0115.stoa002:preface.1"
+    CtsUrn workUrn = new CtsUrn(workStr)
+    assert workUrn.getWorkLevel().toString() == "WORK"
+    
+
+    String versionStr = "urn:cts:latinLit:stoa0115.stoa002.stoa01"
+    CtsUrn versionUrn = new CtsUrn(versionStr)
+    assert versionUrn.getWorkLevel().toString() == "VERSION"
+
+
+    String exemplarStr = "urn:cts:latinLit:stoa0115.stoa002.stoa01.tokenized"
+    CtsUrn exemplarUrn = new CtsUrn(exemplarStr)
+    assert exemplarUrn.getWorkLevel().toString() == "EXEMPLAR"
+  }
+
 
   /**
    * Tests basic methods of CtsUrn class.
