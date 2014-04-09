@@ -30,9 +30,16 @@ class TestCtsUrnWorkComponent extends GroovyTestCase {
   }
 
 
-  /**
-   * Tests basic methods of CtsUrn class.
-   */
+
+  void testGroup() {
+    String groupStr = "urn:cts:greekLit:tlg0012"
+    CtsUrn groupUrn = new CtsUrn(groupStr)
+    assert groupUrn.getTextGroup() == "tlg0012"
+    shouldFail {
+      String noWork = groupUrn.getWork()
+    }
+  }
+
   void testGroupAndWork() {
     
     String testUrnStr = "urn:cts:greekLit:tlg1220.tlg001:1" 
@@ -46,6 +53,9 @@ class TestCtsUrnWorkComponent extends GroovyTestCase {
 
     assert urn.getTextGroup() == "tlg1220"
     assert urn.getWork() == "tlg001"
+
+    
+
   }
 
 
