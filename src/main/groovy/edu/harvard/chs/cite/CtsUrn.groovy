@@ -464,14 +464,30 @@ class CtsUrn {
       }
 
 
-      /**
-      * Gets the full URN for the work-level reference, without any further
-      * reference information.
-      * @returns The full URN, as a String, down to the work-level.
-      */
-      String getUrnWithoutPassage() {
-	return "urn:cts:" + this.ctsNamespace + ":" + this.workComponent + ":"
-      }
+  /**
+   * Gets the full URN for the work-level reference, without any further
+   * reference information.
+   * @returns The full URN, as a String, down to the work-level.
+   */
+  String getUrnWithoutPassage() {
+    return "urn:cts:" + this.ctsNamespace + ":" + this.workComponent + ":"
+  }
+
+
+
+  String reduceToWork() 
+  throws Exception {
+
+    if (this.getWorkLevel() == WorkLevel.GROUP) {
+      throw new Exception("CtsUrn: no work part of this URN")
+    }
+    String base = "urn:cts:" + this.ctsNamespace + ":" + this.getTextGroup() + "." + this.getWork() + ":"
+    if (this.getPassageComponent() == null) {
+      return base
+    } else {
+      return  base + this.getPassageComponent()
+    }
+  }
 
 
     /** 
