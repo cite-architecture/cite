@@ -190,7 +190,9 @@ class TestTextInventory extends GroovyTestCase {
     @Test void testWorkLanguages() {
         assert ti.languageForWork(iliadUrnStr) == "grc"
         assert ti.languageForWork(iliadUrn) == "grc"
-        assert ti.languageForWork(bogusReference) == null
+        assert shouldFail {
+	 String bogus = ti.languageForWork(bogusReference) 
+	}
         assert shouldFail {
             ti.languageForWork(invalidUrnString)
         }
@@ -202,7 +204,9 @@ class TestTextInventory extends GroovyTestCase {
         def expectedOnline = ["urn:cts:greekLit:tlg4036.tlg023.chs01", "urn:cts:greekLit:tlg4036.tlg023.chs02"]
         assert ti.versionsForWork(chrestomathyUrn) == expectedOnline
         assert ti.versionsForWork(chrestomathyUrnStr) == expectedOnline
-        assert ti.versionsForWork(bogusReference).size() == 0
+        assert shouldFail {
+	  String bogus = ti.versionsForWork(bogusReference).size() 
+	}
         assert shouldFail {
             ti.versionsForWork(invalidUrnStr)
         }
