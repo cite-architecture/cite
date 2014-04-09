@@ -119,6 +119,8 @@ class TestCtsUrnWorkComponent extends GroovyTestCase {
     String tokenUrnStr = "urn:cts:greekLit:tlg0012.tlg001.msA.tokens:1.10.2"
     CtsUrn urn = new CtsUrn(tokenUrnStr)
     assert urn.getExemplar() == "tokens"
+    assert urn.getExemplar(false) == "tokens"
+    assert urn.getExemplar(true) == "greekLit:tokens"
   }
 
 }
