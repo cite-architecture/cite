@@ -23,6 +23,21 @@ class TestCtsUrnUtils extends GroovyTestCase {
     }
 
 
+  void testReduceToWork() {
+    String versString = "urn:cts:greekLit:tlg0012.tlg001.msA:1.1"
+    CtsUrn versUrn = new CtsUrn(versString)
+    assert versUrn.reduceToWork() == "urn:cts:greekLit:tlg0012.tlg001:1.1"
+
+
+    String workString = "urn:cts:greekLit:tlg0012.tlg001:1.1"
+    CtsUrn workUrn = new CtsUrn(workString)
+    String groupString = "urn:cts:greekLit:tlg0012"
+    CtsUrn groupUrn = new CtsUrn(groupString)
+    String emptyPsgString =  "urn:cts:greekLit:tlg0012.tlg001.msA:"
+    CtsUrn emptyPsgUrn = new CtsUrn(emptyPsgString)
+
+  }
+
 
     void testPointUrn() {
 
