@@ -1,6 +1,5 @@
 # The `cite` library #
 
-
 ## What it is and what's here
 Cite is a library for working CTS URNs, CTS TextInventories, and  CITE Object URNs.
 
