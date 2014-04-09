@@ -125,8 +125,13 @@ class CtsUrn {
   /** Gets workLevel property.
    * @returns WorkLevel for this URN.
    */
-  WorkLevel getWorkLevel() {
-    return this.workLevel
+  WorkLevel getWorkLevel() 
+  throws Exception {
+    if (this.workLevel != null) {
+      return this.workLevel
+    } else {
+      throw new Exception("CtsUrn: no work component in this urn")
+    }
   }                        
 
 
@@ -561,96 +566,139 @@ class CtsUrn {
 	       return textGroup
       }
 
-      /**
-      * Returns the text group component of the URN qualified by its
-      * cts namespace, unless the cts namespace is empty, or the
-      * nsQualified parameter is false.
-      * @param nsQualified True to include the CTS namespace,
-      * false to omit it.
-      * @returns A String value for the text group.
-      */
-      String getTextGroup(boolean nsQualified) {
-      	     if ((nsQualified) && (ctsNamespace) && (ctsNamespace != "")) {
-		   return "${ctsNamespace }:${textGroup}"
-	      } else {
-		  return textGroup
-	      }
-      }
+  /**
+   * Returns the text group component of the URN qualified by its
+   * cts namespace, unless the cts namespace is empty, or the
+   * nsQualified parameter is false.
+   * @param nsQualified True to include the CTS namespace,
+   * false to omit it.
+   * @returns A String value for the text group.
+   */
+  String getTextGroup(boolean nsQualified) {
+    if ((nsQualified) && (ctsNamespace) && (ctsNamespace != "")) {
+      return "${ctsNamespace }:${textGroup}"
+    } else {
+      return textGroup
+    }
+  }
 
-      /**
-      * Returns the work component of the URN qualified by its
-      * cts namespace, unless the cts namespace is empty.
-      * @returns A String value for the work.
-      */
-      String getWork() {
-	       return work
-      }
 
-      /**
-      * Returns the work component of the URN qualified by its
-      * cts namespace, unless the cts namespace is empty, or the
-      * nsQualified parameter is false.
-      * @param nsQualified True to include the CTS namespace,
-      * false to omit it.
-      * @returns A String value for the work.
-      */
-      String getWork(boolean nsQualified) {
-      	     if ((nsQualified) && (ctsNamespace) && (ctsNamespace != "")) {
-		   return "${ctsNamespace }:${work}"
-	      } else {
-		  return work
-	      }
-      }
+  /**
+   * Returns the work component of the URN qualified by its
+   * cts namespace, unless the cts namespace is empty.
+   * @returns A String value for the work.
+   * @throws Exception if workLevel is undefined.
+   */
+  String getWork() 
+  throws Exception {
+    if (this.work != null) {
+      return this.work
+    } else {
+      throw new Exception("CtsUrn: no work component in this urn")
+    }
+  }
 
-      /**
-      * Returns the version component of the URN qualified by its
-      * cts namespace, unless the cts namespace is empty.
-      * @returns A String value for the version.
-      */
-      String getVersion() {
-	       return version
-      }
 
-      /**
-      * Returns the version component of the URN qualified by its
-      * cts namespace, unless the cts namespace is empty, or the
-      * nsQualified parameter is false.
-      * @param nsQualified True to include the CTS namespace,
-      * false to omit it.
-      * @returns A String value for the version.
-      */
-      String getVersion(boolean nsQualified) {
-      	     if ((nsQualified) && (ctsNamespace) && (ctsNamespace != "")) {
-		   return "${ctsNamespace }:${version}"
-	      } else {
-		  return version
-	      }
-      }
 
-      /**
-      * Returns the exemplar component of the URN qualified by its
-      * cts namespace, unless the cts namespace is empty.
-      * @returns A String value for the exemplar.
-      */
-      String getExemplar() {
-	       return exemplar
-      }
 
-      /**
-      * Returns the exemplar component of the URN qualified by its
-      * cts namespace, unless the cts namespace is empty, or the
-      * nsQualified parameter is false.
-      * @param nsQualified True to include the CTS namespace,
-      * false to omit it.
-      * @returns A String value for the exemplar.
-      */
-      String getExemplar(boolean nsQualified) {
-      	     if ((nsQualified) && (ctsNamespace) && (ctsNamespace != "")) {
-		   return "${ctsNamespace }:${exemplar}"
-	      } else {
-		  return exemplar
-	      }
-      }
+  /**
+   * Returns the work component of the URN qualified by its
+   * cts namespace, unless the cts namespace is empty, or the
+   * nsQualified parameter is false.
+   * @param nsQualified True to include the CTS namespace,
+   * false to omit it.
+   * @returns A String value for the work.
+   * @throws Exception if work is not defined.
+   */
+  String getWork(boolean nsQualified) 
+  throws Exception {  
+    if (this.work == null) {
+      throw new Exception("CtsUrn: no work component in this urn")
+    } 
+
+    if ((nsQualified) && (ctsNamespace) && (ctsNamespace != "")) {
+      return "${ctsNamespace }:${work}"
+    } else {
+      return work
+    }
+  }
+
+
+
+
+  /**
+   * Returns the version component of the URN qualified by its
+   * cts namespace, unless the cts namespace is empty.
+   * @returns A String value for the version.
+   * @throws Exception if version is undefined.
+   */
+  String getVersion() 
+  throws Exception {
+    if (this.version == null) {
+      throw new Exception("CtsUrn: no version component in this urn")
+    } else {
+      return this.version
+    }
+  }
+
+  /**
+   * Returns the version component of the URN qualified by its
+   * cts namespace, unless the cts namespace is empty, or the
+   * nsQualified parameter is false.
+   * @param nsQualified True to include the CTS namespace,
+   * false to omit it.
+   * @returns A String value for the version.
+   * @throws Exception if version is undefined.
+   */
+  String getVersion(boolean nsQualified)   
+  throws Exception {
+    if (this.version == null) {
+      throw new Exception("CtsUrn: no version component in this urn")
+    }
+    if ((nsQualified) && (ctsNamespace) && (ctsNamespace != "")) {
+      return "${ctsNamespace }:${version}"
+    } else {
+      return version
+    }
+  }
+
+
+
+  /**
+   * Returns the exemplar component of the URN qualified by its
+   * cts namespace, unless the cts namespace is empty.
+   * @returns A String value for the exemplar.
+   * @throws Exception if exemplar is not defined.
+   */
+  String getExemplar() 
+  throws Exception {  
+    if (this.exemplar == null) {
+      throw new Exception("CtsUrn: no exemplar component in this urn")
+    } 
+    return this.exemplar
+  }
+
+  /**
+   * Returns the exemplar component of the URN qualified by its
+   * cts namespace, unless the cts namespace is empty, or the
+   * nsQualified parameter is false.
+   * @param nsQualified True to include the CTS namespace,
+   * false to omit it.
+   * @returns A String value for the exemplar.
+   * @throws Exception if exemplar is not defined.
+   */
+  String getExemplar(boolean nsQualified) 
+  throws Exception {  
+    if (this.exemplar == null) {
+      throw new Exception("CtsUrn: no exemplar component in this urn")
+    } 
+    if ((nsQualified) && (ctsNamespace) && (ctsNamespace != "")) {
+      return "${ctsNamespace }:${exemplar}"
+    } else {
+      return exemplar
+    }
+  }
+
 
 
       /**
