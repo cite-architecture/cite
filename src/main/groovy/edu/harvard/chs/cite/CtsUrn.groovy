@@ -103,8 +103,6 @@ class CtsUrn {
   }
 
 
-
-
   /** Finds index of first subreference.
    * @returns Integer value of subrefIdx1, or default
    * value of 1.
@@ -124,9 +122,6 @@ class CtsUrn {
   }
 
 
-
-
-
   /** Gets workLevel property.
    * @returns WorkLevel for this URN.
    */
@@ -134,13 +129,15 @@ class CtsUrn {
     return this.workLevel
   }                        
 
+
   /**
    * Private method assigns appropriate values to member properties
    * based on Urn String submitted to constructor.
    * @param urnString The values to assign, represented as a CTS Urn String.
    * @throws Exception if urnString is not a syntactically valid CTS URN.
    */
-  private void initializeUrn(String urnString) {
+  private void initializeUrn(String urnString) 
+  throws Exception {
     def components = urnString.split(":")
     if ((components[0] != 'urn') ||  (components[1] != 'cts') ) {
       throw new Exception("InitializeUrn: Bad URN syntax: ${urnString}")
@@ -216,7 +213,11 @@ class CtsUrn {
       switch (splitRange.size()) {
 
       case 2:
-      initializeRange(splitRange[0], splitRange[1])
+      try {
+	initializeRange(splitRange[0], splitRange[1])
+      } catch (Exception e) {
+	throw e
+      }
       break
 
       case 1:
@@ -224,7 +225,11 @@ class CtsUrn {
 	throw new Exception("CtsUrn, method initializeURN: bad syntax: ${urnString} has empty range component.")
 
       }else {
-	initializePoint(splitRange[0])
+	try {
+	  initializePoint(splitRange[0])
+	} catch (Exception e) {
+	  throw e
+	}
       }
       break		
           
@@ -233,8 +238,6 @@ class CtsUrn {
       }
     }
   }
-
-
 
 
   /** Gets first subreference string.
@@ -259,7 +262,6 @@ class CtsUrn {
       throw new Exception("CtsUrn, getSubref2: urn does not include second subreference.")
     }
   }
-
 
 
   /** Gets first node reference of a range.
@@ -328,11 +330,15 @@ class CtsUrn {
    * @throws Exception if indexed subreference not indexed with
    * an integer.
    */    
-  private void initializePoint(String str) {
+  private void initializePoint(String str) 
+  throws Exception {
     def splitSub = str.split(/@/)
     switch (splitSub.size()) {
 
     case 1:
+    if (str.contains("@")) {
+      throw new Exception("CtsUrn: Empty subreference, ${str}")
+    }
     this.passageNode = splitSub[0]
     break
 
@@ -354,19 +360,23 @@ class CtsUrn {
     
   }
 
-
   
   /**
    * "Private" method assigns appropriate values ot member
    * properites if URN is a reference to a range.
    * @param str The URN to parse, as a String.
-   * @throws Exception if index is not an integer value.
+   * @throws Exception if index is not an integer value, or if
+   * subreference is invalid.
    */    
-  private void initializeRange(String str1, String str2) {
+  private void initializeRange(String str1, String str2) 
+  throws Exception {
 
     def splitSub = str1.split(/@/)
     switch (splitSub.size()) {
     case 1:
+    if (str1.contains("@")) {
+      throw new Exception("CtsUrn: Empty subreference, ${str1}")
+    }
     this.rangeBegin = splitSub[0]
     break
 
@@ -391,6 +401,9 @@ class CtsUrn {
     splitSub = str2.split(/@/)
     switch (splitSub.size()) {
     case 1:
+    if (str2.contains("@")) {
+      throw new Exception("CtsUrn: Empty subreference, ${str2}")
+    }
     this.rangeEnd = splitSub[0]
     break
 
@@ -698,7 +711,9 @@ class CtsUrn {
    	   return this.getUrnWithoutPassage() + ":" + this.getPassage(level)
     }
 
-public String getVersionInfo() {
-return this.versionInfo
-}
+
+  public String getVersionInfo() {
+    return this.versionInfo
+  }
+
 }

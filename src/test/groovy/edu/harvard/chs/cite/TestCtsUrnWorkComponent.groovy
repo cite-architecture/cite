@@ -15,7 +15,7 @@ class TestCtsUrnWorkComponent extends GroovyTestCase {
   /**
    * Tests basic methods of CtsUrn class.
    */
-  void testPointUrn() {
+  void testGroupAndWork() {
     
     String testUrnStr = "urn:cts:greekLit:tlg1220.tlg001:1" 
     CtsUrn urn = new CtsUrn(testUrnStr)
@@ -26,9 +26,15 @@ class TestCtsUrnWorkComponent extends GroovyTestCase {
     assert urn.getTextGroup(false) == "tlg1220"
     assert urn.getWork(false) == "tlg001"
 
-
     assert urn.getTextGroup() == "tlg1220"
     assert urn.getWork() == "tlg001"
   }
+
+
+  void testVersionAndExemplar() {
+    String versionUrnStr = "urn:cts:greekLit:tlg0012.tlg001.msA:1.10"
+    String tokenUrnStr = "urn:cts:greekLit:tlg0012.tlg001.msA.tokens:1.10.2"
+  }
+
 
 }
