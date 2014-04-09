@@ -30,13 +30,18 @@ class TestCtsUrnUtils extends GroovyTestCase {
       String reduction = groupUrn.reduceToWork()
     }
 
-    String versString = "urn:cts:greekLit:tlg0012.tlg001.msA:1.1"
-    CtsUrn versUrn = new CtsUrn(versString)
-    assert versUrn.reduceToWork() == "urn:cts:greekLit:tlg0012.tlg001:1.1"
 
     String workString = "urn:cts:greekLit:tlg0012.tlg001:1.1"
     CtsUrn workUrn = new CtsUrn(workString)
     assert workUrn.reduceToWork() == "urn:cts:greekLit:tlg0012.tlg001:1.1"
+
+    String versString = "urn:cts:greekLit:tlg0012.tlg001.msA:1.1"
+    CtsUrn versUrn = new CtsUrn(versString)
+    assert versUrn.reduceToWork() == "urn:cts:greekLit:tlg0012.tlg001:1.1"
+
+    String exemplarString = "urn:cts:greekLit:tlg0012.tlg001.msA.tokens:1.1.1"
+    CtsUrn exemplarUrn = new CtsUrn(exemplarString)
+    assert exemplarUrn.reduceToWork() == "urn:cts:greekLit:tlg0012.tlg001:1.1.1"
 
     String emptyPsgString =  "urn:cts:greekLit:tlg0012.tlg001.msA:"
     CtsUrn emptyPsgUrn = new CtsUrn(emptyPsgString)
