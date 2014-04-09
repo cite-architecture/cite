@@ -9,41 +9,50 @@ import org.junit.Test
 */
 class TestCtsUrnPoint extends GroovyTestCase {
 
-    /**
-    * Tests constructors and toString() method of CtsUrn class.
-    */
-    void testConstructor() {
-      // only form of constructor: URN from String:
-      shouldFail {
-	 CtsUrn badUrnSyntax = new CtsUrn("Dumb string")
-      }
-      shouldFail {
-	CtsUrn tooShortSyntax = new CtsUrn("urn:cts:greekLit:")
-      }
-      shouldFail {
-	CtsUrn emptySubref = new CtsUrn("urn:cts:greekLit:tlg1220.tlg001:1.1@")
-      }
 
-      String testUrnStr = "urn:cts:greekLit:tlg1220.tlg001:1.1" 
-      CtsUrn urn = new CtsUrn(testUrnStr)
+  String specVersion = "5.0.rc.2"
 
-      // simple to round trip when there is no subref:
-      assert urn.toString() == testUrnStr
+  /**
+   * Tests constructors and toString() method of CtsUrn class.
+   */
+  void testConstructor() {
+    // only form of constructor: URN from String:
+    shouldFail {
+      CtsUrn badUrnSyntax = new CtsUrn("Dumb string")
+    }
+    shouldFail {
+      CtsUrn tooShortSyntax = new CtsUrn("urn:cts:greekLit:")
+    }
+    shouldFail {
+      CtsUrn emptySubref = new CtsUrn("urn:cts:greekLit:tlg1220.tlg001:1.1@")
+    }
 
+    String testUrnStr = "urn:cts:greekLit:tlg1220.tlg001:1.1" 
+    CtsUrn urn = new CtsUrn(testUrnStr)
 
-
-      String exemplarStr = "urn:cts:greekLit:tlg0012.tlg001.msA.tokens"
-      CtsUrn exemplarUrn = new CtsUrn(exemplarStr)
+    // simple to round trip when there is no subref:
+    assert urn.toString() == testUrnStr
 
 
+    String exemplarStr = "urn:cts:greekLit:tlg0012.tlg001.msA.tokens"
+    CtsUrn exemplarUrn = new CtsUrn(exemplarStr)
+
+    // USE THIS TO TEST toString() with subreff:
+    String subRefStr = "urn:cts:greekLit:tlg1220.tlg001:1.1@μῆνιν" 
+    CtsUrn subRefUrn = new CtsUrn(subRefStr)
+    System.err.println "Subref == " + subRefUrn.toString()
 
 
-      // USE THIS TO TEST toString() with subreff:
-      String subRefStr = "urn:cts:greekLit:tlg1220.tlg001:1.1@μῆνιν" 
-      CtsUrn subRefUrn = new CtsUrn(subRefStr)
-      System.err.println "Subref == " + subRefUrn.toString()
+
+    String noPsgString = "urn:cts:greekLit:tlg0012.tlg001:"
+    CtsUrn noPsg = new CtsUrn(noPsgString)
+    assert noPsg
 
 
+    if (specVersion == "5.0.rc.3") {
+      String noSemiStr = "urn:cts:greekLit:tlg0012.tlg001"
+      CtsUrn noSemi = new CtsUrn(noSemiStr)
+    }
 
 
       /*

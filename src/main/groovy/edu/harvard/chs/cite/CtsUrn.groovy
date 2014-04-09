@@ -470,7 +470,7 @@ class CtsUrn {
       * @returns The full URN, as a String, down to the work-level.
       */
       String getUrnWithoutPassage() {
-      	     return "urn:cts:" + this.ctsNamespace + ":" + this.workComponent
+	return "urn:cts:" + this.ctsNamespace + ":" + this.workComponent + ":"
       }
 
 
