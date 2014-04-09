@@ -200,6 +200,9 @@ class CtsUrn {
 
     // allow fall-through:
     switch (this.workLevel) {
+    case WorkLevel.EXEMPLAR:
+    this.exemplar = splitWork[3]
+
     case WorkLevel.VERSION:
     this.version = splitWork[2]
 
