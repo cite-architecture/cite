@@ -505,7 +505,6 @@ class CtsUrn {
    */
   String reduceToVersion() 
   throws Exception {
-
     if ((this.getWorkLevel() == WorkLevel.GROUP) || (this.getWorkLevel() == WorkLevel.WORK)) {
       throw new Exception("CtsUrn: no version part of this URN")
     }
