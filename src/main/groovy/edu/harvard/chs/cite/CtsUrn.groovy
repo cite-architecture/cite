@@ -1,6 +1,5 @@
 package edu.harvard.chs.cite
 
-
 /**
 * A class representing a reference to a text passage in a logical
 * hierarchical scheme, expressed in the notation of the Canonical
@@ -63,7 +62,12 @@ class CtsUrn {
 
 
 
-  // subreference values
+  // subreference values: node URN
+  /** Substring reference on a node URN.   */
+  String subref
+  /** Optional index on substring */
+  Integer subrefIdx
+  //range URNs:
   /** Substring reference on a node URN, or substring reference
    * on first node of a range URN. */
   String subref1
@@ -253,7 +257,7 @@ class CtsUrn {
    * @throws Exception if first subreference string does not exist or is empty.
    */
   String getSubref1() {
-    if (this.hasSubref()) {
+    if ((this.subref2) && (this.subref2 != '')) {
       return subref1
     } else {
       throw new Exception("CtsUrn, getSubref1: urn does not include subreference.")
@@ -331,7 +335,7 @@ class CtsUrn {
     if (isRange()) {
       return (hasSubref1() || hasSubref2())
     } else {
-      return ((subref1) && (subref1 != ''))
+      return ((subref) && (subref != ''))
     }
   }
 
@@ -372,6 +376,7 @@ class CtsUrn {
   private void initializePoint(String str) 
   throws Exception {
     def splitSub = str.split(/@/)
+
     switch (splitSub.size()) {
 
     case 1:
@@ -383,12 +388,11 @@ class CtsUrn {
 
     case 2:
     this.passageNode = splitSub[0]
-    this.subref1 = splitSub[1]
-    ArrayList subrefParts = indexSubref(this.subref1)
-    this.subref1 = subrefParts[0]
+    ArrayList subrefParts = indexSubref(splitSub[1])
+    this.subref = subrefParts[0]
     if (subrefParts.size() == 2) {
       try {
-	this.subrefIdx1 = subrefParts[1].toInteger()
+	this.subrefIdx = subrefParts[1].toInteger()
       } catch (Exception e) {
 	throw e
       }
