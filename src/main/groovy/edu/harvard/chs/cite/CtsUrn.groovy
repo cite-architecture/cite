@@ -64,11 +64,12 @@ class CtsUrn {
 
 
   // subreference values
-  /** First substring  */
+  /** Substring reference on a node URN, or substring reference
+   * on first node of a range URN. */
   String subref1
   /** Optional index on first substring */
   Integer subrefIdx1
-  /** Second substring in case of a range with two subreferences */
+  /** Substring reference on second node of a range URN. */
   String subref2
   /** Optional index on second substring */
   Integer subrefIdx2
@@ -296,12 +297,42 @@ class CtsUrn {
   }
 
 
+  /** Determines if first node of a range URN has a sub reference.
+   * @returns True if first node of range urn has a subreference.
+   * @throws Exception if URN is not a range URN.
+   */
+  boolean hasSubref1()   
+  throws Exception {
+    if (! isRange()) {
+      throw new Exception("URN is not a range.")
+    }
+    return ((subref1) && (subref1 != ''))
+  }
+
+
+  /** Determines if second node of a range URN has a sub reference.
+   * @returns True if second node of range urn has a subreference.
+   * @throws Exception if URN is not a range URN.
+   */
+  boolean hasSubref2()
+  throws Exception {
+    if (! isRange()) {
+      throw new Exception("URN is not a range.")
+    }
+    return ((subref2) && (subref2 != ''))
+  }
+
+
   /** Determines if URN has a sub reference.
    * @returns True if urn has a subreference. For a range URN,
    * true if either node has a subreference.
    */
   boolean hasSubref() {
-    return (((subref1) && (subref1 != '')) || ((subref2) && (subref2 != '')))
+    if (isRange()) {
+      return (hasSubref1() || hasSubref2())
+    } else {
+      return ((subref1) && (subref1 != ''))
+    }
   }
 
   /**
@@ -447,6 +478,9 @@ class CtsUrn {
   }
 
 
+
+
+
       
       /**
       * Returns the CTS URN object as a String in the notation defined by
@@ -462,6 +496,26 @@ class CtsUrn {
 	String base = this.getUrnWithoutPassage()
 	return rawString
       }
+  /**
+   * Returns the CITE URN object as a String in the notation defined by
+   * the proposed CITE URN standard.  
+   * @param validUri True if subreference should be encoded to ensure
+   * that URN is a syntactically valid URI according to RFC xxx.
+   * @returns The URN as a String.
+   */
+  String toString(boolean validUri) {
+    if (validUri) {
+      if (this.hasSubref()) {
+	System.err.println "MUST ENCODE SUBREF"
+	System.err.println "SHOW: ${subref1} and ${subref2}"
+      }
+      // then must encode subref portion
+      //java.net.URLEncoder.encode(toEncode
+    } else {
+      return rawString
+    }
+  }
+
 
 
   /**
@@ -785,14 +839,14 @@ class CtsUrn {
       }
 
 
-      /**
-      * Determines if the URN refers to a range of citation nodes,
-      * or a single citation node.
-      * @returns True if URN refers to a range of citation nodes.
-      */
+  /**
+   * Determines if the URN refers to a range of citation nodes,
+   * or a single citation node.
+   * @returns True if URN refers to a range of citation nodes.
+   */
   boolean isRange() {
-      return (this.rangeBegin != null)
-      }
+    return (this.rangeBegin != null)
+  }
 
 
     /**

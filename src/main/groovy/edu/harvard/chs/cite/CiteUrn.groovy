@@ -67,14 +67,17 @@ class CiteUrn {
         }
     }
       
-    /**
-      * Returns the CITE URN object as a String in the notation defined by
-      * the proposed CITE URN standard.
-      * @returns The URN as a String.
-      */
-    String toString() {
-        return asString
-    }
+  /**
+   * Returns the CITE URN object as a String in the notation defined by
+   * the proposed CITE URN standard.
+   * @returns The URN as a String.
+   */
+  String toString() {
+    return asString
+  }
+
+
+
 
 
     String getNs() {
