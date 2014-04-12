@@ -400,7 +400,6 @@ class CtsUrn {
   throws Exception {
     def splitSub = str.split(/@/)
 
-    System.err.println "INIT PT: ${str} yields " + splitSub
     switch (splitSub.size()) {
 
     case 1:
@@ -408,12 +407,10 @@ class CtsUrn {
       throw new Exception("CtsUrn: Empty subreference, ${str}")
     }
     this.passageNode = splitSub[0]
-    System.err.println "Assigned passageNode: " + this.passageNode
     break
 
     case 2:
     this.passageNode = splitSub[0]
-    System.err.println "Assigned passageNode: " + this.passageNode
 
     ArrayList subrefParts = indexSubref(splitSub[1])
     this.subref = subrefParts[0]
@@ -549,8 +546,6 @@ class CtsUrn {
       if (this.subref1 != null) {
 	String append =  "@{this.getSubref1()}[${this.getSubrefIdx1()}]"
 	urlStr = urlStr + java.net.URLEncoder.encode(append, "UTF-8") 
-	System.err.println "Add range begin... " + urlStr
-
       }
 
       urlStr = urlStr + "-"+ getRangeEnd()
@@ -558,7 +553,6 @@ class CtsUrn {
       if (this.subref2 != null) {
 	String append =  "@${this.getSubref2()}[${this.getSubrefIdx2()}]"
 	urlStr = urlStr + java.net.URLEncoder.encode(append,"UTF-8")
-	System.err.println "Add ragne end .. " + urlStr
       }
 
       return urlStr
