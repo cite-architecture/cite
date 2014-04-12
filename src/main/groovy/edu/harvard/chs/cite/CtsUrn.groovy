@@ -87,6 +87,24 @@ class CtsUrn {
     EXEMPLAR, VERSION, WORK, GROUP
   }
 
+  /** Finds index of sureference.
+   * @returns Integer value of subrefIdx, or default
+   * value of 1.
+   * @throws Exception if subref is not defined.
+   */
+  Integer getSubrefIdx() {
+    if ((this.subref == null) || (this.subref == "")) {
+      throw new Exception("CtsUrn: cannot index null subreference.")
+
+    } else {
+      if (this.subrefIdx == null) {
+	return 1
+      } else {
+	return this.subrefIdx
+      }
+    }
+  }
+
 
 
   /** Finds index of first subreference.
@@ -277,6 +295,11 @@ class CtsUrn {
   }
 
 
+  // may be null
+  String getPassageNode() {
+    return this.passageNode
+  }
+
   /** Gets first node reference of a range.
    * @throws Exception if URN is not a range.
    */
@@ -377,6 +400,7 @@ class CtsUrn {
   throws Exception {
     def splitSub = str.split(/@/)
 
+    System.err.println "INIT PT: ${str} yields " + splitSub
     switch (splitSub.size()) {
 
     case 1:
@@ -384,10 +408,13 @@ class CtsUrn {
       throw new Exception("CtsUrn: Empty subreference, ${str}")
     }
     this.passageNode = splitSub[0]
+    System.err.println "Assigned passageNode: " + this.passageNode
     break
 
     case 2:
     this.passageNode = splitSub[0]
+    System.err.println "Assigned passageNode: " + this.passageNode
+
     ArrayList subrefParts = indexSubref(splitSub[1])
     this.subref = subrefParts[0]
     if (subrefParts.size() == 2) {
@@ -486,20 +513,15 @@ class CtsUrn {
 
 
       
-      /**
-      * Returns the CTS URN object as a String in the notation defined by
-      * the proposed CTS URN standard.
-      * @returns The URN as a String.
-      */
+  /**
+   * Returns the CTS URN object as a String in the notation defined by
+   * the proposed CTS URN standard.
+   * @returns The URN as a String.
+   */
+  String toString() {
+    return rawString
+  }
 
-  // CHANGE THIS:
-      String toString() {
-	/* should return url encoded version of any subref strings and any
-	   numeric indics (b/c of [] notation)
-	 */
-	String base = this.getUrnWithoutPassage()
-	return rawString
-      }
   /**
    * Returns the CITE URN object as a String in the notation defined by
    * the proposed CITE URN standard.  
@@ -509,17 +531,53 @@ class CtsUrn {
    */
   String toString(boolean validUri) {
     if (validUri) {
-      if (this.hasSubref()) {
-	System.err.println "MUST ENCODE SUBREF"
-	System.err.println "SHOW: ${subref1} and ${subref2}"
+      if (isRange() ) {
+	return getValidRangeString()
+      } else {
+	return getValidPointString()
       }
-      // then must encode subref portion
-      //java.net.URLEncoder.encode(toEncode
+
     } else {
       return rawString
     }
   }
 
+  String getValidRangeString() {
+    if (this.hasSubref()) {
+      String urlStr = this.getUrnWithoutPassage() + getRangeBegin()
+
+      if (this.subref1 != null) {
+	String append =  "@{this.getSubref1()}[${this.getSubrefIdx1()}]"
+	urlStr = urlStr + java.net.URLEncoder.encode(append, "UTF-8") 
+	System.err.println "Add range begin... " + urlStr
+
+      }
+
+      urlStr = urlStr + "-"+ getRangeEnd()
+
+      if (this.subref2 != null) {
+	String append =  "@${this.getSubref2()}[${this.getSubrefIdx2()}]"
+	urlStr = urlStr + java.net.URLEncoder.encode(append,"UTF-8")
+	System.err.println "Add ragne end .. " + urlStr
+      }
+
+      return urlStr
+
+    } else {
+      return rawString
+    }
+  }
+
+  String getValidPointString() {
+    if (this.hasSubref()) {
+      String base = this.getUrnWithoutPassage()
+      String append = "@${this.getSubref()}[${this.getSubrefIdx()}]"
+      return base + this.getPassageNode() + java.net.URLEncoder.encode(append, "UTF-8")
+
+    } else {
+      return rawString
+    }
+  }
 
 
   /**
