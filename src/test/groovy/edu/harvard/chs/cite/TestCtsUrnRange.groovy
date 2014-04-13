@@ -49,8 +49,4 @@ class TestCtsUrnRange extends GroovyTestCase {
       assert urn.getRangeEnd() == "1.24"
 
      }
-
-
-
- 
 }
