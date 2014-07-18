@@ -6,9 +6,6 @@ package edu.harvard.chs.cite
 * Text Services URN system.  This class parses URNs expressed as
 * Strings, and makes the components of the URN programmatically accessible.
 *
-* In addition, this class can construct Pseudo-URNs.  See more on that
-* in separate documentation.
-*
 * Note that while the automatically generated groovydoc output does not
 * show get* methods for all the CtsUrn's member properties,
 * Groovy  compilation automatically creates those public methods.
@@ -17,6 +14,9 @@ package edu.harvard.chs.cite
 */
 class CtsUrn {
     
+
+  Integer debug = 1
+
   /** Version description String. */
   final versionInfo = "Part of the CITE library complying with v. 5.0 of the CTS URN specification."
 
@@ -64,19 +64,19 @@ class CtsUrn {
 
   // subreference values: node URN
   /** Substring reference on a node URN.   */
-  String subref
+  String subref = null
   /** Optional index on substring */
-  Integer subrefIdx
+  Integer subrefIdx = null
   //range URNs:
   /** Substring reference on a node URN, or substring reference
    * on first node of a range URN. */
-  String subref1
+  String subref1 = null
   /** Optional index on first substring */
-  Integer subrefIdx1
+  Integer subrefIdx1 = null
   /** Substring reference on second node of a range URN. */
-  String subref2
+  String subref2 = null
   /** Optional index on second substring */
-  Integer subrefIdx2
+  Integer subrefIdx2 = null
 
 
   // NEEDS DEFINITION
@@ -87,12 +87,24 @@ class CtsUrn {
     EXEMPLAR, VERSION, WORK, GROUP
   }
 
-  /** Finds index of sureference.
-   * @returns Integer value of subrefIdx, or default
-   * value of 1.
+  /** Gets first string on a point URN.
+   * @throws Exception if subreference string does not exist or is empty.
+   */
+  String getSubref() 
+  throws Exception {
+    if (this.subref) {
+      return this.subref
+    } else {
+      throw new Exception("CtsUrn:getSubref: no valid subref in ${this.rawString}")
+    }
+  }
+
+  /** Finds index, if any, of subreference.
+   * @returns Integer value of subrefIdx, or default value of 1.
    * @throws Exception if subref is not defined.
    */
-  Integer getSubrefIdx() {
+  Integer getSubrefIdx() 
+  throws Exception {
     if ((this.subref == null) || (this.subref == "")) {
       throw new Exception("CtsUrn: cannot index null subreference (raw string: ${rawString}).")
 
@@ -106,8 +118,7 @@ class CtsUrn {
   }
 
 
-
-  /** Finds index of first subreference.
+  /** Finds index, if any, of first subreference.
    * @returns Integer value of subrefIdx1, or default
    * value of 1.
    * @throws Exception if subref1 is not defined.
@@ -271,19 +282,19 @@ class CtsUrn {
   }
 
 
-  /** Gets first subreference string.
+  /** Gets first subreference string on a range URN.
    * @throws Exception if first subreference string does not exist or is empty.
    */
   String getSubref1() {
-    if ((this.subref2) && (this.subref2 != '')) {
+    if ((this.subref1) && (this.subref1 != '')) {
       return subref1
     } else {
-      throw new Exception("CtsUrn, getSubref1: urn does not include subreference (raw string: ${rawString}).")
+      throw new Exception("CtsUrn, getSubref1: urn does not include subreference range (raw string: ${rawString}).")
     }
   }
 
-  /** Gets second subreference string.
-   * @returns Subreference string on second node of a passage.
+  /** Gets subreference on second element of a range URN.
+   * @returns Subreference string on second node of a passage range.
    * @throws Exception if second subreference string does not exist or is empty.
    */
   String getSubref2() {
@@ -400,6 +411,7 @@ class CtsUrn {
   throws Exception {
     def splitSub = str.split(/@/)
 
+
     switch (splitSub.size()) {
 
     case 1:
@@ -413,6 +425,11 @@ class CtsUrn {
     this.passageNode = splitSub[0]
 
     ArrayList subrefParts = indexSubref(splitSub[1])
+
+    if (debug > 0) {
+      System.err.println "On subref URN ${str},subref parts = " + subrefParts
+    }
+    
     this.subref = subrefParts[0]
     if (subrefParts.size() == 2) {
       try {
@@ -497,9 +514,10 @@ class CtsUrn {
    * @throws Exception if urnStr is not a syntactically valid CTS URN.
    */
   CtsUrn (String urnStr) {
-    this.rawString = urnStr
+    // reverse any URL encoding prior to parsing:
+    this.rawString = URLDecoder.decode(urnStr)
     try {
-      this.initializeUrn(urnStr)
+      this.initializeUrn(this.rawString)
     } catch (Exception e) {
       throw e
     }

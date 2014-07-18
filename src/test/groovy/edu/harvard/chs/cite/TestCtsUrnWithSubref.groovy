@@ -44,7 +44,9 @@ class TestCtsUrnWithSubref extends GroovyTestCase {
   void testSubrefOnRanges() {
     String subrefStr = "urn:cts:greekLit:tlg0012.tlg001:1.1-1.2@οὐλομένην"  
     CtsUrn u = new CtsUrn(subrefStr)
-    assert u.getSubref1() == null
+    shouldFail {
+      u.getSubref1()
+    }
     assert u.getSubref2() == "οὐλομένην"  
   }
 
