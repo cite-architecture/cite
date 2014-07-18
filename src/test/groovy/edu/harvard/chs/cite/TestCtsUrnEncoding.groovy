@@ -10,13 +10,21 @@ import org.junit.Test
 class TestCtsUrnEncoding extends GroovyTestCase {
 
 
-  String subrefEg = "urn:cts:latinLit:stoa0115.stoa002:preface.1@nunc"
-  String expectedEncoding = "urn:cts:latinLit:stoa0115.stoa002:preface.1%40nunc%5B1%5D"
+
 
   void testInAndOut () {
-    CtsUrn urn = new CtsUrn(subrefEg)
-    assert urn.toString() == subrefEg
-    assert urn.toString(true) == expectedEncoding
+    // CtsUrn is identical, whether constructed from encoded or raw 
+    // form.  This encoded example is a valid IRI:  the raw form is not.
+    String rawSubref = "urn:cts:latinLit:stoa0115.stoa002:preface.1@nunc"
+    String encodedSubref = "urn:cts:latinLit:stoa0115.stoa002:preface.1%40nunc%5B1%5D"
+
+    CtsUrn urn = new CtsUrn(rawSubref)
+    assert urn.toString() == rawSubref
+    assert urn.toString(true) == encodedSubref
+
+    CtsUrn urn2 = new CtsUrn(encodedSubref)
+    assert urn.toString() == rawSubref
+    assert urn.toString(true) == encodedSubref
   }
 
  
