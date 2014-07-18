@@ -15,7 +15,7 @@ package edu.harvard.chs.cite
 class CtsUrn {
     
 
-  Integer debug = 1
+  Integer debug = 0
 
   /** Version description String. */
   final versionInfo = "Part of the CITE library complying with v. 5.0 of the CTS URN specification."
