@@ -559,7 +559,7 @@ class CtsUrn {
 
   String getValidRangeString() {
     if (this.hasSubref()) {
-      String urlStr = this.getUrnWithoutPassage() + getRangeBegin()
+      String urlStr = this.getUrnWithoutPassage() + ":" + getRangeBegin()
 
       if (this.subref1 != null) {
 	String append =  "@{this.getSubref1()}[${this.getSubrefIdx1()}]"
@@ -582,7 +582,7 @@ class CtsUrn {
 
   String getValidPointString() {
     if (this.hasSubref()) {
-      String base = this.getUrnWithoutPassage()
+      String base = this.getUrnWithoutPassage() + ":"
       String append = "@${this.getSubref()}[${this.getSubrefIdx()}]"
       return base + this.getPassageNode() + java.net.URLEncoder.encode(append, "UTF-8")
 
@@ -598,7 +598,7 @@ class CtsUrn {
    * @returns The full URN, as a String, down to the work-level.
    */
   String getUrnWithoutPassage() {
-    return "urn:cts:" + this.ctsNamespace + ":" + this.workComponent + ":"
+    return "urn:cts:" + this.ctsNamespace + ":" + this.workComponent
   }
 
 
@@ -614,11 +614,11 @@ class CtsUrn {
     if (this.getWorkLevel() == WorkLevel.GROUP) {
       throw new Exception("CtsUrn: no work part of this URN (raw string: ${rawString})")
     }
-    String base = "urn:cts:" + this.ctsNamespace + ":" + this.getTextGroup() + "." + this.getWork() + ":"
+    String base = "urn:cts:" + this.ctsNamespace + ":" + this.getTextGroup() + "." + this.getWork() 
     if (this.getPassageComponent() == null) {
       return base
     } else {
-      return  base + this.getPassageComponent()
+      return  base + ":" + this.getPassageComponent()
     }
   }
 
@@ -636,11 +636,11 @@ class CtsUrn {
     if ((this.getWorkLevel() == WorkLevel.GROUP) || (this.getWorkLevel() == WorkLevel.WORK)) {
       throw new Exception("CtsUrn: no version part of this URN (raw string ${rawString}).")
     }
-    String base = "urn:cts:" + this.ctsNamespace + ":" + this.getTextGroup() + "." + this.getWork() + "." + this.getVersion() + ":"
+    String base = "urn:cts:" + this.ctsNamespace + ":" + this.getTextGroup() + "." + this.getWork() + "." + this.getVersion() 
     if (this.getPassageComponent() == null) {
       return base
     } else {
-      return  base + this.getPassageComponent()
+      return  base + ":" + this.getPassageComponent()
     }
   }
 

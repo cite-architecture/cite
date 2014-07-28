@@ -20,7 +20,7 @@ class TestCtsUrnWithSubref extends GroovyTestCase {
     assert u.getSubref() == "μῆνιν"
     assert u.getSubrefIdx() == 1
     assert u.getPassageNode() == "1.1"
-    assert u.getUrnWithoutPassage() == "urn:cts:greekLit:tlg0012.tlg001:"
+    assert u.getUrnWithoutPassage() == "urn:cts:greekLit:tlg0012.tlg001"
 
 
     String moreMenin = "urn:cts:greekLit:tlg0012.tlg001:1.1@μ-1.1@ν[2]"
