@@ -26,7 +26,7 @@
             </optional>
             <optional>
                 <element
-                    name="indexRelation">
+                    name="cite:indexRelation">
                     <attribute
                         name="rdfverb"/>
                     <attribute
@@ -56,7 +56,7 @@
             </optional>
             <optional>
                 <element
-                    name="indexRelation">
+                    name="cite:indexRelation">
                     <attribute
                         name="rdfverb"/>
                     <attribute
