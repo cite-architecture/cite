@@ -39,7 +39,7 @@ class TextInventory {
     * TextInventory schema,  this is the <code>tiid</code>
     * attribute on the root element. 
     */
-    def tiId
+    //def tiId
 
     /** The version of the TextInventory schema this inventory validates against.
     */
@@ -1052,7 +1052,7 @@ class TextInventory {
             }
         }
         
-        this.tiId = root.'@tiid'
+        //this.tiId = root.'@tiid'
         this.tiVersion = root.'@tiversion'
         root[ti.ctsnamespace].each { ctsns ->
             def abbr = ctsns.'@abbr'
@@ -1359,8 +1359,8 @@ class TextInventory {
             mkp.declareNamespace('':'http://chs.harvard.edu/xmlns/cts3/ti')
             mkp.declareNamespace('dc':'http://purl.org/dc/elements/1.1')
             
-            TextInventory(tiversion : "${this.tiVersion}", 
-                          tiid : "${this.tiId}"  ) {
+            TextInventory(tiversion : "${this.tiVersion}") { 
+	      //                          tiid : "${this.tiId}"  ) {
 
 
                 // One or more ollections with DC metadata go here, one of which is
