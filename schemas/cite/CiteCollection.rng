@@ -24,6 +24,15 @@
                     </choice>
                 </attribute>
             </optional>
+            <optional>
+                <element
+                    name="indexRelation">
+                    <attribute
+                        name="rdfverb"/>
+                    <attribute
+                        name="inverseverb"/>
+                </element>
+            </optional>
         </element>
     </define>
     
@@ -44,6 +53,15 @@
                         <value>naturaljoin</value>
                     </choice>
                 </attribute>
+            </optional>
+            <optional>
+                <element
+                    name="indexRelation">
+                    <attribute
+                        name="rdfverb"/>
+                    <attribute
+                        name="inverseverb"/>
+                </element>
             </optional>
         </element>
     </define>
@@ -81,8 +99,7 @@
                     name="cite:indexRelation">
                     <attribute
                         name="rdfverb"/>
-                    <attribute
-                        name="inverseverb"/>
+                    
                 </element>
             </optional>
         </element>
