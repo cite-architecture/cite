@@ -6,6 +6,8 @@ package edu.harvard.chs.cite
 */
 class Citable {
 
+  /** Posible types of citable objects.
+   */
   enum CiteType {
     TEXT, OBJECT, EXTENDED
   }
@@ -27,13 +29,13 @@ class Citable {
    */
   def urn
 
+
+  /** Minimal constructor. */
   Citable () {
   }
 
 
 
-  void setCiteExtensions() {
-  }
 
   /** Constructor requires a citable value, either
    * a CTS URN or a CITE Collection URN, as
@@ -60,7 +62,15 @@ class Citable {
     }
   }
 
-  void indexExtensions() {
+  
+  // given a hashmap, set extensionsMap and its invers
+  void setCiteExtensions(LinkedHashMap extMap ) {
+    this.extensionsMap = extMap
+    indexExtensions()
+  }
+
+  // "private" method
+  private void indexExtensions() {
     invertedExtensionsMap.clear()
     extensionsMap.keySet().each { k ->
       def urnList = extensionsMap[k]
@@ -70,8 +80,14 @@ class Citable {
     }
   }
 
-  def configuredExtensions() {
-    return(extensionsMap.keySet())
+
+  // get list of strings naming extensions  
+  ArrayList configuredExtensions() {
+    ArrayList extensions = []
+    extensionsMap.keySet().each {
+      extensions.add("${it}")
+    }
+    return extensions
   }
 
 

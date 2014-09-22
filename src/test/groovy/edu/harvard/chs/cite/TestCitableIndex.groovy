@@ -6,15 +6,18 @@ import org.junit.Test
 
 class TestCitableIndex extends GroovyTestCase {
 
-  def imgColls =  ["urn:cite:hmt:vaimg","urn:cite:hmt:vbimg"]
+
+  LinkedHashMap expectedInverse =  ["urn:cite:hmt:vaimg":"image","urn:cite:hmt:vbimg" : "image"]
+
+  ArrayList imgColls =  ["urn:cite:hmt:vaimg","urn:cite:hmt:vbimg"]
 
   @Test void testUrnInInv() {
     Citable cit = new Citable()
+
+
     cit.extensionsMap["image"] =  imgColls
     cit.indexExtensions()
 
-    def expectedInverse =  ["urn:cite:hmt:vaimg":"image","urn:cite:hmt:vbimg" : "image"]
-    
     assert expectedInverse.keySet() == cit.invertedExtensionsMap.keySet()
 
   }
@@ -22,4 +25,14 @@ class TestCitableIndex extends GroovyTestCase {
 
 
 
+  @Test void testTypes() {
+    Citable cit = new Citable()
+
+    ArrayList imgColls =  ["urn:cite:hmt:vaimg","urn:cite:hmt:vbimg"]
+    LinkedHashMap extMap = ["image" : imgColls]
+    cit.setCiteExtensions(extMap)
+    
+    assert expectedInverse.keySet() == cit.invertedExtensionsMap.keySet()
+    
+  }
 }
