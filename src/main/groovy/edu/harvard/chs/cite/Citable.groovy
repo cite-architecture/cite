@@ -27,41 +27,56 @@ class Citable {
   /** Object for storing either a CTS URN or
    * a CITE Object URN.
    */
-  def urn
+  //def urn
 
 
   /** Minimal constructor. */
   Citable () {
   }
 
+  // constructor with map of CITE extensions
+  Citable (LinkedHashMap extMap) {
+    this.extensionsMap = extMap
+    indexExtensions()
+  }
 
 
 
-  /** Constructor requires a citable value, either
-   * a CTS URN or a CITE Collection URN, as
-   * a String value.
+  /*
    * @param urnStr URN, as a String, of the citable object.
    * @throws Exception if urnStr is neither a CTS URN nor
    * a CITE Object URN.
    */
-  Citable (String urnStr) 
+
+
+  def findCiteType (String urnStr) 
   throws Exception {
-    boolean works = false
     try {
-      this.urn = new CtsUrn(urnStr)
-      works = true
+      CtsUrn urn= new CtsUrn(urnStr)
+      return CiteType.TEXT
     } catch (Exception e) {
     }  
+    
     try {
-      this.urn = new CiteUrn(urnStr)
-      works = true
+      CiteUrn urn = new CiteUrn(urnStr)
+      // check for extensions...
+      if (hasExtension(urn)) {
+	return CiteType.EXTENDED
+      } else {
+	return CiteType.OBJECT
+      }
     } catch (Exception e) {
     }
-    if (! works) {
-      throw new Exception("Citable: could not form a valid URN from ${urnStr}.")
-    }
+    throw new Exception("Citable: could not form a valid URN from ${urnStr}.")
+
   }
 
+  // returns null if no extensions configured
+  // for a CITE Collection
+  ArrayList getExtensions(CiteUrn urn) {
+    String coll = urn.getCollectionLevelUrn()
+    return this.invertedExtensionsMap[coll]
+  }
   
   // given a hashmap, set extensionsMap and its invers
   void setCiteExtensions(LinkedHashMap extMap ) {
@@ -73,9 +88,17 @@ class Citable {
   private void indexExtensions() {
     invertedExtensionsMap.clear()
     extensionsMap.keySet().each { k ->
+      ArrayList extList = []
       def urnList = extensionsMap[k]
       urnList.each { collection ->
-	invertedExtensionsMap[collection] = k
+	if (invertedExtensionsMap[collection] ) {
+	  def elist = invertedExtensionsMap[collection]
+	  elist.add(k)
+	  invertedExtensionsMap[collection] = elist
+	} else {
+	  invertedExtensionsMap[collection] = [k]
+	}
+	//invertedExtensionsMap[collection] = k
       }
     }
   }
@@ -90,5 +113,16 @@ class Citable {
     return extensions
   }
 
+
+  boolean hasExtension(CiteUrn urn) {
+    String coll = urn.getCollectionLevelUrn()
+    boolean found = false
+    invertedExtensionsMap.keySet().each {
+      if (it == coll) {
+	found = true
+      }
+    }    
+    return found
+  }
 
 }

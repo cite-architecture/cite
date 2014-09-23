@@ -13,15 +13,20 @@ class TestCitableTypes extends GroovyTestCase {
   String imgUrn = "urn:cite:hmt:vaimg.VA012RN-0013"
   String badUrn = "utterly:bogus:string"
 
+  ArrayList imgColls =  ["urn:cite:hmt:vaimg","urn:cite:hmt:vbimg"]
+  LinkedHashMap extMap = ["image" : imgColls]
 
 
   @Test void testExtList() {
-    Citable cit = new Citable()
+    Citable cit = new Citable(extMap)
+    assert cit.findCiteType(objUrn) == Citable.CiteType.OBJECT
+    assert cit.findCiteType(txtUrn) == Citable.CiteType.TEXT
+    assert cit.findCiteType(imgUrn) == Citable.CiteType.EXTENDED
 
-    ArrayList imgColls =  ["urn:cite:hmt:vaimg","urn:cite:hmt:vbimg"]
-    LinkedHashMap extMap = ["image" : imgColls]
-    cit.setCiteExtensions(extMap)
-    assert cit.configuredExtensions() == ["image"]
+    shouldFail {
+      cit.findCiteType(badUrn)  
+    }
+
   }
 
 

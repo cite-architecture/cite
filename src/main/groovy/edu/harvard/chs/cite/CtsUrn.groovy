@@ -16,10 +16,14 @@ package edu.harvard.chs.cite
 *
 */
 class CtsUrn {
+
+
     
   /** Version description String. */
   final versionInfo = "Part of the CITE library complying with v. 5.0 of the CTS URN specification."
 
+
+  Integer debug = 0
 
   // All member properties are initialized in constructor.
   /** String version of entire URN as submitted to constructor
@@ -399,8 +403,10 @@ class CtsUrn {
   private void initializePoint(String str) 
   throws Exception {
     def splitSub = str.split(/@/)
+    if (debug > 0) {
+      System.err.println "INIT PT: ${str} yields " + splitSub
+    }
 
-    System.err.println "INIT PT: ${str} yields " + splitSub
     switch (splitSub.size()) {
 
     case 1:
@@ -408,7 +414,9 @@ class CtsUrn {
       throw new Exception("CtsUrn: Empty subreference, ${str}")
     }
     this.passageNode = splitSub[0]
-    System.err.println "Assigned passageNode: " + this.passageNode
+    if (debug > 0) {
+      System.err.println "Assigned passageNode: " + this.passageNode
+    }
     break
 
     case 2:

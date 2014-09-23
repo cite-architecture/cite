@@ -25,14 +25,15 @@ class CiteUrn {
         boolean syntaxOk = true
         if (components.size() != 4) {
             syntaxOk =  false
+            throw new Exception("Bad URN syntax: #${urnStr}#")
         }
+
         if (components[0] != 'urn') {
             syntaxOk = false
         }
         if (components[1] != 'cite') {
             syntaxOk = false
         }
-
         if (syntaxOk) {
             this.asString = urnStr
             this.ns = components[2]
@@ -77,8 +78,9 @@ class CiteUrn {
   }
 
 
-
-
+  String getCollectionLevelUrn() {
+    return "urn:cite:${this.ns}:${this.collection}"
+  }
 
     String getNs() {
         return this.ns
