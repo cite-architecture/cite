@@ -37,5 +37,16 @@ public class ManipulationsTest extends ConcordionTestCase {
     }    
 
     
+    public String decode(String encoded)
+	throws Exception {
+	try {
+	    CtsUrn urn = new CtsUrn(encoded);
+	    return urn.decode();
+	} catch (Exception e) {
+	    throw e;
+	}
+    }    
+
+
     
 }
