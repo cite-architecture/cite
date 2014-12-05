@@ -13,19 +13,9 @@ You can construct an object representation of a CTS URN from a string conforming
 
 ## Examples ##
 
-The string 
-
-><code concordion:set="#urn">urn:cts:greekLit:tlg0012.tlg001.msA:1.1</code> 
-
-
-conforms to the CTS spec, so passing it to a constructor <strong concordion:assertTrue="isValid(#urn)">creates a valid CTS URN object</strong>.
-
-The string 
-
-><code concordion:set="#bogus">NOT-A-URN</code> 
-
-
-does not conform to the CTS spec.  Passing it to a constructor <strong concordion:assertFalse="isValid(#bogus)">generates an Exception</strong>.
+- <strong concordion:set="#urn">urn:cts:greekLit:tlg0012.tlg001.msA:1.1</strong> 
+conforms to the CTS spec, so we can construct <strong concordion:assertTrue="isValid(#urn)">a valid CTS URN object</strong>.
+- <strong concordion:set="#bogus">NOT-A-URN</strong> does not conform to the CTS spec.  Passing it to a constructor <strong concordion:assertFalse="isValid(#bogus)">generates an Exception</strong>.
 
 
 
