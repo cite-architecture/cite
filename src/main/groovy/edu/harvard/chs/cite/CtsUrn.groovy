@@ -572,17 +572,17 @@ class CtsUrn {
    */
   String getValidRangeString() {
     if (this.hasSubref()) {
-      String urlStr = this.getUrnWithoutPassage() + ":" + getRangeBegin()
+      String urlStr = this.getUrnWithoutPassage() + getRangeBegin()
 
       if (this.subref1 != null) {
-	String append =  "@{this.getSubref1()}[${this.getSubrefIdx1()}]"
+	String append =  "@" + this.getSubref1() + "[" + this.getSubrefIdx1() + "]"
 	urlStr = urlStr + java.net.URLEncoder.encode(append, "UTF-8") 
       }
 
       urlStr = urlStr + "-"+ getRangeEnd()
 
       if (this.subref2 != null) {
-	String append =  "@${this.getSubref2()}[${this.getSubrefIdx2()}]"
+	String append =  "@" + this.getSubref2() + "[" + this.getSubrefIdx2() + "]"
 	urlStr = urlStr + java.net.URLEncoder.encode(append,"UTF-8")
       }
 
