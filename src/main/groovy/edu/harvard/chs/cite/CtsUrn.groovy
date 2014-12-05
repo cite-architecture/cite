@@ -24,6 +24,7 @@ class CtsUrn {
 
 
   // All member properties are initialized in constructor.
+  
   /** String version of entire URN as submitted to constructor
    * (so not enforcing URI encoding of any subref or range components).
    */
@@ -692,7 +693,7 @@ class CtsUrn {
         def psgVals  = refPart.split(/\./)
 
 	StringBuffer refBuff = new StringBuffer(psgVals[0])
-	if (limit > psgVals.size()) {
+	if (limit > psgVals.size()) {getWorkLevel
 	    return this.getPassageComponent()
 	}
 	def count = 1
@@ -724,41 +725,41 @@ class CtsUrn {
     }
 
 
-      /**
-      * Expresses the level of the work component's
-      * reference with an English word.
-      * @returns A label for this level of work citation.
-      */
-      String labelForWorkLevel() {
-      	  switch (workLevel) {
-	  case CtsUrn.WorkLevel.EXEMPLAR:
-	  return "exemplar"
+  /**
+   * Expresses the level of the work component's
+   * reference with an English word.
+   * @returns A label for this level of work citation.
+   */
+  String labelForWorkLevel()
+  throws Exception {
+    switch (workLevel) {
+    case CtsUrn.WorkLevel.EXEMPLAR:
+    return "exemplar"
 
-	  case CtsUrn.WorkLevel.VERSION:
-	  return "version"
+    case CtsUrn.WorkLevel.VERSION:
+    return "version"
 
-	  case CtsUrn.WorkLevel.WORK:
-	  return "work"
+    case CtsUrn.WorkLevel.WORK:
+    return "work"
 
-	  case CtsUrn.WorkLevel.GROUP:
-	  return "group"
+    case CtsUrn.WorkLevel.GROUP:
+    return "group"
 
-	  default:
-	  return "Unknown type for work component of URN string ${asString}!"
-      	  }
-      }
+    default:
+    System.err.println "CtsUrn: unknown type for work component of URN string ${rawString}!"
+    throw new Exception("CtsUrn: unknown work level ${workLevel} for ${rawString}")
+    }
+  }
 
 
-      // For work components, override groovy's standard get* methods
-      // in order to control inclusion/exclusion of CTS namespace
-      /**
-      * Returns the text group component of the URN qualified by its
-      * cts namespace, unless the cts namespace is empty.
-      * @returns A String value for the text group.
-      */
-      String getTextGroup() {
-	       return textGroup
-      }
+  /**
+   * Returns the text group component of the URN qualified by its
+   * cts namespace, unless the cts namespace is empty.
+   * @returns A String value for the text group.
+   */
+  String getTextGroup() {
+    return textGroup
+  }
 
   /**
    * Returns the text group component of the URN qualified by its

@@ -18,5 +18,26 @@ public class ContentsTest extends ConcordionTestCase {
 	}
     }
 
-    
+
+    public Integer getDepth(String urnStr)
+    throws Exception {
+	try {
+	    CtsUrn urn = new CtsUrn(urnStr);
+	    return urn.getCitationDepth();
+	} catch (Exception e) {
+	    throw e;
+	}
+    }
+
+
+        public String getDepthLabel(String urnStr)
+    throws Exception {
+	try {
+	    CtsUrn urn = new CtsUrn(urnStr);
+	    return urn.labelForWorkLevel();
+	} catch (Exception e) {
+	    throw e;
+	}
+    }
+
 }
