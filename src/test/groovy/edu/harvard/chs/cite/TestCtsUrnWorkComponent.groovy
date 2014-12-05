@@ -57,7 +57,7 @@ class TestCtsUrnWorkComponent extends GroovyTestCase {
      String noExemplar = groupUrn.getExemplar()
    }
    shouldFail {
-     String noVersion = groupUrn.getExemplar(true)
+     String noExemplar = groupUrn.getExemplar(true)
    }
 
   }

@@ -189,7 +189,6 @@ class TextInventory {
         root[ti.ctsnamespace].each {
             declaredAbbrs.add(it.'@abbr')
         }
-
         root[ti.textgroup].each { tg ->
             CtsUrn urn = new CtsUrn(tg.'@urn')
             if (! declaredAbbrs.containsAll(urn.getCtsNamespace())) {
@@ -234,62 +233,83 @@ class TextInventory {
     }
 
 
-    void checkXPath(groovy.util.Node citeNode, java.util.ArrayList validList, String urn) {
-
-//        this.errorList.add("CHECK usage of ${citeNode.'@scope'} against ${validList} ")
-
-        citeNode.'@scope'.split('/').each { chunk ->
-            def nsParts = chunk.split(/:/)
-            if (nsParts.size() > 1) {
-                if (! validList.containsAll(nsParts[0])) {
-                    this.errorList.add("For ${urn}, @scope attribute ${citeNode.'@scope'} uses undeclared XML namespace.")
-                }
-            }
-        }
 
 
-        citeNode.'@xpath'.split('/').each { chunk ->
-            def nsParts = chunk.split(/:/)
-            if (nsParts.size() > 1) {
-                if (! validList.containsAll(nsParts[0])) {
-                    this.errorList.add("For ${urn}, @xpath attribute ${citeNode.'@xpath'} uses undeclared XML namespace.")
-                }
-            }
-        }
 
-        citeNode[ti.citation].each { cn ->
-            checkXPath(cn, validList, urn)
-        }
 
+  /** Verifies that all XML namespace abbreviations appearing in the
+   * TextInventory's citation node structure for a given edition are in a 
+   * list of valid XML namespace abbreviations.
+   * @param citeNode The citation node element for a given edition, as a parsed 
+   * groovy.util.Node.
+   * @param validList A list of Strings giving all XML namespace abbreviations defined
+   * for the given edition.
+   * @param urn The CTS URN identifying the edition in question.
+   */
+  void checkXPath(groovy.util.Node citeNode, java.util.ArrayList validList, String urn) {
+    //        this.errorList.add("CHECK usage of ${citeNode.'@scope'} against ${validList} ")
+
+    citeNode.'@scope'.split('/').each { chunk ->
+      def nsParts = chunk.split(/:/)
+      if (nsParts.size() > 1) {
+	if (! validList.containsAll(nsParts[0])) {
+	  this.errorList.add("For ${urn}, @scope attribute ${citeNode.'@scope'} uses undeclared XML namespace.")
+	}
+      }
     }
 
 
-
-    void checkXmlNsUsage(groovy.util.Node root) {
-
-        root[ti.textgroup][ti.work][ti.edition].each { e ->
-            String urn = e.'@urn'
-            e[ti.online].each { olNode ->
-                def definedList = []        
-                olNode[ti.namespaceMapping].each {
-                    definedList.add(it.'@abbreviation')
-                }
-                olNode[ti.citationMapping][ti.citation].each { c ->
-                    checkXPath(c, definedList, urn)
-                }
-            }
-        }
+    citeNode.'@xpath'.split('/').each { chunk ->
+      def nsParts = chunk.split(/:/)
+      if (nsParts.size() > 1) {
+	if (! validList.containsAll(nsParts[0])) {
+	  this.errorList.add("For ${urn}, @xpath attribute ${citeNode.'@xpath'} uses undeclared XML namespace.")
+	}
+      }
     }
 
-    /* data constraints to check:
-    * - √ urns must inherit hierarchy
-    * - √ memberof must be of a collection
-    * - √ cts ns must be delcared
-    * - √ lang attributes should be 3-char abbrs and xlation should != original
-    * - √ recursively check @scope and @xpath values on all citationMappings: parse
-    * for abbrs and check that they are declared.
-    */
-    void checkDataValues(groovy.util.Node root) 
+    citeNode[ti.citation].each { cn ->
+      checkXPath(cn, validList, urn)
+    }
+  }
+
+
+  
+  /** For every edition in the inventory, verifies that
+   * all XML namespace abbreviations appearing in XPath expressions are
+   * defined in namespace definitions.
+   * @param root Root node of the TextInventory, as a parsed
+   * groovy.util.Node.
+   */
+  void checkXmlNsUsage(groovy.util.Node root) {
+    root[ti.textgroup][ti.work][ti.edition].each { e ->
+      String urn = e.'@urn'
+      e[ti.online].each { onlineNode ->
+	def definedList = []        
+	onlineNode[ti.namespaceMapping].each {
+	  definedList.add(it.'@abbreviation')
+	}
+	onlineNode[ti.citationMapping][ti.citation].each { c ->
+	  checkXPath(c, definedList, urn)
+	}
+      }
+    }
+  }
+
+  
+
+  /** Verifies that data values in the inventory comply with a number
+   * of constraints of the CTS specification.  These include:
+   * <ul>
+   * <li>All URNs must be properly placed in their inherited hierarchy</li>
+   * <li>A CTS namespace must be declared for all text groups</li>
+   * <li>xml:lang attributes should be 3-char abbrs and xml:lang for 
+   * translations should not be equal to the xml:lang value for the notional work</li>
+   * <li>recursively checks the XPath values of scope and xpath attributes on all citationMappings
+   * and verifies that all XML namespaces are declared.</li>
+   * </ul>
+   */
+  void checkDataValues(groovy.util.Node root) 
     throws Exception {
         checkUrnHierarchy(root)
         checkCtsNsDecl(root)

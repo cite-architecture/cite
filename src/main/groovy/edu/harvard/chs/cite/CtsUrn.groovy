@@ -6,9 +6,6 @@ package edu.harvard.chs.cite
 * Text Services URN system.  This class parses URNs expressed as
 * Strings, and makes the components of the URN programmatically accessible.
 *
-* In addition, this class can construct Pseudo-URNs.  See more on that
-* in separate documentation.
-*
 * Note that while the automatically generated groovydoc output does not
 * show get* methods for all the CtsUrn's member properties,
 * Groovy  compilation automatically creates those public methods.
@@ -19,6 +16,9 @@ class CtsUrn {
 
 
     
+
+  Integer debug = 0
+
   /** Version description String. */
   final versionInfo = "Part of the CITE library complying with v. 5.0 of the CTS URN specification."
 
@@ -68,19 +68,19 @@ class CtsUrn {
 
   // subreference values: node URN
   /** Substring reference on a node URN.   */
-  String subref
+  String subref = null
   /** Optional index on substring */
-  Integer subrefIdx
+  Integer subrefIdx = null
   //range URNs:
   /** Substring reference on a node URN, or substring reference
    * on first node of a range URN. */
-  String subref1
+  String subref1 = null
   /** Optional index on first substring */
-  Integer subrefIdx1
+  Integer subrefIdx1 = null
   /** Substring reference on second node of a range URN. */
-  String subref2
+  String subref2 = null
   /** Optional index on second substring */
-  Integer subrefIdx2
+  Integer subrefIdx2 = null
 
 
   // NEEDS DEFINITION
@@ -91,14 +91,26 @@ class CtsUrn {
     EXEMPLAR, VERSION, WORK, GROUP
   }
 
-  /** Finds index of sureference.
-   * @returns Integer value of subrefIdx, or default
-   * value of 1.
+  /** Gets first string on a point URN.
+   * @throws Exception if subreference string does not exist or is empty.
+   */
+  String getSubref() 
+  throws Exception {
+    if (this.subref) {
+      return this.subref
+    } else {
+      throw new Exception("CtsUrn:getSubref: no valid subref in ${this.rawString}")
+    }
+  }
+
+  /** Finds index, if any, of subreference.
+   * @returns Integer value of subrefIdx, or default value of 1.
    * @throws Exception if subref is not defined.
    */
-  Integer getSubrefIdx() {
+  Integer getSubrefIdx() 
+  throws Exception {
     if ((this.subref == null) || (this.subref == "")) {
-      throw new Exception("CtsUrn: cannot index null subreference.")
+      throw new Exception("CtsUrn: cannot index null subreference (raw string: ${rawString}).")
 
     } else {
       if (this.subrefIdx == null) {
@@ -110,15 +122,14 @@ class CtsUrn {
   }
 
 
-
-  /** Finds index of first subreference.
+  /** Finds index, if any, of first subreference.
    * @returns Integer value of subrefIdx1, or default
    * value of 1.
    * @throws Exception if subref1 is not defined.
    */
   Integer getSubrefIdx1() {
     if ((this.subref1 == null) || (this.subref1 == "")) {
-      throw new Exception("CtsUrn: cannot index null subreference.")
+      throw new Exception("CtsUrn: cannot index null subreference (raw string: ${rawString}.")
 
     } else {
       if (this.subrefIdx1 == null) {
@@ -137,7 +148,7 @@ class CtsUrn {
    */
   Integer getSubrefIdx2() {
     if ((this.subref2 == null) || (this.subref2 == "")) {
-      throw new Exception("CtsUrn: cannot index null subreference.")
+      throw new Exception("CtsUrn: cannot index null subreference (raw string: ${rawString}.")
 
     } else {
       if (this.subrefIdx2 == null) {
@@ -157,7 +168,7 @@ class CtsUrn {
     if (this.workLevel != null) {
       return this.workLevel
     } else {
-      throw new Exception("CtsUrn: no work component in this urn")
+      throw new Exception("CtsUrn: no work component in this urn (raw string: ${rawString}).")
     }
   }                        
 
@@ -275,26 +286,26 @@ class CtsUrn {
   }
 
 
-  /** Gets first subreference string.
+  /** Gets first subreference string on a range URN.
    * @throws Exception if first subreference string does not exist or is empty.
    */
   String getSubref1() {
-    if ((this.subref2) && (this.subref2 != '')) {
+    if ((this.subref1) && (this.subref1 != '')) {
       return subref1
     } else {
-      throw new Exception("CtsUrn, getSubref1: urn does not include subreference.")
+      throw new Exception("CtsUrn, getSubref1: urn does not include subreference range (raw string: ${rawString}).")
     }
   }
 
-  /** Gets second subreference string.
-   * @returns Subreference string on second node of a passage.
+  /** Gets subreference on second element of a range URN.
+   * @returns Subreference string on second node of a passage range.
    * @throws Exception if second subreference string does not exist or is empty.
    */
   String getSubref2() {
     if ((this.subref2) && (this.subref2 != '')) {
       return subref2
     } else {
-      throw new Exception("CtsUrn, getSubref2: urn does not include second subreference.")
+      throw new Exception("CtsUrn, getSubref2: urn does not include second subreference (raw string: ${rawString}).")
     }
   }
 
@@ -311,7 +322,7 @@ class CtsUrn {
     if (this.isRange()) {
       return rangeBegin
     } else {
-      throw new Exception("CtsUrn, getRangeBegin: urn is not a range")
+      throw new Exception("CtsUrn, getRangeBegin: urn is not a range (raw string: ${rawString}).")
     }
   }
 
@@ -323,7 +334,7 @@ class CtsUrn {
     if (this.isRange()) {
       return rangeEnd
     } else {
-      throw new Exception("CtsUrn, getRangeEnd: urn is not a range")
+      throw new Exception("CtsUrn, getRangeEnd: urn is not a range (raw string: ${rawString}).")
     }
   }
 
@@ -335,7 +346,7 @@ class CtsUrn {
   boolean hasSubref1()   
   throws Exception {
     if (! isRange()) {
-      throw new Exception("URN is not a range.")
+      throw new Exception("URN is not a range (raw string: ${rawString}).")
     }
     return ((subref1) && (subref1 != ''))
   }
@@ -348,7 +359,7 @@ class CtsUrn {
   boolean hasSubref2()
   throws Exception {
     if (! isRange()) {
-      throw new Exception("URN is not a range.")
+      throw new Exception("URN is not a range (raw string: ${rawString}).")
     }
     return ((subref2) && (subref2 != ''))
   }
@@ -407,23 +418,34 @@ class CtsUrn {
       System.err.println "INIT PT: ${str} yields " + splitSub
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
     switch (splitSub.size()) {
 
     case 1:
     if (str.contains("@")) {
-      throw new Exception("CtsUrn: Empty subreference, ${str}")
+      throw new Exception("CtsUrn:initializePoint: empty subreference ${str}")
     }
     this.passageNode = splitSub[0]
+<<<<<<< HEAD
     if (debug > 0) {
       System.err.println "Assigned passageNode: " + this.passageNode
     }
+=======
+>>>>>>> master
     break
 
     case 2:
     this.passageNode = splitSub[0]
-    System.err.println "Assigned passageNode: " + this.passageNode
 
     ArrayList subrefParts = indexSubref(splitSub[1])
+
+    if (debug > 0) {
+      System.err.println "On subref URN ${str},subref parts = " + subrefParts
+    }
+    
     this.subref = subrefParts[0]
     if (subrefParts.size() == 2) {
       try {
@@ -453,7 +475,7 @@ class CtsUrn {
     switch (splitSub.size()) {
     case 1:
     if (str1.contains("@")) {
-      throw new Exception("CtsUrn: Empty subreference, ${str1}")
+      throw new Exception("CtsUrn:initializeRange: empty subreference, ${str1}")
     }
     this.rangeBegin = splitSub[0]
     break
@@ -480,7 +502,7 @@ class CtsUrn {
     switch (splitSub.size()) {
     case 1:
     if (str2.contains("@")) {
-      throw new Exception("CtsUrn: Empty subreference, ${str2}")
+      throw new Exception("CtsUrn:initializeRange: empty subreference, ${str2}")
     }
     this.rangeEnd = splitSub[0]
     break
@@ -508,9 +530,10 @@ class CtsUrn {
    * @throws Exception if urnStr is not a syntactically valid CTS URN.
    */
   CtsUrn (String urnStr) {
-    this.rawString = urnStr
+    // reverse any URL encoding prior to parsing:
+    this.rawString = URLDecoder.decode(urnStr)
     try {
-      this.initializeUrn(urnStr)
+      this.initializeUrn(this.rawString)
     } catch (Exception e) {
       throw e
     }
@@ -557,14 +580,18 @@ class CtsUrn {
    */
   String getValidRangeString() {
     if (this.hasSubref()) {
-      String urlStr = this.getUrnWithoutPassage() + getRangeBegin()
+      String urlStr = this.getUrnWithoutPassage() + ":" + getRangeBegin()
 
       if (this.subref1 != null) {
 	String append =  "@{this.getSubref1()}[${this.getSubrefIdx1()}]"
+<<<<<<< HEAD
 	urlStr = urlStr + java.net.URLEncoder.encode(append, "UTF-8")
 	
 	System.err.println "Add range begin... " + urlStr
 
+=======
+	urlStr = urlStr + java.net.URLEncoder.encode(append, "UTF-8") 
+>>>>>>> master
       }
 
       urlStr = urlStr + "-"+ getRangeEnd()
@@ -572,7 +599,6 @@ class CtsUrn {
       if (this.subref2 != null) {
 	String append =  "@${this.getSubref2()}[${this.getSubrefIdx2()}]"
 	urlStr = urlStr + java.net.URLEncoder.encode(append,"UTF-8")
-	System.err.println "Add ragne end .. " + urlStr
       }
 
       return urlStr
@@ -591,8 +617,13 @@ class CtsUrn {
   
   String getValidPointString() {
     if (this.hasSubref()) {
+<<<<<<< HEAD
       String base = this.getUrnWithoutPassage()
       String append = "@" + this.getSubref()+ "[${this.getSubrefIdx()}]"
+=======
+      String base = this.getUrnWithoutPassage() + ":"
+      String append = "@${this.getSubref()}[${this.getSubrefIdx()}]"
+>>>>>>> master
       return base + this.getPassageNode() + java.net.URLEncoder.encode(append, "UTF-8")
 
     } else {
@@ -607,7 +638,7 @@ class CtsUrn {
    * @returns The full URN, as a String, down to the work-level.
    */
   String getUrnWithoutPassage() {
-    return "urn:cts:" + this.ctsNamespace + ":" + this.workComponent + ":"
+    return "urn:cts:" + this.ctsNamespace + ":" + this.workComponent
   }
 
 
@@ -621,13 +652,13 @@ class CtsUrn {
   throws Exception {
 
     if (this.getWorkLevel() == WorkLevel.GROUP) {
-      throw new Exception("CtsUrn: no work part of this URN")
+      throw new Exception("CtsUrn: no work part of this URN (raw string: ${rawString})")
     }
-    String base = "urn:cts:" + this.ctsNamespace + ":" + this.getTextGroup() + "." + this.getWork() + ":"
+    String base = "urn:cts:" + this.ctsNamespace + ":" + this.getTextGroup() + "." + this.getWork() 
     if (this.getPassageComponent() == null) {
       return base
     } else {
-      return  base + this.getPassageComponent()
+      return  base + ":" + this.getPassageComponent()
     }
   }
 
@@ -643,13 +674,13 @@ class CtsUrn {
   String reduceToVersion() 
   throws Exception {
     if ((this.getWorkLevel() == WorkLevel.GROUP) || (this.getWorkLevel() == WorkLevel.WORK)) {
-      throw new Exception("CtsUrn: no version part of this URN")
+      throw new Exception("CtsUrn: no version part of this URN (raw string ${rawString}).")
     }
-    String base = "urn:cts:" + this.ctsNamespace + ":" + this.getTextGroup() + "." + this.getWork() + "." + this.getVersion() + ":"
+    String base = "urn:cts:" + this.ctsNamespace + ":" + this.getTextGroup() + "." + this.getWork() + "." + this.getVersion() 
     if (this.getPassageComponent() == null) {
       return base
     } else {
-      return  base + this.getPassageComponent()
+      return  base + ":" + this.getPassageComponent()
     }
   }
 
@@ -778,7 +809,7 @@ class CtsUrn {
     if (this.work != null) {
       return this.work
     } else {
-      throw new Exception("CtsUrn: no work component in this urn")
+      throw new Exception("CtsUrn: no work component in this urn (raw string ${rawString}).")
     }
   }
 
@@ -797,7 +828,7 @@ class CtsUrn {
   String getWork(boolean nsQualified) 
   throws Exception {  
     if (this.work == null) {
-      throw new Exception("CtsUrn: no work component in this urn")
+      throw new Exception("CtsUrn: no work component in this urn (raw string ${rawString}).")
     } 
 
     if ((nsQualified) && (ctsNamespace) && (ctsNamespace != "")) {
@@ -819,7 +850,7 @@ class CtsUrn {
   String getVersion() 
   throws Exception {
     if (this.version == null) {
-      throw new Exception("CtsUrn: no version component in this urn")
+      throw new Exception("CtsUrn: no version component in this urn (raw string ${rawString}).")
     } else {
       return this.version
     }
@@ -837,7 +868,7 @@ class CtsUrn {
   String getVersion(boolean nsQualified)   
   throws Exception {
     if (this.version == null) {
-      throw new Exception("CtsUrn: no version component in this urn")
+      throw new Exception("CtsUrn: no version component in this urn (raw string ${rawString}).")
     }
     if ((nsQualified) && (ctsNamespace) && (ctsNamespace != "")) {
       return "${ctsNamespace }:${version}"
@@ -857,7 +888,7 @@ class CtsUrn {
   String getExemplar() 
   throws Exception {  
     if (this.exemplar == null) {
-      throw new Exception("CtsUrn: no exemplar component in this urn")
+      throw new Exception("CtsUrn: no exemplar component in this urn (raw string ${rawString}).")
     } 
     return this.exemplar
   }
@@ -874,7 +905,7 @@ class CtsUrn {
   String getExemplar(boolean nsQualified) 
   throws Exception {  
     if (this.exemplar == null) {
-      throw new Exception("CtsUrn: no exemplar component in this urn")
+      throw new Exception("CtsUrn: no exemplar component in this urn (raw string ${rawString}).")
     } 
     if ((nsQualified) && (ctsNamespace) && (ctsNamespace != "")) {
       return "${ctsNamespace }:${exemplar}"

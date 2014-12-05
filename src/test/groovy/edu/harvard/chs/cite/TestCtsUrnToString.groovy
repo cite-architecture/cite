@@ -12,6 +12,7 @@ class TestCtsUrnToString extends GroovyTestCase {
        assert pointUrn.toString() == pointUrnStr
 
        String encodedStr = pointUrn.toString(true)
+       System.err.println encodedStr
        assert pointUrnStr == java.net.URLDecoder.decode(encodedStr, "UTF-8")
      }
 
@@ -21,6 +22,7 @@ class TestCtsUrnToString extends GroovyTestCase {
 	 assert rangeUrn.isRange()
 
 	 String encodedStr = rangeUrn.toString(true)
+       	 System.err.println encodedStr		
 	 assert java.net.URLDecoder.decode(encodedStr,"UTF-8") == rangeUrnStr
     }
 

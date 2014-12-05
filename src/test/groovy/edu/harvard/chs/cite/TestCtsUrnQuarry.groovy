@@ -52,7 +52,7 @@ class TestCtsUrnQuarry extends GroovyTestCase {
 
 	 // A full URN for the work component is
 	 // useful for many applications:
-	 assert urn.getUrnWithoutPassage() == "urn:cts:greekLit:tlg1220.tlg001:"
+	 assert urn.getUrnWithoutPassage() == "urn:cts:greekLit:tlg1220.tlg001"
 
 	 // level within work hiearchy is an enum that can be converted
 	 // to and from String values:

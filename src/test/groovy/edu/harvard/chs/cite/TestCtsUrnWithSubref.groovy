@@ -17,8 +17,11 @@ class TestCtsUrnWithSubref extends GroovyTestCase {
     String subrefStr = "urn:cts:greekLit:tlg0012.tlg001:1.1@μῆνιν"
     CtsUrn u = new CtsUrn(subrefStr)
     assert u.hasSubref()
-    assert u.getSubref1() == "μῆνιν"
-    assert u.getSubrefIdx1() == 1
+    assert u.getSubref() == "μῆνιν"
+    assert u.getSubrefIdx() == 1
+    assert u.getPassageNode() == "1.1"
+    assert u.getUrnWithoutPassage() == "urn:cts:greekLit:tlg0012.tlg001"
+
 
     String moreMenin = "urn:cts:greekLit:tlg0012.tlg001:1.1@μ-1.1@ν[2]"
     CtsUrn subref2urn = new CtsUrn(moreMenin)
@@ -29,7 +32,7 @@ class TestCtsUrnWithSubref extends GroovyTestCase {
 
     String idxedSubrefStr = "urn:cts:greekLit:tlg0012.tlg001:1.1@ν[2]"
     CtsUrn idxU = new CtsUrn(idxedSubrefStr)
-    assert idxU.getSubrefIdx1() == 2
+    assert idxU.getSubrefIdx() == 2
 
     String nonIntStr = "urn:cts:greekLit:tlg0012.tlg001:1.1@μῆνιν[x]"
     shouldFail {
@@ -41,7 +44,9 @@ class TestCtsUrnWithSubref extends GroovyTestCase {
   void testSubrefOnRanges() {
     String subrefStr = "urn:cts:greekLit:tlg0012.tlg001:1.1-1.2@οὐλομένην"  
     CtsUrn u = new CtsUrn(subrefStr)
-    assert u.getSubref1() == null
+    shouldFail {
+      u.getSubref1()
+    }
     assert u.getSubref2() == "οὐλομένην"  
   }
 

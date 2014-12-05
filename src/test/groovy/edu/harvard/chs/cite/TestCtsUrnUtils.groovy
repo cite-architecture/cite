@@ -13,13 +13,12 @@ class TestCtsUrnUtils extends GroovyTestCase {
     void testStripPassage() {
       String psgString = "urn:cts:greekLit:tlg0012.tlg001:1.25"
       CtsUrn psgUrn = new CtsUrn(psgString)
-      assert psgUrn.getUrnWithoutPassage() == "urn:cts:greekLit:tlg0012.tlg001:"
+      assert psgUrn.getUrnWithoutPassage() == "urn:cts:greekLit:tlg0012.tlg001"
 
 
-      String workString = "urn:cts:greekLit:tlg0012.tlg001:"
+      String workString = "urn:cts:greekLit:tlg0012.tlg001"
       CtsUrn workUrn = new CtsUrn(workString)
-      assert workUrn.getUrnWithoutPassage() == "urn:cts:greekLit:tlg0012.tlg001:"
-      
+      assert workUrn.getUrnWithoutPassage() == "urn:cts:greekLit:tlg0012.tlg001"
     }
 
 
@@ -43,9 +42,9 @@ class TestCtsUrnUtils extends GroovyTestCase {
     CtsUrn exemplarUrn = new CtsUrn(exemplarString)
     assert exemplarUrn.reduceToWork() == "urn:cts:greekLit:tlg0012.tlg001:1.1.1"
 
-    String emptyPsgString =  "urn:cts:greekLit:tlg0012.tlg001.msA:"
+    String emptyPsgString =  "urn:cts:greekLit:tlg0012.tlg001.msA"
     CtsUrn emptyPsgUrn = new CtsUrn(emptyPsgString)
-    assert emptyPsgUrn.reduceToWork() == "urn:cts:greekLit:tlg0012.tlg001:"
+    assert emptyPsgUrn.reduceToWork() == "urn:cts:greekLit:tlg0012.tlg001"
 
   }
 
@@ -74,9 +73,9 @@ class TestCtsUrnUtils extends GroovyTestCase {
     CtsUrn exemplarUrn = new CtsUrn(exemplarString)
     assert exemplarUrn.reduceToVersion() == "urn:cts:greekLit:tlg0012.tlg001.msA:1.1.1"
 
-    String emptyPsgString =  "urn:cts:greekLit:tlg0012.tlg001.msA:"
+    String emptyPsgString =  "urn:cts:greekLit:tlg0012.tlg001.msA"
     CtsUrn emptyPsgUrn = new CtsUrn(emptyPsgString)
-    assert emptyPsgUrn.reduceToVersion() == "urn:cts:greekLit:tlg0012.tlg001.msA:"
+    assert emptyPsgUrn.reduceToVersion() == "urn:cts:greekLit:tlg0012.tlg001.msA"
   }
 
 
