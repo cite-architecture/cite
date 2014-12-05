@@ -10,7 +10,7 @@ import org.junit.Test
 class TestCtsUrnEncoding extends GroovyTestCase {
 
 
-<<<<<<< HEAD
+
   String urnStr = "urn:cts:greekLit:tlg0012.tlg001.msA:1.1@Μῆνιν"
   
   @Test void testEncoding() {
@@ -49,9 +49,7 @@ class TestCtsUrnEncoding extends GroovyTestCase {
   }
 
   
-=======
-
-
+  /*
   void testInAndOut () {
     // CtsUrn is identical, whether constructed from encoded or raw 
     // form.  This encoded example is a valid IRI:  the raw form is not.
@@ -67,6 +65,6 @@ class TestCtsUrnEncoding extends GroovyTestCase {
     assert urn.toString(true) == encodedSubref
   }
 
- 
->>>>>>> master
+  */
+
 }

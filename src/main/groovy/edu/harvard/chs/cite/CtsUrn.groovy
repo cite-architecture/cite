@@ -23,8 +23,6 @@ class CtsUrn {
   final versionInfo = "Part of the CITE library complying with v. 5.0 of the CTS URN specification."
 
 
-  Integer debug = 0
-
   // All member properties are initialized in constructor.
   /** String version of entire URN as submitted to constructor
    * (so not enforcing URI encoding of any subref or range components).
@@ -418,10 +416,6 @@ class CtsUrn {
       System.err.println "INIT PT: ${str} yields " + splitSub
     }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> master
     switch (splitSub.size()) {
 
     case 1:
@@ -429,12 +423,9 @@ class CtsUrn {
       throw new Exception("CtsUrn:initializePoint: empty subreference ${str}")
     }
     this.passageNode = splitSub[0]
-<<<<<<< HEAD
     if (debug > 0) {
       System.err.println "Assigned passageNode: " + this.passageNode
     }
-=======
->>>>>>> master
     break
 
     case 2:
@@ -584,14 +575,7 @@ class CtsUrn {
 
       if (this.subref1 != null) {
 	String append =  "@{this.getSubref1()}[${this.getSubrefIdx1()}]"
-<<<<<<< HEAD
-	urlStr = urlStr + java.net.URLEncoder.encode(append, "UTF-8")
-	
-	System.err.println "Add range begin... " + urlStr
-
-=======
 	urlStr = urlStr + java.net.URLEncoder.encode(append, "UTF-8") 
->>>>>>> master
       }
 
       urlStr = urlStr + "-"+ getRangeEnd()
@@ -617,13 +601,8 @@ class CtsUrn {
   
   String getValidPointString() {
     if (this.hasSubref()) {
-<<<<<<< HEAD
       String base = this.getUrnWithoutPassage()
       String append = "@" + this.getSubref()+ "[${this.getSubrefIdx()}]"
-=======
-      String base = this.getUrnWithoutPassage() + ":"
-      String append = "@${this.getSubref()}[${this.getSubrefIdx()}]"
->>>>>>> master
       return base + this.getPassageNode() + java.net.URLEncoder.encode(append, "UTF-8")
 
     } else {
@@ -638,7 +617,7 @@ class CtsUrn {
    * @returns The full URN, as a String, down to the work-level.
    */
   String getUrnWithoutPassage() {
-    return "urn:cts:" + this.ctsNamespace + ":" + this.workComponent
+    return "urn:cts:" + this.ctsNamespace + ":" + this.workComponent + ":"
   }
 
 
