@@ -7,7 +7,7 @@ apply plugin:  "maven"
 apply from: "conf.gradle"
 
 group = "edu.harvard.chs"
-version = '0.82.0'
+version = '0.82.1'
 
 apply from: "versions.gradle"
 
