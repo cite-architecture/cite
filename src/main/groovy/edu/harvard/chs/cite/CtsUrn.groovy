@@ -550,13 +550,19 @@ class CtsUrn {
     }
   }
 
+
+  /**
+   * @returns String value of urn with any subreferences
+   * URL encoded.
+   */
   String getValidRangeString() {
     if (this.hasSubref()) {
       String urlStr = this.getUrnWithoutPassage() + getRangeBegin()
 
       if (this.subref1 != null) {
 	String append =  "@{this.getSubref1()}[${this.getSubrefIdx1()}]"
-	urlStr = urlStr + java.net.URLEncoder.encode(append, "UTF-8") 
+	urlStr = urlStr + java.net.URLEncoder.encode(append, "UTF-8")
+	
 	System.err.println "Add range begin... " + urlStr
 
       }
@@ -576,10 +582,17 @@ class CtsUrn {
     }
   }
 
+
+  String decode() {
+    System.err.println "Raw is " + rawString
+    System.err.println "Decoded is " +  java.net.URLDecoder.decode(rawString,"UTF-8")
+    return java.net.URLDecoder.decode(rawString,"UTF-8")
+  }
+  
   String getValidPointString() {
     if (this.hasSubref()) {
       String base = this.getUrnWithoutPassage()
-      String append = "@${this.getSubref()}[${this.getSubrefIdx()}]"
+      String append = "@" + this.getSubref()+ "[${this.getSubrefIdx()}]"
       return base + this.getPassageNode() + java.net.URLEncoder.encode(append, "UTF-8")
 
     } else {
