@@ -34,4 +34,4 @@ The semantically equivalent URN  <strong concordion:set="#subidx">urn:cts:greekL
 For a range URN with subreferences like <strong concordion:set="#rangesub">urn:cts:greekLit:tlg0012.tlg001.msA:1.1@Μῆνιν[1]-1.2@οὐλομένην</strong>, we can also extract:
 
 - the first subreference,  <strong concordion:assertEquals="subref1(#rangesub)">Μῆνιν</strong> and its (explicit) index <strong concordion:assertEquals="subrefidx1(#rangesub)">1</strong>
--  the second subreference,  <strong concordion:assertEquals="subref2(#rangesub)">οὐλομένην</strong> and its (implicit) index <strong concordion:assertEquals="subrefidx2(#rangesub)">1</strong>
+-  the second subreference,  <strong concordion:assertEquals="subref2(#rangesub)">οὐλομένην</strong> and its (implicit) index <strong concordion:assertEquals="subrefidx2(#rangesub)">1</strong>

@@ -38,7 +38,7 @@ public class ManipulationsTest extends ConcordionTestCase {
 	    throw e;
 	}
     }    
-
+    /*
     public String encoded(String urnStr)
 	throws Exception {
 	try {
@@ -59,7 +59,7 @@ public class ManipulationsTest extends ConcordionTestCase {
 	    throw e;
 	}
     }    
-
+    */
 
     
 }

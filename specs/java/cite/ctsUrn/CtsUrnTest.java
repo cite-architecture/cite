@@ -14,8 +14,10 @@ public class CtsUrnTest extends ConcordionTestCase {
 	    return false;
 	}
     }
+    
 
 
+    /*
     public boolean isRange(String urnStr)
     throws Exception {
 	try {
@@ -24,8 +26,12 @@ public class CtsUrnTest extends ConcordionTestCase {
 	} catch (Exception e) {
 	    throw e;
 	}
-    }
+	}*/
 
+
+    
+
+    /*
     public String reduceToWork(String urnStr)
     throws Exception {
 	try {
@@ -86,12 +92,12 @@ public class CtsUrnTest extends ConcordionTestCase {
 	throws Exception {
 	try {
 	    CtsUrn urn = new CtsUrn(urnStr);
-	    return urn.toString(true);
+	    return urn.toString();
 	} catch (Exception e) {
 	    throw e;
 	}
     }    
-
+    */
     
     
 }

@@ -11,12 +11,50 @@ You can construct an object representation of a CTS URN from a string conforming
 [readable]: http://www.homermultitext.org/hmt-docs/specifications/ctsurn/
 
 
-## Examples ##
+### Examples ###
+
+
 
 - <strong concordion:set="#urn">urn:cts:greekLit:tlg0012.tlg001.msA:1.1</strong> 
 conforms to the CTS spec, so we can construct <strong concordion:assertTrue="isValid(#urn)">a valid CTS URN object</strong>.
 - <strong concordion:set="#bogus">NOT-A-URN</strong> does not conform to the CTS spec.  Passing it to a constructor <strong concordion:assertFalse="isValid(#bogus)">generates an Exception</strong>.
 
 
+
+## Unicode normalization ##
+
+
+CTS URN objects can be constructed from strings in any Unicode form, but all output representations of the CTS URN or parts of the CTS URN as strings are normalized to Unicode form NFC.
+
+### Examples ###
+
+Compare the two CTS URNs in this table:  they look identical when printed, but one is in pre-composed form (Unicode form NFC), the other in decomposed form (Unicode form NFD).
+
+<table>
+<tr>
+<th>Input string</th>
+<th>Unicode form of input</th>
+<th>Length of input in bytes</th>
+<th>Output string identical to input string</th>
+</tr>
+
+
+<tr>
+<td concordion:set="#srcStr">urn:cts:greekLit:tlg0012.tlg001:1.1@μῆνιν</td>
+<td concordion:assertEquals="uForm(#srcStr)">NFC (composed)</td>
+<td concordion:assertEquals="getBytes(#srcStr)">47</td>
+<td concordion:assertTrue="matchesOutput(#srcStr)">Yes</td>
+</tr>
+
+<tr>
+<td concordion:set="#srcStr">urn:cts:greekLit:tlg0012.tlg001:1.1@μῆνιν</td>
+<td concordion:assertEquals="uForm(#srcStr)">NFD (decomposed)</td>
+<td concordion:assertEquals="getBytes(#srcStr)">48</td>
+<td concordion:assertFalse="matchesOutput(#srcStr)">No</td>
+
+</tr>
+
+
+</table>
 
 

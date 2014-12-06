@@ -1,5 +1,9 @@
 package edu.harvard.chs.cite
 
+import java.text.Normalizer
+import java.text.Normalizer.Form
+
+
 /**
 * A class representing a reference to a text passage in a logical
 * hierarchical scheme, expressed in the notation of the Canonical
@@ -90,6 +94,41 @@ class CtsUrn {
     EXEMPLAR, VERSION, WORK, GROUP
   }
 
+
+
+
+
+
+
+
+  /** CtsUrns are constructed from a String conforming to the
+   * syntax and semantics of the CTS URN specification.
+   * @throws Exception if urnStr is not a syntactically valid CTS URN.
+   */
+  CtsUrn (String urnStr) {
+    // reverse any URL encoding prior to parsing:
+    //this.rawString = URLDecoder.decode(urnStr)
+
+
+    if (debug > 3) {
+      System.err.println "From source string ${urnStr}, constructing normalized..."
+    }
+    // Normalized to NFC, per URN spec:
+    rawString = Normalizer.normalize(urnStr, Form.NFC)
+    try {
+      this.initializeUrn(this.rawString)
+    } catch (Exception e) {
+      throw e
+    }
+  }
+
+
+
+
+
+
+
+  
   /** Gets first string on a point URN.
    * @throws Exception if subreference string does not exist or is empty.
    */
@@ -517,32 +556,17 @@ class CtsUrn {
   }
 
 
-  /** CtsUrns are constructed from a String conforming to the
-   * syntax and semantics of the CTS URN specification.
-   * @throws Exception if urnStr is not a syntactically valid CTS URN.
-   */
-  CtsUrn (String urnStr) {
-    // reverse any URL encoding prior to parsing:
-    this.rawString = URLDecoder.decode(urnStr)
-    try {
-      this.initializeUrn(this.rawString)
-    } catch (Exception e) {
-      throw e
-    }
-  }
-
-
 
 
 
       
   /**
-   * Returns the CTS URN object as a String in the notation defined by
-   * the proposed CTS URN standard.
+   * Returns the CTS URN object as a String in the normalized
+   * sting form specified by the CTS URN standard.
    * @returns The URN as a String.
    */
   String toString() {
-    return rawString
+   return rawString
   }
 
   /**
@@ -552,7 +576,10 @@ class CtsUrn {
    * that URN is a syntactically valid URI according to RFC xxx.
    * @returns The URN as a String.
    */
+      /*
   String toString(boolean validUri) {
+    // RETURN NFC FORM OF STRING!
+
     if (validUri) {
       if (isRange() ) {
 	return getValidRangeString()
@@ -563,13 +590,15 @@ class CtsUrn {
     } else {
       return rawString
     }
-  }
 
+  }
+    */
 
   /**
    * @returns String value of urn with any subreferences
    * URL encoded.
    */
+  /*
   String getValidRangeString() {
     if (this.hasSubref()) {
       String urlStr = this.getUrnWithoutPassage() + getRangeBegin()
@@ -610,7 +639,8 @@ class CtsUrn {
       return rawString
     }
   }
-
+  */
+  
 
   /**
    * Gets the full URN for the work-level reference, without any further
