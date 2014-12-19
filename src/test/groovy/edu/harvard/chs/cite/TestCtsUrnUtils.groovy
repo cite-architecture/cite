@@ -13,12 +13,12 @@ class TestCtsUrnUtils extends GroovyTestCase {
     void testStripPassage() {
       String psgString = "urn:cts:greekLit:tlg0012.tlg001:1.25"
       CtsUrn psgUrn = new CtsUrn(psgString)
-      assert psgUrn.getUrnWithoutPassage() == "urn:cts:greekLit:tlg0012.tlg001"
+      assert psgUrn.getUrnWithoutPassage() == "urn:cts:greekLit:tlg0012.tlg001:"
 
 
       String workString = "urn:cts:greekLit:tlg0012.tlg001"
       CtsUrn workUrn = new CtsUrn(workString)
-      assert workUrn.getUrnWithoutPassage() == "urn:cts:greekLit:tlg0012.tlg001"
+      assert workUrn.getUrnWithoutPassage() == "urn:cts:greekLit:tlg0012.tlg001:"
     }
 
 
