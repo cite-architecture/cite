@@ -95,12 +95,6 @@ class CtsUrn {
   }
 
 
-
-
-
-
-
-
   /** CtsUrns are constructed from a String conforming to the
    * syntax and semantics of the CTS URN specification.
    * @throws Exception if urnStr is not a syntactically valid CTS URN.
@@ -569,78 +563,6 @@ class CtsUrn {
    return rawString
   }
 
-  /**
-   * Returns the CITE URN object as a String in the notation defined by
-   * the proposed CITE URN standard.  
-   * @param validUri True if subreference should be encoded to ensure
-   * that URN is a syntactically valid URI according to RFC xxx.
-   * @returns The URN as a String.
-   */
-      /*
-  String toString(boolean validUri) {
-    // RETURN NFC FORM OF STRING!
-
-    if (validUri) {
-      if (isRange() ) {
-	return getValidRangeString()
-      } else {
-	return getValidPointString()
-      }
-
-    } else {
-      return rawString
-    }
-
-  }
-    */
-
-  /**
-   * @returns String value of urn with any subreferences
-   * URL encoded.
-   */
-  /*
-  String getValidRangeString() {
-    if (this.hasSubref()) {
-      String urlStr = this.getUrnWithoutPassage() + getRangeBegin()
-
-      if (this.subref1 != null) {
-	String append =  "@" + this.getSubref1() + "[" + this.getSubrefIdx1() + "]"
-	urlStr = urlStr + java.net.URLEncoder.encode(append, "UTF-8") 
-      }
-
-      urlStr = urlStr + "-"+ getRangeEnd()
-
-      if (this.subref2 != null) {
-	String append =  "@" + this.getSubref2() + "[" + this.getSubrefIdx2() + "]"
-	urlStr = urlStr + java.net.URLEncoder.encode(append,"UTF-8")
-      }
-
-      return urlStr
-
-    } else {
-      return rawString
-    }
-  }
-
-
-  String decode() {
-    System.err.println "Raw is " + rawString
-    System.err.println "Decoded is " +  java.net.URLDecoder.decode(rawString,"UTF-8")
-    return java.net.URLDecoder.decode(rawString,"UTF-8")
-  }
-  
-  String getValidPointString() {
-    if (this.hasSubref()) {
-      String base = this.getUrnWithoutPassage()
-      String append = "@" + this.getSubref()+ "[${this.getSubrefIdx()}]"
-      return base + this.getPassageNode() + java.net.URLEncoder.encode(append, "UTF-8")
-
-    } else {
-      return rawString
-    }
-  }
-  */
-  
 
   /**
    * Gets the full URN for the work-level reference, without any further
@@ -989,4 +911,37 @@ class CtsUrn {
     return this.versionInfo
   }
 
+
+  String reportAll() {
+    return """
+rawString ${rawString}
+ctsNamespace ${ctsNamespace}
+
+workComponent ${workComponent}
+passageComponent ${passageComponent}
+
+textGroup ${textGroup}
+work ${work}
+version ${version}
+exemplar ${exemplar}
+
+workLevel ${workLevel}
+
+passageNode ${passageNode}
+subref ${subref}
+subrefIdx ${subrefIdx}
+
+rangeBegin ${rangeBegin}
+subref1 ${subref1}
+subrefIdx1 ${subrefIdx}
+
+rangeEnd ${rangeEnd}
+subref2 ${subref2}
+subrefIdx2 ${subrefIdx2}
+"""
+  }
+
+  
 }
+
+
