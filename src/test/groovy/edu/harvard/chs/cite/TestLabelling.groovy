@@ -39,8 +39,9 @@ class TestLabelling extends GroovyTestCase {
 
 
     @Test void testInvAttributes() {
-        assert ti.getTiId() == "hmt"
-        assert ti.getTiVersion() == "5.0.rc.1"
+      // gone in 5.0...
+      //assert ti.getTiid() == "hmt"
+      assert ti.getTiVersion() == "5.0.rc.1"
     }
 
     @Test void testGroupNames() {

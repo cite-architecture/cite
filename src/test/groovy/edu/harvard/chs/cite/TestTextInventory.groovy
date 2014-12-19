@@ -84,8 +84,8 @@ class TestTextInventory extends GroovyTestCase {
 
 
     @Test void testInvAttributes() {
-        assert ti.getTiId() == "hmt"
-        assert ti.getTiVersion() == "5.0.rc.1"
+      //assert ti.getTiId() == "hmt"
+      assert ti.getTiVersion() == "5.0.rc.1"
     }
 
     @Test void testCtsNamespaces() {
