@@ -23,7 +23,7 @@ Find the depth of the URN's passage citation:
 
 - the  URN <strong concordion:set="#range">urn:cts:greekLit:tlg0012.tlg001:1.1</strong> is cited at  <strong concordion:assertEquals="getDepth(#range)">2</strong> levels (book and line of the *Iliad*).
 - the  URN <strong concordion:set="#range">urn:cts:greekLit:tlg0012.tlg001:1</strong> is cited at  <strong concordion:assertEquals="getDepth(#range)">1</strong> level (book of the *Iliad*).
-- range  URNs should work, too!  <strong concordion:set="#range">urn:cts:greekLit:tlg0012.tlg001:1.1-2.75</strong> is cited at  <strong concordion:assertEquals="getDepth(#range)">2</strong> levels (book and line of the *Iliad*).
+- either end of a range  URN should point to a citable unit at the same level of depth, so  <strong concordion:set="#range">urn:cts:greekLit:tlg0012.tlg001:1.1-2.75</strong> is cited at  <strong concordion:assertEquals="getDepth(#range)">2</strong> levels (book and line of the *Iliad*).
 
 
 

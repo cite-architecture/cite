@@ -672,8 +672,13 @@ class CtsUrn {
     * @returns Number of elements in a passage reference.
     */
     int getCitationDepth() {
-        def refVals = this.passageComponent.split(/\Q.\E/)
-        return refVals.size()
+      def refVals
+      if (isRange()) {
+	refVals = this.rangeBegin.split(/\Q.\E/)
+      } else {
+	refVals = this.passageComponent.split(/\Q.\E/)
+      }
+      return refVals.size()
     }
 
 
