@@ -1,0 +1,803 @@
+<?xml-model href="../../../schemas/cts/TextInventory.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<TextInventory tiid="hmt" tiversion="5.0.rc.1" xmlns="http://chs.harvard.edu/xmlns/cts"
+  xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <ctsnamespace abbr="greekLit" ns="chs.harvard.edu/ctsns/greekLit">
+    <description xml:lang="eng"> The &quot;First Thousand Years of Greek&quot; project's inventory
+      of Greek texts. </description>
+  </ctsnamespace>
+  <ctsnamespace abbr="homerPap" ns="chs.harvard.edu/ctsns/homericPapyri">
+    <description xml:lang="eng"> Papyri represented by electronic editions in the Homer Multitext
+      Project. </description>
+  </ctsnamespace>
+
+
+  <textgroup urn="urn:cts:greekLit:tlg0012">
+    <groupname xml:lang="eng"> Homer </groupname>
+    <work urn="urn:cts:greekLit:tlg0012.tlg001" xml:lang="grc">
+      <title xml:lang="eng"> Iliad </title>
+      
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msBm1">
+        <label xml:lang="eng"> Bm1 </label>
+        <description xml:lang="eng"> Egerton 267 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msBm2">
+        <label xml:lang="eng"> Bm2 </label>
+        <description xml:lang="eng"> King's 16 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msBm3">
+        <label xml:lang="eng"> Bm3 </label>
+        <description xml:lang="eng"> Harley 1675 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msCa2">
+        <label xml:lang="eng"> Ca2 </label>
+        <description xml:lang="eng"> coll. Trinitatis Cant. 983 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msA">
+        <label xml:lang="eng"> A </label>
+        <description xml:lang="eng"> Venice: Marcianus Graecus Z.454 (=822). </description>
+        <online docname="Iliad-A.xml">
+
+
+          <namespaceMapping abbreviation="tei" nsURI="http://www.tei-c.org/ns/1.0"/>
+          <citationMapping>
+            <citation label="book" scope="/tei:TEI/tei:text/tei:body" xpath="/tei:div[@n = '?']">
+              <citation label="line" scope="/tei:TEI/tei:text/tei:body/tei:div[@n = '?']"
+                xpath="/tei:l[@n = '?']"/>
+            </citation>
+          </citationMapping>
+        </online>
+        <exemplar urn="urn:cts:greekLit:tlg0012.tlg001.msA.lex">
+          <label xml:lang="eng">Lexical Tokens</label>
+          <description xml:lang="eng">Derivitive exemplar tokenized for lexical entities ("words").</description>
+        </exemplar>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msAg">
+        <label xml:lang="eng"> Ag </label>
+        <description xml:lang="eng"> Angelicus 122 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msAthous">
+        <label xml:lang="eng"> Athous </label>
+        <description xml:lang="eng"> Vatopedi 592 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msB">
+        <label xml:lang="eng"> B </label>
+        <description xml:lang="eng"> Ven. 453 </description>
+        <online docname="tier2/Iliad-B.xml">
+
+          <namespaceMapping abbreviation="tei" nsURI="http://www.tei-c.org/ns/1.0"/>
+          <citationMapping>
+            <citation label="book" scope="/tei:TEI/tei:text/tei:body" xpath="/tei:div[@n = '?']">
+              <citation label="line" scope="/tei:TEI/tei:text/tei:body/tei:div[@n = '?']"
+                xpath="/tei:l[@n = '?']"/>
+            </citation>
+          </citationMapping>
+        </online>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msBm4">
+        <label xml:lang="eng"> Bm4 </label>
+        <description xml:lang="eng"> Harley 1771 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msBm5">
+        <label xml:lang="eng"> Bm5 </label>
+        <description xml:lang="eng"> Harley 5600 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msBm6">
+        <label xml:lang="eng"> Bm6 </label>
+        <description xml:lang="eng"> Harley 5601 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msBm7">
+        <label xml:lang="eng"> Bm7 </label>
+        <description xml:lang="eng"> Harley 5672 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msBm8">
+        <label xml:lang="eng"> Bm8 </label>
+        <description xml:lang="eng"> Harley 5693 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msBm9">
+        <label xml:lang="eng"> Bm9 </label>
+        <description xml:lang="eng"> add. MSS 8232 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msC">
+        <label xml:lang="eng"> C </label>
+        <description xml:lang="eng"> Laur. 32.3 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msCa1">
+        <label xml:lang="eng"> Ca1 </label>
+        <description xml:lang="eng"> coll. Corporis Christi Cant. 81 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msCa3">
+        <label xml:lang="eng"> Ca3 </label>
+        <description xml:lang="eng"> Cambridge University Library 1290 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msD">
+        <label xml:lang="eng"> D </label>
+        <description xml:lang="eng"> Laur. 32.15 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msE1">
+        <label xml:lang="eng"> E1 </label>
+        <description xml:lang="eng"> Escorialensis 83 (Σ ii.7) </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msE2">
+        <label xml:lang="eng"> E2 </label>
+        <description xml:lang="eng"> Escorialensis 213 (Φ ii.19) </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msE3">
+        <label xml:lang="eng"> E3 </label>
+        <description xml:lang="eng"> Escorialensis 291 (Υ i.1) </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msE4">
+        <label xml:lang="eng"> E4 </label>
+        <description xml:lang="eng"> Escorialensis 509 (Ω i.12) </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msEt">
+        <label xml:lang="eng"> Et </label>
+        <description xml:lang="eng"> Etonensis 139 = Bl. 4.12 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msGe">
+        <label xml:lang="eng"> Ge </label>
+        <description xml:lang="eng"> Genavensis 44 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msGf">
+        <label xml:lang="eng"> Gf </label>
+        <description xml:lang="eng"> Grotta Ferrata Z α xxiv </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msH1">
+        <label xml:lang="eng"> H1 </label>
+        <description xml:lang="eng"> Holkham Hall, Norfolk, 263 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msH2">
+        <label xml:lang="eng"> H2 </label>
+        <description xml:lang="eng"> Holkham 264 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msL1">
+        <label xml:lang="eng"> L1 </label>
+        <description xml:lang="eng"> Laurentianus 31.5 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msL2">
+        <label xml:lang="eng"> L2 </label>
+        <description xml:lang="eng"> Laur. 32.15 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msL3">
+        <label xml:lang="eng"> L3 </label>
+        <description xml:lang="eng"> Laur. 32.4 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msL4">
+        <label xml:lang="eng"> L4 </label>
+        <description xml:lang="eng"> Laur. 32.5 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msL5">
+        <label xml:lang="eng"> L5 </label>
+        <description xml:lang="eng"> Laur. 32.6 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msL6">
+        <label xml:lang="eng"> L6 </label>
+        <description xml:lang="eng"> Laur. 32.8 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msL7">
+        <label xml:lang="eng"> L7 </label>
+        <description xml:lang="eng"> Laur. 32.10 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msL8">
+        <label xml:lang="eng"> L8 </label>
+        <description xml:lang="eng"> Laur. 32.11 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msL9">
+        <label xml:lang="eng"> L9 </label>
+        <description xml:lang="eng"> Laur. 32.18 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msL10">
+        <label xml:lang="eng"> L10 </label>
+        <description xml:lang="eng"> Laur. 32.22 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msL11">
+        <label xml:lang="eng"> L11 </label>
+        <description xml:lang="eng"> Laur. 32.25 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msL12">
+        <label xml:lang="eng"> L12 </label>
+        <description xml:lang="eng"> Laur. 32.27 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msL13">
+        <label xml:lang="eng"> L13 </label>
+        <description xml:lang="eng"> Laur. 32.28 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msL14">
+        <label xml:lang="eng"> L14 </label>
+        <description xml:lang="eng"> Laur. 32.31 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msL15">
+        <label xml:lang="eng"> L15 </label>
+        <description xml:lang="eng"> Laur. 32.38 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msL16">
+        <label xml:lang="eng"> L16 </label>
+        <description xml:lang="eng"> Laur. 32.47 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msL17">
+        <label xml:lang="eng"> L17 </label>
+        <description xml:lang="eng"> Laur. 91 sup. 1 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msL18">
+        <label xml:lang="eng"> L18 </label>
+        <description xml:lang="eng"> Laur. 91 sup. 2 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msL19">
+        <label xml:lang="eng"> L19 </label>
+        <description xml:lang="eng"> Conv. soppr. 48 (già Badia 36) </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msL20">
+        <label xml:lang="eng"> L20 </label>
+        <description xml:lang="eng"> Conv. soppr. 139 (già Badia 64) </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msLe1">
+        <label xml:lang="eng"> Le1 </label>
+        <description xml:lang="eng"> Leidensis Voss. graec. 64 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msLe2">
+        <label xml:lang="eng"> Le2 </label>
+        <description xml:lang="eng"> Leidensis 22, xviii </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msLi">
+        <label xml:lang="eng"> Li </label>
+        <description xml:lang="eng"> Lipsiensis 32 (ol. 1275) </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msM1">
+        <label xml:lang="eng"> M1 </label>
+        <description xml:lang="eng"> Ambrosianus 74 (A 181 supp.) </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msM2">
+        <label xml:lang="eng"> M2 </label>
+        <description xml:lang="eng"> Ambr. 89 (B 39 sup.) </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msM3">
+        <label xml:lang="eng"> M3 </label>
+        <description xml:lang="eng"> Ambr. 152 (B 150 sup.) </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msM4">
+        <label xml:lang="eng"> M4 </label>
+        <description xml:lang="eng"> Ambr. 281 (E 35 sup.) </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msM5">
+        <label xml:lang="eng"> M5 </label>
+        <description xml:lang="eng"> Ambr. 355 (F 101 sup.) </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msM6">
+        <label xml:lang="eng"> M6 </label>
+        <description xml:lang="eng"> Ambr. 441 (H 77 sup.) </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msM7">
+        <label xml:lang="eng"> M7 </label>
+        <description xml:lang="eng"> Ambr. 450 (I 4 sup.) </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msM8">
+        <label xml:lang="eng"> M8 </label>
+        <description xml:lang="eng"> Ambr. 463 (I 58 sup.) </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msM9">
+        <label xml:lang="eng"> M9 </label>
+        <description xml:lang="eng"> Ambr. 1057 (I 90 inf.) </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msM10">
+        <label xml:lang="eng"> M10 </label>
+        <description xml:lang="eng"> Ambr. 486 (L 73 sup.) </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msM11">
+        <label xml:lang="eng"> M11 </label>
+        <description xml:lang="eng"> Ambr. 502 A(L 116 sup.) </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msM12">
+        <label xml:lang="eng"> M12 </label>
+        <description xml:lang="eng"> Ambr. 532 (M 86 sup.) </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msM13">
+        <label xml:lang="eng"> M13 </label>
+        <description xml:lang="eng"> Ambr. 1015 (E 56 inf.) </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msM14">
+        <label xml:lang="eng"> M14 </label>
+        <description xml:lang="eng"> Ambr. 1046 (I 30 inf.) </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msM15">
+        <label xml:lang="eng"> M15 </label>
+        <description xml:lang="eng"> Ambr. 426 (H 22 sup.) </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msM16">
+        <label xml:lang="eng"> M16 </label>
+        <description xml:lang="eng"> Ambr. 576 (N 275 sup.) </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msM17">
+        <label xml:lang="eng"> M17 </label>
+        <description xml:lang="eng"> Ambr. 725 (R 119 sup.) </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msMa1">
+        <label xml:lang="eng"> Ma1 </label>
+        <description xml:lang="eng"> Madrid, Biblioteca Nacional. 4555 (18 Ir.) </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msMa2">
+        <label xml:lang="eng"> Ma2 </label>
+        <description xml:lang="eng"> Madrid 4560 (23 Ir.) </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msMa3">
+        <label xml:lang="eng"> Ma3 </label>
+        <description xml:lang="eng"> Madrid 4841 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msMc">
+        <label xml:lang="eng"> Mc </label>
+        <description xml:lang="eng"> Monte Cassino S 94 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msMo2">
+        <label xml:lang="eng"> Mo2 </label>
+        <description xml:lang="eng"> Estensis 104 (II. D 5) </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msMo1">
+        <label xml:lang="eng"> Mo1 </label>
+        <description xml:lang="eng"> Estensis 123 (III. D 4) </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msMon1">
+        <label xml:lang="eng"> Mon1 </label>
+        <description xml:lang="eng"> Munich, Hofbibliothek 111 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msMon2">
+        <label xml:lang="eng"> Mon2 </label>
+        <description xml:lang="eng"> Munich, Hofbibliothek 311 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msMon3">
+        <label xml:lang="eng"> Mon3 </label>
+        <description xml:lang="eng"> Munich, Hofbibliothek 519 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msN1">
+        <label xml:lang="eng"> N1 </label>
+        <description xml:lang="eng"> Napoli, Biblioteca nazionale III. E 37 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msN2">
+        <label xml:lang="eng"> N2 </label>
+        <description xml:lang="eng"> Napoli, Biblioteca nazionale II. F 1 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msN4">
+        <label xml:lang="eng"> N4 </label>
+        <description xml:lang="eng"> Napoli, Biblioteca nazionale II. F 3 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msN3">
+        <label xml:lang="eng"> N3 </label>
+        <description xml:lang="eng"> Napoli, Biblioteca nazionale II. F 2 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msO1">
+        <label xml:lang="eng"> O1 </label>
+        <description xml:lang="eng"> Barocci 96 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msO2">
+        <label xml:lang="eng"> O2 </label>
+        <description xml:lang="eng"> Barocci 203 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msO3">
+        <label xml:lang="eng"> O3 </label>
+        <description xml:lang="eng"> Laud. 41 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msO4">
+        <label xml:lang="eng"> O4 </label>
+        <description xml:lang="eng"> Laud. 54 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msO5">
+        <label xml:lang="eng"> O5 </label>
+        <description xml:lang="eng"> Auct. T 2. 7 (misc. 207) </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msO6">
+        <label xml:lang="eng"> O6 </label>
+        <description xml:lang="eng"> Canonici 43 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msO7">
+        <label xml:lang="eng"> O7 </label>
+        <description xml:lang="eng"> Canonici 66 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msO8">
+        <label xml:lang="eng"> O8 </label>
+        <description xml:lang="eng"> coll. Nov. Oxon. D 298 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msO9">
+        <label xml:lang="eng"> O9 </label>
+        <description xml:lang="eng"> ms. collegii Corporis Christi Oxon. CCCCLXX F 4. 12
+        </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msP1">
+        <label xml:lang="eng"> P1 </label>
+        <description xml:lang="eng"> Paris Bibliothèque Nationale, grec 1805 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msP2">
+        <label xml:lang="eng"> P2 </label>
+        <description xml:lang="eng"> Paris grec 2680 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msP4">
+        <label xml:lang="eng"> P4 </label>
+        <description xml:lang="eng"> Paris grec 2682 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msP3">
+        <label xml:lang="eng"> P3 </label>
+        <description xml:lang="eng"> Paris grec 2681 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msP5">
+        <label xml:lang="eng"> P5 </label>
+        <description xml:lang="eng"> Paris grec 2683 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msP6">
+        <label xml:lang="eng"> P6 </label>
+        <description xml:lang="eng"> Paris grec 2684 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msP7">
+        <label xml:lang="eng"> P7 </label>
+        <description xml:lang="eng"> Paris grec 2685 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msP8">
+        <label xml:lang="eng"> P8 </label>
+        <description xml:lang="eng"> Paris grec 2686 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msP9">
+        <label xml:lang="eng"> P9 </label>
+        <description xml:lang="eng"> Paris grec 2687 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msP10">
+        <label xml:lang="eng"> P10 </label>
+        <description xml:lang="eng"> Paris grec 2697 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msP12">
+        <label xml:lang="eng"> P12 </label>
+        <description xml:lang="eng"> Paris grec 2767 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msP11">
+        <label xml:lang="eng"> P11 </label>
+        <description xml:lang="eng"> Paris grec 2766 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msP13">
+        <label xml:lang="eng"> P13 </label>
+        <description xml:lang="eng"> Paris grec 2768 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msP14">
+        <label xml:lang="eng"> P14 </label>
+        <description xml:lang="eng"> Paris grec 2830 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msP15">
+        <label xml:lang="eng"> P15 </label>
+        <description xml:lang="eng"> Paris grec 2894 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msP16">
+        <label xml:lang="eng"> P16 </label>
+        <description xml:lang="eng"> Paris supplément grec 144 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msP17">
+        <label xml:lang="eng"> P17 </label>
+        <description xml:lang="eng"> Paris supplément grec 497 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msP19">
+        <label xml:lang="eng"> P19 </label>
+        <description xml:lang="eng"> Paris supplément grec 656 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msP18">
+        <label xml:lang="eng"> P18 </label>
+        <description xml:lang="eng"> Paris supplément grec 608 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msP20">
+        <label xml:lang="eng"> P20 </label>
+        <description xml:lang="eng"> Paris supplément grec 679 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msP21">
+        <label xml:lang="eng"> P21 </label>
+        <description xml:lang="eng"> Paris supplément grec 1095 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msPa">
+        <label xml:lang="eng"> Pa </label>
+        <description xml:lang="eng"> Parma, Biblioteca Palatina HH. 11. 27 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msP22">
+        <label xml:lang="eng"> P22 </label>
+        <description xml:lang="eng"> Paris supplément grec 1247 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msPal1">
+        <label xml:lang="eng"> Pal1 </label>
+        <description xml:lang="eng"> Heidelberg 40 (Wilken p. 276) </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msPal2">
+        <label xml:lang="eng"> Pal2 </label>
+        <description xml:lang="eng"> Heidelberg 222 (Wilken p. 282) </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msPe">
+        <label xml:lang="eng"> Pe </label>
+        <description xml:lang="eng"> Perugia, Bibl. Comm. E 48 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msPi">
+        <label xml:lang="eng"> Pi </label>
+        <description xml:lang="eng"> Pistoia, Bibl. Fortiguerri A 55 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msQ1">
+        <label xml:lang="eng"> Q1 </label>
+        <description xml:lang="eng"> Moscow, Library of the Ministry of Foreign Affairs
+        </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msQ2">
+        <label xml:lang="eng"> Q2 </label>
+        <description xml:lang="eng"> Moscow, Bibliotheca S. Synodi, no 474 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msQ3">
+        <label xml:lang="eng"> Q3 </label>
+        <description xml:lang="eng"> Moscow, Library of the Ministry of Foreign Affairs
+        </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msR1">
+        <label xml:lang="eng"> R1 </label>
+        <description xml:lang="eng"> Riccardianus 30 (K. II 10) </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msS">
+        <label xml:lang="eng"> S </label>
+        <description xml:lang="eng"> Stuttgart, Königliche öffentliche Bibliothek 5 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msT">
+        <label xml:lang="eng"> T </label>
+        <description xml:lang="eng"> British Library, Burney 86 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msR4">
+        <label xml:lang="eng"> R4 </label>
+        <description xml:lang="eng"> Riccardianus 896 (S. II 24) </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msR3">
+        <label xml:lang="eng"> R3 </label>
+        <description xml:lang="eng"> Riccardianus 32 (K. II 19) </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msR2">
+        <label xml:lang="eng"> R2 </label>
+        <description xml:lang="eng"> Riccardianus 62 (K. II 11) </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msU1">
+        <label xml:lang="eng"> U1 </label>
+        <description xml:lang="eng"> Venice, Marciana 431 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msU3">
+        <label xml:lang="eng"> U3 </label>
+        <description xml:lang="eng"> Venice, Marciana 456 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msU4">
+        <label xml:lang="eng"> U4 </label>
+        <description xml:lang="eng"> Venice, Marciana 458 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msU2">
+        <label xml:lang="eng"> U2 </label>
+        <description xml:lang="eng"> Venice, Marciana 455 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msU5">
+        <label xml:lang="eng"> U5 </label>
+        <description xml:lang="eng"> Venice, Marciana 459 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msU6">
+        <label xml:lang="eng"> U6 </label>
+        <description xml:lang="eng"> Venice, Marciana 459 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msU7">
+        <label xml:lang="eng"> U7 </label>
+        <description xml:lang="eng"> Venice, Marciana 514 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msU8">
+        <label xml:lang="eng"> U8 </label>
+        <description xml:lang="eng"> Venice, Marciana ix. 3 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msU9">
+        <label xml:lang="eng"> U9 </label>
+        <description xml:lang="eng"> Venice, Marciana ix. 2 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msU10">
+        <label xml:lang="eng"> U10 </label>
+        <description xml:lang="eng"> Venice, Marciana ix. 16 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msU11">
+        <label xml:lang="eng"> U11 </label>
+        <description xml:lang="eng"> Venice, Marciana ix. 21 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msU12">
+        <label xml:lang="eng"> U12 </label>
+        <description xml:lang="eng"> Venice, Marciana ix. 25 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msU13">
+        <label xml:lang="eng"> U13 </label>
+        <description xml:lang="eng"> Venice, Marciana ix. 33 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msV1">
+        <label xml:lang="eng"> V1 </label>
+        <description xml:lang="eng"> Vat. graec. 26 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msV2">
+        <label xml:lang="eng"> V2 </label>
+        <description xml:lang="eng"> Vat. graec. 27 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msV3">
+        <label xml:lang="eng"> V3 </label>
+        <description xml:lang="eng"> Vat. graec. 28 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msV4">
+        <label xml:lang="eng"> V4 </label>
+        <description xml:lang="eng"> Vat. graec. 29 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msV5">
+        <label xml:lang="eng"> V5 </label>
+        <description xml:lang="eng"> Vat. graec. 30 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msV6">
+        <label xml:lang="eng"> V6 </label>
+        <description xml:lang="eng"> Vat. graec. 31 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msV7">
+        <label xml:lang="eng"> V7 </label>
+        <description xml:lang="eng"> Vat. graec. 50 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msV8">
+        <label xml:lang="eng"> V8 </label>
+        <description xml:lang="eng"> Vat. graec. 97 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msV9">
+        <label xml:lang="eng"> V9 </label>
+        <description xml:lang="eng"> Vat. graec. 902 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msV10">
+        <label xml:lang="eng"> V10 </label>
+        <description xml:lang="eng"> Vat. graec. 903 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msV11">
+        <label xml:lang="eng"> V11 </label>
+        <description xml:lang="eng"> Vat. graec. 915 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msV12">
+        <label xml:lang="eng"> V12 </label>
+        <description xml:lang="eng"> Vat. graec. 1315 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msV13">
+        <label xml:lang="eng"> V13 </label>
+        <description xml:lang="eng"> Vat. graec. 1316 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msV14">
+        <label xml:lang="eng"> V14 </label>
+        <description xml:lang="eng"> Vat. graec. 1317 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msV15">
+        <label xml:lang="eng"> V15 </label>
+        <description xml:lang="eng"> Vat. graec. 1318 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msV16">
+        <label xml:lang="eng"> V16 </label>
+        <description xml:lang="eng"> Vat. graec. 1319 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msV17">
+        <label xml:lang="eng"> V17 </label>
+        <description xml:lang="eng"> Vat. graec. 1404 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msV18">
+        <label xml:lang="eng"> V18 </label>
+        <description xml:lang="eng"> Vat. graec. 1626 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msV19">
+        <label xml:lang="eng"> V19 </label>
+        <description xml:lang="eng"> Pal. 6 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msV20">
+        <label xml:lang="eng"> V20 </label>
+        <description xml:lang="eng"> Pal. 12 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msV21">
+        <label xml:lang="eng"> V21 </label>
+        <description xml:lang="eng"> Pal. 150 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msV22">
+        <label xml:lang="eng"> V22 </label>
+        <description xml:lang="eng"> Pal. 180 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msV23">
+        <label xml:lang="eng"> V23 </label>
+        <description xml:lang="eng"> Pal. 310 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msV26">
+        <label xml:lang="eng"> V26 </label>
+        <description xml:lang="eng"> Urbinas 138 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msV24">
+        <label xml:lang="eng"> V24 </label>
+        <description xml:lang="eng"> Urbinas 136 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msV25">
+        <label xml:lang="eng"> V25 </label>
+        <description xml:lang="eng"> Urbinas 137 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msV27">
+        <label xml:lang="eng"> V27 </label>
+        <description xml:lang="eng"> Ottobuoni 58 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msV28">
+        <label xml:lang="eng"> V28 </label>
+        <description xml:lang="eng"> Ottobuoni 303 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msV29">
+        <label xml:lang="eng"> V29 </label>
+        <description xml:lang="eng"> Ottobuoni 342 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msV30">
+        <label xml:lang="eng"> V30 </label>
+        <description xml:lang="eng"> Regina Sueciae 92 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msV31">
+        <label xml:lang="eng"> V31 </label>
+        <description xml:lang="eng"> Pio II 38 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msV32">
+        <label xml:lang="eng"> V32 </label>
+        <description xml:lang="eng"> Barberini I 161 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msV33">
+        <label xml:lang="eng"> V33 </label>
+        <description xml:lang="eng"> Barberini I 93 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msV34">
+        <label xml:lang="eng"> V34 </label>
+        <description xml:lang="eng"> Barberini I 110 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msV35">
+        <label xml:lang="eng"> V35 </label>
+        <description xml:lang="eng"> Barberini II 16 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msV36">
+        <label xml:lang="eng"> V36 </label>
+        <description xml:lang="eng"> cod. Ross. 986 (no, 16) </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msVe1">
+        <label xml:lang="eng"> Ve1 </label>
+        <description xml:lang="eng"> Rome, biblioteca Vittorio Emmanuele 6 (Collegio Romano), Madrid
+          biblioteca Nacional 4626 (lxxi Iriarte) </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msVe2">
+        <label xml:lang="eng"> Ve2 </label>
+        <description xml:lang="eng"> bibl. Vittorio Emmanuele 8 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msVi1">
+        <label xml:lang="eng"> Vi1 </label>
+        <description xml:lang="eng"> Vienna, phil. 5, ol. 'L' </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msVi2">
+        <label xml:lang="eng"> Vi2 </label>
+        <description xml:lang="eng"> Vienna, phil. 39, ol. 'G' </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msVi3">
+        <label xml:lang="eng"> Vi3 </label>
+        <description xml:lang="eng"> Vienna, phil. 49 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msVi4">
+        <label xml:lang="eng"> Vi4 </label>
+        <description xml:lang="eng"> Vienna, phil. 61 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msVi5">
+        <label xml:lang="eng"> Vi5 </label>
+        <description xml:lang="eng"> Vienna, phil. 117, ol. 'H' </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msVi6">
+        <label xml:lang="eng"> Vi6 </label>
+        <description xml:lang="eng"> 176 in Kollarii supplementis ineditis...ex Windhagiana
+          bibliotheca </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msVi7">
+        <label xml:lang="eng"> Vi7 </label>
+        <description xml:lang="eng"> Vienna, phil. 241 </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msW2">
+        <label xml:lang="eng"> W2 </label>
+        <description xml:lang="eng"> Breslau 25 (= Heyne Vrat. d) </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msW1">
+        <label xml:lang="eng"> W1 </label>
+        <description xml:lang="eng"> Breslau 24 (= Heyne Vrat. c) </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msW3">
+        <label xml:lang="eng"> W3 </label>
+        <description xml:lang="eng"> Breslau 26 (= Heyne Vrat. b) </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msW4">
+        <label xml:lang="eng"> W4 </label>
+        <description xml:lang="eng"> Breslau 27 (= Heyne Vrat. A) </description>
+      </edition>
+      <edition urn="urn:cts:greekLit:tlg0012.tlg001.msW5">
+        <label xml:lang="eng"> W5 </label>
+        <description xml:lang="eng"> Breslau 29 (= Heyne Vrat. a) </description>
+      </edition>
+    </work>
+  </textgroup>
+</TextInventory>

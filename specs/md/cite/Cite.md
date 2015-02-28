@@ -10,7 +10,7 @@ When the specification and implementation are complete and synchronized, we will
 
 - [CTS URNs](ctsUrn/CtsUrn.html)
 - CITE Object URNs
-- CTS Text inventory
+- [CTS Text inventory](ctsTi/CtsTi.html)
 - CITE Collection inventory
 - CITE client
 

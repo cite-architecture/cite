@@ -11,12 +11,12 @@ From a URN like <strong concordion:set="#point">urn:cts:greekLit:tlg0012.tlg001.
 - its version identifier, either with (<strong concordion:assertEquals="versQualified(#point)">greekLit:msA</strong>) or without (<strong concordion:assertEquals="versBare(#point)">msA</strong>) namespace qualifier
 - the identifier for its passage node, <strong concordion:assertEquals="getPassage(#point)">2.75</strong>
 
-For a URN with an exemplar-level identifier, like <strong concordion:set="#exemplarUrn">urn:cts:greekLit:tlg0012.tlg001.msA.opToken:1.1.1</strong>, we can extract:
+For a URN with an exemplar-level identifier, like <strong concordion:set="#exemplarUrn">urn:cts:greekLit:tlg0012.tlg001.msA.lex:1.1.1</strong>, we can extract:
 
 - its text group identifier, either with (<strong concordion:assertEquals="tgQualified(#exemplarUrn)">greekLit:tlg0012</strong>) or without (<strong concordion:assertEquals="tgBare(#exemplarUrn)">tlg0012</strong>) namespace qualifier
 - its work identifier, either with (<strong concordion:assertEquals="wkQualified(#exemplarUrn)">greekLit:tlg001</strong>) or without (<strong concordion:assertEquals="wkBare(#exemplarUrn)">tlg001</strong>) namespace qualifier
 - its version identifier, either with (<strong concordion:assertEquals="versQualified(#exemplarUrn)">greekLit:msA</strong>) or without (<strong concordion:assertEquals="versBare(#exemplarUrn)">msA</strong>) namespace qualifier
-- **And** its exemplar identifier, either with (<strong concordion:assertEquals="exempQualified(#exemplarUrn)">greekLit:opToken</strong>) or without (<strong concordion:assertEquals="exempBare(#exemplarUrn)">opToken</strong>) namespace qualifier
+- **And** its exemplar identifier, either with (<strong concordion:assertEquals="exempQualified(#exemplarUrn)">greekLit:lex</strong>) or without (<strong concordion:assertEquals="exempBare(#exemplarUrn)">lex</strong>) namespace qualifier
 
 
 For a URN citing a range, like <strong concordion:set="#range">urn:cts:greekLit:tlg0012.tlg001.msA:1.1-2.75</strong>, we can also extract:
