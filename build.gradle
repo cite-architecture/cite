@@ -9,7 +9,7 @@ apply from: "conf.gradle"
 group = "edu.harvard.chs"
 
 
-version = '0.92.0'
+version = '0.92.1'
 
 
 apply from: "versions.gradle"
