@@ -144,7 +144,26 @@ public class ComponentsTest extends ConcordionTestCase {
 	    throw e;
 	}
     }
-    
+
+	public String exempQualified(String urnStr)
+	throws Exception {
+	try {
+	    CtsUrn urn = new CtsUrn(urnStr);
+	    return urn.getExemplar(true);
+	} catch (Exception e) {
+	    throw e;
+	}
+    }    
+
+   public String exempBare(String urnStr)
+	throws Exception {
+	try {
+	    CtsUrn urn = new CtsUrn(urnStr);
+	    return urn.getExemplar(false);
+	} catch (Exception e) {
+	    throw e;
+	}
+    }  
 
     public String tgQualified(String urnStr)
 	throws Exception {
