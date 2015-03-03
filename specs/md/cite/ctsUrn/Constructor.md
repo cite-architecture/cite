@@ -30,10 +30,11 @@ conforms to the CTS spec, so we can construct <strong concordion:assertTrue="isV
 
 ### Less obvious examples ###
 
+**Invalid index on subreference**:  substrings are indexed with positive integers. The string
+<strong concordion:set="#badidx">urn:cts:greekLit:tlg0012.tlg001.msA:1.1@Μῆνιν[0]</strong> is therefore invalid.
+Passing it to a constructor <strong concordion:assertFalse="isValid(#badidx)">generates an Exception</strong>.
 
-To be added.
 
-<!--The library throws an Exception if a subreference is indexed with any value other than a positive integer. -->
 @closeex@
 
 

@@ -95,6 +95,21 @@ class CtsUrn {
   }
 
 
+
+  CtsUrn (String urnStr, Integer setDebug) {
+    this.debug = setDebug
+    if (debug > 3) {
+      System.err.println "From source string ${urnStr}, constructing normalized..."
+    }
+    // Normalized to NFC, per URN spec:
+    rawString = Normalizer.normalize(urnStr, Form.NFC)
+    try {
+      this.initializeUrn(this.rawString)
+    } catch (Exception e) {
+      throw e
+    }
+  }
+  
   /** CtsUrns are constructed from a String conforming to the
    * syntax and semantics of the CTS URN specification.
    * @throws Exception if urnStr is not a syntactically valid CTS URN.
@@ -475,6 +490,9 @@ class CtsUrn {
     if (subrefParts.size() == 2) {
       try {
 	this.subrefIdx = subrefParts[1].toInteger()
+	if (this.subrefIdx < 1) {
+	  throw new Exception("CtsUrn:initializeRange: invalid substring index ${this.subrefIdx}")
+	}
       } catch (Exception e) {
 	throw e
       }
@@ -513,6 +531,9 @@ class CtsUrn {
     if (subrefParts.size() == 2) {
       try {
 	this.subrefIdx1 = subrefParts[1].toInteger()
+	if (this.subrefIdx1 < 1) {
+	  throw new Exception("CtsUrn:initializeRange: invalid substring index ${this.subrefIdx1}")
+	}
       } catch (Exception e) {
 	throw e
       }
@@ -540,6 +561,9 @@ class CtsUrn {
     if (subrefParts.size() == 2) {
       try {
 	this.subrefIdx2 = subrefParts[1].toInteger()
+	if (this.subrefIdx2 < 1) {
+	  throw new Exception("CtsUrn:initializeRange: invalid substring index ${this.subrefIdx2}")
+	}
       } catch (Exception e) {
 	throw e
       }

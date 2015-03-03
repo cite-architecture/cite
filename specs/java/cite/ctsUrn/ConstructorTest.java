@@ -10,7 +10,9 @@ public class ConstructorTest extends ConcordionTestCase {
 
     public boolean isValid(String urnStr) {
 	try {
-	    CtsUrn urn = new CtsUrn(urnStr);
+	    Integer debug = 3;
+	    CtsUrn urn = new CtsUrn(urnStr,debug);
+
 	    return true;
 	} catch (Exception e) {
 	    return false;
