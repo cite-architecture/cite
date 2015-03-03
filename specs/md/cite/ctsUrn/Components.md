@@ -14,7 +14,7 @@ The [CTS URN specification](http://cite-architecture.github.io/ctsurn_spec/) def
 3. The parts of the *passage reference component*:
     4. the passage component as a whole
     5. the first and last nodes of a range
-    6. any subreferences, and their index (explicit or implicit)
+    6. any subreferences, and their index (explicit or implicit).  See details in the following section.
 
 
 
@@ -73,32 +73,58 @@ For the URN <strong concordion:set="#range">urn:cts:greekLit:tlg0012.tlg001.msA:
 
 CTS URNs express references to units in a canonical citation system that is specific to individual texts.  For specific versions or exemplars, the notation permits pointing to indexed substrings within the text content of the cited passage.  Substrings are indexed beginning from **1** (not **0**), and a substring reference with no explicit index is defined to mean that is has an implied index of 1.
 
-The 
+The `cite` library's methods support working with subreferences as follows:
+
+1. extracting the entire passage component returns the *literal string version of passage component as submitted to the CtsUrn constructor*.  If an index of 1 is left implicit, it is not supplied.
+2. extracting the substring returns the substring without index.
+3. extracting the index value returns an integer > 0, whether the index was expressed or implied
+
+
+ For ranges, `cite` supports extracting substring and index values for either end of the range.
+
+
+@openex@
+
+### Example: subreference with implicit index
+
+
+
+Subreference content of the URN  <strong concordion:set="#sub">urn:cts:greekLit:tlg0012.tlg001.msA:1.1@Μῆνιν</strong>.
+
+1. the passage component as a whole is  <strong concordion:assertEquals="psgComponent(#sub)">1.1@Μῆνιν</strong>
+2. the substring value is <strong concordion:assertEquals="subref(#sub)">Μῆνιν</strong>
+3.  the (implicit) index value <strong concordion:assertEquals="subrefidx(#sub)">1</strong>.
+
+@closeex@
+
+@openex@
+
+### Example: subreference with explicit index
+
+The  URN  <strong concordion:set="#subidx">urn:cts:greekLit:tlg0012.tlg001.msA:1.1@Μῆνιν[1]</strong> is semantically equivalent to the previous example
+
+1. the passage component as a whole is <strong concordion:assertEquals="psgComponent(#subidx)">1.1@Μῆνιν[1]</strong>
+2.  the substring value is <strong concordion:assertEquals="subref(#subidx)">Μῆνιν</strong>
+3.   the (explicit) index value is <strong concordion:assertEquals="subrefidx(#subidx)">1</strong>.
+
+@closeex@
 
 
 
 @openex@
 
-### Example: node with subreference
+### Example:  subreferences on a range
 
 
-
-For the URN  <strong concordion:set="#sub">urn:cts:greekLit:tlg0012.tlg001.msA:1.1@Μῆνιν</strong>, the CTS namespace and parts of the work component are identical to the previous examples. Parts of the passage component:
-
-1. the passage component as a whole is  <strong concordion:assertEquals="psgComponent(#sub)">1.1@Μῆνιν</strong>
-- the subreference, <strong concordion:assertEquals="subref(#sub)">Μῆνιν</strong>, and its implicit index <strong concordion:assertEquals="subrefidx(#sub)">1</strong>.
-
-The semantically equivalent URN  <strong concordion:set="#subidx">urn:cts:greekLit:tlg0012.tlg001.msA:1.1@Μῆνιν[1]</strong> yields the results:
+Ssubreference content of the URN <strong concordion:set="#rangesub">urn:cts:greekLit:tlg0012.tlg001.msA:1.1@Μῆνιν[1]-1.2@οὐλομένην</strong>.
 
 
-- passage component, <strong concordion:assertEquals="psgComponent(#subidx)">1.1@Μῆνιν[1]</strong>
-- subreference, <strong concordion:assertEquals="subref(#subidx)">Μῆνιν</strong>, and explicit index <strong concordion:assertEquals="subrefidx(#subidx)">1</strong>.
-
-
-For a range URN with subreferences like <strong concordion:set="#rangesub">urn:cts:greekLit:tlg0012.tlg001.msA:1.1@Μῆνιν[1]-1.2@οὐλομένην</strong>, we can also extract:
-
-- the first subreference,  <strong concordion:assertEquals="subref1(#rangesub)">Μῆνιν</strong> and its (explicit) index <strong concordion:assertEquals="subrefidx1(#rangesub)">1</strong>
--  the second subreference,  <strong concordion:assertEquals="subref2(#rangesub)">οὐλομένην</strong> and its (implicit) index <strong concordion:assertEquals="subrefidx2(#rangesub)">1</strong>
+1. the passage component as a whole is <strong concordion:assertEquals="psgComponent(#rangesub)">1.1@Μῆνιν[1]-1.2@οὐλομένην</strong>
+2. the substring value for the first subreference is <strong concordion:assertEquals="subref1(#rangesub)">Μῆνιν</strong>, and for the second subreferences is <strong concordion:assertEquals="subref2(#rangesub)">οὐλομένην</strong>
+3. the (explict) index for the first subreference is <strong concordion:assertEquals="subrefidx1(#rangesub)">1</strong>, and for  the second (implicit) subreference is <strong concordion:assertEquals="subrefidx2(#rangesub)">1</strong>
 
 
 @closeex@
+
+
+
