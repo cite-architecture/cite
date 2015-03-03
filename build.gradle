@@ -1,5 +1,7 @@
 import com.github.rjeschke.txtmark.*
 
+import org.apache.tools.ant.filters.*
+
 apply plugin: "base"
 apply plugin:  "groovy"
 apply plugin:  "maven"
@@ -135,7 +137,7 @@ task cpResources(type: Copy) {
   into "${buildDir}/specs"
 }
 
-task setUpResources(dependsOn: cpResources) {
+task setUpResources(dependsOn: [cpResources]) {
 }
 setUpResources.doLast {
   println "READING FILE TREE FROM " + mdSrc
@@ -174,4 +176,17 @@ test.dependsOn setUpResources
 test {
     systemProperties 'concordion.output.dir': file("${buildDir}/concordion-results")
 
+}
+
+task mapVersion() {
+}
+mapVersion.doLast {
+  tokenMap["version"] = version
+}
+
+task conc(type: Copy, dependsOn: [test, mapVersion]) {
+//task conc(type: Copy) {
+  from "${buildDir}/concordion-results"
+  into "${buildDir}/concordion-formatted"
+  filter(ReplaceTokens, tokens: tokenMap)
 }

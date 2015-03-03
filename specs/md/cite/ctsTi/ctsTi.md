@@ -1,11 +1,22 @@
 # CTS Text Inventory #
 
-We can use <a href="../../../resources/test/data/testinventory.xml" concordion:set="#ti = setHref(#HREF)">this TextInventory file</a> to <strong concordion:assertTrue="shouldMakeTi(#ti)">construct a TextInventory</strong>.
+The catalog of texts in a CTS archive records the URNs for every level of the text's CTS work hierarchy, and citation scheme for every level of the text's citation hierarchy.  The `cite` library supports constructing a CTS Text Inventory from an XML serialization validating against the 
 
-We can test it with a URN (at the version level), such as  <strong concordion:set="#exemplar">urn:cts:greekLit:tlg0012.tlg001.msA:1.1</strong>, which is a  <strong concordion:assertTrue="isValidURN(#exemplar)">valid CTS URN</strong>:
+@openex@
 
-- We can see that <strong concordion:assertTrue="urnInInventory(#ti, #exemplar)">this URN is documented in the TextInventory.</strong>.
+## Examples ##
 
-We can test it with a URN (at the exemplar-level), such as  <strong concordion:set="#exemplar">urn:cts:greekLit:tlg0012.tlg001.msA.lex:1.1.1</strong>, which is a  <strong concordion:assertTrue="isValidURN(#exemplar)">valid CTS URN</strong>:
 
-- We can see that <strong concordion:assertTrue="urnInInventory(#ti, #exemplar)">this URN is documented in the TextInventory.</strong>.
+From <a href="../../../resources/test/data/testinventory.xml" concordion:set="#ti = setHref(#HREF)">this TextInventory file</a> we can <strong concordion:assertTrue="shouldMakeTi(#ti)">construct a TextInventory</strong>.   
+
+We can verify that URNs at different levels of the work hierarchy are documented in the inventory:
+
+<table
+ concordion:execute="#result = urnInInventory(#ti,#urn)">
+<tr><th concordion:set="#urn">URN</th><th concordion:assertTrue="#result">In inventory at...</th></tr>
+<tr><td>urn:cts:greekLit:tlg0012.tlg001.msA:1.1</td><td>Version level</td></tr>
+<tr><td>urn:cts:greekLit:tlg0012.tlg001.msA.lex:1.1.1</td><td>Exemplar level</td></tr>
+</table>
+
+
+@closeex@

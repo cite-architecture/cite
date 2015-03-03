@@ -6,4 +6,6 @@ ext {
 <body>
     """
     htmlEnd = "</body>\n</html>\n"
+
+    tokenMap = [    "openex": "<div class='example'>", "closeex" : "</div>"]
 }
