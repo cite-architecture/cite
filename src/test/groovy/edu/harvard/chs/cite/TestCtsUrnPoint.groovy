@@ -10,8 +10,6 @@ import org.junit.Test
 class TestCtsUrnPoint extends GroovyTestCase {
 
 
-  String specVersion = "5.0.rc.2"
-
   /**
    * Tests constructors and toString() method of CtsUrn class.
    */
@@ -34,11 +32,11 @@ class TestCtsUrnPoint extends GroovyTestCase {
     assert urn.toString() == testUrnStr
 
 
-    String exemplarStr = "urn:cts:greekLit:tlg0012.tlg001.msA.tokens"
+    String exemplarStr = "urn:cts:greekLit:tlg0012.tlg001.msA.tokens:"
     CtsUrn exemplarUrn = new CtsUrn(exemplarStr)
 
     // USE THIS TO TEST toString() with subreff:
-    String subRefStr = "urn:cts:greekLit:tlg1220.tlg001:1.1@μῆνιν" 
+    String subRefStr = "urn:cts:greekLit:tlg1220.tlg001:1.1@μῆνιν"
     CtsUrn subRefUrn = new CtsUrn(subRefStr)
     System.err.println "Subref == " + subRefUrn.toString()
 
@@ -48,11 +46,6 @@ class TestCtsUrnPoint extends GroovyTestCase {
     CtsUrn noPsg = new CtsUrn(noPsgString)
     assert noPsg
 
-
-    if (specVersion == "5.0.rc.3") {
-      String noSemiStr = "urn:cts:greekLit:tlg0012.tlg001"
-      CtsUrn noSemi = new CtsUrn(noSemiStr)
-    }
 
 
       /*

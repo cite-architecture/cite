@@ -39,8 +39,6 @@ public class CtsTiTest extends ConcordionTestCase {
 	    File inv = new File(buildPath + ti);
 	    TextInventory nti = new TextInventory ( inv );
 	    return true;
-
-	
 	} catch (Exception e) {
 	    System.err.println ("CtsTiTest: unable to make Text Inventory: " + e.toString());
 	    return false;
@@ -53,9 +51,8 @@ public class CtsTiTest extends ConcordionTestCase {
 	    String buildPath = new java.io.File( "." ).getCanonicalPath() + docPath; 
 	    File inv = new File(buildPath + ti);
 	    TextInventory nti = new TextInventory ( inv );
-		CtsUrn urn = new CtsUrn(urnStr);
-		return nti.urnInInventory(urn);
-
+	    CtsUrn urn = new CtsUrn(urnStr);
+	    return nti.urnInInventory(urn);
 	
 	} catch (Exception e) {
 	    System.err.println ("CtsTiTest: unable to test if URN is in Inventory: " + e.toString());

@@ -429,7 +429,10 @@ class TextInventory {
         def edLabel = editionLabel(urn)
         def xlatLabel = translationLabel(urn)
         if (edLabel) {
-            return VersionType.EDITION
+	  if (debug > 1) {
+	    println "typeForVersion: edLabel ${edLabel}, so return "  + VersionType.EDITION
+	  }
+	  return VersionType.EDITION
         } else if (xlatLabel) {
             return VersionType.TRANSLATION
         } else {
@@ -478,35 +481,45 @@ class TextInventory {
         def nsStruct = this.ctsnamespaces.find { it[0] == urn.getCtsNamespace()}
 
         switch (urn.getWorkLevel()) {
-            case CtsUrn.WorkLevel.VERSION:
-                switch (typeForVersion(urn)) {
-                case VersionType.EDITION:
-                    String ed = "urn:cts:${urn.getCtsNamespace()}:${urn.getTextGroup()}.${urn.getWork()}.${urn.getVersion()}"
-                def edStruct = this.editions.find {it[0] == ed}
-                String tg = "urn:cts:${urn.getCtsNamespace()}:${urn.getTextGroup()}"
-                def tgStruct = this.textgroups.find {it[0] == tg}
-                String wk = "urn:cts:${urn.getCtsNamespace()}:${urn.getTextGroup()}.${urn.getWork()}"
-                def wkStruct = this.works.find {it[0] == wk }
-                return ((nsStruct != null) && (tgStruct != null) && (wkStruct != null))
-                break
 
-                case VersionType.TRANSLATION:
-                    String trans = "urn:cts:${urn.getCtsNamespace()}:${urn.getTextGroup()}.${urn.getWork()}.${urn.getVersion()}"
-                def transStruct = this.translations.find {it[0] == trans}
-                String tg = "urn:cts:${urn.getCtsNamespace()}:${urn.getTextGroup()}"
-                def tgStruct = this.textgroups.find {it[0] == tg}
-                String wk = "urn:cts:${urn.getCtsNamespace()}:${urn.getTextGroup()}.${urn.getWork()}"
-                def wkStruct = this.works.find {it[0] == wk }
-                return ((nsStruct != null) && (tgStruct != null) && (wkStruct != null))
+	case CtsUrn.WorkLevel.VERSION:
+	
+	switch (typeForVersion(urn)) {
+	case VersionType.EDITION:
+	//	String ed = "urn:cts:${urn.getCtsNamespace()}:${urn.getTextGroup()}.${urn.getWork()}.${urn.getVersion()}"
+	CtsUrn noPsg = new CtsUrn(urn.getUrnWithoutPassage())
+	String ed = noPsg.reduceToVersion()
+	
+	println "CHECKING FOR " + ed + " in " + editions
 
-                break
+	
+	def edStruct = this.editions.find {it[0] == ed}
+	String tg = "urn:cts:${urn.getCtsNamespace()}:${urn.getTextGroup()}:"
+	def tgStruct = this.textgroups.find {it[0] == tg}
+	String wk = "urn:cts:${urn.getCtsNamespace()}:${urn.getTextGroup()}.${urn.getWork()}:"
+	def wkStruct = this.works.find {it[0] == wk }
+	return ((nsStruct != null) && (tgStruct != null) && (wkStruct != null))
+	break
+	
 
-                default:
-                    System.err.println "TYpe is " + typeForVersion(urn)
-                break
-            } 
+	case VersionType.TRANSLATION:
+	String trans = "urn:cts:${urn.getCtsNamespace()}:${urn.getTextGroup()}.${urn.getWork()}.${urn.getVersion()}:"
+	def transStruct = this.translations.find {it[0] == trans}
+	String tg = "urn:cts:${urn.getCtsNamespace()}:${urn.getTextGroup()}:"
+	def tgStruct = this.textgroups.find {it[0] == tg}
+	String wk = "urn:cts:${urn.getCtsNamespace()}:${urn.getTextGroup()}.${urn.getWork()}:"
+	def wkStruct = this.works.find {it[0] == wk }
+	return ((nsStruct != null) && (tgStruct != null) && (wkStruct != null))
+	break
 
-            case CtsUrn.WorkLevel.WORK:
+	default:
+	if (debug > 1) {
+	  System.err.println "TextInventory:urnInInventory: for urn ${urn}, type is " + typeForVersion(urn)
+	}
+	break
+	} 
+
+	case CtsUrn.WorkLevel.WORK:
                 String tg = "urn:cts:${urn.getCtsNamespace()}:${urn.getTextGroup()}"
             def tgStruct = this.textgroups.find {it[0] == tg}
             String grp = "urn:cts:${urn.getCtsNamespace()}:${urn.getTextGroup()}.${urn.getWork()}"
@@ -916,7 +929,7 @@ class TextInventory {
     */
     String translationLabel (CtsUrn u) {
         def xlat = translations.find {
-            it[0] == u.toString()
+            it[0] == u.getUrnWithoutPassage()
         }
         if (xlat) {
             return xlat[1]
@@ -947,12 +960,23 @@ class TextInventory {
     * or null if no edition is found for the requested URN.
     */
     String editionLabel (CtsUrn u) {
-        def ed = editions.find {
-            it[0] == u.toString() 
-        }
-        if (ed) {
-            return ed[1]
-        } else { return null }
+      String edLabel = null
+      String urnBase = u.getUrnWithoutPassage()
+
+      editions.each { e ->
+
+	String firstCol = e[0]
+
+	if (firstCol == urnBase) {
+	  edLabel = e[1]
+	  if (debug > 1) {
+	    println "Equal! ${firstCol == urnBase} #${urnBase}# with #${firstCol}#"
+	    println "edLabel now ${edLabel}"
+	  }
+
+	}
+      }
+      return edLabel
     }
 
     /** Creates reabable name for an edition identified by URN.
@@ -961,7 +985,7 @@ class TextInventory {
     * or null if no edition is found for the requested URN.
     * @throws Exception if s is not a valid CtsUrn String
     */
-    def editionLabel(String s) {
+  String editionLabel(String s) {
         def u
         try {
             u = new CtsUrn(s)
@@ -980,11 +1004,16 @@ class TextInventory {
     String versionLabel(CtsUrn u) {
         def edLabel = editionLabel(u)
         def xlatLabel = translationLabel(u)
+
+	if (debug > 1) {
+	  println "versionLabel for ${u} gives edLabel ${edLabel}"
+	}
         if (edLabel) {
             return edLabel
         } else if (xlatLabel) {
             return xlatLabel
         } else {
+	  System.err.println "No label for ${u}"
             return null
         }
     }
