@@ -8,6 +8,41 @@ public class ContentsTest extends ConcordionTestCase {
 
 
 
+    public boolean hasSubref(String urnStr)
+    throws Exception {
+	try {
+	    CtsUrn urn = new CtsUrn(urnStr);
+	    return urn.hasSubref();
+	} catch (Exception e) {
+	    throw e;
+	}
+    }
+
+
+        public boolean hasSubref1(String urnStr)
+    throws Exception {
+	try {
+	    CtsUrn urn = new CtsUrn(urnStr);
+	    return urn.hasSubref1();
+	} catch (Exception e) {
+	    throw e;
+	}
+    }
+
+
+        public boolean hasSubref2(String urnStr)
+    throws Exception {
+	try {
+	    CtsUrn urn = new CtsUrn(urnStr);
+	    return urn.hasSubref2();
+	} catch (Exception e) {
+	    throw e;
+	}
+    }
+
+
+
+    
     public boolean isRange(String urnStr)
     throws Exception {
 	try {
