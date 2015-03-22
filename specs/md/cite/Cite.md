@@ -14,3 +14,12 @@ When the specification and implementation are complete and synchronized, we will
 - CITE Collection inventory
 - CITE client
 
+
+
+
+## Other utilities ##
+
+
+- <a concordion:run="concordion" href="analyticalDifference/AnalyticalDifference.html">Analytical difference engine</a>
+
+
