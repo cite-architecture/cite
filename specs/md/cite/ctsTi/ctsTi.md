@@ -11,13 +11,18 @@ The TextInventory maintains minimal information about a corpus of texts needed t
 
 
 
+
 From <a href="../../../resources/test/data/testinventory.xml" concordion:set="#ti = setHref(#HREF)">this TextInventory file</a> we can <strong concordion:assertTrue="shouldMakeTi(#ti)">construct a TextInventory</strong>.   
 
 @closeex@
 
 
 
-The TextInventory records the URNs for every level of a text's CTS work hierarchy, and can construct human-readable labels for URNs at any level.
+## Information about the work hierarchy ##
+
+
+
+The TextInventory records the URNs for every level of a text's CTS work hierarchy, and includes a human-readable label for the URN at each level.
 
 @openex@
 
@@ -36,12 +41,28 @@ We can verify that URNs at different levels of the work hierarchy are documented
 </table>
 
 
-We can retrieve human-readable labels for each level of the citation hierarchy:
+We can retrieve human-readable labels for each level of the work hierarchy:
 
-- group name <strong concordion:set="#groupLevel">urn:cts:greekLit:tlg0012:</strong>  has group name inventory.getGroupName(urn) <strong concordion:assertEquals="groupLabel(#ti, #groupLevel)">Homer</strong>.
+- group name <strong concordion:set="#groupLevel">urn:cts:greekLit:tlg0012:</strong>  has group name  <strong concordion:assertEquals="groupLabel(#ti, #groupLevel)">Homer</strong>.
 - the notional work-level URN <strong concordion:set="#workLevel">urn:cts:greekLit:tlg0012.tlg001:</strong> has the label <em concordion:assertEquals="workLabel(#ti, #workLevel)">Iliad</em>.
 - the version-level URN <strong concordion:set="#versionLevel">urn:cts:greekLit:tlg0012.tlg001.msA:</strong> has the label <strong concordion:assertEquals="versionLabel(#ti, #versionLevel)">A</strong>.
 
 @closeex@
+
+
+For the notional work level of the hierarchy, the TextInventory records the primary language of the text using three-digit ISO language codes.  
+
+
+
+@openex@
+
+The *Iliad* (<strong concordion:set="#workLevel">urn:cts:greekLit:tlg0012.tlg001:</strong>) has a primary language code <strong concordion:assertEquals="langCode(#ti,#workLevel)">grc</strong>
+
+@closeex@
+
+
+
+## Information about the citation hierarchy ##
+
 
 The TextInventory documents the citation scheme for every level of the text's citation hierarchy.  

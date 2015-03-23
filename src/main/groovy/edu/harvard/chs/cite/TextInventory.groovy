@@ -19,7 +19,7 @@ class TextInventory {
 
 
     /** Debugging level. */
-    Integer debug = 0
+    public Integer debug = 0
 
     /** List of data values that violate the TextInventory definition. */
     def errorList = []
@@ -568,6 +568,7 @@ class TextInventory {
     String languageForVersion(CtsUrn urn) {
         if (debug > 0)  {
             System.err.println "${urn} at work level " + urn.getWorkLevel()
+	    
         }
 
         switch (urn.getWorkLevel()) {
@@ -618,7 +619,7 @@ class TextInventory {
     throws Exception {
         try {
             CtsUrn urn = new CtsUrn(urnStr)
-            String workStr = "urn:cts:${urn.getCtsNamespace()}:${urn.getTextGroup()}.${urn.getWork()}"
+            String workStr = "urn:cts:${urn.getCtsNamespace()}:${urn.getTextGroup()}.${urn.getWork()}:"
             return worksLanguages[workStr]
 
         } catch (Exception e) {
