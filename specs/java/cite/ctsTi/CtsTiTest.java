@@ -15,7 +15,7 @@ public class CtsTiTest extends ConcordionTestCase {
      * in the documentation.*/
     String docPath = "/build/concordion-results/cite/ctsTi/";
 
-	    /** Hands back a String parameter so we can save links using concordion's
+    /** Hands back a String parameter so we can save links using concordion's
      * #Href variable for use in later computations. */
     public String setHref(String path) {
 	return (path);
@@ -23,6 +23,8 @@ public class CtsTiTest extends ConcordionTestCase {
 
 
 
+    /** Determines wheteher a URN is valid.
+     */
     public boolean isValidURN(String urnStr) {
 	try {
 	    CtsUrn urn = new CtsUrn(urnStr);
@@ -45,7 +47,7 @@ public class CtsTiTest extends ConcordionTestCase {
 	}
     }
 
-	/** Test if a URN is in a TextInventory. */
+    /** Test if a URN is in a TextInventory. */
     public boolean urnInInventory(String ti, String urnStr) {
 	try {
 	    String buildPath = new java.io.File( "." ).getCanonicalPath() + docPath; 
@@ -60,7 +62,36 @@ public class CtsTiTest extends ConcordionTestCase {
 	}
     }
 
+    
+    public String versionLabel(String ti, String urnStr)
+    throws Exception {
+	try {
+	    String buildPath = new java.io.File( "." ).getCanonicalPath() + docPath; 
+	    File inv = new File(buildPath + ti);
+	    TextInventory nti = new TextInventory ( inv );
+	    return nti.versionLabel(urnStr);
+	    
+	} catch (Exception e) {
+	    System.err.println (e.toString());
+	    throw (e);
+	}
+    }
 
+
+
+    public String workLabel(String ti, String urnStr)
+    throws Exception {
+	try {
+	    String buildPath = new java.io.File( "." ).getCanonicalPath() + docPath; 
+	    File inv = new File(buildPath + ti);
+	    TextInventory nti = new TextInventory ( inv );
+	    return nti.workTitle(urnStr);
+	    
+	} catch (Exception e) {
+	    System.err.println (e.toString());
+	    throw (e);
+	}
+    }
     
     
 }

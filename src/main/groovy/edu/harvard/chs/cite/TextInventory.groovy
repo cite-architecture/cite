@@ -893,7 +893,7 @@ class TextInventory {
     * @returns A String with a human-readlabe name for the work,
     * or null if no work is found for the requested URN.
     */
-    def workTitle (CtsUrn u) {
+    String workTitle (CtsUrn u) {
         def wk = this.works.find {
             (it[0] == u.toString())
         }
@@ -911,7 +911,7 @@ class TextInventory {
     * or null if no work is found for the requested URN.
     * @throws Exception if s is not a valid CtsUrn String
     */
-    def workTitle(String s) {
+  String workTitle(String s) {
         def u
         try {
             u = new CtsUrn(s)
@@ -1025,7 +1025,7 @@ class TextInventory {
     * (either translation or edition) or null if no version is found for the requested URN.
     * @throws Exception if s is not a valid CtsUrn String
     */
-    def versionLabel(String s) {
+    String versionLabel(String s) {
         def u
         try {
             u = new CtsUrn(s)
