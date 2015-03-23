@@ -121,7 +121,6 @@ public class CtsTiTest extends ConcordionTestCase {
 	    String buildPath = new java.io.File( "." ).getCanonicalPath() + docPath; 
 	    File inv = new File(buildPath + ti);
 	    TextInventory nti = new TextInventory ( inv );
-	    nti.debug = 10;
 	    return nti.languageForWork(urnStr);
 	    
 	} catch (Exception e) {
@@ -129,7 +128,24 @@ public class CtsTiTest extends ConcordionTestCase {
 	    throw (e);
 	}
     }
-    
+
+
+      public String versionLang(String ti, String urnStr)
+    throws Exception {
+	  System.err.println ("CtsTiTest: inv " + ti + " and urn " + urnStr);
+	try {
+	    String buildPath = new java.io.File( "." ).getCanonicalPath() + docPath; 
+	    File inv = new File(buildPath + ti);
+	    TextInventory nti = new TextInventory ( inv );
+	    System.err.println ("CtsTiTest: created TI object, setting debug level");
+	    nti.debug = 5;
+	    return nti.languageForVersion(urnStr);
+	    
+	} catch (Exception e) {
+	    System.err.println (e.toString());
+	    throw (e);
+	}
+    }
     
     
 }

@@ -567,8 +567,7 @@ class TextInventory {
     */
     String languageForVersion(CtsUrn urn) {
         if (debug > 0)  {
-            System.err.println "${urn} at work level " + urn.getWorkLevel()
-	    
+            System.err.println "TextInventory:languageForVersion: ${urn} at work level " + urn.getWorkLevel()
         }
 
         switch (urn.getWorkLevel()) {
@@ -578,30 +577,29 @@ class TextInventory {
 
             case CtsUrn.WorkLevel.VERSION : 
 
-                if (debug > 0)  {
-                System.err.println "${urn} at version level  is type" + typeForVersion(urn)
+	    if (debug > 0)  {
+	      System.err.println "${urn} at version level  is type" + typeForVersion(urn)
             }
 
-               switch (typeForVersion(urn)) {
+	    switch (typeForVersion(urn)) {
                 
-                case VersionType.TRANSLATION:
-                    return translationLanguages[urn.toString()]
-                break
+	    case VersionType.TRANSLATION:
+	    return translationLanguages[urn.toString()]
+	    break
 
-                case VersionType.EDITION:
-                    return languageForWork(urn)
-                break
+	    case VersionType.EDITION:
+	    return languageForWork(urn)
+	    break
 
-                default:
-                    // 
-                    break
+	    default:
+	    // 
+	    break
             }
             break
 
             default :
-                //
-                break
-
+	    //
+	    break
         }
     }
     
@@ -633,7 +631,7 @@ class TextInventory {
     * work was found for the requested urn.
     */
     String languageForWork(CtsUrn urn) {
-        return worksLanguages["urn:cts:${urn.getCtsNamespace()}:${urn.getTextGroup()}.${urn.getWork()}"]
+        return worksLanguages["urn:cts:${urn.getCtsNamespace()}:${urn.getTextGroup()}.${urn.getWork()}:"]
     }
 
     /** Finds value of online element's docname attribute.

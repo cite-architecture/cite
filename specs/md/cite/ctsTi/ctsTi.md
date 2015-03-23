@@ -58,6 +58,9 @@ For the notional work level of the hierarchy, the TextInventory records the prim
 
 The *Iliad* (<strong concordion:set="#workLevel">urn:cts:greekLit:tlg0012.tlg001:</strong>) has a primary language code <strong concordion:assertEquals="langCode(#ti,#workLevel)">grc</strong>
 
+
+The English translation with URN <strong concordion:set="#xlate">urn:cts:greekLit:tlg0012.tlg001.chs01:</strong> has the language code <strong concordion:assertEquals="versionLang(#ti,#xlate)">eng</strong>, while the Venetus A manuscript (<strong concordion:set="#msA">urn:cts:greekLit:tlg0012.tlg001.msA:</strong>) has the code <strong concordion:assertEquals="versionLang(#ti,#msA)">grc</strong>.
+
 @closeex@
 
 
