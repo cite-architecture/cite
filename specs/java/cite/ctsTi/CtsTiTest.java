@@ -92,6 +92,23 @@ public class CtsTiTest extends ConcordionTestCase {
 	    throw (e);
 	}
     }
+
+
+
+
+    public String groupLabel(String ti, String urnStr)
+    throws Exception {
+	try {
+	    String buildPath = new java.io.File( "." ).getCanonicalPath() + docPath; 
+	    File inv = new File(buildPath + ti);
+	    TextInventory nti = new TextInventory ( inv );
+	    return nti.getGroupName(urnStr);
+	    
+	} catch (Exception e) {
+	    System.err.println (e.toString());
+	    throw (e);
+	}
+    }
     
     
 }

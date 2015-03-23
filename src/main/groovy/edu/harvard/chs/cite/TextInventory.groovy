@@ -839,7 +839,7 @@ class TextInventory {
     * or null if no text group is found for the requested URN.
     * @throws Exception if urnStr is not a valid CTS URN string.
     */
-    def getGroupName(String urnStr) 
+    String getGroupName(String urnStr) 
     throws Exception {
         CtsUrn urn
         try {
@@ -857,7 +857,8 @@ class TextInventory {
     * or null if no text group is found for the requested URN.
     */
     String getGroupName (CtsUrn u) {
-        def tgStr = "urn:cts:${u.getCtsNamespace()}:${u.getTextGroup(false)}"
+        def tgStr = "urn:cts:${u.getCtsNamespace()}:${u.getTextGroup(false)}:"
+	//System.err.println "Hunt for " + tgStr + " in "	 + this.textgroups
         def gp = this.textgroups.find {
             it[0] == tgStr
         }

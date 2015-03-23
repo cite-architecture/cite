@@ -38,6 +38,7 @@ We can verify that URNs at different levels of the work hierarchy are documented
 
 We can retrieve human-readable labels for each level of the citation hierarchy:
 
+- group name <strong concordion:set="#groupLevel">urn:cts:greekLit:tlg0012:</strong>  has group name inventory.getGroupName(urn) <strong concordion:assertEquals="groupLabel(#ti, #groupLevel)">Homer</strong>.
 - the notional work-level URN <strong concordion:set="#workLevel">urn:cts:greekLit:tlg0012.tlg001:</strong> has the label <em concordion:assertEquals="workLabel(#ti, #workLevel)">Iliad</em>.
 - the version-level URN <strong concordion:set="#versionLevel">urn:cts:greekLit:tlg0012.tlg001.msA:</strong> has the label <strong concordion:assertEquals="versionLabel(#ti, #versionLevel)">A</strong>.
 
