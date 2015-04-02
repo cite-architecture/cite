@@ -12,10 +12,15 @@ You can construct an object representation of a CITE URN from a string conformin
 ### Examples ###
 
 
+- The string <strong concordion:set="#coll">urn:cite:hmt:msA</strong> is a valid URN identifying a *collection*, so we can  <strong concordion:assertTrue="isValid(#coll)">construct a URN object</strong> from it.
 - The string <strong concordion:set="#urn">urn:cite:hmt:msA.12r</strong> 
-conforms to the specification, so we can construct <strong concordion:assertTrue="isValid(#urn)">a valid URN object</strong>.
+is a valid URN identifying a *notional object*, so we can construct <strong concordion:assertTrue="isValid(#urn)">a URN object</strong> from it.
+- The string <strong concordion:set="#vers">urn:cite:hmt:msA.12r.1</strong> 
+is a valid URN identifying a *version* of an object, so we can construct <strong concordion:assertTrue="isValid(#vers)">a URN object</strong> from it.
 - The string <strong concordion:set="#bogus">NOT-A-URN</strong> does not conform to the specification.  Passing it to a constructor <strong concordion:assertFalse="isValid(#bogus)">generates an Exception</strong>.
-- 
+
+
+
 @closeex@
 
 
@@ -26,6 +31,37 @@ CITE URN objects can be constructed from strings in any Unicode form, but all ou
 @openex@
 
 ### Examples ###
+
+
+
+<table>
+<tr>
+<th>Input string</th>
+<th>Unicode form of input</th>
+<th>Length of input in bytes</th>
+<th>Output string identical to input string</th>
+</tr>
+
+
+<tr>
+<td concordion:set="#srcStr">urn:cts:greekLit:tlg0012.tlg001:1.1@μῆνιν</td>
+<td concordion:assertEquals="uForm(#srcStr)">NFC (composed)</td>
+<td concordion:assertEquals="getBytes(#srcStr)">47</td>
+<td concordion:assertTrue="matchesOutput(#srcStr)">Yes</td>
+</tr>
+
+<tr>
+<td concordion:set="#srcStr">urn:cts:greekLit:tlg0012.tlg001:1.1@μῆνιν</td>
+<td concordion:assertEquals="uForm(#srcStr)">NFD (decomposed)</td>
+<td concordion:assertEquals="getBytes(#srcStr)">48</td>
+<td concordion:assertFalse="matchesOutput(#srcStr)">No</td>
+
+</tr>
+
+
+</table>
+
+
 
 
 @closeex@
