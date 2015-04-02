@@ -44,17 +44,17 @@ CITE URN objects can be constructed from strings in any Unicode form, but all ou
 
 
 <tr>
-<td concordion:set="#srcStr">urn:cts:greekLit:tlg0012.tlg001:1.1@μῆνιν</td>
-<td concordion:assertEquals="uForm(#srcStr)">NFC (composed)</td>
-<td concordion:assertEquals="getBytes(#srcStr)">47</td>
-<td concordion:assertTrue="matchesOutput(#srcStr)">Yes</td>
+<td concordion:set="#srcStr1">urn:cite:examples:tokens.1@μῆνιν</td>
+<td concordion:assertEquals="uForm(#srcStr1)">NFC (composed)</td>
+<td concordion:assertEquals="getBytes(#srcStr1)">38</td>
+<td concordion:assertTrue="matchesOutput(#srcStr1)">Yes</td>
 </tr>
 
 <tr>
-<td concordion:set="#srcStr">urn:cts:greekLit:tlg0012.tlg001:1.1@μῆνιν</td>
-<td concordion:assertEquals="uForm(#srcStr)">NFD (decomposed)</td>
-<td concordion:assertEquals="getBytes(#srcStr)">48</td>
-<td concordion:assertFalse="matchesOutput(#srcStr)">No</td>
+<td concordion:set="#srcStr2">urn:cite:examples:tokens.1@μῆνιν</td>
+<td concordion:assertEquals="uForm(#srcStr2)">NFD (decomposed)</td>
+<td concordion:assertEquals="getBytes(#srcStr2)">39</td>
+<td concordion:assertFalse="matchesOutput(#srcStr2)">No</td>
 
 </tr>
 

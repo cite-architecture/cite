@@ -53,13 +53,13 @@ public class CiteUrnTest extends ConcordionTestCase {
 
 
     public boolean matchesOutput(String urnStr) {
-	Integer debug = 0;
+	Integer debug = 1;
 	if (debug > 0) {
 	    System.err.println ("Look for  matching urn from input " + urnStr);
 	}
 
 	try {
-	    CiteUrn urn = new CiteUrn(urnStr);
+	    CiteUrn urn  = new CiteUrn(urnStr);
 	    byte[] srcBytes = urn.toString().getBytes("UTF-8");
 	    if (debug > 0) {
 		System.err.println ("Src string in bytes: " + srcBytes.length);
