@@ -11,7 +11,7 @@ apply from: "conf.gradle"
 group = "edu.harvard.chs"
 
 
-version = '0.92.2'
+version = '0.94.0'
 
 
 apply from: "versions.gradle"
@@ -185,7 +185,6 @@ mapVersion.doLast {
 }
 
 task conc(type: Copy, dependsOn: [test, mapVersion]) {
-//task conc(type: Copy) {
   from "${buildDir}/concordion-results"
   into "${buildDir}/concordion-formatted"
   filter(ReplaceTokens, tokens: tokenMap)

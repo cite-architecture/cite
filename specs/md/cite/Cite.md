@@ -9,8 +9,17 @@ When the specification and implementation are complete and synchronized, we will
 
 
 - <a concordion:run="concordion" href="ctsUrn/CtsUrn.html">CTS URNs</a>
-- CITE Object URNs
+- <a concordion:run="concordion" href="citeUrn/CiteUrn.html">CITE Object URNs</a>
 - <a concordion:run="concordion" href="ctsTi/CtsTi.html">CTS Text inventory</a>
 - CITE Collection inventory
 - CITE client
+
+
+
+
+## Other utilities ##
+
+
+- <a concordion:run="concordion" href="analyticalDifference/AnalyticalDifference.html">Analytical difference engine</a>
+
 

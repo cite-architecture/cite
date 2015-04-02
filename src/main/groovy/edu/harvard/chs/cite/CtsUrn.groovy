@@ -134,9 +134,6 @@ class CtsUrn {
 
 
 
-
-
-
   
   /** Gets first string on a point URN.
    * @throws Exception if subreference string does not exist or is empty.
@@ -238,14 +235,20 @@ class CtsUrn {
     switch (components.size()) {
     case 5:
     this.passageComponent = components[4]
-                 
     case 4:
+    if (urnString[-1..-1] == ":") {
+      if (debug > 1) {System.err.println "\n\nTRAILING COLON\n\n"}
+    } else {
+      if (components.size() ==  4) {
+	throw new Exception("Bad URN syntax: too few components (${components.size()} from ${components}) in ${urnString}")
+      }
+    }
     if (components[3]) {
       this.workComponent = components[3]
       this.ctsNamespace = components[2]
 
     } else {
-      throw new Exception("Bad URN syntax: no textgroup in ${urnString}")
+      throw new Exception("Bad URN syntax: too few components in ${urnString}")
     }
     break
     
@@ -253,7 +256,7 @@ class CtsUrn {
     // in addition to required 'urn' prefix and namespace
     // identifier:
     default :
-    throw new Exception("Method initializeURN: bad syntax: ${urnString}")
+    throw new Exception("Method initializeURN: bad syntax in ${urnString}, too few components (${components.size()} from ${components})")
     break
     }
 

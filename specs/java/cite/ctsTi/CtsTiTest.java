@@ -15,7 +15,7 @@ public class CtsTiTest extends ConcordionTestCase {
      * in the documentation.*/
     String docPath = "/build/concordion-results/cite/ctsTi/";
 
-	    /** Hands back a String parameter so we can save links using concordion's
+    /** Hands back a String parameter so we can save links using concordion's
      * #Href variable for use in later computations. */
     public String setHref(String path) {
 	return (path);
@@ -23,6 +23,8 @@ public class CtsTiTest extends ConcordionTestCase {
 
 
 
+    /** Determines wheteher a URN is valid.
+     */
     public boolean isValidURN(String urnStr) {
 	try {
 	    CtsUrn urn = new CtsUrn(urnStr);
@@ -39,23 +41,20 @@ public class CtsTiTest extends ConcordionTestCase {
 	    File inv = new File(buildPath + ti);
 	    TextInventory nti = new TextInventory ( inv );
 	    return true;
-
-	
 	} catch (Exception e) {
 	    System.err.println ("CtsTiTest: unable to make Text Inventory: " + e.toString());
 	    return false;
 	}
     }
 
-	/** Test if a URN is in a TextInventory. */
+    /** Test if a URN is in a TextInventory. */
     public boolean urnInInventory(String ti, String urnStr) {
 	try {
 	    String buildPath = new java.io.File( "." ).getCanonicalPath() + docPath; 
 	    File inv = new File(buildPath + ti);
 	    TextInventory nti = new TextInventory ( inv );
-		CtsUrn urn = new CtsUrn(urnStr);
-		return nti.urnInInventory(urn);
-
+	    CtsUrn urn = new CtsUrn(urnStr);
+	    return nti.urnInInventory(urn);
 	
 	} catch (Exception e) {
 	    System.err.println ("CtsTiTest: unable to test if URN is in Inventory: " + e.toString());
@@ -63,7 +62,90 @@ public class CtsTiTest extends ConcordionTestCase {
 	}
     }
 
+    
+    public String versionLabel(String ti, String urnStr)
+    throws Exception {
+	try {
+	    String buildPath = new java.io.File( "." ).getCanonicalPath() + docPath; 
+	    File inv = new File(buildPath + ti);
+	    TextInventory nti = new TextInventory ( inv );
+	    return nti.versionLabel(urnStr);
+	    
+	} catch (Exception e) {
+	    System.err.println (e.toString());
+	    throw (e);
+	}
+    }
 
+
+
+    public String workLabel(String ti, String urnStr)
+    throws Exception {
+	try {
+	    String buildPath = new java.io.File( "." ).getCanonicalPath() + docPath; 
+	    File inv = new File(buildPath + ti);
+	    TextInventory nti = new TextInventory ( inv );
+	    return nti.workTitle(urnStr);
+	    
+	} catch (Exception e) {
+	    System.err.println (e.toString());
+	    throw (e);
+	}
+    }
+
+
+
+
+    public String groupLabel(String ti, String urnStr)
+    throws Exception {
+	try {
+	    String buildPath = new java.io.File( "." ).getCanonicalPath() + docPath; 
+	    File inv = new File(buildPath + ti);
+	    TextInventory nti = new TextInventory ( inv );
+	    return nti.getGroupName(urnStr);
+	    
+	} catch (Exception e) {
+	    System.err.println (e.toString());
+	    throw (e);
+	}
+    }
+
+
+
+
+
+    
+    public String langCode(String ti, String urnStr)
+    throws Exception {
+	try {
+	    String buildPath = new java.io.File( "." ).getCanonicalPath() + docPath; 
+	    File inv = new File(buildPath + ti);
+	    TextInventory nti = new TextInventory ( inv );
+	    return nti.languageForWork(urnStr);
+	    
+	} catch (Exception e) {
+	    System.err.println (e.toString());
+	    throw (e);
+	}
+    }
+
+
+      public String versionLang(String ti, String urnStr)
+    throws Exception {
+	  System.err.println ("CtsTiTest: inv " + ti + " and urn " + urnStr);
+	try {
+	    String buildPath = new java.io.File( "." ).getCanonicalPath() + docPath; 
+	    File inv = new File(buildPath + ti);
+	    TextInventory nti = new TextInventory ( inv );
+	    System.err.println ("CtsTiTest: created TI object, setting debug level");
+	    nti.debug = 5;
+	    return nti.languageForVersion(urnStr);
+	    
+	} catch (Exception e) {
+	    System.err.println (e.toString());
+	    throw (e);
+	}
+    }
     
     
 }

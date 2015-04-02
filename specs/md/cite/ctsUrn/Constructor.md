@@ -82,3 +82,17 @@ Compare the two CTS URNs in this table:  they look identical when printed, but o
 
 
 @closeex@
+
+Must adhere to the spec.
+
+These should fail.
+
+<strong concordion:set="#notrail">urn:cts:greekLit:tlg0012.tlg001.msA</strong>
+
+<strong concordion:assertFalse="isValid(#notrail)">generates an Exception</strong>.
+
+
+But 
+<strong concordion:set="#trail">urn:cts:greekLit:tlg0012.tlg001.msA:</strong>
+
+<strong concordion:assertTrue="isValid(#trail)">this is ok</strong>.
