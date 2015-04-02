@@ -132,12 +132,15 @@ sourceSets {
     }
 }
 
+
 task cpResources(type: Copy) {
+  description "Copies specification resources into build area"
   from "specs/resources"
   into "${buildDir}/specs"
 }
 
 task setUpResources(dependsOn: [cpResources]) {
+  description "Converts specification markdown to HTML for concordion"
 }
 setUpResources.doLast {
   println "READING FILE TREE FROM " + mdSrc
@@ -147,7 +150,7 @@ setUpResources.doLast {
   tree.visit { f ->
     if (f.relativePath.isFile()) {
       File inFile = new File("${mdSrc}/${f.relativePath}")
-      println "Need to work on " + inFile
+      println "Working on " + inFile
       def segs = f.relativePath.getSegments()
       String treePath = "${buildDir}/specs"
       Integer limit =  segs.size() - 1
