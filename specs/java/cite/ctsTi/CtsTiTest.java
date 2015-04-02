@@ -138,7 +138,7 @@ public class CtsTiTest extends ConcordionTestCase {
 	    File inv = new File(buildPath + ti);
 	    TextInventory nti = new TextInventory ( inv );
 	    System.err.println ("CtsTiTest: created TI object, setting debug level");
-	    nti.debug = 5;
+	    nti.debug = 0;
 	    return nti.languageForVersion(urnStr);
 	    
 	} catch (Exception e) {

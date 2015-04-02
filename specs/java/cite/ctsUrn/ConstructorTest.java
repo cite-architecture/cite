@@ -10,7 +10,7 @@ public class ConstructorTest extends ConcordionTestCase {
 
     public boolean isValid(String urnStr) {
 	try {
-	    Integer debug = 3;
+	    Integer debug = 0;
 	    CtsUrn urn = new CtsUrn(urnStr,debug);
 
 	    return true;
@@ -21,18 +21,23 @@ public class ConstructorTest extends ConcordionTestCase {
 
 
     public boolean matchesOutput(String urnStr) {
-	System.err.println ("Look for  matching urn from input " + urnStr);
-
+	Integer debug = 0;
+	if (debug > 0) {
+	    System.err.println ("Look for  matching urn from input " + urnStr);
+	}
 
 	try {
 	    CtsUrn urn = new CtsUrn(urnStr);
-
 	    byte[] srcBytes = urn.toString().getBytes("UTF-8");
-	    System.err.println ("Src string in bytes: " + srcBytes.length);
-	    System.err.println ("NFC? " + Normalizer.isNormalized(urnStr, Normalizer.Form.NFC));
+	    if (debug > 0) {
+		System.err.println ("Src string in bytes: " + srcBytes.length);
+		System.err.println ("NFC? " + Normalizer.isNormalized(urnStr, Normalizer.Form.NFC));
+	    }
 	    byte[] urnBytes = urn.toString().getBytes("UTF-8");
-	    System.err.println ("Urn string in bytes: " + urnBytes.length);
-	    System.err.println ("NFC? " + Normalizer.isNormalized(urn.toString(), Normalizer.Form.NFC));
+	    if (debug > 0) {
+		System.err.println ("Urn string in bytes: " + urnBytes.length);
+		System.err.println ("NFC? " + Normalizer.isNormalized(urn.toString(), Normalizer.Form.NFC));
+	    }
 	    return urnStr.equals(urn.toString());
 	    
 	} catch (Exception e) {

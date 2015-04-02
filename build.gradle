@@ -139,8 +139,18 @@ task cpResources(type: Copy) {
   into "${buildDir}/specs"
 }
 
+cpResources.doFirst {
+  println "\n\nAbout to run 'cpResources' task"
+}
+cpResources.doLast {
+  println "Copied resources into ${buildDir}/specs\n\n"
+}
+
 task setUpResources(dependsOn: [cpResources]) {
   description "Converts specification markdown to HTML for concordion"
+}
+setUpResources.doFirst {
+  println "About to run 'setUpResources' task"
 }
 setUpResources.doLast {
   println "READING FILE TREE FROM " + mdSrc
@@ -178,7 +188,9 @@ setUpResources.doLast {
 test.dependsOn setUpResources
 test {
     systemProperties 'concordion.output.dir': file("${buildDir}/concordion-results")
-
+}
+test.doFirst {
+  println "About to run 'test' task"
 }
 
 task mapVersion() {
