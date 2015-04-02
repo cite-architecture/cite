@@ -4,4 +4,4 @@ The technology-independent representation of a CITE URN as a string of character
 
 
 - <a href="Constructor.html" concordion:run="concordion">Constructing a CITE Object URN</a>
-- Extracting parts of a CITE Object URN
+- <a href="Components.html" concordion:run="concordion">Working with parts of a CITE Object URN</a>

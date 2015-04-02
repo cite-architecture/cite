@@ -35,6 +35,10 @@ conforms to the CTS spec, so we can construct <strong concordion:assertTrue="isV
 Passing it to a constructor <strong concordion:assertFalse="isValid(#badidx)">generates an Exception</strong>.
 
 
+
+**Wrong number of components**:  the colon-delimited syntax of a CTS URN always identifies four components after the required string `cts:`, even if the final passage component is empty.  The string <strong concordion:set="#notrail">urn:cts:greekLit:tlg0012.tlg001.msA</strong> only includes three CTS components, so trying to make a CTS URN from it <strong concordion:assertFalse="isValid(#notrail)">generates an Exception</strong>. The string 
+<strong concordion:set="#trail">urn:cts:greekLit:tlg0012.tlg001.msA:</strong> has four components, even though the final one is empty;  it is possible to   <strong concordion:assertTrue="isValid(#trail)">construct a CTS URN object</strong> from it.
+
 @closeex@
 
 
@@ -82,17 +86,3 @@ Compare the two CTS URNs in this table:  they look identical when printed, but o
 
 
 @closeex@
-
-Must adhere to the spec.
-
-These should fail.
-
-<strong concordion:set="#notrail">urn:cts:greekLit:tlg0012.tlg001.msA</strong>
-
-<strong concordion:assertFalse="isValid(#notrail)">generates an Exception</strong>.
-
-
-But 
-<strong concordion:set="#trail">urn:cts:greekLit:tlg0012.tlg001.msA:</strong>
-
-<strong concordion:assertTrue="isValid(#trail)">this is ok</strong>.

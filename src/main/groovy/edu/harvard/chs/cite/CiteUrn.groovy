@@ -45,12 +45,13 @@ class CiteUrn {
   String extendedRef
 
 
-  /** CiteUrns are constructed from a String conforming to the
-   * syntax and semantics of the draft CTS URN proposal.
+  /** Constructor using a String conforming to the
+   * syntax and semantics of the CITE URN specification at
+   * http://cite-architecture.github.io/citeurn_spec/
+   *
+   * @param A String representation of a CITE Object URN.
    */
   CiteUrn (String urnStr) {
-
-
     def components = urnStr.split(/:/)
     boolean syntaxOk = true
     if (components.size() != 4) {
@@ -105,8 +106,7 @@ class CiteUrn {
 
       
   /**
-   * Returns the CITE URN object as a String in the notation defined by
-   * the proposed CITE URN standard.
+   * Gets the CITE URN object as a String.
    * @returns The URN as a String.
    */
   String toString() {
@@ -114,42 +114,67 @@ class CiteUrn {
   }
 
 
-  String getCollectionLevelUrn() {
-    return "urn:cite:${this.ns}:${this.collection}"
+  /** Gets CITE Namespace component of the URN.
+   * @returns The required namespace component of the URN.
+   */
+  String getNs() {
+    return this.ns
   }
 
-    String getNs() {
-        return this.ns
-    }
-    String getCollection() {
-        return this.collection
-    }
-    String getObjectId() {
-        return this.objectId
-    }
-    String getObjectVersion() {
-        return this.objectVersion
-    }
-    String getExtendedRef() {
-        return this.extendedRef
-    }
 
-    boolean hasVersion() {
-        return (this.objectVersion != null)
-    } 
+  /** Gets object component of the URN.
+   * @returns The required object component of the URN.
+   */
+  String getObjectComponent() {
+    return this.objectComponent
+  }
 
-    boolean hasObjectId() {
-        return (this.objectId != null)
-    } 
+  
+  // Extract parts of object component:
+  
+  String getCollection() {
+    return this.collection
+  }
+
+  String getObjectId() {
+    return this.objectId
+  }
+
+  String getObjectVersion() {
+    return this.objectVersion
+  }
+
+  String getExtendedRef() {
+    return this.extendedRef
+  }
+
+  
+
+  // tests on object component
+
+  
+  boolean hasObjectId() {
+    return (this.objectId != null)
+  } 
+
+  boolean hasVersion() {
+    return (this.objectVersion != null)
+  }
+
+  boolean hasExtendedRef() {
+    return (this.extendedRef != null)
+  } 
+
 
 
     
-    /** Creates a CiteUrn identifying a Collection from
-    * a CiteUrn at any level.
-    * @param u The CiteUrn in question.
-    * @returns A CiteUrn identifying a Collection.
-    */
-    CiteUrn collectionForUrn() {
-        return (new CiteUrn("urn:cite:${this.getNs()}:${this.getCollection()}"))
-    }
+  /** Creates a CiteUrn identifying a Collection from
+   * a CiteUrn at any level.
+   * @param u The CiteUrn in question.
+   * @returns A CiteUrn identifying a Collection.
+   */
+  String reduceToCollection() {
+    return "urn:cite:${this.ns}:${this.collection}"
+  }
+
 }
