@@ -6,9 +6,80 @@ import java.text.Normalizer.Form;
 
 import org.concordion.integration.junit3.ConcordionTestCase;
 
-public class CiteUrnTest extends ConcordionTestCase {
+public class ComponentsTest extends ConcordionTestCase {
 
 
+    public String getNs(String urnStr)
+    throws Exception {
+	CiteUrn urn = new CiteUrn(urnStr);
+	return urn.getNs();
+    }
+
+
+    public String getObjComponent(String urnStr)
+    throws Exception {
+	CiteUrn urn = new CiteUrn(urnStr);
+	return urn.getObjectComponent();
+    }
+
+    public String getCollection(String urnStr)
+    throws Exception {
+	CiteUrn urn = new CiteUrn(urnStr);
+	return urn.getCollection();
+    }
+
+    public String getVersion(String urnStr)
+    throws Exception {
+	CiteUrn urn = new CiteUrn(urnStr);
+	return urn.getObjectVersion();
+    }
+
+    public String reduceToColl(String urnStr)
+    throws Exception {
+	CiteUrn urn = new CiteUrn(urnStr);
+	return urn.reduceToCollection();
+    }
+
+
+    
+
+    public String getExtendedRef(String urnStr)
+    throws Exception {
+	CiteUrn urn = new CiteUrn(urnStr);
+	return urn.getExtendedRef();
+    }
+
+    
+
+    public boolean hasObjId(String urnStr)
+    throws Exception {
+	CiteUrn urn = new CiteUrn(urnStr);
+	return urn.hasObjectId();
+    }
+
+    public boolean hasVersion(String urnStr)
+    throws Exception {
+	CiteUrn urn = new CiteUrn(urnStr);
+	return urn.hasVersion();
+    }
+
+    public boolean hasExtendedRef(String urnStr)
+    throws Exception {
+	CiteUrn urn = new CiteUrn(urnStr);
+	return urn.hasExtendedRef();
+    }
+
+
+    
+    public String getObjId(String urnStr)
+    throws Exception {
+	CiteUrn urn = new CiteUrn(urnStr);
+	return urn.getObjectId();
+    }
+    
+    
+
+    
     public boolean isValid(String urnStr) {
 	try {
 	    CiteUrn urn = new CiteUrn(urnStr);

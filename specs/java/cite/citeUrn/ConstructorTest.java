@@ -6,7 +6,7 @@ import java.text.Normalizer.Form;
 
 import org.concordion.integration.junit3.ConcordionTestCase;
 
-public class CiteUrnTest extends ConcordionTestCase {
+public class ConstructorTest extends ConcordionTestCase {
 
 
     public boolean isValid(String urnStr) {
