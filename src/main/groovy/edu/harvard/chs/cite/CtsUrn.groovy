@@ -935,7 +935,7 @@ class CtsUrn {
     * @returns The trimmed URN, as a String.
     */
     public String trimPassage(int level) {
-   	   return this.getUrnWithoutPassage() + ":" + this.getPassage(level)
+   	   return this.getUrnWithoutPassage() + this.getPassage(level)
     }
 
 
