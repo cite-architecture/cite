@@ -939,6 +939,9 @@ class CtsUrn {
     }
 
 
+  /** Gets information about this version of the library.
+   * @return Version info string.
+   */
   public String getVersionInfo() {
     return this.versionInfo
   }

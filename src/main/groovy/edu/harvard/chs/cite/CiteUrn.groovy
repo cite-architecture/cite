@@ -71,6 +71,15 @@ class CiteUrn {
   String extendedRef_2 = null
 
 
+
+  /** Initializes values for all constituent parts of 
+   * of the URN's object component.  It checks for the presence of ranges,
+   * and for each object (individual object or end points of a range),
+   * it checks for presence of extended references.
+   * @param objStr The identifying String, optionally including
+   * extended reference, for either a single object or a range of
+   * objects.
+   */
   void initializeObjPart(String objStr) 
   throws Exception {
     // first, check for range, then within each
@@ -107,6 +116,16 @@ class CiteUrn {
     }
   }
 
+
+  /** Initializes values for all constituent parts of 
+   * of the URN's version component.  It checks for the presence of ranges,
+   * and for each version (individual version or end points of a range),
+   * it checks for presence of extended references.
+   * @param versionStr The identifying String, optionally including
+   * extended reference, for either a single version reference or a range of
+   * version references; the String should be prefixed with the object
+   * identifying String, separated by a period, e.g., "object.version".
+   */
   void initializeVersionPart(String versionStr) {
     // first, check for range, then within each
     // obj ref, check for extended ref
