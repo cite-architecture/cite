@@ -112,7 +112,7 @@
             <value>boolean</value>
             <value>markdown</value>
             <value>citeimg</value>
-            <value>geojson</value>
+            <!--<value>geojson</value>-->
             <!-- <value>citeurn</value>
             <value>ctsurn</value> -->
         </choice>
