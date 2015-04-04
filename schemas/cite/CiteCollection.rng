@@ -211,8 +211,10 @@
                 </element>
             </optional>
             <optional>
+                <oneOrMore>
                 <externalRef
                     href="src.rng"/>
+                </oneOrMore>
             </optional>
             <oneOrMore>
                 <choice>
