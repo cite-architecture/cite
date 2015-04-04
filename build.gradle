@@ -197,7 +197,6 @@ task mapVersion() {
 }
 mapVersion.doLast {
   tokenMap["version"] = version
-  tokenMap["cc_spec_version"] = cc_spec_version
 }
 
 task conc(type: Copy, dependsOn: [test, mapVersion]) {
