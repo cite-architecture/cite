@@ -11,7 +11,7 @@ apply from: "conf.gradle"
 group = "edu.harvard.chs"
 
 
-version = '0.94.1'
+version = '0.95.0'
 
 
 apply from: "versions.gradle"
@@ -197,6 +197,7 @@ task mapVersion() {
 }
 mapVersion.doLast {
   tokenMap["version"] = version
+  tokenMap["cc_spec_version"] = cc_spec_version
 }
 
 task conc(type: Copy, dependsOn: [test, mapVersion]) {
