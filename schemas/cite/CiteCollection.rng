@@ -112,7 +112,7 @@
             <value>boolean</value>
             <value>markdown</value>
             <value>citeimg</value>
-            <value>geojson</value>
+            <!--<value>geojson</value>-->
             <!-- <value>citeurn</value>
             <value>ctsurn</value> -->
         </choice>
@@ -184,22 +184,18 @@
                 <attribute
                     name="abbr"/>
                 <attribute
-                    name="fullValue"/>
+                    name="uri"/>
                 <empty/>
             </element>
-            <optional>
-            <oneOrMore>
-            <element name="cite:extension">
-            <attribute name="name">
-                <data
-                    type="string">
-                    <param
-                        name="pattern">.+</param>
-                </data>
-            </attribute>
-            </element>
-            </oneOrMore>
-            </optional>
+            
+            <zeroOrMore>
+                <element
+                    name="cite:extendedBy">
+                    <attribute
+                        name="abbr"/>
+                </element>
+            </zeroOrMore>
+            
             <ref
                 name="metadata"/>
             <optional>
@@ -211,9 +207,12 @@
                 </element>
             </optional>
             <optional>
+                <oneOrMore>
                 <externalRef
                     href="src.rng"/>
+                </oneOrMore>
             </optional>
+            <ref name="citeProperty"/>
             <oneOrMore>
                 <choice>
                     <ref
@@ -222,41 +221,7 @@
                     <ref name="citeProperty"/>
                 </choice>
             </oneOrMore>
-            <zeroOrMore>
-                <element
-                    name="cite:extendedBy">
-                    <attribute
-                        name="abbr"/>
-                    <attribute
-                        name="uri"/>
-                    <attribute
-                        name="extendedCitation">
-                        <choice>
-                            <value>true</value>
-                            <value>false</value>
-                        </choice>
-                    </attribute>
-                    <oneOrMore>
-                        <element
-                            name="cite:request">
-                            <attribute
-                                name="name"/>
-                            <zeroOrMore>
-                                <element
-                                    name="cite:parameter">
-                                    <attribute
-                                        name="name"/>
-                                    <attribute
-                                        name="type">
-                                        <ref
-                                            name="citedatachoice"/>
-                                    </attribute>
-                                </element>
-                            </zeroOrMore>
-                        </element>
-                    </oneOrMore>
-                </element>
-            </zeroOrMore>
+            
         </element>
     </start>
 </grammar>

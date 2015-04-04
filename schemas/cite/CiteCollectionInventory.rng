@@ -8,15 +8,51 @@
     <start>
         <element
             name="cite:collectionService">
-            <zeroOrMore>
+            <attribute name="version">
+                <choice>
+                    <value>0.1</value>
+                </choice>
+            </attribute>
+            <optional>
                 <element
-                    name="cite:extensionImplementation">
-                    <attribute
-                        name="abbr"/>
-                    <attribute
-                        name="rdfType"/>
+                    name="cite:extensions">
+                    <oneOrMore>
+                        <element
+                            name="cite:rdfnamespace">
+                            <attribute
+                                name="abbr"/>
+                            <attribute
+                                name="uri"/>
+                        </element>
+                    </oneOrMore>
+                    <oneOrMore>
+                        <element
+                            name="cite:extension">
+                            <attribute
+                                name="abbr"/>
+                            <attribute
+                                name="uri"/>
+                            <attribute
+                                name="rdfType"/>
+                            <attribute
+                                name="extendedCitation">
+                                <choice>
+                                    <value>true</value>
+                                    <value>false</value>
+                                </choice>
+                            </attribute>
+                            <oneOrMore>
+                                <element
+                                    name="cite:request">
+                                    <attribute
+                                        name="name"/>
+                                    <empty/>
+                                </element>
+                            </oneOrMore>
+                        </element>
+                    </oneOrMore>
                 </element>
-            </zeroOrMore>
+            </optional>
             <oneOrMore>
                 <externalRef
                     href="CiteCollection.rng"/>
