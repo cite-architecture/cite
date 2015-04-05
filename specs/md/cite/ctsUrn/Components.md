@@ -29,6 +29,10 @@ The URN <strong concordion:set="#point">urn:cts:greekLit:tlg0012.tlg001.msA:2.75
 
 The URN <strong concordion:set="#point">urn:cts:greekLit:tlg0012.tlg001.msA.lex:2.75</strong> cites at the <strong concordion:assertEquals="getLabelForWorkLevel(#point)">exemplar</strong> level.
 
+The URN <strong concordion:set="#point">urn:cts:greekLit:tlg0012.tlg001.msA:2.75</strong> cites the version <strong concordion:assertEquals="getVersionNoNS(#point)">msA</strong> level.
+
+The URN <strong concordion:set="#point">urn:cts:greekLit:tlg0012.tlg001.msA:</strong> cites, without a passage-component, the version <strong concordion:assertEquals="getVersionNoNS(#point)">msA</strong> level.
+
 @closeex@
 
 @openex@

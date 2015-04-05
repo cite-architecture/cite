@@ -15,6 +15,17 @@ public class ComponentsTest extends ConcordionTestCase {
 	}
     }
 
+	public String getVersionNoNS(String urnStr)
+	throws Exception {
+	try{
+		CtsUrn urn = new CtsUrn(urnStr);
+		return urn.getVersion(false);
+	} catch (Exception e) {
+		throw e;
+	}
+	}
+
+
 	public String getLabelForWorkLevel(String urnStr)
 	throws Exception {
 	try{
