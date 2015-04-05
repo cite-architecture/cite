@@ -16,6 +16,15 @@ public class CtsUrnTest extends ConcordionTestCase {
     }
     
 
+    public boolean convertsToString(String urnStr) {
+	try {
+	    CtsUrn urn = new CtsUrn(urnStr);
+		String newString = urn.toString();
+	    return true;
+	} catch (Exception e) {
+	    return false;
+	}
+    }
 
     /*
     public boolean isRange(String urnStr)

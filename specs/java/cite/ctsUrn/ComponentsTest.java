@@ -15,6 +15,16 @@ public class ComponentsTest extends ConcordionTestCase {
 	}
     }
 
+	public String getLabelForWorkLevel(String urnStr)
+	throws Exception {
+	try{
+		CtsUrn urn = new CtsUrn(urnStr);
+		return urn.labelForWorkLevel();
+	} catch (Exception e) {
+		throw e;
+	}
+	}
+
 
     public String psgComponent(String urnStr)
 	throws Exception {

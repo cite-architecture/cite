@@ -17,6 +17,19 @@ The [CTS URN specification](http://cite-architecture.github.io/ctsurn_spec/) def
     6. any subreferences, and their index (explicit or implicit).  See details in the following section.
 
 
+@openex@
+
+### Example: Different Work-level URNs
+
+A URN can cite a work at the EXEMPLAR, VERSION, WORK, or GROUP level.
+
+The URN <strong concordion:set="#point">urn:cts:greekLit:tlg0012.tlg001:2.75</strong> cites at the <strong concordion:assertEquals="getLabelForWorkLevel(#point)">work</strong> level.
+
+The URN <strong concordion:set="#point">urn:cts:greekLit:tlg0012.tlg001.msA:2.75</strong> cites at the <strong concordion:assertEquals="getLabelForWorkLevel(#point)">version</strong> level.
+
+The URN <strong concordion:set="#point">urn:cts:greekLit:tlg0012.tlg001.msA.lex:2.75</strong> cites at the <strong concordion:assertEquals="getLabelForWorkLevel(#point)">exemplar</strong> level.
+
+@closeex@
 
 @openex@
 
