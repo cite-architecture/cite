@@ -58,7 +58,8 @@ class CollectionInventory {
         }
     }
 
-    /** Constructs a CollectionInventory from a File object.
+
+  /** Constructs a CollectionInventory from a File object.
     * @param f File with XML validating against the XML schema of a CollectionInventory.
     * @throws Exception if invalid data values found.
     */
@@ -92,6 +93,10 @@ throws Exception {
     CollectionInventory() {
     }
 
+
+
+  /*
+  
     // null if no redirect found
     String getRedirect(String urnStr, String requestName) 
     throws Exception {
@@ -147,9 +152,9 @@ throws Exception {
         String keyString = "urn:cite:${urn.getNs()}:${urn.getCollection()}"
         return this.citeCollections[keyString]
     }
+  */
 
-
-    /** "Private" method populates TI model from a string serialization of a  
+    /** "Private" method populates TI model from a string serialization of a
     * CTS CollectionInventory.
     * @param str String giving content of a valid XML inventory.
     */
@@ -173,13 +178,19 @@ throws Exception {
     void initFromParsed (groovy.util.Node root, boolean checkData) 
     throws Exception {
 
+
+
+      /*
         // collect extensionImplementation data
         root[cite.extensionImplementation].each { ext ->
             this.extensionImpls[ext.'@name'] = ext.'@baseUrl'
         }
+      */
 
         // collect for all collections: name, urn, canonicalId
         // if extendedBy present, map its abbr from collect
+
+      /*
         root[cite.citeCollection].each { coll ->
             def exts = [:]
             coll[cite.extendedBy].each { ext ->
@@ -192,6 +203,6 @@ throws Exception {
             dataPairs['extensions'] = exts
             
             this.citeCollections[coll.'@urn'] = dataPairs
-        }
+	    }*/
     }
 }

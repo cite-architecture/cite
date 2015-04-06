@@ -11,7 +11,7 @@ When the specification and implementation are complete and synchronized, we will
 - <a concordion:run="concordion" href="ctsUrn/CtsUrn.html">CTS URNs</a>
 - <a concordion:run="concordion" href="citeUrn/CiteUrn.html">CITE Object URNs</a>
 - <a concordion:run="concordion" href="ctsTi/CtsTi.html">CTS Text inventory</a>
-- CITE Collection inventory
+- <a concordion:run="concordion" href="collectionInventory/CollectionInventory.html">CITE Collection inventory</a>
 - CITE client
 
 
