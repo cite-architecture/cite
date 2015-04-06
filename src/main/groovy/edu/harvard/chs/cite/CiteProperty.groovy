@@ -9,20 +9,33 @@ package edu.harvard.chs.cite
  */
 class CiteProperty {
 
+  /** Allowed string values for propertyType */
+  Set citeTypes = ["string",
+		   "number",
+		   "boolean",
+		   "markdown"
+		   ]
 
-
+  /** Identifying name of property. */
   String propertyName
 
+  /** Type of property.  String value must be 
+   * one of the set citeTypes. */
   String propertyType
 
+  /** A human-readable name for this property.  */
   String label
 
   
   /** Constructor. */
   CiteProperty (String propName, String propType, String propLabel) throws Exception {
-    this.propertyName = propName
-    this.propertyType = propType
-    this.label = propLabel
+    if (propType in citeTypes) {
+      this.propertyName = propName
+      this.propertyType = propType
+      this.label = propLabel
+    } else {
+      throw new Exception("CiteProperty: invalid value for type, ${propType}")
+    }
   }
   
 }
