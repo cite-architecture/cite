@@ -13,7 +13,9 @@ class CiteProperty {
   Set citeTypes = ["string",
 		   "number",
 		   "boolean",
-		   "markdown"
+		   "markdown",
+		   "citeurn",
+		   "ctsurn"
 		   ]
 
   /** Identifying name of property. */

@@ -10,42 +10,57 @@ package edu.harvard.chs.cite
 class CiteCollection {
 
 
-  /** CITE Collection URN for this collection,
-   * as a String.
-  String urn
+  /** CITE Collection URN for this collection */
+   public CiteUrn urn = null
 
   /** Name of the property with object's URN. */
-  CiteProperty canonicalIdProp
+  public CiteProperty canonicalIdProp = null
 
   /** Name of the property with a human-readable label.*/
-  CiteProperty labelProp
+  public CiteProperty labelProp = null
 
   /** Abbreviated form of CITE namespace used in URNs.*/
-  String nsAbbr
+  public String nsAbbr = null
 
   /** URI uniquely identifying the CITE namespace. */
-  String nsFull
+  public String nsFull = null
 
+  /** List of one or more name/type pairs identifying sources
+   * for this collection's  data.  */
+  public ArrayList sources = []
+  
+  
   /** Possibly empty list of extensions applicable to this 
    * Collection.  These are identified by abbreviations that 
    * can resolved with reference to the inventory of the Collection
    * Service where this Collection is instantiated. */
-  ArrayList extendedBy = []
-
-
-  /** List of one or more name/type pairs identifying sources
-   * for this collection's  data.  */
-  ArrayList sources = []
-
+  public ArrayList extendedBy = []
 
   // other properties beyond id and label ....
-  ArrayList properties = []
+  public ArrayList properties = []
 
   
-  /** Constructor. */
+  /** Empty constructor. */
   CiteCollection () throws Exception {
   }
 
-  
+  /** Evaluates configuration of this collection.
+   * @returns True if configuration is valid.
+   */
+  boolean isValid() {
+    // check that nsFull is a URI object...
+    return(urn != null
+	   && (canonicalIdProp != null)
+	   && (labelProp != null)
+	   && (nsAbbr == urn.getNs())
+	   && (nsFull != null)
+	   && (sources.size() > 0)
+	  )
+  }
+
+
+  public String getNsFull() {
+    return this.nsFull
+  }
   
 }
