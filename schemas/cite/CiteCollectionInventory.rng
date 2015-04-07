@@ -16,24 +16,19 @@
             <optional>
                 <element
                     name="cite:extensions">
-                    <oneOrMore>
-                        <element
-                            name="cite:rdfnamespace">
-                            <attribute
-                                name="abbr"/>
-                            <attribute
-                                name="uri"/>
-                        </element>
-                    </oneOrMore>
-                    <oneOrMore>
+                   <oneOrMore>
                         <element
                             name="cite:extension">
                             <attribute
                                 name="abbr"/>
                             <attribute
-                                name="uri"/>
+                                name="extensionUri"/>
+                            
                             <attribute
                                 name="rdfType"/>
+                            <attribute name="rdfUri"/>
+                            
+                           
                             <attribute
                                 name="extendedCitation">
                                 <choice>
