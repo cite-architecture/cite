@@ -1,10 +1,10 @@
 
 
 ext {
-    groovyVersion = '2.0.6'
+    groovyVersion = '2.3.9'
     jingVersion = '20091111'
     junitVersion = '4.8.2'
     xmlunitVersion = '1.3'
 }
 
-/* keep groovy version back deliberately ?*/
+
