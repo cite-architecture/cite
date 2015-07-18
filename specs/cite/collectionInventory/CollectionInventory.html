@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?><html xmlns:concordion="http://www.concordion.org/2007/concordion"><head><style>* {
+  font-family: Arial;
+}
+body {
+  padding: 32px;  
+}
+pre {
+  padding: 6px 28px 6px 28px;
+  background-color: #E8EEF7;
+}
+pre, pre *, code, code *, kbd {
+  font-family: Courier New, Courier;
+  font-size: 10pt;
+}
+h1, h1 * {
+  font-size: 24pt;	
+}
+p, td, th, li, .breadcrumbs {
+  font-size: 10pt;
+}
+p, li {
+  line-height: 140%;
+  max-width: 720px;
+}
+table {
+  border-collapse: collapse;
+  empty-cells: show;
+  margin: 8px 0px 8px 0px;
+}
+th, td {
+  border: 1px solid black;
+  padding: 3px;
+}
+td {
+  background-color: white;
+  vertical-align: top;
+}
+th {
+  background-color: #C3D9FF;
+}
+li {
+  margin-top: 6px;
+  margin-bottom: 6px; 
+}
+
+.example {
+  padding: 6px 16px 6px 16px;
+  border: 1px solid #C3D9FF;
+  margin: 6px 0px 28px 0px;
+  background-color: #F5F9FD;
+}
+.example h3 {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  font-size: 12pt;
+}
+
+p.success {
+  padding: 2px;
+}
+.success, .success * {
+  background-color: #afa !important;
+}
+.success pre {
+  background-color: #bbffbb;
+}
+.failure, .failure * {
+  background-color: #ffb0b0;
+  padding: 1px;
+}
+.failure .expected {
+  text-decoration: line-through;
+  color: #bb5050;
+}
+.ignored, .ignored * {
+  background-color: #f0f0f0 !important;	
+}
+
+ins {
+  text-decoration: none;	
+}
+
+.exceptionMessage {
+  background-color: #fdd;
+  font-family: Courier New, Courier, Monospace;
+  font-size: 10pt;
+  display: block;
+  font-weight: normal;
+  padding: 4px;
+  text-decoration: none !important;
+}
+.stackTrace, .stackTrace * {
+  font-weight: normal;
+}
+.stackTrace {
+  display: none;
+  padding: 1px 4px 4px 4px;
+  background-color: #fdd;
+  border-top: 1px dotted black;
+}
+.stackTraceExceptionMessage {
+  display: block;
+  font-family: Courier New, Courier, Monospace;
+  font-size: 8pt;
+  white-space: wrap;
+  padding: 1px 0px 1px 0px;
+}
+.stackTraceEntry {
+  white-space: nowrap;
+  font-family: Courier New, Courier, Monospace;
+  display: block;
+  font-size: 8pt;
+  padding: 1px 0px 1px 32px;
+}
+.stackTraceButton {
+  font-size: 8pt;
+  margin: 2px 8px 2px 0px;
+  font-weight: normal;
+  font-family: Arial;
+}
+
+.special {
+  font-style: italic;
+}
+.missing, .missing * {
+  background-color: #ff9999;
+  color:#bb5050;
+  text-decoration: line-through;
+}
+.surplus, .surplus * {
+  background-color: #ff9999;
+}
+.footer {
+  text-align: right;
+  margin-top: 40px;
+  font-size: 8pt;
+  width: 100%;
+  color: #999;
+}
+.footer .testTime {
+  padding: 2px 10px 0px 0px;
+}
+
+.idea {
+  font-size: 9pt;
+  color: #888;
+  font-style: italic;	
+}
+.tight li {
+  margin-top: 1px;
+  margin-bottom: 1px; 
+}
+.commentary {
+  float: right;
+  width: 200px;
+  background-color: #ffffd0;
+  padding:8px;
+  border: 3px solid #eeeeb0;	 
+  margin: 10px 0px 10px 10px;	 
+}
+.commentary, .commentary * {
+  font-size: 8pt;
+}
+</style><meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+</head><body><span class="breadcrumbs"><a href="../Cite.html">A CITE library for the JVM, version 0.96.0</a> &gt;</span>
+    <p>I# CITE Collection Inventory #</p>
+<h2>CITE Collections</h2>
+<p>A minimum valid CITE Collection is made up:</p>
+<ul>
+<li>a CITE URN identifying the collection</li>
+<li>a CiteProperty object for the collection's canonical ID property</li>
+<li>a CiteProperty object for the collection's labelling property</li>
+<li>a URI uniquely identifying the abbreviated CITE namespace named in the Collection's URN</li>
+</ul>
+<p><div class='example'></p>
+<h3>Examples</h3>
+<p>We can initialize a valid CITE Collection as follows.</p>
+<p>First, using these properties:</p>
+<ul>
+<li>name = <strong concordion:set="#name2">Image</strong></li>
+<li>type =  <strong concordion:set="#type2">citeurn</strong></li>
+<li>label =  <strong concordion:set="#label2">Image URN</strong></li>
+</ul>
+<p>we can construct
+<strong concordion:assertTrue="isValidProp(#name2,#type2,#label2)" class="success">a valid CiteProperty for the Collection's  canonical ID property</strong>.</p>
+<p>Then, using these properties, we can construct a valid CiteProperty for the Collection's label property:</p>
+<ul>
+<li>name = <strong concordion:set="#name3">label</strong></li>
+<li>type =  <strong concordion:set="#type3">string</strong></li>
+<li>label =  <strong concordion:set="#label3">Caption</strong></li>
+</ul>
+<p>we can construct <strong concordion:assertTrue="isValidProp(#name2,#type2,#label2)" class="success">a valid CiteProperty for the Collection's  label property</strong>.</p>
+<p>If we give this collection the URN <strong concordion:set="#imgurn">urn:cite:hmt:vaimg</strong>,  with the <code>hmt</code> namespace abbreviation expanded to <strong concordion:set="#fulluri">http://homermultitext.org/citens</strong>, and source named <strong concordion:set="#srcname">images.csv</strong> we can create  <strong concordion:assertTrue="isValidCollection(#name3,#type3,#label3,#name3,#type3,#label3,#imgurn,#fulluri,#srcname)" class="success">a valid CITE Collection object</strong>.</p>
+<p></div></p>
+<h2>CITE Properties</h2>
+<p>Every CITEProperty object is defined by three strings:  a <em>name</em> that is unique within the Collection a belongs to, a <em>type</em>,  and a human-readable display <em>label</em>.  The value of <em>type</em> must be one of  <code>string</code>, <code>number</code>, <code>boolean</code>, or <code>markdown</code>.  The <code>cite</code> library can construct CITEProperty objects from ordered triples of strings in the sequence name, type and label.
+<div class='example'></p>
+<h3>Examples</h3>
+<p>Given these definitions:</p>
+<ul>
+<li>name = <strong concordion:set="#name1">rv</strong></li>
+<li>type =  <strong concordion:set="#type1">string</strong></li>
+<li>label =  <strong concordion:set="#label1">Recto or Verso</strong></li>
+</ul>
+<p>we can <strong concordion:assertTrue="isValidProp(#name1,#type1,#label1)" class="success">construct a valid CiteProperty</strong>.</p>
+<p>If instead we use the string <strong concordion:set="#badtype">text_data</strong> for the type value, the library <strong concordion:assertFalse="isValidProp(#name1,#badtype,#label1)" class="success">throws an Exception</strong>, because <strong>text_data</strong> is not a valid value for a CITEProperty type.</p>
+<p></div></p>
+<p>For <code>string</code> properties, it is also possible to define a set of controlled vocabulary items.</p>
+<p><div class='example'></p>
+<h3>Examples</h3>
+<p>If we use these values:</p>
+<ul>
+<li>name = <strong concordion:set="#name1">rv</strong></li>
+<li>label =  <strong concordion:set="#label1">Recto or Verso</strong></li>
+</ul>
+<p>and further define a list of allowed values [<strong concordion:set="#vocab">recto,verso</strong>], we can <strong concordion:assertTrue="isValidControlledProp(#name1,#label1,#vocab)" class="success">construct a CITEProperty with controlled vocabulary</strong>.</p>
+<p></div></p>
+<h2>Extensions</h2>
+<p>A valid CITE Extension includes:</p>
+<ul>
+<li>an abbreviation identifying the extension</li>
+<li>a URI expanding the extension's abbreviation</li>
+<li>an RDF type, expressed with abbreviated RDF namespace</li>
+<li>a URI expanding the RDF namespace abbreviation</li>
+<li>a boolean value indicating whether this extension defines an extended citation notation</li>
+<li>a set of one or more names of requests</li>
+</ul>
+<p><div class='example'></p>
+<p>If we define an extension with these values:</p>
+<ul>
+<li>abbreviation <strong concordion:set="#extname">image</strong></li>
+<li>URI for extension <strong concordion:set="#exturi">http://cite-architecture.github.io/extensions/image</strong></li>
+<li>RDF type <strong concordion:set="#rdftype">cite:Image</strong></li>
+<li>URI for the <code>cite</code> RDF namespace <strong concordion:set="#rdfuri">http://cite-architecture.github.io/extensions/image</strong></li>
+<li>extended notation <strong concordion:set="#extendcite">true</strong></li>
+<li>a set of request names <strong concordion:set="#reqlist">GetBinaryImage,GetCaption,GetRights,GetIIPMooviewer</strong></li>
+</ul>
+<p>then we can <strong concordion:assertTrue="isValidExt(#extname, #exturi, #rdftype, #rdfuri, #extendcite, #reqlist)" class="success">construct a valid CITE Extension</strong> object.</p>
+<p></div></p>
+<div class="footer">Results generated by <a href="http://www.concordion.org" style="font-weight: bold; text-decoration: none; color: #89C;">Concordion</a><div class="testTime">in 18 ms on 18-Jul-2015 at 15:33:15 EDT</div></div></body>
+</html>
