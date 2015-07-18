@@ -386,11 +386,39 @@ class CiteUrn {
   
   /** Creates a CiteUrn identifying a Collection from
    * a CiteUrn at any level.
-   * @param u The CiteUrn in question.
    * @returns A CiteUrn identifying a Collection.
    */
   String reduceToCollection() {
     return "urn:cite:${this.ns}:${this.collection}"
+  }
+
+
+
+  /** Creates a CiteUrn identifying a CITE Object from
+   * a given CiteUrn.  If the source URN has an extended reference,
+   * it is omitted.
+   * @returns A CiteUrn identifying a Collection.
+   */
+  String reduceToObject() {
+    String reducedUrn = "urn:cite:${this.ns}:${this.collection}."
+    if (this.isRange()) {
+      reducedUrn += "${this.getFirstObject()}"
+      if (this.objectVersion_1 != null) {
+	reducedUrn += ".${this.objectVersion_1}"
+      }
+      reducedUrn +=      "-${this.getSecondObject()}"
+      if (this.objectVersion_2 != null) {
+	reducedUrn += ".${this.objectVersion_2}"
+      }
+
+      
+    } else {
+      reducedUrn += this.getObjectId()
+      if (this.hasVersion()) {
+	reducedUrn += "." + this.getObjectVersion()
+      }
+    }
+    return (reducedUrn)
   }
 
 }

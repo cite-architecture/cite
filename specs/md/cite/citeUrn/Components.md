@@ -52,7 +52,10 @@ The URN <strong concordion:set="#img">urn:cite:hmt:vaimg.VA012RN_0013.v1@0.1532,
 
 ## Manipulating CITE Object URNs ##
 
-Because every CITE URN has an object component minimally composed of a collection identifier, we can reduce any CITE URN to a URN for its collection.
+Because the components of a CITE Object URN have specified semantics, we can work with semantically meaningful manipulations of a CITE Object URN.
+Every CITE URN has an object component minimally composed of a collection identifier, so we can always reduce a CITE URN to a URN identifying its collection.  
+
+Similarly, we can determine whether a CITE URN has an extended reference component, and if so we can reduce a CITE URN with extended reference to a URN identifying the unique object without extended reference.
 
 @openex@
 

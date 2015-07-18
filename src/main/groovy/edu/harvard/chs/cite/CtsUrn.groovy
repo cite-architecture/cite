@@ -644,7 +644,23 @@ class CtsUrn {
   }
 
 
+  /** 
+   * Returns the URN value without subreference, that is,
+   * reduced to the citable node.
+   * @returns The reduced URN, as a String.
+   */
+  String reduceToNode() {
+    String reducedUrn = "urn:cts:${this.ctsNamespace}:${this.workComponent}:"
 
+    if (this.isRange()) {
+      reducedUrn += this.rangeBegin + "-" + this.rangeEnd
+    } else {
+      reducedUrn += this.passageNode
+    }
+    return reducedUrn
+  }
+
+  
     /** 
     * Gets the reference component of a passage that optionally
     * may include a sub-reference component.
@@ -935,7 +951,7 @@ class CtsUrn {
     * @returns The trimmed URN, as a String.
     */
     public String trimPassage(int level) {
-   	   return this.getUrnWithoutPassage() + this.getPassage(level)
+      return this.getUrnWithoutPassage() + this.getPassage(level)
     }
 
 

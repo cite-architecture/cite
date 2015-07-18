@@ -9,6 +9,7 @@ In addition to [extracting component parts](Components.html) of a URN, you can m
 1. To refer to the cited text as a whole, we can remove the passage component of a URN.
 2. To generalize a URN referring to a version or exemplar, we can reduce the work component to the notional work level, while keeping the passage reference unchanged.
 3. To generalize a URN referring to a specific exemplar, we can reduce the work component to the version level (edition or translation), while keeping the passage reference unchanged.
+4. To generalize a URN with a subreference, we can reduce the passage reference to refer to the citable node, while keeping the work reference unchanged.
 
 @openex@
 
