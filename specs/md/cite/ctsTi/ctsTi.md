@@ -50,6 +50,10 @@ We can retrieve human-readable labels for each level of the work hierarchy:
 @closeex@
 
 
+
+### Information about  languages within the work hierarchy ###
+
+
 For the notional work level of the hierarchy, the TextInventory records the primary language of the text using three-digit ISO language codes.  
 
 
@@ -69,3 +73,5 @@ The English translation with URN <strong concordion:set="#xlate">urn:cts:greekLi
 
 
 The TextInventory documents the citation scheme for every level of the text's citation hierarchy.  
+
+
