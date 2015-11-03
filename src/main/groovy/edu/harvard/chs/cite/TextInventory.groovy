@@ -5,7 +5,7 @@ import groovy.xml.StreamingMarkupBuilder
 
 /**
 * Class modelling a TextInventory.
-* Methods for finding artifacts in the TextInventory appear in two forms:  
+* Methods for finding artifacts in the TextInventory appear in two forms:
 * <ul>
 * <li>an internal "private" method returning a TextInventory class data structure.
 * These methods have 'Data' in their names.</li>
@@ -19,12 +19,12 @@ class TextInventory {
 
 
     /** Debugging level. */
-    public Integer debug = 0
+    public Integer debug = 5
 
     /** List of data values that violate the TextInventory definition. */
     def errorList = []
 
-    /** Character encoding to use when representing TextInventory as 
+    /** Character encoding to use when representing TextInventory as
     * a File object.
     */
     String enc = "UTF-8"
@@ -35,9 +35,9 @@ class TextInventory {
     /** XML namespace for the CTS vocabulary.    */
     static groovy.xml.Namespace ctsns = new groovy.xml.Namespace("http://chs.harvard.edu/xmlns/cts")
 
-    /** The TextInventory ID. In an XML serialization validating against the 
+    /** The TextInventory ID. In an XML serialization validating against the
     * TextInventory schema,  this is the <code>tiid</code>
-    * attribute on the root element. 
+    * attribute on the root element.
     */
     //def tiId
 
@@ -71,14 +71,14 @@ class TextInventory {
 
     /**  A list of version-level structures.
     * Each version-level structure is comprised of
-    * a CTS URN for the version, a label, a boolean flag indicating 
+    * a CTS URN for the version, a label, a boolean flag indicating
     * whether or not this version is online, and a parent (work) URN.
     */
     def editions = []
 
     /**  A list of version-level structures.
     * Each version-level structure is comprised of
-    * a CTS URN for the version, a label, a boolean flag indicating 
+    * a CTS URN for the version, a label, a boolean flag indicating
     * whether or not this version is online, and a parent (work) URN.
     */
     def translations = []
@@ -94,7 +94,7 @@ class TextInventory {
     def nsMapList = [:]
 
     /** Map of Cts Urns to corresponding value of online attribute.
-    * The map should include an entry for every online version in the 
+    * The map should include an entry for every online version in the
     * inventory.
     */
     def onlineMap = [:]
@@ -133,27 +133,27 @@ class TextInventory {
             String currentTg = ""
             String currentWk = ""
             String currentVers = ""
-            
+
             CtsUrn tgUrn = new CtsUrn(tg.'@urn')
             currentNs = tgUrn.getCtsNamespace()
             currentTg = tgUrn.getTextGroup()
             tg[ti.work].each { w ->
                 CtsUrn wkUrn = new CtsUrn(w.'@urn')
                 if (wkUrn.getCtsNamespace() != currentNs) {
-                    this.errorList.add("Work urn ${wkUrn} in wrong CTS namespace.")                        
+                    this.errorList.add("Work urn ${wkUrn} in wrong CTS namespace.")
                 }
                 if (wkUrn.getTextGroup() != currentTg ) {
-                    this.errorList.add("Work urn ${wkUrn} in wrong textgroup.")                        
+                    this.errorList.add("Work urn ${wkUrn} in wrong textgroup.")
                 }
                 currentWk = wkUrn.getWork()
 
                 w[ti.edition].each { ed ->
                     CtsUrn edUrn = new CtsUrn(ed.'@urn')
                     if (edUrn.getCtsNamespace() != currentNs) {
-                        this.errorList.add("Edition urn ${edUrn} in wrong CTS namespace.")                        
+                        this.errorList.add("Edition urn ${edUrn} in wrong CTS namespace.")
                     }
                     if (edUrn.getTextGroup() != currentTg ) {
-                        this.errorList.add("Edition urn ${edUrn} in wrong textgroup.")                        
+                        this.errorList.add("Edition urn ${edUrn} in wrong textgroup.")
                     }
                     if (edUrn.getWork() != currentWk ) {
                         this.errorList.add("Edition urn ${edUrn} in wrong work.")
@@ -163,10 +163,10 @@ class TextInventory {
                 w[ti.translation].each { tr ->
                     CtsUrn trUrn = new CtsUrn(tr.'@urn')
                     if (trUrn.getCtsNamespace() != currentNs) {
-                        this.errorList.add("Translation urn ${edUrn} in wrong CTS namespace.")                        
+                        this.errorList.add("Translation urn ${edUrn} in wrong CTS namespace.")
                     }
                     if (trUrn.getTextGroup() != currentTg ) {
-                        this.errorList.add("Translation urn ${trUrn} in wrong textgroup.")                        
+                        this.errorList.add("Translation urn ${trUrn} in wrong textgroup.")
                     }
                     if (trUrn.getWork() != currentWk ) {
                         this.errorList.add("Translation urn ${trUrn} in wrong work.")
@@ -199,9 +199,9 @@ class TextInventory {
     }
 
 
-    /** Verifies that values of xml:lang for translation 
+    /** Verifies that values of xml:lang for translation
     * elements is not identical to the xml:lang value of the
-    * parent work. 
+    * parent work.
     */
     void checkLangAttrs(groovy.util.Node root) {
         root[ti.textgroup][ti.work].each { w ->
@@ -227,7 +227,7 @@ class TextInventory {
                 if (xLang == workLang) {
                     errorList.add("Invalid language value for translation ${t.'@urn'}: same as language for work.")
                 }
-                
+
             }
         }
     }
@@ -238,9 +238,9 @@ class TextInventory {
 
 
   /** Verifies that all XML namespace abbreviations appearing in the
-   * TextInventory's citation node structure for a given edition are in a 
+   * TextInventory's citation node structure for a given edition are in a
    * list of valid XML namespace abbreviations.
-   * @param citeNode The citation node element for a given edition, as a parsed 
+   * @param citeNode The citation node element for a given edition, as a parsed
    * groovy.util.Node.
    * @param validList A list of Strings giving all XML namespace abbreviations defined
    * for the given edition.
@@ -274,7 +274,7 @@ class TextInventory {
   }
 
 
-  
+
   /** For every edition in the inventory, verifies that
    * all XML namespace abbreviations appearing in XPath expressions are
    * defined in namespace definitions.
@@ -285,7 +285,7 @@ class TextInventory {
     root[ti.textgroup][ti.work][ti.edition].each { e ->
       String urn = e.'@urn'
       e[ti.online].each { onlineNode ->
-	def definedList = []        
+	def definedList = []
 	onlineNode[ti.namespaceMapping].each {
 	  definedList.add(it.'@abbreviation')
 	}
@@ -296,20 +296,20 @@ class TextInventory {
     }
   }
 
-  
+
 
   /** Verifies that data values in the inventory comply with a number
    * of constraints of the CTS specification.  These include:
    * <ul>
    * <li>All URNs must be properly placed in their inherited hierarchy</li>
    * <li>A CTS namespace must be declared for all text groups</li>
-   * <li>xml:lang attributes should be 3-char abbrs and xml:lang for 
+   * <li>xml:lang attributes should be 3-char abbrs and xml:lang for
    * translations should not be equal to the xml:lang value for the notional work</li>
    * <li>recursively checks the XPath values of scope and xpath attributes on all citationMappings
    * and verifies that all XML namespaces are declared.</li>
    * </ul>
    */
-  void checkDataValues(groovy.util.Node root) 
+  void checkDataValues(groovy.util.Node root)
     throws Exception {
         checkUrnHierarchy(root)
         checkCtsNsDecl(root)
@@ -327,7 +327,7 @@ class TextInventory {
     * @param capsUrl URL of the GetCapabilities request.
     * @throws Exception if invalid data values found.
     */
-    TextInventory (URL capsUrl) 
+    TextInventory (URL capsUrl)
     throws Exception {
         def capsText = capsUrl.getText("UTF-8")
         groovy.util.Node capsRoot = new XmlParser().parseText(capsText)
@@ -348,7 +348,7 @@ class TextInventory {
     * @param str The String of XML text representing the TextInventory.
     * @throws Exception if invalid data values found.
     */
-    TextInventory (String str) 
+    TextInventory (String str)
     throws Exception {
         try {
             this.initFromText(str)
@@ -361,7 +361,7 @@ class TextInventory {
     * @param f File with XML validating against the XML schema of a TextInventory.
     * @throws Exception if invalid data values found.
     */
-    TextInventory (File f) 
+    TextInventory (File f)
     throws Exception {
         try {
             this.initFromText(f.getText(enc))
@@ -409,9 +409,9 @@ class TextInventory {
     * @returns A VersionType value.
     * @throws Exception if urnStr is not a valid CTS URN string.
     */
-    VersionType typeForVersion(String urnStr) 
+    VersionType typeForVersion(String urnStr)
     throws Exception {
-        try { 
+        try {
             def u = new CtsUrn(urnStr)
             return typeForVersion(urnStr)
         } catch (Exception e) {
@@ -449,7 +449,7 @@ class TextInventory {
     * @returns A map of XML namespace abbreviations to URI values.
     * @throws Exception if urnStr is not a valid Cts Urn value.
     */
-    LinkedHashMap xmlNsForVersion(String urnStr) 
+    LinkedHashMap xmlNsForVersion(String urnStr)
     throws Exception {
         try {
             CtsUrn urn = new CtsUrn(urnStr)
@@ -483,16 +483,16 @@ class TextInventory {
         switch (urn.getWorkLevel()) {
 
 	case CtsUrn.WorkLevel.VERSION:
-	
+
 	switch (typeForVersion(urn)) {
 	case VersionType.EDITION:
 	//	String ed = "urn:cts:${urn.getCtsNamespace()}:${urn.getTextGroup()}.${urn.getWork()}.${urn.getVersion()}"
 	CtsUrn noPsg = new CtsUrn(urn.getUrnWithoutPassage())
 	String ed = noPsg.reduceToVersion()
-	
+
 	println "CHECKING FOR " + ed + " in " + editions
 
-	
+
 	def edStruct = this.editions.find {it[0] == ed}
 	String tg = "urn:cts:${urn.getCtsNamespace()}:${urn.getTextGroup()}:"
 	def tgStruct = this.textgroups.find {it[0] == tg}
@@ -500,7 +500,7 @@ class TextInventory {
 	def wkStruct = this.works.find {it[0] == wk }
 	return ((nsStruct != null) && (tgStruct != null) && (wkStruct != null))
 	break
-	
+
 
 	case VersionType.TRANSLATION:
 	String trans = "urn:cts:${urn.getCtsNamespace()}:${urn.getTextGroup()}.${urn.getWork()}.${urn.getVersion()}:"
@@ -517,7 +517,7 @@ class TextInventory {
 	  System.err.println "TextInventory:urnInInventory: for urn ${urn}, type is " + typeForVersion(urn)
 	}
 	break
-	} 
+	}
 
 	case CtsUrn.WorkLevel.WORK:
                 String tg = "urn:cts:${urn.getCtsNamespace()}:${urn.getTextGroup()}"
@@ -533,7 +533,7 @@ class TextInventory {
             return ((nsStruct != null) && (tgStruct != null))
             break
 
-            default: 
+            default:
                 System.err.println "Level " + urn.getWorkLevel()
             return true
             break
@@ -548,7 +548,7 @@ class TextInventory {
     * @returns ISO language code.
     * @throws Exception if urnStr is not a valid CTS URN value.
     */
-    String languageForVersion(String urnStr) 
+    String languageForVersion(String urnStr)
     throws Exception {
         try {
             CtsUrn urn = new CtsUrn(urnStr)
@@ -571,18 +571,18 @@ class TextInventory {
         }
 
         switch (urn.getWorkLevel()) {
-            case CtsUrn.WorkLevel.WORK : 
+            case CtsUrn.WorkLevel.WORK :
                 return languageForWork(urn)
             break
 
-            case CtsUrn.WorkLevel.VERSION : 
+            case CtsUrn.WorkLevel.VERSION :
 
 	    if (debug > 0)  {
 	      System.err.println "${urn} at version level  is type" + typeForVersion(urn)
             }
 
 	    switch (typeForVersion(urn)) {
-                
+
 	    case VersionType.TRANSLATION:
 	    return translationLanguages[urn.toString()]
 	    break
@@ -592,7 +592,7 @@ class TextInventory {
 	    break
 
 	    default:
-	    // 
+	    //
 	    break
             }
             break
@@ -602,7 +602,7 @@ class TextInventory {
 	    break
         }
     }
-    
+
 
 
 
@@ -613,7 +613,7 @@ class TextInventory {
     * work was found for the requested urn.
     * @throws Exception if urnStr is not a valid CTS URN string.
     */
-    String languageForWork(String urnStr) 
+    String languageForWork(String urnStr)
     throws Exception {
         try {
             CtsUrn urn = new CtsUrn(urnStr)
@@ -676,7 +676,7 @@ class TextInventory {
     * @throws Exception if s is not a valid CtsUrn String
     */
     def worksForGroup(String s) {
-        def u 
+        def u
         try {
             u = new CtsUrn(s)
             return worksForGroup(u)
@@ -685,7 +685,7 @@ class TextInventory {
         }
     }
 
-    /** Gets the full URI of the CTS Namespace identified by 
+    /** Gets the full URI of the CTS Namespace identified by
     * @param label Unique label of the CTS Namespace.
     * @returns The URI for the CTS Namespace, or null if none
     * found.
@@ -698,7 +698,7 @@ class TextInventory {
             case 0:
                 return null
             break
-            
+
             case 1:
                 def ctsNs = ctsNsMatches[0]
                 return ctsNs[1]
@@ -731,7 +731,7 @@ class TextInventory {
     * @throws Exception if s is not a valid CtsUrn String
     */
     def onlineForGroup(String s) {
-        def u 
+        def u
         try {
             u = new CtsUrn(s)
             return onlineForGroup(new CtsUrn(s))
@@ -744,10 +744,10 @@ class TextInventory {
     /** Finds version-level URNs for all versions
      * available online for a given CTS URN.
     * @param u A CTS URN to check for.
-    * This URN may include either a work- or version-level reference to the work:     
-    * it is trimmed to the work level before searching.  If u is given at the 
+    * This URN may include either a work- or version-level reference to the work:
+    * it is trimmed to the work level before searching.  If u is given at the
     * text group level, it is not an error, but the returned list will be empty.
-    * @returns A possibly empty List of Strings giving CtsUrns at the version 
+    * @returns A possibly empty List of Strings giving CtsUrns at the version
     * level.
     * @throws Exception if s is not a valid CtsUrn String
     */
@@ -764,9 +764,9 @@ class TextInventory {
     /** Finds version-level URNs for all versions
      * available online for a given CTS URN.
     * @param u A CTS URN to check for.
-    * This URN may include either a work- or version-level reference to the work:     * it is trimmed to the work level before searching.  If u is given at the 
+    * This URN may include either a work- or version-level reference to the work:     * it is trimmed to the work level before searching.  If u is given at the
     * text group level, it is not an error, but the returned list will be empty.
-    * @returns A possibly empty List of Strings giving CtsUrns at the version 
+    * @returns A possibly empty List of Strings giving CtsUrns at the version
     * level.
     */
     def onlineForWork(CtsUrn u) {
@@ -778,12 +778,12 @@ class TextInventory {
     }
 
     /** Finds version-level URNs known to this inventory for a
-    * requested CTS URN. 
+    * requested CTS URN.
     * @param u The CTS URN to search for.  This URN may include either a work-
     * or version-level reference to the work: it is trimmed to the work level
     * before searching.  If u is given at the text group level, it is not an
     * error, but the returned list will be empty.
-    * @returns A possibly empty List of Strings giving CtsUrns at the version 
+    * @returns A possibly empty List of Strings giving CtsUrns at the version
     * level.
     **/
     def versionsForWork(CtsUrn u) {
@@ -813,17 +813,17 @@ class TextInventory {
 
 
     /** Finds version-level URNs known to this inventory for a
-    * requested CTS URN. 
-    * @param s A String representing the CTS URN to search for.  
-    * This URN may include either a work- or version-level reference to the work:     * it is trimmed to the work level before searching.  If u is given at the 
+    * requested CTS URN.
+    * @param s A String representing the CTS URN to search for.
+    * This URN may include either a work- or version-level reference to the work:     * it is trimmed to the work level before searching.  If u is given at the
     * text group level, it is not an error, but the returned list will be empty.
-    * @returns A possibly empty List of Strings giving CtsUrns at the version 
+    * @returns A possibly empty List of Strings giving CtsUrns at the version
     * level.
     * @throws Exception if s is not a valid CtsUrn String
     */
     def versionsForWork(String s) {
         def urn
-        try { 
+        try {
             urn = new CtsUrn(s)
             versionsForWork(new CtsUrn(s))
         } catch (Exception e) {
@@ -838,7 +838,7 @@ class TextInventory {
     * or null if no text group is found for the requested URN.
     * @throws Exception if urnStr is not a valid CTS URN string.
     */
-    String getGroupName(String urnStr) 
+    String getGroupName(String urnStr)
     throws Exception {
         CtsUrn urn
         try {
@@ -1071,7 +1071,7 @@ class TextInventory {
 
 
 
-    /** "Private" method populates TI model from a string serialization of a  
+    /** "Private" method populates TI model from a string serialization of a
     * CTS TextInventory.
     * @param str String giving content of a valid XML inventory.
     */
@@ -1091,7 +1091,7 @@ class TextInventory {
     * @root The root Node of the parse.
     * @throws Exception if data values violate definition of TextInventory.
     */
-    void initFromParsed (groovy.util.Node root, boolean checkData) 
+    void initFromParsed (groovy.util.Node root, boolean checkData)
     throws Exception {
         if (checkData) {
             try {
@@ -1100,7 +1100,7 @@ class TextInventory {
                 throw e
             }
         }
-        
+
         //this.tiId = root.'@tiid'
         this.tiVersion = root.'@tiversion'
         root[ti.ctsnamespace].each { ctsns ->
@@ -1146,7 +1146,7 @@ class TextInventory {
 		      System.err.println "Found  edition " + labelNode?.text()
 		      System.err.println "Online? " + isOnline
 		    }
-		    
+
                     editions.add([e.'@urn',labelNode?.text(),isOnline, w.'@urn'])
                     if (isOnline)  {
                         def firstOnline = online[0]
@@ -1157,8 +1157,8 @@ class TextInventory {
 			  System.err.println "Make CM for " + firstOnline
 			  System.err.println " indexed from " + e.'@urn'
 			  System.err.println "Size of model map now " + citationModelMap.keySet().size()
-			  
-			  
+
+
 			}
 
                         def nsMaps = [:]
@@ -1214,7 +1214,7 @@ class TextInventory {
 
 
 
-    /** "Private" method finds data structures for all online versions of 
+    /** "Private" method finds data structures for all online versions of
     * texts known to the inventory.
     * @returns A List of version-level data structures.
     */
@@ -1237,7 +1237,7 @@ class TextInventory {
     * @throws Exception if s is not a valid CtsUrn String
     */
     def worksDataForGroup(String s) {
-        def u 
+        def u
         try {
             u = new CtsUrn(s)
             return worksDataForGroup(u)
@@ -1269,7 +1269,7 @@ class TextInventory {
     * @throws Exception if s is not a valid CtsUrn String
     */
     def onlineDataForGroup(String s) {
-        def u 
+        def u
         try {
             u = new CtsUrn(s)
             return onlineDataForGroup(new CtsUrn(s))
@@ -1278,8 +1278,8 @@ class TextInventory {
         }
     }
 
-    /**   "Private" or internal method finds version-level data structures 
-    * for all online versions belonging to the TextGroup of the requested 
+    /**   "Private" or internal method finds version-level data structures
+    * for all online versions belonging to the TextGroup of the requested
     * CtsUrn.
     * @param u CtsUrn identifying the TextGroup to search for.
     * @returns A (possibly empty) List of version data structures.
@@ -1327,15 +1327,15 @@ class TextInventory {
 
     /**  "Private" or internal method finds version-level data structures for all versions
      * available online for a given CTS URN.
-    * @param u A CTS URN to check for 
-    * This URN may include either a work- or version-level reference to the work:     
-    * it is trimmed to the work level before searching.  If u is given at the 
+    * @param u A CTS URN to check for
+    * This URN may include either a work- or version-level reference to the work:
+    * it is trimmed to the work level before searching.  If u is given at the
     * text group level, it is not an error, but the returned list will be empty.
     * @returns A (possibly empty) List of version-level data structures.
     * @throws Exception if s is not a valid CtsUrn String
     */
     def onlineDataForWork(String s) {
-        def u 
+        def u
         try {
             u = new CtsUrn(s)
             return onlineDataForWork(new CtsUrn(s))
@@ -1348,18 +1348,18 @@ class TextInventory {
 
 
     /**  "Private" or internal method finds version data structures for the work identified by
-    * requested CTS URN. 
-    * @param s A String representing the CTS URN to search for.  
-    * This URN may include either a work- or version-level reference to the work:     
-    * it is trimmed to the work level before searching.  If u is given at the 
+    * requested CTS URN.
+    * @param s A String representing the CTS URN to search for.
+    * This URN may include either a work- or version-level reference to the work:
+    * it is trimmed to the work level before searching.  If u is given at the
     * text group level, it is not an error, but the returned list will be empty.
-    * @returns A possibly empty List of Strings giving CtsUrns at the version 
+    * @returns A possibly empty List of Strings giving CtsUrns at the version
     * level.
     * @throws Exception if s is not a valid CtsUrn String
     */
     def versionsDataForWork(String s) {
         def u
-        try { 
+        try {
             u = new CtsUrn(s)
             return versionsDataForWork(u)
         } catch (Exception e) {
@@ -1368,12 +1368,12 @@ class TextInventory {
     }
 
     /**  "Private" or internal method finds version data structures for the work identified by
-    * requested CTS URN. 
-    * @param s A String representing the CTS URN to search for.  
-    * This URN may include either a work- or version-level reference to the work:     
-    * it is trimmed to the work level before searching.  If u is given at the 
+    * requested CTS URN.
+    * @param s A String representing the CTS URN to search for.
+    * This URN may include either a work- or version-level reference to the work:
+    * it is trimmed to the work level before searching.  If u is given at the
     * text group level, it is not an error, but the returned list will be empty.
-    * @returns A possibly empty List of Strings giving CtsUrns at the version 
+    * @returns A possibly empty List of Strings giving CtsUrns at the version
     * level.
     */
     def versionsDataForWork(CtsUrn u) {
@@ -1407,8 +1407,8 @@ class TextInventory {
         def xml = new groovy.xml.StreamingMarkupBuilder().bind {
             mkp.declareNamespace('':'http://chs.harvard.edu/xmlns/cts3/ti')
             mkp.declareNamespace('dc':'http://purl.org/dc/elements/1.1')
-            
-            TextInventory(tiversion : "${this.tiVersion}") { 
+
+            TextInventory(tiversion : "${this.tiVersion}") {
 	      //                          tiid : "${this.tiId}"  ) {
 
 
@@ -1462,61 +1462,61 @@ class TextInventory {
                                                     def cm = this.getCitationModel(versionUrn)
                                                     citationMapping {
                                                     cm.mappings.each { m ->
-                                                        assert m instanceof java.util.ArrayList 
+                                                        assert m instanceof java.util.ArrayList
 
 
                                                         def maxIndex = m.size() - 1
                                                         def depth = 0
                                                         def triplet = m[depth]
-                                                        citation (label : "${triplet.getLabel()}", 
-                                                                         scope : "${triplet.getScopePattern()}", 
+                                                        citation (label : "${triplet.getLabel()}",
+                                                                         scope : "${triplet.getScopePattern()}",
                                                                          xpath:  "${triplet.getLeafPattern()}" ) {
 
-                                                            
-                                                            // don't know how to get Builder to handle recursion. 
-                                                            // manually allow up to 4 levels.  sigh. 
+
+                                                            // don't know how to get Builder to handle recursion.
+                                                            // manually allow up to 4 levels.  sigh.
                                                             if (maxIndex > depth) {
                                                                 depth++;
                                                                 triplet = m[depth]
-                                                            citation (label : "${triplet.getLabel()}", 
-                                                                             scope : "${triplet.getScopePattern()}", 
+                                                            citation (label : "${triplet.getLabel()}",
+                                                                             scope : "${triplet.getScopePattern()}",
                                                                              xpath:  "${triplet.getLeafPattern()}" ) {
 
 
                                                                 if (maxIndex > depth) {
                                                                     depth++;
                                                                     triplet = m[depth]
-                                                                citation (label : "${triplet.getLabel()}", 
-                                                                                 scope : "${triplet.getScopePattern()}", 
+                                                                citation (label : "${triplet.getLabel()}",
+                                                                                 scope : "${triplet.getScopePattern()}",
                                                                                  xpath:  "${triplet.getLeafPattern()}" ) {
-                                                                    
+
                                                                     if (maxIndex > depth) {
                                                                         depth++;
                                                                         triplet = m[depth]
-                                                                    citation (label : "${triplet.getLabel()}", 
-                                                                                     scope : "${triplet.getScopePattern()}", 
+                                                                    citation (label : "${triplet.getLabel()}",
+                                                                                     scope : "${triplet.getScopePattern()}",
                                                                                      xpath:  "${triplet.getLeafPattern()}" ) {
 
-                                                                        
+
                                                                         if (maxIndex > depth) {
                                                                             depth++;
                                                                             triplet = m[depth]
-                                                                            citation (label : "${triplet.getLabel()}", 
-                                                                                             scope : "${triplet.getScopePattern()}", 
+                                                                            citation (label : "${triplet.getLabel()}",
+                                                                                             scope : "${triplet.getScopePattern()}",
                                                                                              xpath:  "${triplet.getLeafPattern()}" ) {
                                                                             }
 }
                                                                         }
-                                                                    }                                                                        
+                                                                    }
                                                                 }
                                                            }
-                                                            
+
 }
                                                                 }
                                                             }
                                                         }
                                                     }
-                                                 
+
                                             }
 }
                                             break
@@ -1528,67 +1528,67 @@ class TextInventory {
                                                 description ('xml:lang': "ADDLANG","${v[2]}")
                                                 def onlineDoc = this.onlineDocname(versionUrn)
 
-                                                
+
                                                 online(docname : onlineDoc) {
                                                     validate(schema: "VALIDATE SCHEMA")
                                                     namespaceMapping(nsURI:"uri",abbreviation: "NAMESPACEABBR")
                                                     def cm = this.getCitationModel(versionUrn)
                                                     citationMapping {
                                                     cm.mappings.each { m ->
-                                                        assert m instanceof java.util.ArrayList 
+                                                        assert m instanceof java.util.ArrayList
 
                                                         def maxIndex = m.size() - 1
                                                         def depth = 0
                                                         def triplet = m[depth]
-                                                        citation (label : "${triplet.getLabel()}", 
-                                                                         scope : "${triplet.getScopePattern()}", 
+                                                        citation (label : "${triplet.getLabel()}",
+                                                                         scope : "${triplet.getScopePattern()}",
                                                                          xpath:  "${triplet.getLeafPattern()}" ) {
 
-                                                            
-                                                            // don't know how to get Builder to handle recursion. 
-                                                            // manually allow up to 4 levels.  sigh. 
+
+                                                            // don't know how to get Builder to handle recursion.
+                                                            // manually allow up to 4 levels.  sigh.
                                                             if (maxIndex > depth) {
                                                                 depth++;
                                                                 triplet = m[depth]
-                                                            citation (label : "${triplet.getLabel()}", 
-                                                                             scope : "${triplet.getScopePattern()}", 
+                                                            citation (label : "${triplet.getLabel()}",
+                                                                             scope : "${triplet.getScopePattern()}",
                                                                              xpath:  "${triplet.getLeafPattern()}" ) {
 
 
                                                                 if (maxIndex > depth) {
                                                                     depth++;
                                                                     triplet = m[depth]
-                                                                citation (label : "${triplet.getLabel()}", 
-                                                                                 scope : "${triplet.getScopePattern()}", 
+                                                                citation (label : "${triplet.getLabel()}",
+                                                                                 scope : "${triplet.getScopePattern()}",
                                                                                  xpath:  "${triplet.getLeafPattern()}" ) {
-                                                                    
+
                                                                     if (maxIndex > depth) {
                                                                         depth++;
                                                                         triplet = m[depth]
-                                                                    citation (label : "${triplet.getLabel()}", 
-                                                                                     scope : "${triplet.getScopePattern()}", 
+                                                                    citation (label : "${triplet.getLabel()}",
+                                                                                     scope : "${triplet.getScopePattern()}",
                                                                                      xpath:  "${triplet.getLeafPattern()}" ) {
 
-                                                                        
+
                                                                         if (maxIndex > depth) {
                                                                             depth++;
                                                                             triplet = m[depth]
-                                                                            citation (label : "${triplet.getLabel()}", 
-                                                                                             scope : "${triplet.getScopePattern()}", 
+                                                                            citation (label : "${triplet.getLabel()}",
+                                                                                             scope : "${triplet.getScopePattern()}",
                                                                                              xpath:  "${triplet.getLeafPattern()}" ) {
                                                                             }
 }
                                                                         }
-                                                                    }                                                                        
+                                                                    }
                                                                 }
                                                            }
-                                                            
+
 }
                                                                 }
                                                             }
                                                         }
                                                     }
-                                                 
+
                                             }
 }
                                             break
@@ -1602,9 +1602,9 @@ class TextInventory {
                                     }
                                 }
                             }
-                            
+
                         }
-                        
+
                     }
                 }
             }
