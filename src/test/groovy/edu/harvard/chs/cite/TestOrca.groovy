@@ -1,14 +1,13 @@
-package edu.harvard.chs.cite 
+package edu.harvard.chs.cite
 
 
-import static org.junit.Assert.*
 import org.junit.Test
+import static groovy.test.GroovyAssert.shouldFail
 
 
+class TestOrca  {
 
-class TestOrca extends GroovyTestCase {
-  
-
+  @Test
   void testAnalysis() {
     CiteUrn analysisRec = new CiteUrn("urn:cite:hmt:classtokens.1")
     CtsUrn psg = new CtsUrn("urn:cts:greekLit:tlg0012.tlg001.msA:1.1@Μῆνιν")

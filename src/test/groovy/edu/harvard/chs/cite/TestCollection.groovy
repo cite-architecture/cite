@@ -1,20 +1,21 @@
-package edu.harvard.chs.cite 
+package edu.harvard.chs.cite
 
 
-import static org.junit.Assert.*
 import org.junit.Test
+import static groovy.test.GroovyAssert.shouldFail
 
 
-/** Class to test cite library's CiteCollection class. 
+
+/** Class to test cite library's CiteCollection class.
 */
-class TestCollection extends GroovyTestCase {
+class TestCollection {
 
-  
+  @Test
   void testOneCollection() {
     CiteCollection cc = new CiteCollection()
-    
+
   }
 
-  
- 
+
+
 }
