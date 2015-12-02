@@ -4,7 +4,6 @@ package edu.harvard.chs.cite
 import java.text.Normalizer
 import java.text.Normalizer.Form
 
-
 /**
 * A class representing a reference to a versioned object in a set of
 * objects with shared properties, expressed in the notation of the
@@ -17,7 +16,7 @@ import java.text.Normalizer.Form
 *
 */
 class CiteUrn {
-  
+
 
 
   /** String version of the URN as submitted to constructor
@@ -34,7 +33,7 @@ class CiteUrn {
   /** The entire object component of the URN. */
   String objectComponent
 
-  // 2. period-delimited parts of objectComponent. Only 
+  // 2. period-delimited parts of objectComponent. Only
   // collection is mandatory.
   //
   /** Identifier for the CITE Collection */
@@ -72,7 +71,7 @@ class CiteUrn {
 
 
 
-  /** Initializes values for all constituent parts of 
+  /** Initializes values for all constituent parts of
    * of the URN's object component.  It checks for the presence of ranges,
    * and for each object (individual object or end points of a range),
    * it checks for presence of extended references.
@@ -80,7 +79,7 @@ class CiteUrn {
    * extended reference, for either a single object or a range of
    * objects.
    */
-  void initializeObjPart(String objStr) 
+  void initializeObjPart(String objStr)
   throws Exception {
     // first, check for range, then within each
     // obj ref, check for extended ref
@@ -92,13 +91,13 @@ class CiteUrn {
     def refParts1 = rangeParts[0].split(/@/)
     if (refParts1.size() == 2) {
       this.extendedRef_1 = refParts1[1]
-    } 
+    }
     this.objectId_1 = refParts1[0]
 
     def refParts2 = rangeParts[1].split(/@/)
     if (refParts2.size() == 2) {
       this.extendedRef_2 = refParts2[1]
-    } 
+    }
     this.objectId_2 = refParts2[0]
     break
 
@@ -106,7 +105,7 @@ class CiteUrn {
     def refParts = rangeParts[0].split(/@/)
     if (refParts.size() == 2) {
       this.extendedRef = refParts[1]
-    } 
+    }
     this.objectId = refParts[0]
     break
 
@@ -117,7 +116,7 @@ class CiteUrn {
   }
 
 
-  /** Initializes values for all constituent parts of 
+  /** Initializes values for all constituent parts of
    * of the URN's version component.  It checks for the presence of ranges,
    * and for each version (individual version or end points of a range),
    * it checks for presence of extended references.
@@ -151,7 +150,7 @@ class CiteUrn {
     def refParts2 = remainder2.split(/@/)
     if (refParts2.size() == 2) {
       this.extendedRef_2 = refParts2[1]
-    } 
+    }
     this.objectVersion_2 = refParts2[0]
     break
 
@@ -162,7 +161,7 @@ class CiteUrn {
     def refParts = remainder.split(/@/)
     if (refParts.size() == 2) {
       this.extendedRef = refParts[1]
-    } 
+    }
     this.objectVersion = refParts[0]
     break
 
@@ -240,7 +239,7 @@ class CiteUrn {
   }
 
 
-      
+
   /**
    * Gets the CITE URN object as a String.
    * @returns The URN as a String.
@@ -248,6 +247,7 @@ class CiteUrn {
   String toString() {
     return asString
   }
+
 
 
   /** Gets the CITE Namespace component of the URN.
@@ -265,11 +265,11 @@ class CiteUrn {
     return this.objectComponent
   }
 
-  
+
   // Extract parts of object component:
 
 
-  /** Extracts from the object component the required identifier 
+  /** Extracts from the object component the required identifier
    * for a CITE Collection.
    * @returns The collection identifier.
    */
@@ -278,7 +278,7 @@ class CiteUrn {
   }
 
 
-  /** Extracts from the object component the optional identifier 
+  /** Extracts from the object component the optional identifier
    * for a notional object.
    * @returns The object identifier, or null if the
    * URN only identifies a collection.
@@ -287,7 +287,7 @@ class CiteUrn {
     return this.objectId
   }
 
-  /** Extracts from the object component the optional identifier 
+  /** Extracts from the object component the optional identifier
    * for the version of an object.
    * @returns The version identifier, or null if the
    * URN only identifies a collection or notional object.
@@ -346,21 +346,21 @@ class CiteUrn {
     return this.extendedRef_2
   }
 
-  
+
 
   // tests on object component
 
   /** Tests if the URN identifies a notional work.
    * @returns True if the URN has a work identifier.
-   */  
+   */
   boolean hasObjectId() {
     return (this.objectId != null)
-  } 
+  }
 
 
   /** Tests if the URN identifies a version.
    * @returns True if the URN has a version identifier.
-   */  
+   */
   boolean hasVersion() {
     return (this.objectVersion != null)
   }
@@ -368,22 +368,22 @@ class CiteUrn {
 
   /** Tests if the URN includes a type-specific extended reference.
    * @returns True if the URN has an extended reference.
-   */  
+   */
   boolean hasExtendedRef() {
     return (this.extendedRef != null)
-  } 
-  
+  }
+
 
   /** Tests if the URN refers to a range of objects in
    * an ordered collection.
    * @returns True if the URN is a range.
-   */  
+   */
   boolean isRange() {
     return ((this.objectId_1 != null) && (this.objectId_2 != null))
   }
-  
+
   // Manipulating URNs
-  
+
   /** Creates a CiteUrn identifying a Collection from
    * a CiteUrn at any level.
    * @returns A CiteUrn identifying a Collection.
@@ -411,7 +411,7 @@ class CiteUrn {
 	reducedUrn += ".${this.objectVersion_2}"
       }
 
-      
+
     } else {
       reducedUrn += this.getObjectId()
       if (this.hasVersion()) {

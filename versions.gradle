@@ -6,4 +6,5 @@ ext {
     junitVersion = '4.12'
     xmlunitVersion = '1.3'
     concordionVersion = "1.5.1"
+
 }

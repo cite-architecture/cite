@@ -59,7 +59,7 @@ dependencies {
     compile group: 'org.codehaus.groovy', name: 'groovy-all', version: groovyVersion
     //compile group: 'org.iso_relax.verifier.jaxp.validation', name: 'isorelax-jaxp-bridge', version : '1.0'
     compile group: 'com.thaiopensource', name:'jing', version: jingVersion
-
+    
 
   testCompile group: "junit", name: "junit", version: junitVersion
   testCompile group: "org.concordion", name: "concordion", version: concordionVersion

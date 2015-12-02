@@ -3,7 +3,6 @@ package edu.harvard.chs.cite
 import java.text.Normalizer
 import java.text.Normalizer.Form
 
-
 /**
 * A class representing a reference to a text passage in a logical
 * hierarchical scheme, expressed in the notation of the Canonical
@@ -18,9 +17,6 @@ import java.text.Normalizer.Form
 */
 class CtsUrn {
 
-
-    
-
   Integer debug = 0
 
   /** Version description String. */
@@ -28,7 +24,7 @@ class CtsUrn {
 
 
   // All member properties are initialized in constructor.
-  
+
   /** String version of entire URN as submitted to constructor
    * (so not enforcing URI encoding of any subref or range components).
    */
@@ -46,7 +42,7 @@ class CtsUrn {
   // period-delimited parts of workComponent:
   /** Identifier for the TextGroup.  */
   String textGroup
-  /** Identifier for the notional work, corresponding to 
+  /** Identifier for the notional work, corresponding to
    * 'work' in the FRBR model. */
   String work
   /** The version-level component representing an edition or
@@ -55,10 +51,10 @@ class CtsUrn {
   /** Identifier for an exemplar. */
   String exemplar
 
-  
+
   /** Depth of the work component's hierarchy */
   WorkLevel workLevel
-      
+
   // parts of passageComponent
   /** For a single node reference, the passage */
   String passageNode
@@ -109,7 +105,7 @@ class CtsUrn {
       throw e
     }
   }
-  
+
   /** CtsUrns are constructed from a String conforming to the
    * syntax and semantics of the CTS URN specification.
    * @throws Exception if urnStr is not a syntactically valid CTS URN.
@@ -134,11 +130,11 @@ class CtsUrn {
 
 
 
-  
+
   /** Gets first string on a point URN.
    * @throws Exception if subreference string does not exist or is empty.
    */
-  String getSubref() 
+  String getSubref()
   throws Exception {
     if (this.subref) {
       return this.subref
@@ -151,7 +147,7 @@ class CtsUrn {
    * @returns Integer value of subrefIdx, or default value of 1.
    * @throws Exception if subref is not defined.
    */
-  Integer getSubrefIdx() 
+  Integer getSubrefIdx()
   throws Exception {
     if ((this.subref == null) || (this.subref == "")) {
       throw new Exception("CtsUrn: cannot index null subreference (raw string: ${rawString}).")
@@ -207,14 +203,14 @@ class CtsUrn {
   /** Gets workLevel property.
    * @returns WorkLevel for this URN.
    */
-  WorkLevel getWorkLevel() 
+  WorkLevel getWorkLevel()
   throws Exception {
     if (this.workLevel != null) {
       return this.workLevel
     } else {
       throw new Exception("CtsUrn: no work component in this urn (raw string: ${rawString}).")
     }
-  }                        
+  }
 
 
   /**
@@ -223,14 +219,14 @@ class CtsUrn {
    * @param urnString The values to assign, represented as a CTS Urn String.
    * @throws Exception if urnString is not a syntactically valid CTS URN.
    */
-  private void initializeUrn(String urnString) 
+  private void initializeUrn(String urnString)
   throws Exception {
     def components = urnString.split(":")
     if ((components[0] != 'urn') ||  (components[1] != 'cts') ) {
       throw new Exception("InitializeUrn: Bad URN syntax: ${urnString}")
     }
 
-    // exploit fall through: assign top-level, 
+    // exploit fall through: assign top-level,
     // colon-separated components:
     switch (components.size()) {
     case 5:
@@ -251,7 +247,7 @@ class CtsUrn {
       throw new Exception("Bad URN syntax: too few components in ${urnString}")
     }
     break
-    
+
     // must have at least a namespace + work identifier,
     // in addition to required 'urn' prefix and namespace
     // identifier:
@@ -269,7 +265,7 @@ class CtsUrn {
     case 1:
     this.workLevel = WorkLevel.GROUP
     break
-	
+
     case 2:
     this.workLevel = WorkLevel.WORK
     break
@@ -296,7 +292,7 @@ class CtsUrn {
 
     case WorkLevel.WORK:
     this.work = splitWork[1]
-        
+
     default :
     this.textGroup = splitWork[0]
     break
@@ -327,9 +323,9 @@ class CtsUrn {
 	  throw e
 	}
       }
-      break		
-          
-      default : 
+      break
+
+      default :
       break
       }
     }
@@ -393,7 +389,7 @@ class CtsUrn {
    * @returns True if first node of range urn has a subreference.
    * @throws Exception if URN is not a range URN.
    */
-  boolean hasSubref1()   
+  boolean hasSubref1()
   throws Exception {
     if (! isRange()) {
       throw new Exception("URN is not a range (raw string: ${rawString}).")
@@ -429,7 +425,7 @@ class CtsUrn {
 
   /**
    * "Private" method uses a regular expression to parse
-   *  a subref String into a list of either 1 or 2 elements.  
+   *  a subref String into a list of either 1 or 2 elements.
    *  If there is an index value, it is the second element;
    *  the (possibly empty) substring value is the first element
    *  in the list.
@@ -460,8 +456,8 @@ class CtsUrn {
    * @param str The URN to parse, as a String.
    * @throws Exception if indexed subreference not indexed with
    * an integer.
-   */    
-  private void initializePoint(String str) 
+   */
+  private void initializePoint(String str)
   throws Exception {
     def splitSub = str.split(/@/)
     if (debug > 0) {
@@ -488,7 +484,7 @@ class CtsUrn {
     if (debug > 0) {
       System.err.println "On subref URN ${str},subref parts = " + subrefParts
     }
-    
+
     this.subref = subrefParts[0]
     if (subrefParts.size() == 2) {
       try {
@@ -503,18 +499,18 @@ class CtsUrn {
     break
 
     }
-    
+
   }
 
-  
+
   /**
    * "Private" method assigns appropriate values ot member
    * properites if URN is a reference to a range.
    * @param str The URN to parse, as a String.
    * @throws Exception if index is not an integer value, or if
    * subreference is invalid.
-   */    
-  private void initializeRange(String str1, String str2) 
+   */
+  private void initializeRange(String str1, String str2)
   throws Exception {
 
     def splitSub = str1.split(/@/)
@@ -576,18 +572,30 @@ class CtsUrn {
     }
   }
 
-
-
-
-
-      
   /**
    * Returns the CTS URN object as a String in the normalized
-   * sting form specified by the CTS URN standard.
+   * string form specified by the CTS URN standard.
    * @returns The URN as a String.
    */
   String toString() {
-   return rawString
+    String urnString
+    if (this.isRange()) {
+      urnString = this.getUrnWithoutPassage() + this.rangeBegin
+      if (this.subref1) {
+        urnString += "@" + getSubref1() + "[${getSubrefIdx1()}]"
+      }
+      urnString += "-" + this.rangeEnd
+      if (this.subref2) {
+        urnString +=  "@" + getSubref2() + "[${getSubrefIdx2()}]"
+      }
+
+    } else {
+      urnString = this.getUrnWithoutPassage() + this.passageNode
+      if (this.subref) {
+        urnString +=  "@" + getSubref() + "[${getSubrefIdx()}]"
+      }
+    }
+   return urnString
   }
 
 
@@ -601,19 +609,19 @@ class CtsUrn {
   }
 
 
-  /** 
+  /**
    * Returns the URN value with work component reduced to a notional
-   * work level. 
+   * work level.
    * @returns The reduced URN, as a String.
    * @throws Exception if notional work level is not defined.
    */
-  String reduceToWork() 
+  String reduceToWork()
   throws Exception {
 
     if (this.getWorkLevel() == WorkLevel.GROUP) {
       throw new Exception("CtsUrn: no work part of this URN (raw string: ${rawString})")
     }
-    String base = "urn:cts:" + this.ctsNamespace + ":" + this.getTextGroup() + "." + this.getWork() 
+    String base = "urn:cts:" + this.ctsNamespace + ":" + this.getTextGroup() + "." + this.getWork()
     if (this.getPassageComponent() == null) {
       return base
     } else {
@@ -624,18 +632,18 @@ class CtsUrn {
 
 
 
-  /** 
+  /**
    * Returns the URN value with work component reduced to a version level.
-   * 
+   *
    * @returns The reduced URN, as a String.
    * @throws Exception if the URN is not defined at the version level.
    */
-  String reduceToVersion() 
+  String reduceToVersion()
   throws Exception {
     if ((this.getWorkLevel() == WorkLevel.GROUP) || (this.getWorkLevel() == WorkLevel.WORK)) {
       throw new Exception("CtsUrn: no version part of this URN (raw string ${rawString}).")
     }
-    String base = "urn:cts:" + this.ctsNamespace + ":" + this.getTextGroup() + "." + this.getWork() + "." + this.getVersion() 
+    String base = "urn:cts:" + this.ctsNamespace + ":" + this.getTextGroup() + "." + this.getWork() + "." + this.getVersion()
     if (this.getPassageComponent() == null) {
       return base
     } else {
@@ -644,7 +652,7 @@ class CtsUrn {
   }
 
 
-  /** 
+  /**
    * Returns the URN value without subreference, that is,
    * reduced to the citable node.
    * @returns The reduced URN, as a String.
@@ -660,8 +668,8 @@ class CtsUrn {
     return reducedUrn
   }
 
-  
-    /** 
+
+    /**
     * Gets the reference component of a passage that optionally
     * may include a sub-reference component.
     *
@@ -710,7 +718,7 @@ class CtsUrn {
 
 
     /**
-    * Counts depth of the citation hierarchy in a URN's 
+    * Counts depth of the citation hierarchy in a URN's
     * passage component.
     * @returns Number of elements in a passage reference.
     */
@@ -784,7 +792,7 @@ class CtsUrn {
    * @returns A String value for the work.
    * @throws Exception if workLevel is undefined.
    */
-  String getWork() 
+  String getWork()
   throws Exception {
     if (this.work != null) {
       return this.work
@@ -805,11 +813,11 @@ class CtsUrn {
    * @returns A String value for the work.
    * @throws Exception if work is not defined.
    */
-  String getWork(boolean nsQualified) 
-  throws Exception {  
+  String getWork(boolean nsQualified)
+  throws Exception {
     if (this.work == null) {
       throw new Exception("CtsUrn: no work component in this urn (raw string ${rawString}).")
-    } 
+    }
 
     if ((nsQualified) && (ctsNamespace) && (ctsNamespace != "")) {
       return "${ctsNamespace }:${work}"
@@ -827,7 +835,7 @@ class CtsUrn {
    * @returns A String value for the version.
    * @throws Exception if version is undefined.
    */
-  String getVersion() 
+  String getVersion()
   throws Exception {
     if (this.version == null) {
       throw new Exception("CtsUrn: no version component in this urn (raw string ${rawString}).")
@@ -845,7 +853,7 @@ class CtsUrn {
    * @returns A String value for the version.
    * @throws Exception if version is undefined.
    */
-  String getVersion(boolean nsQualified)   
+  String getVersion(boolean nsQualified)
   throws Exception {
     if (this.version == null) {
       throw new Exception("CtsUrn: no version component in this urn (raw string ${rawString}).")
@@ -865,11 +873,11 @@ class CtsUrn {
    * @returns A String value for the exemplar.
    * @throws Exception if exemplar is not defined.
    */
-  String getExemplar() 
-  throws Exception {  
+  String getExemplar()
+  throws Exception {
     if (this.exemplar == null) {
       throw new Exception("CtsUrn: no exemplar component in this urn (raw string ${rawString}).")
-    } 
+    }
     return this.exemplar
   }
 
@@ -882,11 +890,11 @@ class CtsUrn {
    * @returns A String value for the exemplar.
    * @throws Exception if exemplar is not defined.
    */
-  String getExemplar(boolean nsQualified) 
-  throws Exception {  
+  String getExemplar(boolean nsQualified)
+  throws Exception {
     if (this.exemplar == null) {
       throw new Exception("CtsUrn: no exemplar component in this urn (raw string ${rawString}).")
-    } 
+    }
     if ((nsQualified) && (ctsNamespace) && (ctsNamespace != "")) {
       return "${ctsNamespace }:${exemplar}"
     } else {
@@ -906,7 +914,7 @@ class CtsUrn {
       * such as that supplied by a TextInventory.
       * @param label A standard String value for the work level of
       * this URN.
-      * @returns An integer, ranging from 1 for text group to 4 for 
+      * @returns An integer, ranging from 1 for text group to 4 for
       * exemplar.
       */
       static WorkLevel levelForLabel(String label) {
@@ -923,7 +931,7 @@ class CtsUrn {
 	      case "edition":
 	      case "translation":
 	      return WorkLevel.VERSION
-	      
+
 	      case "exemplar":
 	      return WorkLevel.EXEMPLAR
 
@@ -944,7 +952,7 @@ class CtsUrn {
 
 
     /**
-    * Trims the passage component to a 
+    * Trims the passage component to a
     * specified level of the reference hierarchy.
     * @param level The number of levels of the citation
     * hierarchy to include.
@@ -992,7 +1000,25 @@ subrefIdx2 ${subrefIdx2}
 """
   }
 
-  
+
+  /** Creates a String representation of the URN with any subreferences
+  * URL encoded.
+  */
+  String encodeSubref() {
+    String encodedString
+    if (this.isRange()) {
+      encodedString = this.getUrnWithoutPassage() + this.rangeBegin //+ "-" + this.rangeEnd
+      if (this.subref1) {
+        encodedString += "@" + URLEncoder.encode(getSubref1(), "UTF-8") + "[${getSubrefIdx1()}]"
+      }
+      encodedString += "-" + this.rangeEnd
+      if (this.subref2) {
+        encodedString +=  "@" + URLEncoder.encode(getSubref2(), "UTF-8") + "[${getSubrefIdx2()}]"
+      }
+
+    } else {
+      encodedString = this.getUrnWithoutPassage() + this.passageNode
+    }
+    return encodedString
+  }
 }
-
-
