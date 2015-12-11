@@ -22,5 +22,13 @@ class TestCtsUrnSerial {
     assert urn.toString() == URLDecoder.decode(encoded, "UTF-8")
   }
 
+  @Test
+  void testUnicodeNotRange() {
+    // should always be NFC
+    CtsUrn urn = new CtsUrn("urn:cts:greekLit:tlg0012.tlg001.msA:1.1@μῆνιν")
+    String encoded = urn.encodeSubref()
+    assert urn.toString() == URLDecoder.decode(encoded, "UTF-8")
+  }
+
 
 }
