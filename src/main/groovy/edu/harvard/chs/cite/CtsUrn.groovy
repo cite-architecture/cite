@@ -1017,7 +1017,12 @@ subrefIdx2 ${subrefIdx2}
       }
 
     } else {
-      encodedString = this.getUrnWithoutPassage() + this.passageNode
+		if (this.subref){
+			encodedString = this.getUrnWithoutPassage() + this.passageNode
+			encodedString += "@" + URLEncoder.encode(getSubref(), "UTF-8") + "[${getSubrefIdx()}]"
+		} else {
+			encodedString = this.getUrnWithoutPassage() + this.passageNode
+		}
     }
     return encodedString
   }
