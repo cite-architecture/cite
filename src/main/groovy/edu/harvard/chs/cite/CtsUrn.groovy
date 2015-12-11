@@ -1009,17 +1009,17 @@ subrefIdx2 ${subrefIdx2}
     if (this.isRange()) {
       encodedString = this.getUrnWithoutPassage() + this.rangeBegin //+ "-" + this.rangeEnd
       if (this.subref1) {
-        encodedString += "@" + URLEncoder.encode(getSubref1(), "UTF-8") + "[${getSubrefIdx1()}]"
+			encodedString += URLEncoder.encode("@${getSubref1()}[${getSubrefIdx1()}]", "UTF-8")
       }
       encodedString += "-" + this.rangeEnd
       if (this.subref2) {
-        encodedString +=  "@" + URLEncoder.encode(getSubref2(), "UTF-8") + "[${getSubrefIdx2()}]"
+			encodedString += URLEncoder.encode("@${getSubref2()}[${getSubrefIdx2()}]", "UTF-8")
       }
 
     } else {
 		if (this.subref){
 			encodedString = this.getUrnWithoutPassage() + this.passageNode
-			encodedString += "@" + URLEncoder.encode(getSubref(), "UTF-8") + "[${getSubrefIdx()}]"
+			encodedString += URLEncoder.encode("@${getSubref()}[${getSubrefIdx()}]", "UTF-8")
 		} else {
 			encodedString = this.getUrnWithoutPassage() + this.passageNode
 		}
