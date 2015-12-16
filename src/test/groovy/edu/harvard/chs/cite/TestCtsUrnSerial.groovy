@@ -72,13 +72,16 @@ class TestCtsUrnSerial {
     CtsUrn urn6 = new CtsUrn("urn:cts:greekLit:tlg0012.tlg001.msA:")
     CtsUrn urn7 = new CtsUrn("urn:cts:greekLit:tlg0012.tlg001:")
 
-     assert urn1.toString() == "urn:cts:greekLit:tlg0012.tlg001.msA:1.1@μῆνιν-1.2@οὐλομένην"
-     assert urn2.toString() == "urn:cts:greekLit:tlg0012.tlg001.msA:1.1@μῆνιν[1]"
-     assert urn3.toString() == "urn:cts:greekLit:tlg0012.tlg001.msA:1.1"
-     assert urn4.toString() == "urn:cts:greekLit:tlg0012.tlg001.msA:1.1-1.2"
-     assert urn5.toString() == "urn:cts:greekLit:tlg0012.tlg001.msA:1"
-     assert urn6.toString() == "urn:cts:greekLit:tlg0012.tlg001.msA:"
-     assert urn7.toString() == "urn:cts:greekLit:tlg0012.tlg001:"
+	// Library should add indices to subrefs!
+	String testString = "urn:cts:greekLit:tlg0012.tlg001.msA:1.1@μῆνιν[1]-1.2@οὐλομένην[1]"
+	assert urn1.toString() == testString
+	
+    assert urn2.toString() == "urn:cts:greekLit:tlg0012.tlg001.msA:1.1@μῆνιν[1]"
+    assert urn3.toString() == "urn:cts:greekLit:tlg0012.tlg001.msA:1.1"
+    assert urn4.toString() == "urn:cts:greekLit:tlg0012.tlg001.msA:1.1-1.2"
+    assert urn5.toString() == "urn:cts:greekLit:tlg0012.tlg001.msA:1"
+    assert urn6.toString() == "urn:cts:greekLit:tlg0012.tlg001.msA:"
+    assert urn7.toString() == "urn:cts:greekLit:tlg0012.tlg001:"
 	}
 
 }

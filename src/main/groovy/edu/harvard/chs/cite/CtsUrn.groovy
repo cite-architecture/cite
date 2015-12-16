@@ -578,28 +578,32 @@ class CtsUrn {
    * @returns The URN as a String.
    */
   String toString() {
-    String urnString
-    if (this.isRange()) {
-      urnString = this.getUrnWithoutPassage() + this.rangeBegin
-      if (this.subref1) {
-        urnString += "@" + getSubref1() + "[${getSubrefIdx1()}]"
-      }
-      urnString += "-" + this.rangeEnd
-      if (this.subref2) {
-        urnString +=  "@" + getSubref2() + "[${getSubrefIdx2()}]"
-      }
+	  String urnString
+	  if (this.isRange()) {
+			  urnString = this.getUrnWithoutPassage() + this.rangeBegin
+				  if (this.subref1) {
+					  urnString += "@" + getSubref1() + "[${getSubrefIdx1()}]"
+				  }
+			  urnString += "-" + this.rangeEnd
+				  if (this.subref2) {
+					  urnString +=  "@" + getSubref2() + "[${getSubrefIdx2()}]"
+				  }
 
-    } else {
-      urnString = this.getUrnWithoutPassage() + this.passageNode
-      if (this.subref) {
-        urnString +=  "@" + getSubref() + "[${getSubrefIdx()}]"
-      }
-    }
-   return urnString
+		} else {
+			  if (this.getPassageNode()){
+					  urnString = this.getUrnWithoutPassage() + this.passageNode
+					  if (this.subref) {
+						  urnString +=  "@" + getSubref() + "[${getSubrefIdx()}]"
+					  }
+			  } else {
+				  urnString = this.getUrnWithoutPassage()
+			  }
+	    }
+		return urnString
   }
 
 
-  /**
+/**
    * Gets the full URN for the work-level reference, without any further
    * reference information.
    * @returns The full URN, as a String, down to the work-level.
@@ -1020,8 +1024,10 @@ subrefIdx2 ${subrefIdx2}
 		if (this.subref){
 			encodedString = this.getUrnWithoutPassage() + this.passageNode
 			encodedString += URLEncoder.encode("@${getSubref()}[${getSubrefIdx()}]", "UTF-8")
-		} else {
+		} else if (this.getPassageNode()) {
 			encodedString = this.getUrnWithoutPassage() + this.passageNode
+		} else {
+			encodedString = this
 		}
     }
     return encodedString
