@@ -15,11 +15,21 @@ class TestCtsUrnSerial {
 
 
   @Test
-  void testUnicode() {
+  void testUnicodeEncodeSubref() {
     // should always be NFC
     CtsUrn urn = new CtsUrn("urn:cts:greekLit:tlg0012.tlg001.msA:1.1@μῆνιν-1.2@οὐλομένην")
     String encoded = urn.encodeSubref()
     assert urn.toString() == URLDecoder.decode(encoded, "UTF-8")
+  }
+
+  @Test
+  void testUnicodeEncodeChars() {
+    CtsUrn urnEpsilonTonos = new CtsUrn("urn:cts:greekLit:tlg0012.tlg001.msA:1.1@οὐλομένην")
+    CtsUrn urnEpsilonOxia = new CtsUrn("urn:cts:greekLit:tlg0012.tlg001.msA:1.1@οὐλομένην")
+    CtsUrn urnEpsilonCombining = new CtsUrn("urn:cts:greekLit:tlg0012.tlg001.msA:1.1@οὐλομένην")
+	assert urnEpsilonTonos.toString() == urnEpsilonOxia.toString()
+	assert urnEpsilonTonos.toString() == urnEpsilonCombining.toString()
+	assert urnEpsilonOxia.toString() == urnEpsilonCombining.toString()
   }
 
   @Test
@@ -32,7 +42,7 @@ class TestCtsUrnSerial {
 
   @Test
   void testGetSubref(){
-    CtsUrn urn1 = new CtsUrn("urn:cts:greekLit:tlg0012.tlg001.msA:1.1@μῆνιν-1.2@οὐλομένην")
+    CtsUrn urn1 = new CtsUrn("urn:cts:greekLit:tlg0012.tlg001.msA:1.1@μῆνιν-1.2@οὐλομένην")
     CtsUrn urn2 = new CtsUrn("urn:cts:greekLit:tlg0012.tlg001.msA:1.1@μῆνιν[1]")
     CtsUrn urn3 = new CtsUrn("urn:cts:greekLit:tlg0012.tlg001.msA:1.1")
     CtsUrn urn4 = new CtsUrn("urn:cts:greekLit:tlg0012.tlg001.msA:1.1-1.2")
@@ -67,7 +77,7 @@ class TestCtsUrnSerial {
 	
 	@Test
 	void testToString(){
-	String testString = "urn:cts:greekLit:tlg0012.tlg001.msA:1.1@μῆνιν[1]-1.2@οὐλομένην[1]"
+	String testString = "urn:cts:greekLit:tlg0012.tlg001.msA:1.1@μῆνιν[1]-1.2@οὐλομένην[1]"
     CtsUrn urn1 = new CtsUrn(testString)
     CtsUrn urn2 = new CtsUrn("urn:cts:greekLit:tlg0012.tlg001.msA:1.1@μῆνιν[1]")
     CtsUrn urn3 = new CtsUrn("urn:cts:greekLit:tlg0012.tlg001.msA:1.1")
@@ -78,8 +88,7 @@ class TestCtsUrnSerial {
     CtsUrn urn8 = new CtsUrn("urn:cts:greekLit:tlg0012:")
 
 	// Library should add indices to subrefs!
-	//String testString = "urn:cts:greekLit:tlg0012.tlg001.msA:1.1@μῆνιν[1]-1.2@οὐλομένην[1]"
-	// !!!! We are failing here, because of some Unicode stuff. Sigh.
+
 	assert urn1.toString() == testString
 	
     assert urn2.toString() == "urn:cts:greekLit:tlg0012.tlg001.msA:1.1@μῆνιν[1]"
