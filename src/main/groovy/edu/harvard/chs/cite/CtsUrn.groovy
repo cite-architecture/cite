@@ -690,7 +690,7 @@ class CtsUrn {
     * hierarchy.
     * @param limit Number of levels of hierarchy to
     * include in resulting passage String.
-    * @returns Requesed passage component of the URN,
+    * @returns Requested passage component of the URN,
     * or if limit exceeds the number of elements
     * in the passage component, returns the original URN.
     */
@@ -700,7 +700,7 @@ class CtsUrn {
         def psgVals  = refPart.split(/\./)
 
 	StringBuffer refBuff = new StringBuffer(psgVals[0])
-	if (limit > psgVals.size()) {getWorkLevel
+	if (limit > psgVals.size()) {
 	    return this.getPassageComponent()
 	}
 	def count = 1
