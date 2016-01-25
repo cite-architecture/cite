@@ -32,6 +32,34 @@ class TestCtsUrnSerial {
 	assert urnEpsilonOxia.toString() == urnEpsilonCombining.toString()
   }
 
+
+  @Test
+  void testUnicodeNormalization() {
+
+		String test1 = "οὐλομένην" 
+		String test2 = "οὐλομένην"
+		String test3 = "οὐλομένην"
+
+		String urnString1 = "urn:cts:greekLit:tlg0012.tlg001:2.1@" + test1
+		String urnString2 = "urn:cts:greekLit:tlg0012.tlg001:2.1@" + test2
+		String urnString3 = "urn:cts:greekLit:tlg0012.tlg001:2.1@" + test3
+
+		shouldFail {
+			assert urnString1 == urnString2
+			assert urnString1 == urnString3
+			assert urnString2 == urnString3
+		}
+
+		CtsUrn urn1 = new CtsUrn(urnString1)
+		CtsUrn urn2 = new CtsUrn(urnString2)
+		CtsUrn urn3 = new CtsUrn(urnString3)
+
+		assert urn1.toString() == urn2.toString()
+		assert urn1.toString() == urn3.toString()
+		assert urn2.toString() == urn3.toString()
+
+  }
+
   @Test
   void testUnicodeNotRange() {
     // should always be NFC
