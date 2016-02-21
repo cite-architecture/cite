@@ -83,6 +83,13 @@ class TextInventory {
     */
     def translations = []
 
+    /**  A list of exemplar-level structures.
+    * Each exemplar-level structure is comprised of
+    * a CTS URN for the exemplar, a label, a boolean flag indicating
+    * whether or not this version is online, and a parent (version-level) URN.
+    */
+    def exemplars = []
+
 
     /** Map of Cts Urns to corresponding CitationModel object.
     * The map should include an entry for every citable work in
@@ -1085,6 +1092,90 @@ class TextInventory {
         initFromParsed(root, true)
     }
 
+
+    ArrayList collectCtsNamespaceData (groovy.util.Node root) {
+      ArrayList tripleList = []
+      root[ti.ctsnamespace].each { ctsns ->
+        def abbr = ctsns.'@abbr'
+        def uri = ctsns.'@ns'
+        def descr = ctsns[ti.description][0]?.text()
+        def nsTriple = [abbr, uri, descr]
+        tripleList.add(nsTriple)
+      }
+      return tripleList
+    }
+
+    /** Creates a pairing of URN and label for a text group
+    * from information in parsed textgroup element.
+    * @param tgNode Parsed groovy node for a text group.
+    * @returns Ordered pair of strings with URN and label values.
+    */
+    ArrayList tgFromNode(groovy.util.Node tgNode) {
+      def nameNode = tgNode[ti.groupname][0]
+      return([tgNode.'@urn',nameNode?.text()])
+    }
+
+    /** Creates a pairing of URN and label for a text group
+    * from information in parsed textgroup element.
+    * @param wkNode Parsed groovy node for a work.
+    * @returns Map of work's URN to work's lang attribute.
+    */
+    LinkedHashMap workLangMapping(groovy.util.Node wk) {
+      LinkedHashMap lang = [:]
+      wk.attributes().each { a ->
+        def k = a.getKey()
+        if (k instanceof groovy.xml.QName) {
+          if (k.getLocalPart() == "lang") {
+            lang[wk.'@urn'] = a.getValue()
+          }
+        }
+      }
+      return lang
+    }
+
+
+
+    /** Creates a triple of URN, label and parent URN
+    * for a work from information in a parsed work element.
+    * @param wkNode Parsed groovy node for a work.
+    * @param parentUrn URN, as a String, for the work's textgroup.
+    * @returns Ordered triple of strings.
+    */
+    ArrayList wkFromNode(groovy.util.Node wkNode, String parentUrn) {
+      def titleNode = wkNode[ti.title][0]
+      return([wkNode.'@urn',titleNode?.text(), parentUrn])
+    }
+
+
+
+    /** Creates a triple of URN, label and parent URN
+    * for a work from information in a parsed work element.
+    * @param wkNode Parsed groovy node for a work.
+    * @param parentUrn URN, as a String, for the work's textgroup.
+    * @returns Ordered triple of strings.
+    */
+    ArrayList editionFromNode(groovy.util.Node edNode, String parentUrn) {
+      def labelNode = edNode[ti.label][0]
+
+      def online = edNode[ti.online]
+      boolean isOnline = (online.size() > 0)
+      return([edNode.'@urn',labelNode?.text(),isOnline, parentUrn])
+    }
+    /*  if (isOnline)  {
+          def firstOnline = online[0]
+          onlineMap[e.'@urn'] = firstOnline.'@docname'
+
+          citationModelMap[e.'@urn'] = new CitationModel(firstOnline)
+             if (debug > 1) {
+                  System.err.println "Make CM for " + firstOnline
+                  System.err.println " indexed from " + e.'@urn'
+                  System.err.println "Size of model map now " + citationModelMap.keySet().size()
+
+
+}*/
+
+
+
     /** "Private" method populates TI model from an XML representation
     * of a CTS TextInventory that has been parsed as a
     * groovy Node object.
@@ -1103,76 +1194,36 @@ class TextInventory {
 
         //this.tiId = root.'@tiid'
         this.tiVersion = root.'@tiversion'
-        root[ti.ctsnamespace].each { ctsns ->
-            def abbr = ctsns.'@abbr'
-            def uri = ctsns.'@ns'
-            def descr = ctsns[ti.description][0]?.text()
-            def nsTriple = [abbr, uri, descr]
-            ctsnamespaces.add(nsTriple)
-        }
+
+        ctsnamespaces = collectCtsNamespaceData(root)
 
         root[ti.textgroup].each { g ->
-            def nameNode = g[ti.groupname][0]
-            textgroups.add([g.'@urn',nameNode?.text()])
-	    if (debug > 1) {
-	      System.err.println "Found text group " + nameNode?.text()
-	    }
+          textgroups.add(tgFromNode(g))
 
             g[ti.work].each { w ->
-                def titleNode = w[ti.title][0]
-                works.add([w.'@urn',titleNode?.text(), g.'@urn'])
-		if (debug > 1) {
-		  System.err.println "Found  work " + titleNode?.text()
-		}
-
-                //works.add(w.'@urn')
-                w.attributes().each { a ->
-                    def k = a.getKey()
-                    if (k instanceof groovy.xml.QName) {
-                        if (k.getLocalPart() == "lang") {
-                            worksLanguages[w.'@urn'] = a.getValue()
-                        }
-                    }
-                }
+              works.add(wkFromNode(w, g.'@urn'))
+              worksLanguages << workLangMapping(w)
 
 
                 w[ti.edition].each { e ->
-                    def labelNode = e[ti.label][0]
-
-                    def online = e[ti.online]
-                    boolean isOnline = (online.size() > 0)
-
-		    if (debug > 1) {
-		      System.err.println "Found  edition " + labelNode?.text()
-		      System.err.println "Online? " + isOnline
-		    }
-
-                    editions.add([e.'@urn',labelNode?.text(),isOnline, w.'@urn'])
-                    if (isOnline)  {
-                        def firstOnline = online[0]
-                        onlineMap[e.'@urn'] = firstOnline.'@docname'
-
-                        citationModelMap[e.'@urn'] = new CitationModel(firstOnline)
-			if (debug > 1) {
-			  System.err.println "Make CM for " + firstOnline
-			  System.err.println " indexed from " + e.'@urn'
-			  System.err.println "Size of model map now " + citationModelMap.keySet().size()
-
-
-			}
-
-                        def nsMaps = [:]
+                  editions.add(editionFromNode(e, w.'@urn'))
+/*
+                      def nsMaps = [:]
                         e[ti.online][ti.namespaceMapping].each { ns ->
                             String abbr = ns.'@abbreviation'
                             String uri = ns.'@nsURI'
                             nsMaps[abbr] = uri
                         }
                         nsMapList[e.'@urn'] = nsMaps
-                    }
+                    }*/
                 }
 
 
                 w[ti.translation].each { tr ->
+                  e[ti.exemplar].each { ex ->
+                    System.err.println "EDITION HAS EXEMPLAR " + ex
+                  }
+
                     tr.attributes().each { a ->
                         def k = a.getKey()
                         if (k instanceof groovy.xml.QName) {
