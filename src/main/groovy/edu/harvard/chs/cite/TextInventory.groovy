@@ -1076,7 +1076,6 @@ class TextInventory {
     * @param str String giving content of a valid XML inventory.
     */
     void initFromText (String str) {
-      System.err.println "INIT INV FROM:&&&" + str + "&&&"
         def root = new XmlParser().parseText(str)
         initFromParsed(root, true)
     }
