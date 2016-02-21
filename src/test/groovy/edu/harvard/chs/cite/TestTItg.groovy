@@ -15,12 +15,13 @@ class TestTItg {
     TextInventory ti = new TextInventory(new File("testdata/tiwexemplar.xml"))
     assert ti.textgroups.size() == 1
 
+    CtsUrn expectedUrn = new CtsUrn("urn:cts:greekLit:tlg0012:")
     def tgpair = ti.textgroups[0]
-    assert tgpair[0] == "urn:cts:greekLit:tlg0012:"
-    String label = tgpair[1].replaceAll(" ", "") 
+    CtsUrn actualUrn = new CtsUrn(tgpair[0])
+    assert expectedUrn.toString() == actualUrn.toString()
 
-
-    assert label == "Homer"
+    String expectedLabel = "Homer"
+    assert expectedLabel == tgpair[1].replaceAll(" ", "")
   }
 
 
