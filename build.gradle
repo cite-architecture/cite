@@ -11,7 +11,7 @@ apply from: "conf.gradle"
 group = "edu.harvard.chs"
 
 
-version = '1.0.6'
+version = '1.0.7'
 
 
 apply from: "versions.gradle"
@@ -110,7 +110,7 @@ uploadRngs {
         }
     }
 }
-
+/*
 
 // for specs with concordion:
 sourceSets {
@@ -155,7 +155,7 @@ setUpResources.doFirst {
 setUpResources.doLast {
   println "READING FILE TREE FROM " + mdSrc
   FileTree tree = fileTree(mdSrc) {
-    include "**/*.md"
+    include "** / *.md"
   }
   tree.visit { f ->
     if (f.relativePath.isFile()) {
@@ -192,6 +192,7 @@ test {
 test.doFirst {
   println "About to run 'test' task"
 }
+*/
 
 task mapVersion() {
 }
