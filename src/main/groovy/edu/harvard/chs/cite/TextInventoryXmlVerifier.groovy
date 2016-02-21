@@ -15,7 +15,7 @@ import groovy.xml.StreamingMarkupBuilder
 * change.  The URN and String methods are stable.  They will not change their signature
 * and should produce identical results even if the underlying implementation changes.
 */
-class TextInventory {
+class TextInventoryXmlVerifier {
 
 
     /** Debugging level. */

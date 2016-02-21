@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="TextInventory.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<TextInventory
+   tiid="hmt"
+   tiversion="5.0.rc.1"
+   xmlns="http://chs.harvard.edu/xmlns/cts"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+   <ctsnamespace
+      abbr="greekLit"
+      ns="http://chs.harvard.edu/ctsns/greekLit">
+      <description
+         xml:lang="eng"> The &quot;First Thousand Years of Greek&quot; project's inventory of Greek
+         texts. </description>
+   </ctsnamespace>
+   
+   
+   
+   
+   
+   <textgroup
+      urn="urn:cts:greekLit:tlg0012:">
+      <groupname
+         xml:lang="eng"> Homer </groupname>
+      <work
+         urn="urn:cts:greekLit:tlg0012.tlg001:"
+         xml:lang="grc">
+         <title
+            xml:lang="eng"> Iliad </title>
+         <edition
+            urn="urn:cts:greekLit:tlg0012.tlg001.testlines:">
+            <label
+               xml:lang="eng"> testlines </label>
+            <description
+               xml:lang="eng"> testlines</description>
+          
+            <exemplar urn="urn:cts:greekLit:tlg0012.tlg001.testlines.lextokens:">
+               <online
+                  docname="nonexistent.xml">
+                  
+                  <namespaceMapping
+                     abbreviation="tei"
+                     nsURI="http://www.tei-c.org/ns/1.0"/>
+                  <citationMapping>
+                     <citation
+                        label="book"
+                        scope="/tei:TEI/tei:text/tei:body"
+                        xpath="/tei:div[@n = '?']">
+                        <citation
+                           label="line"
+                           scope="/tei:TEI/tei:text/tei:body/tei:div[@n = '?']"
+                           xpath="/tei:l[@n = '?']">
+                           <citation
+                              label="line"
+                              scope="/tei:TEI/tei:text/tei:body/tei:div[@n = '?']/tei:l[@n = '?']"
+                              xpath="/tei:span[@n = '?']">
+                           </citation>
+                        </citation>
+                     </citation>
+                  </citationMapping>
+               </online>
+            </exemplar>
+         </edition>
+         
+      </work>
+   </textgroup>
+   
+
+</TextInventory>
