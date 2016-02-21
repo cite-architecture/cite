@@ -3,6 +3,11 @@ package edu.harvard.chs.cite
 class TextInventoryFileReader{
 
 
+  /** XML namespace for the TextInventory vocabulary.    */
+  static groovy.xml.Namespace ti = new groovy.xml.Namespace("http://chs.harvard.edu/xmlns/cts")
+
+
+
       static ArrayList collectCtsNamespaceData (groovy.util.Node root) {
         ArrayList tripleList = []
         root[ti.ctsnamespace].each { ctsns ->

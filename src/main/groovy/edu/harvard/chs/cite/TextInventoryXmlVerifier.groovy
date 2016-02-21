@@ -4,7 +4,11 @@ package edu.harvard.chs.cite
 */
 class TextInventoryXmlVerifier {
 
+    /** XML namespace for the TextInventory vocabulary.    */
+    static groovy.xml.Namespace ti = new groovy.xml.Namespace("http://chs.harvard.edu/xmlns/cts")
 
+
+    
   /** Verifies that all URNs for works and versions
    * agree with their parent element.  Adds a one-line text
    * description of each error found to errorList.
@@ -196,7 +200,7 @@ class TextInventoryXmlVerifier {
    */
   static ArrayList checkDataValues(groovy.util.Node root)
     throws Exception {
-      errorList ArrayList = []
+      ArrayList errorList = []
       errorList << checkUrnHierarchy(root)
       errorList << checkCtsNsDecl(root)
       errorList << checkLangAttrs(root)
