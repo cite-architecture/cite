@@ -22,9 +22,12 @@ class TestTIVersion {
 
     CtsUrn actualUrn = new CtsUrn(quad[0])
     assert expectedUrn.toString() == actualUrn.toString()
-    assert quad[2] == false
-    assert expectedLabel == quad[3].replaceAll(" ", "")
 
+    String expectedLabel = "testlines"
+    assert expectedLabel == quad[1].replaceAll(" ", "")
+
+    boolean expectedOnline = false
+    assert quad[2] == expectedOnline
 
   }
 
