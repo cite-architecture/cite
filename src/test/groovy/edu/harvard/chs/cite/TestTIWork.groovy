@@ -10,12 +10,14 @@ import static groovy.test.GroovyAssert.shouldFail
 */
 class TestTIWork {
 
+  TextInventory ti = new TextInventory(new File("testdata/tiwexemplar.xml"))
+
+
+  CtsUrn expectedUrn = new CtsUrn("urn:cts:greekLit:tlg0012.tlg001:")
+
   @Test
   void testCtsWork() {
-    TextInventory ti = new TextInventory(new File("testdata/tiwexemplar.xml"))
     assert ti.works.size() == 1
-
-    CtsUrn expectedUrn = new CtsUrn("urn:cts:greekLit:tlg0012.tlg001:")
     def triple = ti.works[0]
 
     CtsUrn actualUrn = new CtsUrn(triple[0])
@@ -25,6 +27,10 @@ class TestTIWork {
     assert expectedLabel == triple[1].replaceAll(" ", "")
   }
 
+  @Test
+  void testLangForWork() {
 
+    assert ti.worksLanguages[expectedUrn.toString()] == 'grc'
+  }
 
 }
