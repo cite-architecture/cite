@@ -26,17 +26,16 @@
          xml:lang="grc">
          <title
             xml:lang="eng"> Iliad </title>
-         <edition
-            urn="urn:cts:greekLit:tlg0012.tlg001.testlines:">
+         <translation
+            urn="urn:cts:greekLit:tlg0012.tlg001.testlines:" xml:lang="eng">
             <label
-               xml:lang="eng"> testlines </label>
-            <description
-               xml:lang="eng"> testlines</description>
-          
-            <exemplar urn="urn:cts:greekLit:tlg0012.tlg001.testlines.lextokens:">
-               <online></online>
-            </exemplar>
-         </edition>
+               xml:lang="eng"> English translation </label>
+            
+        <online n="x"/>
+                  
+                 
+            
+         </translation>
          
       </work>
    </textgroup>
