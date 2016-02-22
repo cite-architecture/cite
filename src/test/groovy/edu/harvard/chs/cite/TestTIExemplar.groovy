@@ -34,6 +34,15 @@ class TestTIExemplar {
 
   }
 
+  @Test
+  void testParent() {
+    assert ti.editions.size() == 1
+    def quad = ti.editions[0]
+    boolean expectedOnline = false
+    assert expectedOnline == quad[2]
+  }
+
+
 
 
 }
