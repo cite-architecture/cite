@@ -521,7 +521,7 @@ class TextInventory {
                     throw new Exception("CTS Namespaces misconfigured: label ${label}is not unique.")
                 break
             }
-     }
+    }
 
 
     /**  Finds version-level URNs for all online versions
@@ -882,8 +882,6 @@ class TextInventory {
     }
 
 
-
-
     /** "Private" method populates TI model from a string serialization of a
     * CTS TextInventory.
     * @param str String giving content of a valid XML inventory.
@@ -899,11 +897,6 @@ class TextInventory {
     }
 
 
-
-
-    
-
-
     /** "Private" method populates TI model from an XML representation
     * of a CTS TextInventory that has been parsed as a
     * groovy Node object.
@@ -914,7 +907,7 @@ class TextInventory {
     throws Exception {
         if (checkData) {
             try {
-                checkDataValues(root)
+                errorList = TextInventoryXmlVerifier.checkDataValues(root)
             } catch(Exception e) {
                 throw e
             }
@@ -923,28 +916,35 @@ class TextInventory {
         //this.tiId = root.'@tiid'
         this.tiVersion = root.'@tiversion'
 
-        ctsnamespaces = collectCtsNamespaceData(root)
+        ctsnamespaces = TextInventoryFileReader.collectCtsNamespaceData(root)
 
         root[ti.textgroup].each { g ->
-          textgroups.add(tgFromNode(g))
+          textgroups.add(TextInventoryFileReader.tgFromNode(g))
 
             g[ti.work].each { w ->
-              works.add(wkFromNode(w, g.'@urn'))
-              worksLanguages << workLangMapping(w)
+              works.add(TextInventoryFileReader.wkFromNode(w, g.'@urn'))
+              worksLanguages << TextInventoryFileReader.workLangMapping(w)
 
 
                 w[ti.edition].each { e ->
-                  editions.add(editionFromNode(e, w.'@urn'))
-
+                  editions.add(TextInventoryFileReader.editionFromNode(e, w.'@urn'))
                 }
 
 
                 w[ti.translation].each { tr ->
-                  e[ti.exemplar].each { ex ->
-                    System.err.println "EDITION HAS EXEMPLAR " + ex
-                  }
+                  translations.add(TextInventoryFileReader.editionFromNode(tr, w.'@urn'))
+		  translationLanguages << TextInventoryFileReader.workLangMapping(tr) // rename if this works
+		}
 
-                    tr.attributes().each { a ->
+	    }
+	}
+
+
+                  //e[ti.exemplar].each { ex ->
+                    //System.err.println "EDITION HAS EXEMPLAR " + ex
+                  //}
+
+                  /*  tr.attributes().each { a ->
                         def k = a.getKey()
                         if (k instanceof groovy.xml.QName) {
                             if (k.getLocalPart() == "lang") {
@@ -952,20 +952,13 @@ class TextInventory {
 
                             }
                         }
-                    }
-                    def labelNode = tr[ti.label][0]
-
-                    def online = tr[ti.online]
-                    boolean isOnline = (online.size() > 0)
-		    if (debug > 1) {
-		      System.err.println "Found translation " + labelNode?.text()
-		      System.err.println "Online? " + isOnline
-		    }
-                    translations.add([tr.'@urn',labelNode?.text(),isOnline, w.'@urn'])
+                    }*/
+/*
                     if (isOnline)  {
                         def firstOnline = online[0]
                         onlineMap[tr.'@urn'] = firstOnline.'@docname'
                         citationModelMap[tr.'@urn'] = new CitationModel(firstOnline)
+
 
                         def nsMaps = [:]
                         tr[ti.online][ti.namespaceMapping].each { ns ->
@@ -974,12 +967,7 @@ class TextInventory {
                             nsMaps[abbr] = uri
                         }
                         nsMapList[tr.'@urn'] = nsMaps
-
-                    }
-
-                }
-            }
-        }
+*/
 
     }
 

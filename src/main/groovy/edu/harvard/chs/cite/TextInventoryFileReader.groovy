@@ -35,7 +35,7 @@ class TextInventoryFileReader{
       * @param wkNode Parsed groovy node for a work.
       * @returns Map of work's URN to work's lang attribute.
       */
-      LinkedHashMap workLangMapping(groovy.util.Node wk) {
+      static LinkedHashMap workLangMapping(groovy.util.Node wk) {
         LinkedHashMap lang = [:]
         wk.attributes().each { a ->
           def k = a.getKey()
