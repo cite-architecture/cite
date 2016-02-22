@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="TextInventory.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
 <TextInventory
   tiid="hmt"
   tiversion="5.0.rc.1"
@@ -35,25 +36,9 @@
         <label
           xml:lang="eng"> testlines </label>
         <description
+          
           xml:lang="eng"> testlines</description>
-        <online
-          docname="A_Iliad_testlines.xml">
-    
-          <namespaceMapping
-            abbreviation="tei"
-            nsURI="http://www.tei-c.org/ns/1.0"/>
-          <citationMapping>
-            <citation
-              label="book"
-              scope="/tei:TEI/tei:text/tei:body"
-              xpath="/tei:div[@n = '?']">
-              <citation
-                label="line"
-                scope="/tei:TEI/tei:text/tei:body/tei:div[@n = '?']"
-                xpath="/tei:l[@n = '?']"/>
-            </citation>
-          </citationMapping>
-        </online>
+        <online/>
       </edition>
       <edition
         urn="urn:cts:greekLit:tlg0012.tlg001.test2:">
@@ -61,24 +46,8 @@
           xml:lang="eng"> testlines </label>
         <description
           xml:lang="eng"> testlines</description>
-        <online
-          docname="B_Iliad_test2.xml">
-         
-          <namespaceMapping
-            abbreviation="tei"
-            nsURI="http://www.tei-c.org/ns/1.0"/>
-          <citationMapping>
-            <citation
-              label="book"
-              scope="/tei:TEI/tei:text/tei:body"
-              xpath="/tei:div[@n = '?']">
-              <citation
-                label="line"
-                scope="/tei:TEI/tei:text/tei:body/tei:div[@n = '?']"
-                xpath="/tei:l[@n = '?']"/>
-            </citation>
-          </citationMapping>
-        </online>
+        <online/>
+     
         
       </edition>
     </work>
@@ -98,25 +67,8 @@
           xml:lang="eng">Unit</label>
         <description
           xml:lang="eng">Simple file for unit testing</description>
-        <online
-          docname="no-namespace.xml">
-  
-          <citationMapping>
-            <citation
-              label="frontmatter"
-              xpath="/div[ @type = 'preface' and @n = '?']"
-              scope="/root"/>
-   <citation
-              label="chapter"
-              xpath="/div[@type = 'chapter' and @n = '?']"
-              scope="/root">
-              <citation
-                label="section"
-                xpath="/div[@n = '?']"
-                scope="/root//div[@type = 'chapter' and @n = '?']"/>
-            </citation>
-          </citationMapping>
-        </online>
+        <online/>
+       
       </edition>
     </work>
   </textgroup>

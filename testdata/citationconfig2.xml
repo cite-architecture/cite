@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- On-line configuration for inventory in testinventory2.xml -->
+<CitationConfiguration>
+    <online
+        urn="urn:cts:greekLit:tlg0012.tlg001.testlines:"
+        type="xml"
+        docname="A_Iliad_testlines.xml">
+        
+        <namespaceMapping
+            abbreviation="tei"
+            nsURI="http://www.tei-c.org/ns/1.0"/>
+        <citationMapping>
+            <citation
+                label="book"
+                scope="/tei:TEI/tei:text/tei:body"
+                xpath="/tei:div[@n = '?']">
+                <citation
+                    label="line"
+                    scope="/tei:TEI/tei:text/tei:body/tei:div[@n = '?']"
+                    xpath="/tei:l[@n = '?']"/>
+            </citation>
+        </citationMapping>
+    </online>
+    
+    
+    <online
+        urn="urn:cts:greekLit:tlg0012.tlg001.test2:"
+        type="xml"
+        docname="B_Iliad_test2.xml">
+        
+        <namespaceMapping
+            abbreviation="tei"
+            nsURI="http://www.tei-c.org/ns/1.0"/>
+        <citationMapping>
+            <citation
+                label="book"
+                scope="/tei:TEI/tei:text/tei:body"
+                xpath="/tei:div[@n = '?']">
+                <citation
+                    label="line"
+                    scope="/tei:TEI/tei:text/tei:body/tei:div[@n = '?']"
+                    xpath="/tei:l[@n = '?']"/>
+            </citation>
+        </citationMapping>
+    </online>
+    
+    <online
+        urn="urn:cts:test1:test.unclassified.unittest:"
+        type="xml"
+        docname="no-namespace.xml">
+        
+        
+        <citationMapping>
+            <citation
+                label="frontmatter"
+                xpath="/div[ @type = 'preface' and @n = '?']"
+                scope="/root"/>
+            <citation
+                label="chapter"
+                xpath="/div[@type = 'chapter' and @n = '?']"
+                scope="/root">
+                <citation
+                    label="section"
+                    xpath="/div[@n = '?']"
+                    scope="/root//div[@type = 'chapter' and @n = '?']"/>
+            </citation>
+        </citationMapping>
+    </online>
+    
+</CitationConfiguration>
