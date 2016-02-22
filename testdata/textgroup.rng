@@ -137,12 +137,46 @@
 						name="pattern">urn:cts:.+:.+\..+\..+</param>
 				</data>
 			</attribute>
-			
+			<mixed>
+				<oneOrMore>
+					<element
+						name="ti:label">
+						<attribute
+							name="xml:lang">
+							<data
+								type="string">
+								<param
+									name="pattern">...+</param>
+							</data>
+						</attribute>
+						<data
+							type="string">
+							<param
+								name="pattern">.+</param>
+						</data>
+					</element>
+				</oneOrMore>
+				<zeroOrMore>
+					<element
+						name="ti:description">
+						<attribute
+							name="xml:lang">
+							<data
+								type="string">
+								<param
+									name="pattern">...+</param>
+							</data>
+						</attribute>
+						<text></text>
+					</element>
+				</zeroOrMore>
+				
 				<optional>
 					<element name="ti:online">
 						<empty></empty>
 					</element>
 				</optional>
+			</mixed>
 			
 		</element>
 	</define>
