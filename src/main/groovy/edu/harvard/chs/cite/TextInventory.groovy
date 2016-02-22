@@ -912,10 +912,8 @@ class TextInventory {
                 throw e
             }
         }
-
         //this.tiId = root.'@tiid'
         this.tiVersion = root.'@tiversion'
-
         ctsnamespaces = TextInventoryFileReader.collectCtsNamespaceData(root)
 
         root[ti.textgroup].each { g ->
@@ -931,7 +929,6 @@ class TextInventory {
 		  ed[ti.exemplar].each { ex ->
 		    exemplars.add(TextInventoryFileReader.childObjectFromNode(ex,ed.'@urn'))
 		  }
-		  
                 }
 
                 w[ti.translation].each { tr ->
@@ -944,21 +941,19 @@ class TextInventory {
 		}
 	    }
 	}
+    }
+
+  void initFromParsedCitationConfig (groovy.util.Node root, boolean checkData) throws Exception {
+
+    // responsible for:
+    /*
+      1. map of URNs to citation models
+      2. map of URNs to XML namespaces since that's what we're actually working with
+      3. file name since that's what we're actually working with
+    */
+  }
 
 
-                  //e[ti.exemplar].each { ex ->
-                    //System.err.println "EDITION HAS EXEMPLAR " + ex
-                  //}
-
-                  /*  tr.attributes().each { a ->
-                        def k = a.getKey()
-                        if (k instanceof groovy.xml.QName) {
-                            if (k.getLocalPart() == "lang") {
-                                translationLanguages[tr.'@urn'] = a.getValue()
-
-                            }
-                        }
-                    }*/
 /*
                     if (isOnline)  {
                         def firstOnline = online[0]
@@ -975,7 +970,7 @@ class TextInventory {
                         nsMapList[tr.'@urn'] = nsMaps
 */
 
-    }
+
 
 
 // CONIFGURAION FILE STUFF
