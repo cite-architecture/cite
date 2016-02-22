@@ -30,18 +30,18 @@ class TextInventoryFileReader{
         return([tgNode.'@urn',nameNode?.text()])
       }
 
-      /** Creates a pairing of URN and label for a text group
-      * from information in parsed textgroup element.
-      * @param wkNode Parsed groovy node for a work.
+      /** Maps a URN to a language identifier
+      * from information in parsed XML element.
+      * @param elem Parsed groovy node for a work.
       * @returns Map of work's URN to work's lang attribute.
       */
-      static LinkedHashMap workLangMapping(groovy.util.Node wk) {
+      static LinkedHashMap languageMapping(groovy.util.Node elem) {
         LinkedHashMap lang = [:]
-        wk.attributes().each { a ->
+        elem.attributes().each { a ->
           def k = a.getKey()
           if (k instanceof groovy.xml.QName) {
             if (k.getLocalPart() == "lang") {
-              lang[wk.'@urn'] = a.getValue()
+              lang[elem.'@urn'] = a.getValue()
             }
           }
         }
@@ -69,11 +69,11 @@ class TextInventoryFileReader{
       * @param parentUrn URN, as a String, for the work's textgroup.
       * @returns Ordered triple of strings.
       */
-      static ArrayList editionFromNode(groovy.util.Node edNode, String parentUrn) {
-        def labelNode = edNode[ti.label][0]
+      static ArrayList versionFromNode(groovy.util.Node versionNode, String parentUrn) {
+        def labelNode = versionNode[ti.label][0]
 
-        def online = edNode[ti.online]
+        def online = versionNode[ti.online]
         boolean isOnline = (online.size() > 0)
-        return([edNode.'@urn',labelNode?.text(),isOnline, parentUrn])
+        return([versionNode.'@urn',labelNode?.text(),isOnline, parentUrn])
       }
 }
