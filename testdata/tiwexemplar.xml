@@ -34,6 +34,7 @@
                xml:lang="eng"> testlines</description>
           
             <exemplar urn="urn:cts:greekLit:tlg0012.tlg001.testlines.lextokens:">
+               <label xml:lang="eng">Analysis as lexical tokens</label>
                <online></online>
             </exemplar>
          </edition>
