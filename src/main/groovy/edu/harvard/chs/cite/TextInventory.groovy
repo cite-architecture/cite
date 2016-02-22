@@ -106,22 +106,9 @@ class TextInventory {
     */
     def translationLanguages = [:]
 
-    /** Map of Cts Urns to corresponding CitationModel object.
-    * The map should include an entry for every citable work in
-    * the inventory.
-    * This map can be read from a CitationConfiguration file.
-    */
-    def citationModelMap = [:]
-
-    /** Map of Cts Urns to XML namespace mappings.
-    * This map can be read from a CitationConfiguration file.
-    */
-    def nsMapList = [:]
-
     /** Map of Cts Urns to corresponding value of online attribute.
     * The map should include an entry for every online version in the
     * inventory.
-    * This map can be read from a CitationConfiguration file.
     */
     def onlineMap = [:]
 
@@ -262,6 +249,8 @@ class TextInventory {
     * @returns A map of XML namespace abbreviations to URI values.
     * @throws Exception if urnStr is not a valid Cts Urn value.
     */
+  // MOVE TO CITATION CONFIG
+  /*
     LinkedHashMap xmlNsForVersion(String urnStr)
     throws Exception {
         try {
@@ -271,7 +260,8 @@ class TextInventory {
             throw e
         }
     }
-
+  */
+  
 
 
     /** Finds a map of the XML namespace abbreviations
@@ -852,35 +842,6 @@ class TextInventory {
     /* ********************************************************************/
     /* ** Begin "private" or internal methods *****************************/
 
-    /**
-    * Finds a CitationModel object for a work identified by URN, as a String.
-    * @param The URN, as a String, of the work for which to find
-    * the CitationModel.
-    * @returns A CitationModel derived from the online node corresponding
-    * to this URN, or null if no match found.
-    */
-    CitationModel getCitationModel(String urnStr)  {
-      if (debug > 1) {
-	System.err.println "CM map keys are: " + this.citationModelMap.keySet()
-	System.err.println "Includes ${urnStr}? " + this.citationModelMap.keySet().contains(urnStr)
-	System.err.println "So we return a " + this.citationModelMap[urnStr].getClass()
-	def modelMap = this.citationModelMap[urnStr]
-	System.err.println "Number of its mappings = " + modelMap.mappings.size()
-      }
-      return this.citationModelMap[urnStr]
-    }
-
-
-    /**
-    * Finds a CitationModel object for a work identified by URN.
-    * @param The URN the work for which to find the CitationModel.
-    * @returns A CitationModel derived from the online node corresponding
-    * to this URN, or null if no match found.
-    */
-    CitationModel getCitationModel(CtsUrn urn)  {
-        return getCitationModel(urn.toString())
-    }
-
 
     /** "Private" method populates TI model from a string serialization of a
     * CTS TextInventory.
@@ -890,7 +851,6 @@ class TextInventory {
         def root = new XmlParser().parseText(str)
         initFromParsedTextInv(root, true)
     }
-
 
     void initFromParsedTextInv (groovy.util.Node root) {
         initFromParsedTextInv(root, true)
@@ -943,48 +903,6 @@ class TextInventory {
 	}
     }
 
-  void initFromParsedCitationConfig (groovy.util.Node root, boolean checkData) throws Exception {
-
-    // responsible for:
-    /*
-      1. map of URNs to citation models
-      2. map of URNs to XML namespaces since that's what we're actually working with
-      3. file name since that's what we're actually working with
-    */
-  }
-
-
-/*
-                    if (isOnline)  {
-                        def firstOnline = online[0]
-                        onlineMap[tr.'@urn'] = firstOnline.'@docname'
-                        citationModelMap[tr.'@urn'] = new CitationModel(firstOnline)
-
-
-                        def nsMaps = [:]
-                        tr[ti.online][ti.namespaceMapping].each { ns ->
-                            String abbr = ns.'@abbreviation'
-                            String uri = ns.'@nsURI'
-                            nsMaps[abbr] = uri
-                        }
-                        nsMapList[tr.'@urn'] = nsMaps
-*/
-
-
-
-
-// CONIFGURAION FILE STUFF
-    /*
-    This should be read from a Coifguration FILE!
-
-                          def nsMaps = [:]
-                            e[ti.online][ti.namespaceMapping].each { ns ->
-                                String abbr = ns.'@abbreviation'
-                                String uri = ns.'@nsURI'
-                                nsMaps[abbr] = uri
-                            }
-                            nsMapList[e.'@urn'] = nsMaps
-                        }*/
 
     /** "Private" method finds data structures for all online versions of
     * texts known to the inventory.
@@ -1029,10 +947,6 @@ class TextInventory {
         }
         return wkList
     }
-
-
-
-
 
     /**   "Private" or internal method finds version-level data structures for all online versions
     * belonging to the TextGroup of the requested CtsUrn.
