@@ -69,11 +69,11 @@ class TextInventoryFileReader{
       * @param parentUrn URN, as a String, for the work's textgroup.
       * @returns Ordered triple of strings.
       */
-      static ArrayList versionFromNode(groovy.util.Node versionNode, String parentUrn) {
-        def labelNode = versionNode[ti.label][0]
+      static ArrayList childObjectFromNode(groovy.util.Node childNode, String parentUrn) {
+        def labelNode = childNode[ti.label][0]
 
-        def online = versionNode[ti.online]
+        def online = childNode[ti.online]
         boolean isOnline = (online.size() > 0)
-        return([versionNode.'@urn',labelNode?.text(),isOnline, parentUrn])
+        return([childNode.'@urn',labelNode?.text(),isOnline, parentUrn])
       }
 }

@@ -10,10 +10,27 @@ import static groovy.test.GroovyAssert.shouldFail
 */
 class TestTIExemplar {
 
+  TextInventory ti = new TextInventory(new File("testdata/tiwexemplar.xml"))
+
+  CtsUrn expectedUrn = new CtsUrn("urn:cts:greekLit:tlg0012.tlg001.testlines.lextokens:")
+
   @Test
   void testExemplar() {
-    TextInventory ti = new TextInventory(new File("testdata/tiwexemplar.xml"))
-    System.err.println "HERE ARE ctsnamespace triples: " + ti.ctsnamespaces
+    assert ti.exemplars.size() == 1
+    def quad = ti.exemplars[0]
+
+
+    CtsUrn actualUrn = new CtsUrn(quad[0])
+    assert expectedUrn.toString() == actualUrn.toString()
+
+    String expectedLabel = "Analysisaslexicaltokens"
+    assert expectedLabel == quad[1].replaceAll(" ", "")
+
+    boolean expectedOnline = true
+    assert expectedOnline == quad[2]
+
+    String expectedParent = "urn:cts:greekLit:tlg0012.tlg001.testlines:"
+    assert expectedParent == quad[3]
 
   }
 

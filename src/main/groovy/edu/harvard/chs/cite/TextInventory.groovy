@@ -926,13 +926,21 @@ class TextInventory {
               worksLanguages << TextInventoryFileReader.languageMapping(w)
 
                 w[ti.edition].each { ed ->
-                  editions.add(TextInventoryFileReader.versionFromNode(ed, w.'@urn'))
+                  editions.add(TextInventoryFileReader.childObjectFromNode(ed, w.'@urn'))
+
+		  ed[ti.exemplar].each { ex ->
+		    exemplars.add(TextInventoryFileReader.childObjectFromNode(ex,ed.'@urn'))
+		  }
 		  
                 }
 
                 w[ti.translation].each { tr ->
-                  translations.add(TextInventoryFileReader.versionFromNode(tr, w.'@urn'))
+                  translations.add(TextInventoryFileReader.childObjectFromNode(tr, w.'@urn'))
 		  translationLanguages << TextInventoryFileReader.languageMapping(tr)
+
+		  tr[ti.exemplar].each { ex ->
+		    exemplars.add(TextInventoryFileReader.childObjectFromNode(ex,tr.'@urn'))
+		  }
 		}
 	    }
 	}
