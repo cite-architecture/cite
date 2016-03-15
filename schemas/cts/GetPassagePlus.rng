@@ -46,7 +46,7 @@
                 </element>
                 <externalRef href="prevnext.rng"></externalRef>
             </element>
-            <externalRef href="description.rng"></externalRef>
+           <!-- <externalRef href="description.rng"></externalRef>-->
         </element>
     </start>
     
