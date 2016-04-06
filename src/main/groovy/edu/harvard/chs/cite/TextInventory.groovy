@@ -756,6 +756,46 @@ class TextInventory {
     }
 
 
+    /** Creates reabable name for an exemplar identified by URN.
+    * @param u URN identifying the edition to label.
+    * @returns A String with a human-readable name for the edition,
+    * or null if no edition is found for the requested URN.
+    */
+    String exemplarLabel (CtsUrn u) {
+      String exLabel = null
+      String urnBase = u.getUrnWithoutPassage()
+
+      exemplars.each { e ->
+
+	String firstCol = e[0]
+
+	if (firstCol == urnBase) {
+	  exLabel = e[1]
+	  if (debug > 1) {
+	    println "Equal! ${firstCol == urnBase} #${urnBase}# with #${firstCol}#"
+	    println "exLabel now ${exLabel}"
+	  }
+
+	}
+      }
+      return exLabel
+    }
+
+    /** Creates reabable name for an exemplar identified by URN.
+    * @param u URN identifying the translation to label.
+    * @returns A String with a human-readable name for the translation,
+    * or null if no translation is found for the requested URN.
+    * @throws Exception if s is not a valid CtsUrn String
+    */
+    def exemplarLabel (String s) {
+        def u
+        try {
+            u = new CtsUrn(s)
+            return exemplarLabel(u)
+        } catch (Exception e) {
+            throw e
+        }
+    }
 
     /** Creates reabable name for an edition identified by URN.
     * @param u URN identifying the edition to label.
@@ -807,6 +847,7 @@ class TextInventory {
     String versionLabel(CtsUrn u) {
         def edLabel = editionLabel(u)
         def xlatLabel = translationLabel(u)
+		def exempLsbel = exemplarLabel(u)
 
 	if (debug > 1) {
 	  println "versionLabel for ${u} gives edLabel ${edLabel}"

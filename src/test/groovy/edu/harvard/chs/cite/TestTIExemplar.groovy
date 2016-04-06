@@ -35,6 +35,23 @@ class TestTIExemplar {
   }
 
   @Test
+  void testExemplarMethod() {
+    assert ti.exemplars.size() == 1
+    def quad = ti.exemplars[0]
+
+
+    CtsUrn actualUrn = new CtsUrn(quad[0])
+    assert expectedUrn.toString() == actualUrn.toString()
+
+    String expectedLabel = "Analysisaslexicaltokens"
+    assert expectedLabel == quad[1].replaceAll(" ", "")
+
+	assert expectedLabel == ti.exemplarLabel(actualUrn).replaceAll(" ","")
+	assert expectedLabel == ti.exemplarLabel(actualUrn.toString()).replaceAll(" ","")
+
+  }
+
+  @Test
   void testParent() {
     assert ti.editions.size() == 1
     def quad = ti.editions[0]
