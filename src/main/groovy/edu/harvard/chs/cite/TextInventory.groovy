@@ -465,7 +465,7 @@ class TextInventory {
     */
     def worksForGroup(CtsUrn u) {
         def workUrns =  []
-        worksDataForGroup("urn:cts:${u.getCtsNamespace()}:${u.getTextGroup()}").each {
+        worksDataForGroup("urn:cts:${u.getCtsNamespace()}:${u.getTextGroup()}:").each {
             workUrns.add(it[0])
         }
         return workUrns
