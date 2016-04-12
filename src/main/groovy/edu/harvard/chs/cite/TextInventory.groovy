@@ -847,7 +847,7 @@ class TextInventory {
     String versionLabel(CtsUrn u) {
         def edLabel = editionLabel(u)
         def xlatLabel = translationLabel(u)
-		def exempLsbel = exemplarLabel(u)
+		def exempLabel = exemplarLabel(u)
 
 	if (debug > 1) {
 	  println "versionLabel for ${u} gives edLabel ${edLabel}"
@@ -856,6 +856,8 @@ class TextInventory {
             return edLabel
         } else if (xlatLabel) {
             return xlatLabel
+        } else if (exempLabel) {
+            return exempLabel
         } else {
 	  System.err.println "No label for ${u}"
             return null
