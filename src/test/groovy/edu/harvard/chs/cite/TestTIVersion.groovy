@@ -31,6 +31,17 @@ class TestTIVersion {
 
   }
 
+  @Test
+  void testVersionsForWork(){
+	 CtsUrn u = new CtsUrn("urn:cts:greekLit:tlg0012.tlg001.testlines:")
+     def l = ti.versionsForWork(u)
+	 CtsUrn x = new CtsUrn(l[0])
+	 assert "${u}" == "${x}"
+	 
+	 
+
+  }
+
 
 
 }

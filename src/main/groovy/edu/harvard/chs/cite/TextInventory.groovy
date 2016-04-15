@@ -590,7 +590,8 @@ class TextInventory {
     * level.
     **/
     def versionsForWork(CtsUrn u) {
-        def wk = "urn:cts:${u.getCtsNamespace()}:${u.getTextGroup(false)}.${u.getWork(false)}"
+        def wk = "urn:cts:${u.getCtsNamespace()}:${u.getTextGroup(false)}.${u.getWork(false)}:"
+		CtsUrn testIt = new CtsUrn(wk)
         def edlist = editions.findAll {
             it[3] == wk.toString()
         }
@@ -613,6 +614,50 @@ class TextInventory {
         return edUrls + transUrls
     }
 
+    /** Finds exemplar-level URNs known to this inventory for a
+    * requested CTS URN.
+    * @param u The CTS URN to search for.  This URN may include either a version-
+    * or exemplar-level reference to the work: it is trimmed to the work level
+    * before searching.  If u is given at the text group or work level, it is not an
+    * error, but the returned list will be empty.
+    * @returns A possibly empty List of Strings giving CtsUrns at the version
+    * level.
+    **/
+    def exemplarsForVersion(CtsUrn u) {
+        def v = "urn:cts:${u.getCtsNamespace()}:${u.getTextGroup(false)}.${u.getWork(false)}.${u.getVersion(false)}:"
+		CtsUrn testIt = new CtsUrn(v)
+        def exlist = exemplars.findAll {
+            it[3] == v.toString()
+        }
+
+        def exUrls = []
+        exlist.each { ex ->
+            exUrls.add(ex[0])
+        }
+
+        return exUrls
+    }
+
+
+
+    /** Finds exemplar-level URNs known to this inventory for a
+    * requested CTS URN.
+    * @param s A String representing the CTS URN to search for.
+    * This URN may include either a version-level or exemplar-level reference to the work:     * it is trimmed to the version level before searching.  If u is given at the
+    * text group or work level, it is not an error, but the returned list will be empty.
+    * @returns A possibly empty List of Strings giving CtsUrns at the version
+    * level.
+    * @throws Exception if s is not a valid CtsUrn String
+    */
+    def exemplarsForVersion(String s) {
+        def urn
+        try {
+            urn = new CtsUrn(s)
+            exemplarsForVersion(new CtsUrn(s))
+        } catch (Exception e) {
+            throw e
+        }
+    }
 
 
     /** Finds version-level URNs known to this inventory for a

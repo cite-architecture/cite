@@ -59,6 +59,15 @@ class TestTIExemplar {
     assert expectedOnline == quad[2]
   }
 
+  @Test
+  void testExemplarsForVersion(){
+	 CtsUrn u = new CtsUrn("urn:cts:greekLit:tlg0012.tlg001.testlines:")
+     def l = ti.exemplarsForVersion(u)
+	 System.err.println "list: ${l}"
+	 assert l[0] == "urn:cts:greekLit:tlg0012.tlg001.testlines.lextokens:"
+	 
+
+  }
 
 
 
