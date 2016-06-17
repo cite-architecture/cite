@@ -17,7 +17,7 @@ import java.text.Normalizer.Form
 */
 class CiteUrn {
 
-
+  Integer debug = 0
 
   /** String version of the URN as submitted to constructor
    * normalized to Unicode KFC form.
@@ -128,8 +128,11 @@ class CiteUrn {
   void initializeVersionPart(String versionStr) {
     // first, check for range, then within each
     // obj ref, check for extended ref
-    System.err.println "ANALYZE VERSION " + versionStr
-    System.err.println "is it a range?"
+    if (debug > 1) {
+      System.err.println "ANALYZE VERSION " + versionStr
+      System.err.println "is it a range?"
+    }
+
 
     def rangeParts = versionStr.split("-")
     switch(rangeParts.size()) {
