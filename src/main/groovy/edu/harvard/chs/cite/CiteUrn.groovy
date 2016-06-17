@@ -81,38 +81,39 @@ class CiteUrn {
    */
   void initializeObjPart(String objStr)
   throws Exception {
-    // first, check for range, then within each
-    // obj ref, check for extended ref
-    def rangeParts = objStr.split("-")
-    switch(rangeParts.size()) {
+  // first, check for range, then within each
+	// obj ref, check for extended ref
+  def rangeParts = objStr.split("-")
+	  System.err.println "Initialized ${objStr}. Got ${rangeParts.size()} rangeParts."
+  switch(rangeParts.size()) {
 
 
-    case 2:
-    def refParts1 = rangeParts[0].split(/@/)
-    if (refParts1.size() == 2) {
-      this.extendedRef_1 = refParts1[1]
-    }
-    this.objectId_1 = refParts1[0]
+	  case 2:
+	  def refParts1 = rangeParts[0].split(/@/)
+	  if (refParts1.size() == 2) {
+		  this.extendedRef_1 = refParts1[1]
+	  }
+	  this.objectId_1 = refParts1[0]
 
-    def refParts2 = rangeParts[1].split(/@/)
-    if (refParts2.size() == 2) {
-      this.extendedRef_2 = refParts2[1]
-    }
-    this.objectId_2 = refParts2[0]
-    break
+	  def refParts2 = rangeParts[1].split(/@/)
+	  if (refParts2.size() == 2) {
+		  this.extendedRef_2 = refParts2[1]
+	  }
+	  this.objectId_2 = refParts2[0]
+	  break
 
-    case 1:
-    def refParts = rangeParts[0].split(/@/)
-    if (refParts.size() == 2) {
-      this.extendedRef = refParts[1]
-    }
-    this.objectId = refParts[0]
-    break
+	  case 1:
+	  def refParts = rangeParts[0].split(/@/)
+	  if (refParts.size() == 2) {
+		  this.extendedRef = refParts[1]
+	  }
+	  this.objectId = refParts[0]
+	  break
 
-    default:
-    throw new Exception("CiteUrn:initializeObjPart: could not make sense of ${objStr}")
-    break
-    }
+	  default:
+	  throw new Exception("CiteUrn:initializeObjPart: could not make sense of ${objStr}")
+	  break
+  }
   }
 
 
@@ -135,9 +136,11 @@ class CiteUrn {
     switch(rangeParts.size()) {
 
     case 2:
+	System.err.println "YES!"
     def dotParts1 = rangeParts[0].split(/\./)
+	System.err.println "${dotParts1.size()}"
     this.objectId_1 = dotParts1[0]
-    String remainder1 = dotParts1[1..-1].join(".")
+	String remainder1 = dotParts1[1..-1].join(".")
     def refParts1 = remainder1.split(/@/)
     if (refParts1.size() == 2) {
       this.extendedRef_1 = refParts1[1]
@@ -155,6 +158,7 @@ class CiteUrn {
     break
 
     case 1:
+	System.err.println "No!"
     def dotParts = versionStr.split(/\./)
     this.objectId = dotParts[0]
     String remainder = dotParts[1..-1].join(".")
@@ -205,7 +209,8 @@ class CiteUrn {
       this.asString = Normalizer.normalize(urnStr, Form.NFC)
       this.ns = components[2]
       this.objectComponent = components[3]
-
+		System.err.println "Inside constructor. ${urnStr} yields objectComponent: ${objectComponent}"
+		System.err.println "countLevel(${objectComponent}) = ${countLevel(objectComponent)}"
       switch (countLevel(objectComponent)) {
       case 0:
       throw new Exception("CiteUrn: could not parse ${urnStr}")
@@ -379,6 +384,8 @@ class CiteUrn {
    * @returns True if the URN is a range.
    */
   boolean isRange() {
+	  System.err.println "Checking ${this} to see if it is a range."
+		  System.err.println "${this.objectId_1} - ${this.objectId_2} "
     return ((this.objectId_1 != null) && (this.objectId_2 != null))
   }
 
@@ -396,29 +403,31 @@ class CiteUrn {
 
   /** Creates a CiteUrn identifying a CITE Object from
    * a given CiteUrn.  If the source URN has an extended reference,
-   * it is omitted.
-   * @returns A CiteUrn identifying a Collection.
+   * it is omitted. If the URN points to a range, returns both end-objects.
+   * @returns A CiteUrn identifying an Object.
    */
   String reduceToObject() {
-    String reducedUrn = "urn:cite:${this.ns}:${this.collection}."
-    if (this.isRange()) {
-      reducedUrn += "${this.getFirstObject()}"
-      if (this.objectVersion_1 != null) {
-	reducedUrn += ".${this.objectVersion_1}"
-      }
-      reducedUrn +=      "-${this.getSecondObject()}"
-      if (this.objectVersion_2 != null) {
-	reducedUrn += ".${this.objectVersion_2}"
-      }
+	  System.err.println "reduceToObject(${this})"
+	  String reducedUrn = "urn:cite:${this.ns}:${this.collection}."
+	  if (this.isRange()) {
+		  System.err.println "${this} is a range."
+		  reducedUrn += "${this.getFirstObject()}"
+		  if (this.objectVersion_1 != null) {
+			  reducedUrn += ".${this.objectVersion_1}"
+		  }
+		  reducedUrn +=      "-${this.getSecondObject()}"
+		  if (this.objectVersion_2 != null) {
+			  reducedUrn += ".${this.objectVersion_2}"
+		  }
 
 
-    } else {
-      reducedUrn += this.getObjectId()
-      if (this.hasVersion()) {
-	reducedUrn += "." + this.getObjectVersion()
-      }
-    }
-    return (reducedUrn)
+	  } else {
+		  reducedUrn += this.getObjectId()
+		  if (this.hasVersion()) {
+			  reducedUrn += "." + this.getObjectVersion()
+		  }
+	  }
+	  return (reducedUrn)
   }
 
 }
