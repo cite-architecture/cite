@@ -19,11 +19,9 @@ class TestCiteUrnManip {
     assert objectImgWRoi.reduceToObject() == "urn:cite:hmt:vaimg.VA012RN_0013"
   }
 
-  /*
   @Test
   void testRangeManipulation() {
     CiteUrn mixedLevels = new CiteUrn("urn:cite:examples:bifolios.1.v1-3.v1")
     assert mixedLevels.reduceToObject() == "urn:cite:examples:bifolios.1.v1-3.v1"
   }
-  */
 }

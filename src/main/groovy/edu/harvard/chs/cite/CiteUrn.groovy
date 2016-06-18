@@ -159,9 +159,20 @@ class CiteUrn {
 			return om
 	}
 
+	/** 
+	 * Returns the number of period-delimited elements in the Object component
+	 * of a URN. If it is a range, returns the level of the first element of the range.
+	 * @param String containing the object-component of a URN
+	 * @returns Integer
+	 **/
 
   Integer countLevel(String objectRef) {
-    String stripped = objectRef.replaceAll(/@.+/,'')
+	  String stripped = null
+	  if ( objectRef.contains("-") ){
+    		stripped = objectRef.split("-")[0].replaceAll(/@.+/,'')
+	  } else {
+			stripped = objectRef.replaceAll(/@.+/,'')
+	  }
     return stripped.split(/\./).size()
   }
 
