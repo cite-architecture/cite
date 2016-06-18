@@ -19,7 +19,6 @@ class TestCiteUrnComponents {
    CiteUrn range8 = new CiteUrn("urn:cite:hmt:vaimg.VA012RN_0013.v1@0.1532,0.1021,0.4014,0.0225-VA024RN_0025@0.1532,0.1021,0.4014,0.0225")
    */
 
-
   // Object, version, not range, no extendedRef
   @Test
   void testConstructor1() {
@@ -194,16 +193,16 @@ class TestCiteUrnComponents {
   // Range Object, no version, one extendedRef (first)
   @Test
   void testConstructor9() {
-   CiteUrn versObj = new CiteUrn("urn:cite:hmt:vaimg.VA00.12RN_0013@0.12,0.12,0.12,0.12-VA024RN_0025")
-   assert versObj.asString == "urn:cite:hmt:vaimg.VA00.12RN_0013@0.12,0.12,0.12,0.12-VA024RN_0025"
+   CiteUrn versObj = new CiteUrn("urn:cite:hmt:vaimg.VA0012RN_0013@0.12,0.12,0.12,0.12-VA024RN_0025")
+   assert versObj.asString == "urn:cite:hmt:vaimg.VA0012RN_0013@0.12,0.12,0.12,0.12-VA024RN_0025"
    assert versObj.collection == "vaimg"
    assert versObj.extendedRef == null 
    assert versObj.extendedRef_1 == "0.12,0.12,0.12,0.12"
    assert versObj.extendedRef_2 == null
    assert versObj.ns == "hmt"
-   assert versObj.objectComponent == "vaimg.VA00.12RN_0013@0.12,0.12,0.12,0.12-VA024RN_0025"
+   assert versObj.objectComponent == "vaimg.VA0012RN_0013@0.12,0.12,0.12,0.12-VA024RN_0025"
    assert versObj.objectId == null
-   assert versObj.objectId_1 == "VA00.12RN_0013"
+   assert versObj.objectId_1 == "VA0012RN_0013"
    assert versObj.objectId_2 == "VA024RN_0025"
    assert versObj.objectVersion == null
    assert versObj.objectVersion_1 == null
@@ -286,5 +285,159 @@ class TestCiteUrnComponents {
    assert versObj.objectVersion_2 == "v2"
   }
 
+   // Range Object, version-Noversions, 2 extendedRef
+  @Test
+  void testConstructor14() {
+   CiteUrn versObj = new CiteUrn("urn:cite:hmt:vaimg.VA012RN_0013.v1@0.1,0.1,0.1,0.1-VA024RN_0025@0.2,0.2,0.2,0.2")
+   assert versObj.asString == "urn:cite:hmt:vaimg.VA012RN_0013.v1@0.1,0.1,0.1,0.1-VA024RN_0025@0.2,0.2,0.2,0.2" 
+   assert versObj.collection == "vaimg"
+   assert versObj.extendedRef == null 
+   assert versObj.extendedRef_1 == "0.1,0.1,0.1,0.1"
+   assert versObj.extendedRef_2 == "0.2,0.2,0.2,0.2"
+   assert versObj.ns == "hmt"
+   assert versObj.objectComponent == "vaimg.VA012RN_0013.v1@0.1,0.1,0.1,0.1-VA024RN_0025@0.2,0.2,0.2,0.2"
+   assert versObj.objectId == null
+   assert versObj.objectId_1 == "VA012RN_0013"
+   assert versObj.objectId_2 == "VA024RN_0025"
+   assert versObj.objectVersion == null
+   assert versObj.objectVersion_1 == "v1"
+   assert versObj.objectVersion_2 == null
+  }
+
+   // Range Object, noVersion-version, 2 extendedRef
+  @Test
+  void testConstructor15() {
+   CiteUrn versObj = new CiteUrn("urn:cite:hmt:vaimg.VA012RN_0013@0.1,0.1,0.1,0.1-VA024RN_0025.v1@0.2,0.2,0.2,0.2")
+   assert versObj.asString == "urn:cite:hmt:vaimg.VA012RN_0013@0.1,0.1,0.1,0.1-VA024RN_0025.v1@0.2,0.2,0.2,0.2" 
+   assert versObj.collection == "vaimg"
+   assert versObj.extendedRef == null 
+   assert versObj.extendedRef_1 == "0.1,0.1,0.1,0.1"
+   assert versObj.extendedRef_2 == "0.2,0.2,0.2,0.2"
+   assert versObj.ns == "hmt"
+   assert versObj.objectComponent == "vaimg.VA012RN_0013@0.1,0.1,0.1,0.1-VA024RN_0025.v1@0.2,0.2,0.2,0.2"
+   assert versObj.objectId == null
+   assert versObj.objectId_1 == "VA012RN_0013"
+   assert versObj.objectId_2 == "VA024RN_0025"
+   assert versObj.objectVersion == null
+   assert versObj.objectVersion_1 == null
+   assert versObj.objectVersion_2 == "v1"
+  }
+
+  
+   // Range Object, 2 versions, extendedRef-noExtendedRef
+  @Test
+  void testConstructor16() {
+   CiteUrn versObj = new CiteUrn("urn:cite:hmt:vaimg.VA012RN_0013.v1@0.1,0.1,0.1,0.1-VA024RN_0025.v2")
+   assert versObj.asString == "urn:cite:hmt:vaimg.VA012RN_0013.v1@0.1,0.1,0.1,0.1-VA024RN_0025.v2" 
+   assert versObj.collection == "vaimg"
+   assert versObj.extendedRef == null 
+   assert versObj.extendedRef_1 == "0.1,0.1,0.1,0.1"
+   assert versObj.extendedRef_2 == null
+   assert versObj.ns == "hmt"
+   assert versObj.objectComponent == "vaimg.VA012RN_0013.v1@0.1,0.1,0.1,0.1-VA024RN_0025.v2"
+   assert versObj.objectId == null
+   assert versObj.objectId_1 == "VA012RN_0013"
+   assert versObj.objectId_2 == "VA024RN_0025"
+   assert versObj.objectVersion == null
+   assert versObj.objectVersion_1 == "v1"
+   assert versObj.objectVersion_2 == "v2"
+  }
+
+   // Range Object, version-Noversions, extendedRef-noExtendedRef
+  @Test
+  void testConstructor17() {
+   CiteUrn versObj = new CiteUrn("urn:cite:hmt:vaimg.VA012RN_0013.v1@0.1,0.1,0.1,0.1-VA024RN_0025")
+   assert versObj.asString == "urn:cite:hmt:vaimg.VA012RN_0013.v1@0.1,0.1,0.1,0.1-VA024RN_0025" 
+   assert versObj.collection == "vaimg"
+   assert versObj.extendedRef == null 
+   assert versObj.extendedRef_1 == "0.1,0.1,0.1,0.1"
+   assert versObj.extendedRef_2 == null
+   assert versObj.ns == "hmt"
+   assert versObj.objectComponent == "vaimg.VA012RN_0013.v1@0.1,0.1,0.1,0.1-VA024RN_0025"
+   assert versObj.objectId == null
+   assert versObj.objectId_1 == "VA012RN_0013"
+   assert versObj.objectId_2 == "VA024RN_0025"
+   assert versObj.objectVersion == null
+   assert versObj.objectVersion_1 == "v1"
+   assert versObj.objectVersion_2 == null
+  }
+
+   // Range Object, noVersion-version, extendedRef-noExtendedRef
+  @Test
+  void testConstructor18() {
+   CiteUrn versObj = new CiteUrn("urn:cite:hmt:vaimg.VA012RN_0013@0.1,0.1,0.1,0.1-VA024RN_0025.v1")
+   assert versObj.asString == "urn:cite:hmt:vaimg.VA012RN_0013@0.1,0.1,0.1,0.1-VA024RN_0025.v1" 
+   assert versObj.collection == "vaimg"
+   assert versObj.extendedRef == null 
+   assert versObj.extendedRef_1 == "0.1,0.1,0.1,0.1"
+   assert versObj.extendedRef_2 == null
+   assert versObj.ns == "hmt"
+   assert versObj.objectComponent == "vaimg.VA012RN_0013@0.1,0.1,0.1,0.1-VA024RN_0025.v1"
+   assert versObj.objectId == null
+   assert versObj.objectId_1 == "VA012RN_0013"
+   assert versObj.objectId_2 == "VA024RN_0025"
+   assert versObj.objectVersion == null
+   assert versObj.objectVersion_1 == null
+   assert versObj.objectVersion_2 == "v1"
+  }
+
+  /* --------------------------------------------------- */
+
+   // Range Object, 2 versions, noExtendedRef - ExtendedRef
+  @Test
+  void testConstructor19() {
+   CiteUrn versObj = new CiteUrn("urn:cite:hmt:vaimg.VA012RN_0013.v1-VA024RN_0025.v2@0.2,0.2,0.2,0.2")
+   assert versObj.asString == "urn:cite:hmt:vaimg.VA012RN_0013.v1-VA024RN_0025.v2@0.2,0.2,0.2,0.2" 
+   assert versObj.collection == "vaimg"
+   assert versObj.extendedRef == null 
+   assert versObj.extendedRef_1 == null
+   assert versObj.extendedRef_2 == "0.2,0.2,0.2,0.2"
+   assert versObj.ns == "hmt"
+   assert versObj.objectComponent == "vaimg.VA012RN_0013.v1-VA024RN_0025.v2@0.2,0.2,0.2,0.2"
+   assert versObj.objectId == null
+   assert versObj.objectId_1 == "VA012RN_0013"
+   assert versObj.objectId_2 == "VA024RN_0025"
+   assert versObj.objectVersion == null
+   assert versObj.objectVersion_1 == "v1"
+   assert versObj.objectVersion_2 == "v2"
+  }
+
+   // Range Object, version-Noversions, noExtendedRef - ExtendedRef
+  @Test
+  void testConstructor20() {
+   CiteUrn versObj = new CiteUrn("urn:cite:hmt:vaimg.VA012RN_0013.v1-VA024RN_0025@0.2,0.2,0.2,0.2")
+   assert versObj.asString == "urn:cite:hmt:vaimg.VA012RN_0013.v1-VA024RN_0025@0.2,0.2,0.2,0.2" 
+   assert versObj.collection == "vaimg"
+   assert versObj.extendedRef == null 
+   assert versObj.extendedRef_1 == null
+   assert versObj.extendedRef_2 == "0.2,0.2,0.2,0.2"
+   assert versObj.ns == "hmt"
+   assert versObj.objectComponent == "vaimg.VA012RN_0013.v1-VA024RN_0025@0.2,0.2,0.2,0.2"
+   assert versObj.objectId == null
+   assert versObj.objectId_1 == "VA012RN_0013"
+   assert versObj.objectId_2 == "VA024RN_0025"
+   assert versObj.objectVersion == null
+   assert versObj.objectVersion_1 == "v1"
+   assert versObj.objectVersion_2 == null
+  }
+
+   // Range Object, noVersion-version, noExtendedRef - ExtendedRef
+  @Test
+  void testConstructor21() {
+   CiteUrn versObj = new CiteUrn("urn:cite:hmt:vaimg.VA012RN_0013-VA024RN_0025.v1@0.2,0.2,0.2,0.2")
+   assert versObj.asString == "urn:cite:hmt:vaimg.VA012RN_0013-VA024RN_0025.v1@0.2,0.2,0.2,0.2" 
+   assert versObj.collection == "vaimg"
+   assert versObj.extendedRef == null 
+   assert versObj.extendedRef_1 == null
+   assert versObj.extendedRef_2 == "0.2,0.2,0.2,0.2"
+   assert versObj.ns == "hmt"
+   assert versObj.objectComponent == "vaimg.VA012RN_0013-VA024RN_0025.v1@0.2,0.2,0.2,0.2"
+   assert versObj.objectId == null
+   assert versObj.objectId_1 == "VA012RN_0013"
+   assert versObj.objectId_2 == "VA024RN_0025"
+   assert versObj.objectVersion == null
+   assert versObj.objectVersion_1 == null
+   assert versObj.objectVersion_2 == "v1"
+  }
 
 }

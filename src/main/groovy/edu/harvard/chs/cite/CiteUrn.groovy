@@ -74,109 +74,90 @@ class CiteUrn {
   /** Initializes values for all constituent parts of
    * of the URN's object component.  It checks for the presence of ranges,
    * and for each object (individual object or end points of a range),
-   * it checks for presence of extended references.
+   * it checks for presence of versions and extended references.
    * @param objStr The identifying String, optionally including
    * extended reference, for either a single object or a range of
-   * objects.
+   * objects. Does NOT include collection-ID!
    */
   void initializeObjPart(String objStr)
   throws Exception {
   // first, check for range, then within each
 	// obj ref, check for extended ref
   def rangeParts = objStr.split("-")
-	  System.err.println "Initialized ${objStr}. Got ${rangeParts.size()} rangeParts."
-  switch(rangeParts.size()) {
 
+  System.err.println "Initialized ${objStr}. Got ${rangeParts.size()} rangeParts."
+ 	def tempMap = [:] 
+	  
+  	if (rangeParts.size() == 1){ // Not a range
+		tempMap = parseObject(rangeParts[0])			
+		this.extendedRef = tempMap["objectRef"]
+		this.objectId = tempMap["objectId"]
+		this.objectVersion = tempMap["objectVersion"]
+	} else if (rangeParts.size() == 2) { // A range
+		// Deal with Start
+		tempMap = parseObject(rangeParts[0])			
+		this.extendedRef_1 = tempMap["objectRef"]
+		this.objectId_1 = tempMap["objectId"]
+		this.objectVersion_1 = tempMap["objectVersion"]
 
-	  case 2:
-	  def refParts1 = rangeParts[0].split(/@/)
-	  if (refParts1.size() == 2) {
-		  this.extendedRef_1 = refParts1[1]
-	  }
-	  this.objectId_1 = refParts1[0]
+		// Deal with end
+		tempMap = parseObject(rangeParts[1])			
+		this.extendedRef_2 = tempMap["objectRef"]
+		this.objectId_2 = tempMap["objectId"]
+		this.objectVersion_2 = tempMap["objectVersion"]
 
-	  def refParts2 = rangeParts[1].split(/@/)
-	  if (refParts2.size() == 2) {
-		  this.extendedRef_2 = refParts2[1]
-	  }
-	  this.objectId_2 = refParts2[0]
-	  break
-
-	  case 1:
-	  def refParts = rangeParts[0].split(/@/)
-	  if (refParts.size() == 2) {
-		  this.extendedRef = refParts[1]
-	  }
-	  this.objectId = refParts[0]
-	  break
-
-	  default:
-	  throw new Exception("CiteUrn:initializeObjPart: could not make sense of ${objStr}")
-	  break
-  }
-  }
-
-
-  /** Initializes values for all constituent parts of
-   * of the URN's version component.  It checks for the presence of ranges,
-   * and for each version (individual version or end points of a range),
-   * it checks for presence of extended references.
-   * @param versionStr The identifying String, optionally including
-   * extended reference, for either a single version reference or a range of
-   * version references; the String should be prefixed with the object
-   * identifying String, separated by a period, e.g., "object.version".
-   */
-  void initializeVersionPart(String versionStr) {
-    // first, check for range, then within each
-    // obj ref, check for extended ref
-    System.err.println "ANALYZE VERSION " + versionStr
-    System.err.println "is it a range?"
-
-    def rangeParts = versionStr.split("-")
-    switch(rangeParts.size()) {
-
-    case 2:
-	System.err.println "YES!"
-    def dotParts1 = rangeParts[0].split(/\./)
-	System.err.println "${dotParts1.size()}"
-    this.objectId_1 = dotParts1[0]
-	String remainder1 = dotParts1[1..-1].join(".")
-    def refParts1 = remainder1.split(/@/)
-    if (refParts1.size() == 2) {
-      this.extendedRef_1 = refParts1[1]
-    }
-    this.objectVersion_1 = refParts1[0]
-
-    def dotParts2 = rangeParts[1].split(/\./)
-    this.objectId_2 = dotParts2[0]
-    String remainder2 = dotParts2[1..-1].join(".")
-    def refParts2 = remainder2.split(/@/)
-    if (refParts2.size() == 2) {
-      this.extendedRef_2 = refParts2[1]
-    }
-    this.objectVersion_2 = refParts2[0]
-    break
-
-    case 1:
-	System.err.println "No!"
-    def dotParts = versionStr.split(/\./)
-    this.objectId = dotParts[0]
-    String remainder = dotParts[1..-1].join(".")
-    def refParts = remainder.split(/@/)
-    if (refParts.size() == 2) {
-      this.extendedRef = refParts[1]
-    }
-    this.objectVersion = refParts[0]
-    break
-
-    default:
-    throw new Exception("CiteUrn:initializeVersionPart: could not make sense of ${objStr}")
-    break
-    }
-
+	} else {
+      throw new Exception("Bad syntax in object-identifier (too many hyphens): #${objStr}#")
+	}
 
   }
 
+  /** Method to parse the parts of an Object identifier:
+	* (1) object, (2) version, (3) subref
+	* We need to do this for single-object URNs, and each end of a range, so
+	* it makes sense to break it out.
+	* NOTE: Strip off the collection-ID before sending in the Object String.
+	*       Otherwise there is no way to distinguish 'collection.object' from 'object.version'
+	*
+	* @param A String representing an object-identifier
+	* @returns Map. om.objectId om.objectVersion om.objectRef 
+   **/
+	Map parseObject(String objStr){
+		def tempObjPlusVersion = ""
+		def om = [:]
+		om["objectId"] = null
+		om["objectVersion"] = null
+		om["objectRef"] = null
+
+			// 1. split off extendedRef, if any
+			if (objStr.contains("@")){
+				om["objectRef"] = objStr.split("@")[1]
+				tempObjPlusVersion = objStr.split("@")[0]
+			} else {
+				tempObjPlusVersion = objStr
+			}
+			System.err.println "At this point, tempObjPlusVersion = ${tempObjPlusVersion}"
+			System.err.println "size() = ${tempObjPlusVersion.split(/\./).size()}"
+
+			// 2. split off version, if any
+			if (tempObjPlusVersion.split(/\./).size() > 2){
+			  throw new Exception("Bad syntax in object-identifier (too many components): #${objStr}#")
+			}
+			
+			if (tempObjPlusVersion.split(/\./).size() == 1){
+				System.err.println "Size == 1 for ${tempObjPlusVersion}"
+				om["objectId"] = tempObjPlusVersion
+			} 
+			if (tempObjPlusVersion.split(/\./).size() == 2){
+				System.err.println "Size == 2 for ${tempObjPlusVersion}"
+				System.err.println "[0] = ${tempObjPlusVersion.split(/\./)[0]}"
+				System.err.println "[1] = ${tempObjPlusVersion.split(/\./)[1]}"
+				om["objectId"] = tempObjPlusVersion.split(/\./)[0]
+				om["objectVersion"] = tempObjPlusVersion.split(/\./)[1]
+			} 
+			// 3. we're good
+			return om
+	}
 
 
   Integer countLevel(String objectRef) {
@@ -211,31 +192,20 @@ class CiteUrn {
       this.objectComponent = components[3]
 		System.err.println "Inside constructor. ${urnStr} yields objectComponent: ${objectComponent}"
 		System.err.println "countLevel(${objectComponent}) = ${countLevel(objectComponent)}"
-      switch (countLevel(objectComponent)) {
-      case 0:
-      throw new Exception("CiteUrn: could not parse ${urnStr}")
-      break
-      case 1:
-      this.collection = objectComponent
-      break
-      case 2:
-      def parts = objectComponent.split(/\./)
-      this.collection = parts[0]
-      Integer last = parts.size() - 1
-      initializeObjPart(parts[1..last].join("."))
-
-      break
-      case 3:
-      def parts = objectComponent.split(/\./)
-      this.collection = parts[0]
-      Integer last = parts.size() - 1
-      initializeVersionPart(parts[1..last].join("."))
-      break
-
-      default :
-
-      break
-      }
+		switch (countLevel(objectComponent)) {
+			case 0: 										// must have at least one, a collection-id
+			throw new Exception("CiteUrn: could not parse ${urnStr}")
+			break
+			case 1:										// has only collection-id
+			this.collection = objectComponent
+			break
+			default:										// collection-Id + object-Id
+			def parts = objectComponent.split(/\./)
+			this.collection = parts[0]
+			Integer last = parts.size() - 1
+			initializeObjPart(parts[1..last].join(".")) // we've just removed the collection-ID
+			break
+		}
 
 
     } else {
