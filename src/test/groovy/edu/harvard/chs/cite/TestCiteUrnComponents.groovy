@@ -134,4 +134,157 @@ class TestCiteUrnComponents {
    assert versObj.objectVersion_2 == null
   }
 
+  // Range Object, no version, two extendedReff
+  @Test
+  void testConstructor7() {
+   CiteUrn versObj = new CiteUrn("urn:cite:hmt:vaimg.VA012RN_0013@12,12,12,12-VA024RN_0025@11,11,11,11")
+   assert versObj.asString == "urn:cite:hmt:vaimg.VA012RN_0013@12,12,12,12-VA024RN_0025@11,11,11,11"
+   assert versObj.collection == "vaimg"
+   assert versObj.extendedRef == null 
+   assert versObj.extendedRef_1 == "12,12,12,12"
+   assert versObj.extendedRef_2 == "11,11,11,11"
+   assert versObj.ns == "hmt"
+   assert versObj.objectComponent == "vaimg.VA012RN_0013@12,12,12,12-VA024RN_0025@11,11,11,11"
+   assert versObj.objectId == null
+   assert versObj.objectId_1 == "VA012RN_0013"
+   assert versObj.objectId_2 == "VA024RN_0025"
+   assert versObj.objectVersion == null
+   assert versObj.objectVersion_1 == null
+   assert versObj.objectVersion_2 == null
+  }
+
+  // Range Object, no version, two extendedReff (with decimals!)
+  @Test
+  void testConstructor7a() {
+   CiteUrn versObj = new CiteUrn("urn:cite:hmt:vaimg.VA012RN_0013@0.12,0.12,0.12,0.12-VA024RN_0025@0.11,0.11,0.11,0.11")
+   assert versObj.asString == "urn:cite:hmt:vaimg.VA012RN_0013@0.12,0.12,0.12,0.12-VA024RN_0025@0.11,0.11,0.11,0.11"
+   assert versObj.collection == "vaimg"
+   assert versObj.extendedRef == null 
+   assert versObj.extendedRef_1 == "0.12,0.12,0.12,0.12"
+   assert versObj.extendedRef_2 == "0.11,0.11,0.11,0.11"
+   assert versObj.ns == "hmt"
+   assert versObj.objectComponent == "vaimg.VA012RN_0013@0.12,0.12,0.12,0.12-VA024RN_0025@0.11,0.11,0.11,0.11"
+   assert versObj.objectId == null
+   assert versObj.objectId_1 == "VA012RN_0013"
+   assert versObj.objectId_2 == "VA024RN_0025"
+   assert versObj.objectVersion == null
+   assert versObj.objectVersion_1 == null
+   assert versObj.objectVersion_2 == null
+  }
+
+  // Range Object, no version, one extendedRef (second)
+  @Test
+  void testConstructor8() {
+   CiteUrn versObj = new CiteUrn("urn:cite:hmt:vaimg.VA012RN_0013-VA024RN_0025@0.11,0.11,0.11,0.11")
+   assert versObj.asString == "urn:cite:hmt:vaimg.VA012RN_0013-VA024RN_0025@0.11,0.11,0.11,0.11"
+   assert versObj.collection == "vaimg"
+   assert versObj.extendedRef == null 
+   assert versObj.extendedRef_1 == null
+   assert versObj.extendedRef_2 == "0.11,0.11,0.11,0.11"
+   assert versObj.ns == "hmt"
+   assert versObj.objectComponent == "vaimg.VA012RN_0013-VA024RN_0025@0.11,0.11,0.11,0.11"
+   assert versObj.objectId == null
+   assert versObj.objectId_1 == "VA012RN_0013"
+   assert versObj.objectId_2 == "VA024RN_0025"
+   assert versObj.objectVersion == null
+   assert versObj.objectVersion_1 == null
+   assert versObj.objectVersion_2 == null
+  }
+
+  // Range Object, no version, one extendedRef (first)
+  @Test
+  void testConstructor9() {
+   CiteUrn versObj = new CiteUrn("urn:cite:hmt:vaimg.VA00.12RN_0013@0.12,0.12,0.12,0.12-VA024RN_0025")
+   assert versObj.asString == "urn:cite:hmt:vaimg.VA00.12RN_0013@0.12,0.12,0.12,0.12-VA024RN_0025"
+   assert versObj.collection == "vaimg"
+   assert versObj.extendedRef == null 
+   assert versObj.extendedRef_1 == "0.12,0.12,0.12,0.12"
+   assert versObj.extendedRef_2 == null
+   assert versObj.ns == "hmt"
+   assert versObj.objectComponent == "vaimg.VA00.12RN_0013@0.12,0.12,0.12,0.12-VA024RN_0025"
+   assert versObj.objectId == null
+   assert versObj.objectId_1 == "VA00.12RN_0013"
+   assert versObj.objectId_2 == "VA024RN_0025"
+   assert versObj.objectVersion == null
+   assert versObj.objectVersion_1 == null
+   assert versObj.objectVersion_2 == null
+  }
+
+  // Range Object, two versions, no extendedRef
+  @Test
+  void testConstructor10() {
+   CiteUrn versObj = new CiteUrn("urn:cite:hmt:vaimg.VA012RN_0013.v1-VA024RN_0025.v1")
+   assert versObj.asString == "urn:cite:hmt:vaimg.VA012RN_0013.v1-VA024RN_0025.v1"
+   assert versObj.collection == "vaimg"
+   assert versObj.extendedRef == null 
+   assert versObj.extendedRef_1 == null
+   assert versObj.extendedRef_2 == null
+   assert versObj.ns == "hmt"
+   assert versObj.objectComponent == "vaimg.VA012RN_0013.v1-VA024RN_0025.v1"
+   assert versObj.objectId == null
+   assert versObj.objectId_1 == "VA012RN_0013"
+   assert versObj.objectId_2 == "VA024RN_0025"
+   assert versObj.objectVersion == null
+   assert versObj.objectVersion_1 == "v1"
+   assert versObj.objectVersion_2 == "v1"
+  }
+
+  // Range Object, version-noVersion, no extendedRef
+  @Test
+  void testConstructor11() {
+   CiteUrn versObj = new CiteUrn("urn:cite:hmt:vaimg.VA012RN_0013.v1-VA024RN_0025")
+   assert versObj.asString == "urn:cite:hmt:vaimg.VA012RN_0013.v1-VA024RN_0025"
+   assert versObj.collection == "vaimg"
+   assert versObj.extendedRef == null 
+   assert versObj.extendedRef_1 == null
+   assert versObj.extendedRef_2 == null
+   assert versObj.ns == "hmt"
+   assert versObj.objectComponent == "vaimg.VA012RN_0013.v1-VA024RN_0025"
+   assert versObj.objectId == null
+   assert versObj.objectId_1 == "VA012RN_0013"
+   assert versObj.objectId_2 == "VA024RN_0025"
+   assert versObj.objectVersion == null
+   assert versObj.objectVersion_1 == "v1"
+   assert versObj.objectVersion_2 == null
+  }
+
+  // Range Object, noVersion-version, no extendedRef
+  @Test
+  void testConstructor12() {
+   CiteUrn versObj = new CiteUrn("urn:cite:hmt:vaimg.VA012RN_0013-VA024RN_0025.v1")
+   assert versObj.asString == "urn:cite:hmt:vaimg.VA012RN_0013-VA024RN_0025.v1"
+   assert versObj.collection == "vaimg"
+   assert versObj.extendedRef == null 
+   assert versObj.extendedRef_1 == null
+   assert versObj.extendedRef_2 == null
+   assert versObj.ns == "hmt"
+   assert versObj.objectComponent == "vaimg.VA012RN_0013-VA024RN_0025.v1"
+   assert versObj.objectId == null
+   assert versObj.objectId_1 == "VA012RN_0013"
+   assert versObj.objectId_2 == "VA024RN_0025"
+   assert versObj.objectVersion == null
+   assert versObj.objectVersion_1 == null
+   assert versObj.objectVersion_2 == "v1"
+  }
+
+   // Range Object, 2 versions, 2 extendedRef
+  @Test
+  void testConstructor13() {
+   CiteUrn versObj = new CiteUrn("urn:cite:hmt:vaimg.VA012RN_0013.v1@0.1,0.1,0.1,0.1-VA024RN_0025.v2@0.2,0.2,0.2,0.2")
+   assert versObj.asString == "urn:cite:hmt:vaimg.VA012RN_0013.v1@0.1,0.1,0.1,0.1-VA024RN_0025.v2@0.2,0.2,0.2,0.2" 
+   assert versObj.collection == "vaimg"
+   assert versObj.extendedRef == null 
+   assert versObj.extendedRef_1 == "0.1,0.1,0.1,0.1"
+   assert versObj.extendedRef_2 == "0.2,0.2,0.2,0.2"
+   assert versObj.ns == "hmt"
+   assert versObj.objectComponent == "vaimg.VA012RN_0013.v1@0.1,0.1,0.1,0.1-VA024RN_0025.v2@0.2,0.2,0.2,0.2"
+   assert versObj.objectId == null
+   assert versObj.objectId_1 == "VA012RN_0013"
+   assert versObj.objectId_2 == "VA024RN_0025"
+   assert versObj.objectVersion == null
+   assert versObj.objectVersion_1 == "v1"
+   assert versObj.objectVersion_2 == "v2"
+  }
+
+
 }
