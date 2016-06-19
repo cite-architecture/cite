@@ -411,4 +411,47 @@ class CiteUrn {
 	  return (reducedUrn)
   }
 
+  /** Returns a CITE URN for the first part of a range. If "this" is not a range, just returns "this" as a string.
+   * @param URN a CITE URN.
+   * @returns String. A CiteUrn identifying an Object.
+   */
+
+  String getRangeBegin(){
+	  String temp =  "${this.reduceToCollection()}.${this.getFirstObject()}"
+	  if (this.isRange() ){
+		  if (this.objectVersion_1 != null){ 
+			  temp += ".${this.objectVersion_1}"
+		  }
+		  if (this.extendedRef_1 != null){ 
+			  temp += "@${this.extendedRef_1}"
+		  }
+	  } else {
+		  temp = this.toString()
+	  }
+	  return temp
+  }
+
+
+  /** Returns a CITE URN for the second part of a range. If "this" is not a range, just returns "this" as a string.
+   * @param URN a CITE URN.
+   * @returns String. A CiteUrn identifying an Object.
+   */
+
+  String getRangeEnd(){
+	  String temp = "${this.reduceToCollection()}.${this.getSecondObject()}"
+	  if (this.isRange() ){
+		  if (this.objectVersion_2 != null){ 
+			  temp += ".${this.objectVersion_2}"
+		  }
+		  if (this.extendedRef_2 != null){ 
+			  temp += "@${this.extendedRef_2}"
+		  }
+	  } else {
+		  temp = this.toString()
+	  }
+	  return temp
+  }
+
+
+
 }
