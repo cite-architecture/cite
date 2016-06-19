@@ -383,12 +383,31 @@ class CiteUrn {
 
 
   /** Creates a CiteUrn identifying a CITE Object from
-   * a given CiteUrn.  If the source URN has an extended reference,
+   * a given CiteUrn.  If the source URN has an extended reference, OR VERSIONS,
    * it is omitted. If the URN points to a range, returns both end-objects.
    * @returns A CiteUrn identifying an Object.
    */
   String reduceToObject() {
 	  System.err.println "reduceToObject(${this})"
+	  String reducedUrn = "urn:cite:${this.ns}:${this.collection}."
+	  if (this.isRange()) {
+		  System.err.println "${this} is a range."
+		  reducedUrn += "${this.getFirstObject()}"
+		  reducedUrn +=      "-${this.getSecondObject()}"
+
+	  } else {
+		  reducedUrn += this.getObjectId()
+	  }
+	  return (reducedUrn)
+  }
+
+  /** Creates a CiteUrn identifying a VERSIONED CITE Object from
+   * a given CiteUrn.  If the source URN has an extended reference
+   * it is omitted. If the URN points to a range, returns both end-objects and any versions.
+   * @returns A CiteUrn identifying an Object and version.
+   */
+  String reduceToVersion() {
+	  System.err.println "reduceToVersion(${this})"
 	  String reducedUrn = "urn:cite:${this.ns}:${this.collection}."
 	  if (this.isRange()) {
 		  System.err.println "${this} is a range."
