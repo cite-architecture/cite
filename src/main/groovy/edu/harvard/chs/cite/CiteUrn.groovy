@@ -74,47 +74,45 @@ class CiteUrn {
   /** Initializes values for all constituent parts of
    * of the URN's object component.  It checks for the presence of ranges,
    * and for each object (individual object or end points of a range),
-   * it checks for presence of extended references.
+   * it checks for presence of versions and extended references.
    * @param objStr The identifying String, optionally including
    * extended reference, for either a single object or a range of
-   * objects.
+   * objects. Does NOT include collection-ID!
    */
   void initializeObjPart(String objStr)
   throws Exception {
-    // first, check for range, then within each
-    // obj ref, check for extended ref
-    def rangeParts = objStr.split("-")
-    switch(rangeParts.size()) {
+  // first, check for range, then within each
+	// obj ref, check for extended ref
+  def rangeParts = objStr.split("-")
 
+  System.err.println "Initialized ${objStr}. Got ${rangeParts.size()} rangeParts."
+ 	def tempMap = [:] 
+	  
+  	if (rangeParts.size() == 1){ // Not a range
+		tempMap = parseObject(rangeParts[0])			
+		this.extendedRef = tempMap["objectRef"]
+		this.objectId = tempMap["objectId"]
+		this.objectVersion = tempMap["objectVersion"]
+	} else if (rangeParts.size() == 2) { // A range
+		// Deal with Start
+		tempMap = parseObject(rangeParts[0])			
+		this.extendedRef_1 = tempMap["objectRef"]
+		this.objectId_1 = tempMap["objectId"]
+		this.objectVersion_1 = tempMap["objectVersion"]
 
-    case 2:
-    def refParts1 = rangeParts[0].split(/@/)
-    if (refParts1.size() == 2) {
-      this.extendedRef_1 = refParts1[1]
-    }
-    this.objectId_1 = refParts1[0]
+		// Deal with end
+		tempMap = parseObject(rangeParts[1])			
+		this.extendedRef_2 = tempMap["objectRef"]
+		this.objectId_2 = tempMap["objectId"]
+		this.objectVersion_2 = tempMap["objectVersion"]
 
-    def refParts2 = rangeParts[1].split(/@/)
-    if (refParts2.size() == 2) {
-      this.extendedRef_2 = refParts2[1]
-    }
-    this.objectId_2 = refParts2[0]
-    break
+	} else {
+      throw new Exception("Bad syntax in object-identifier (too many hyphens): #${objStr}#")
+	}
 
-    case 1:
-    def refParts = rangeParts[0].split(/@/)
-    if (refParts.size() == 2) {
-      this.extendedRef = refParts[1]
-    }
-    this.objectId = refParts[0]
-    break
-
-    default:
-    throw new Exception("CiteUrn:initializeObjPart: could not make sense of ${objStr}")
-    break
-    }
   }
 
+<<<<<<< HEAD
 
   /** Initializes values for all constituent parts of
    * of the URN's version component.  It checks for the presence of ranges,
@@ -177,9 +175,67 @@ class CiteUrn {
   }
 
 
+  /** Method to parse the parts of an Object identifier:
+	* (1) object, (2) version, (3) subref
+	* We need to do this for single-object URNs, and each end of a range, so
+	* it makes sense to break it out.
+	* NOTE: Strip off the collection-ID before sending in the Object String.
+	*       Otherwise there is no way to distinguish 'collection.object' from 'object.version'
+	*
+	* @param A String representing an object-identifier
+	* @returns Map. om.objectId om.objectVersion om.objectRef 
+   **/
+	Map parseObject(String objStr){
+		def tempObjPlusVersion = ""
+		def om = [:]
+		om["objectId"] = null
+		om["objectVersion"] = null
+		om["objectRef"] = null
+
+			// 1. split off extendedRef, if any
+			if (objStr.contains("@")){
+				om["objectRef"] = objStr.split("@")[1]
+				tempObjPlusVersion = objStr.split("@")[0]
+			} else {
+				tempObjPlusVersion = objStr
+			}
+			System.err.println "At this point, tempObjPlusVersion = ${tempObjPlusVersion}"
+			System.err.println "size() = ${tempObjPlusVersion.split(/\./).size()}"
+
+			// 2. split off version, if any
+			if (tempObjPlusVersion.split(/\./).size() > 2){
+			  throw new Exception("Bad syntax in object-identifier (too many components): #${objStr}#")
+			}
+			
+			if (tempObjPlusVersion.split(/\./).size() == 1){
+				System.err.println "Size == 1 for ${tempObjPlusVersion}"
+				om["objectId"] = tempObjPlusVersion
+			} 
+			if (tempObjPlusVersion.split(/\./).size() == 2){
+				System.err.println "Size == 2 for ${tempObjPlusVersion}"
+				System.err.println "[0] = ${tempObjPlusVersion.split(/\./)[0]}"
+				System.err.println "[1] = ${tempObjPlusVersion.split(/\./)[1]}"
+				om["objectId"] = tempObjPlusVersion.split(/\./)[0]
+				om["objectVersion"] = tempObjPlusVersion.split(/\./)[1]
+			} 
+			// 3. we're good
+			return om
+	}
+
+	/** 
+	 * Returns the number of period-delimited elements in the Object component
+	 * of a URN. If it is a range, returns the level of the first element of the range.
+	 * @param String containing the object-component of a URN
+	 * @returns Integer
+	 **/
 
   Integer countLevel(String objectRef) {
-    String stripped = objectRef.replaceAll(/@.+/,'')
+	  String stripped = null
+	  if ( objectRef.contains("-") ){
+    		stripped = objectRef.split("-")[0].replaceAll(/@.+/,'')
+	  } else {
+			stripped = objectRef.replaceAll(/@.+/,'')
+	  }
     return stripped.split(/\./).size()
   }
 
@@ -208,32 +264,22 @@ class CiteUrn {
       this.asString = Normalizer.normalize(urnStr, Form.NFC)
       this.ns = components[2]
       this.objectComponent = components[3]
-
-      switch (countLevel(objectComponent)) {
-      case 0:
-      throw new Exception("CiteUrn: could not parse ${urnStr}")
-      break
-      case 1:
-      this.collection = objectComponent
-      break
-      case 2:
-      def parts = objectComponent.split(/\./)
-      this.collection = parts[0]
-      Integer last = parts.size() - 1
-      initializeObjPart(parts[1..last].join("."))
-
-      break
-      case 3:
-      def parts = objectComponent.split(/\./)
-      this.collection = parts[0]
-      Integer last = parts.size() - 1
-      initializeVersionPart(parts[1..last].join("."))
-      break
-
-      default :
-
-      break
-      }
+		System.err.println "Inside constructor. ${urnStr} yields objectComponent: ${objectComponent}"
+		System.err.println "countLevel(${objectComponent}) = ${countLevel(objectComponent)}"
+		switch (countLevel(objectComponent)) {
+			case 0: 										// must have at least one, a collection-id
+			throw new Exception("CiteUrn: could not parse ${urnStr}")
+			break
+			case 1:										// has only collection-id
+			this.collection = objectComponent
+			break
+			default:										// collection-Id + object-Id
+			def parts = objectComponent.split(/\./)
+			this.collection = parts[0]
+			Integer last = parts.size() - 1
+			initializeObjPart(parts[1..last].join(".")) // we've just removed the collection-ID
+			break
+		}
 
 
     } else {
@@ -382,6 +428,8 @@ class CiteUrn {
    * @returns True if the URN is a range.
    */
   boolean isRange() {
+	  System.err.println "Checking ${this} to see if it is a range."
+		  System.err.println "${this.objectId_1} - ${this.objectId_2} "
     return ((this.objectId_1 != null) && (this.objectId_2 != null))
   }
 
@@ -398,30 +446,94 @@ class CiteUrn {
 
 
   /** Creates a CiteUrn identifying a CITE Object from
-   * a given CiteUrn.  If the source URN has an extended reference,
-   * it is omitted.
-   * @returns A CiteUrn identifying a Collection.
+   * a given CiteUrn.  If the source URN has an extended reference, OR VERSIONS,
+   * it is omitted. If the URN points to a range, returns both end-objects.
+   * @returns A CiteUrn identifying an Object.
    */
   String reduceToObject() {
-    String reducedUrn = "urn:cite:${this.ns}:${this.collection}."
-    if (this.isRange()) {
-      reducedUrn += "${this.getFirstObject()}"
-      if (this.objectVersion_1 != null) {
-	reducedUrn += ".${this.objectVersion_1}"
-      }
-      reducedUrn +=      "-${this.getSecondObject()}"
-      if (this.objectVersion_2 != null) {
-	reducedUrn += ".${this.objectVersion_2}"
-      }
+	  System.err.println "reduceToObject(${this})"
+	  String reducedUrn = "urn:cite:${this.ns}:${this.collection}."
+	  if (this.isRange()) {
+		  System.err.println "${this} is a range."
+		  reducedUrn += "${this.getFirstObject()}"
+		  reducedUrn +=      "-${this.getSecondObject()}"
 
-
-    } else {
-      reducedUrn += this.getObjectId()
-      if (this.hasVersion()) {
-	reducedUrn += "." + this.getObjectVersion()
-      }
-    }
-    return (reducedUrn)
+	  } else {
+		  reducedUrn += this.getObjectId()
+	  }
+	  return (reducedUrn)
   }
+
+  /** Creates a CiteUrn identifying a VERSIONED CITE Object from
+   * a given CiteUrn.  If the source URN has an extended reference
+   * it is omitted. If the URN points to a range, returns both end-objects and any versions.
+   * @returns A CiteUrn identifying an Object and version.
+   */
+  String reduceToVersion() {
+	  System.err.println "reduceToVersion(${this})"
+	  String reducedUrn = "urn:cite:${this.ns}:${this.collection}."
+	  if (this.isRange()) {
+		  System.err.println "${this} is a range."
+		  reducedUrn += "${this.getFirstObject()}"
+		  if (this.objectVersion_1 != null) {
+			  reducedUrn += ".${this.objectVersion_1}"
+		  }
+		  reducedUrn +=      "-${this.getSecondObject()}"
+		  if (this.objectVersion_2 != null) {
+			  reducedUrn += ".${this.objectVersion_2}"
+		  }
+
+
+	  } else {
+		  reducedUrn += this.getObjectId()
+		  if (this.hasVersion()) {
+			  reducedUrn += "." + this.getObjectVersion()
+		  }
+	  }
+	  return (reducedUrn)
+  }
+
+  /** Returns a CITE URN for the first part of a range. If "this" is not a range, just returns "this" as a string.
+   * @param URN a CITE URN.
+   * @returns String. A CiteUrn identifying an Object.
+   */
+
+  String getRangeBegin(){
+	  String temp =  "${this.reduceToCollection()}.${this.getFirstObject()}"
+	  if (this.isRange() ){
+		  if (this.objectVersion_1 != null){ 
+			  temp += ".${this.objectVersion_1}"
+		  }
+		  if (this.extendedRef_1 != null){ 
+			  temp += "@${this.extendedRef_1}"
+		  }
+	  } else {
+		  temp = this.toString()
+	  }
+	  return temp
+  }
+
+
+  /** Returns a CITE URN for the second part of a range. If "this" is not a range, just returns "this" as a string.
+   * @param URN a CITE URN.
+   * @returns String. A CiteUrn identifying an Object.
+   */
+
+  String getRangeEnd(){
+	  String temp = "${this.reduceToCollection()}.${this.getSecondObject()}"
+	  if (this.isRange() ){
+		  if (this.objectVersion_2 != null){ 
+			  temp += ".${this.objectVersion_2}"
+		  }
+		  if (this.extendedRef_2 != null){ 
+			  temp += "@${this.extendedRef_2}"
+		  }
+	  } else {
+		  temp = this.toString()
+	  }
+	  return temp
+  }
+
+
 
 }
