@@ -112,7 +112,6 @@ class CiteUrn {
 
   }
 
-<<<<<<< HEAD
 
   /** Initializes values for all constituent parts of
    * of the URN's version component.  It checks for the presence of ranges,
