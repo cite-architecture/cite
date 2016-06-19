@@ -85,7 +85,6 @@ class CiteUrn {
 	// obj ref, check for extended ref
   def rangeParts = objStr.split("-")
 
-  System.err.println "Initialized ${objStr}. Got ${rangeParts.size()} rangeParts."
  	def tempMap = [:] 
 	  
   	if (rangeParts.size() == 1){ // Not a range
@@ -126,7 +125,6 @@ class CiteUrn {
     // first, check for range, then within each
     // obj ref, check for extended ref
     if (debug > 1) {
-      System.err.println "ANALYZE VERSION " + versionStr
       System.err.println "is it a range?"
     }
 
@@ -198,8 +196,6 @@ class CiteUrn {
 			} else {
 				tempObjPlusVersion = objStr
 			}
-			System.err.println "At this point, tempObjPlusVersion = ${tempObjPlusVersion}"
-			System.err.println "size() = ${tempObjPlusVersion.split(/\./).size()}"
 
 			// 2. split off version, if any
 			if (tempObjPlusVersion.split(/\./).size() > 2){
@@ -207,13 +203,9 @@ class CiteUrn {
 			}
 			
 			if (tempObjPlusVersion.split(/\./).size() == 1){
-				System.err.println "Size == 1 for ${tempObjPlusVersion}"
 				om["objectId"] = tempObjPlusVersion
 			} 
 			if (tempObjPlusVersion.split(/\./).size() == 2){
-				System.err.println "Size == 2 for ${tempObjPlusVersion}"
-				System.err.println "[0] = ${tempObjPlusVersion.split(/\./)[0]}"
-				System.err.println "[1] = ${tempObjPlusVersion.split(/\./)[1]}"
 				om["objectId"] = tempObjPlusVersion.split(/\./)[0]
 				om["objectVersion"] = tempObjPlusVersion.split(/\./)[1]
 			} 
@@ -263,8 +255,6 @@ class CiteUrn {
       this.asString = Normalizer.normalize(urnStr, Form.NFC)
       this.ns = components[2]
       this.objectComponent = components[3]
-		System.err.println "Inside constructor. ${urnStr} yields objectComponent: ${objectComponent}"
-		System.err.println "countLevel(${objectComponent}) = ${countLevel(objectComponent)}"
 		switch (countLevel(objectComponent)) {
 			case 0: 										// must have at least one, a collection-id
 			throw new Exception("CiteUrn: could not parse ${urnStr}")
@@ -427,8 +417,6 @@ class CiteUrn {
    * @returns True if the URN is a range.
    */
   boolean isRange() {
-	  System.err.println "Checking ${this} to see if it is a range."
-		  System.err.println "${this.objectId_1} - ${this.objectId_2} "
     return ((this.objectId_1 != null) && (this.objectId_2 != null))
   }
 
@@ -450,10 +438,8 @@ class CiteUrn {
    * @returns A CiteUrn identifying an Object.
    */
   String reduceToObject() {
-	  System.err.println "reduceToObject(${this})"
 	  String reducedUrn = "urn:cite:${this.ns}:${this.collection}."
 	  if (this.isRange()) {
-		  System.err.println "${this} is a range."
 		  reducedUrn += "${this.getFirstObject()}"
 		  reducedUrn +=      "-${this.getSecondObject()}"
 
@@ -469,10 +455,8 @@ class CiteUrn {
    * @returns A CiteUrn identifying an Object and version.
    */
   String reduceToVersion() {
-	  System.err.println "reduceToVersion(${this})"
 	  String reducedUrn = "urn:cite:${this.ns}:${this.collection}."
 	  if (this.isRange()) {
-		  System.err.println "${this} is a range."
 		  reducedUrn += "${this.getFirstObject()}"
 		  if (this.objectVersion_1 != null) {
 			  reducedUrn += ".${this.objectVersion_1}"
