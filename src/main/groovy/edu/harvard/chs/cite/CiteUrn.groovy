@@ -105,6 +105,30 @@ class CiteUrn {
 		this.objectId_2 = tempMap["objectId"]
 		this.objectVersion_2 = tempMap["objectVersion"]
 
+		// Let's sort out versions and ranges.
+		//		- Both sides can be object-only.
+		//		- If only one end has a version, give the other end the same version.
+		//		- If there are two versions, but different, throw and error.
+		if ( (this.objectVersion_1 == null) && (this.objectVersion_2 != null)){
+			System.err.println "Working with: ${objStr}"
+			System.err.println "v1 was null, v2 was not"
+			System.err.println "Before: ${this.objectVersion_1}, ${this.objectVersion_2}"
+			this.objectVersion_1 = this.objectVersion_2
+			System.err.println "After: ${this.objectVersion_1}, ${this.objectVersion_2}"
+			System.err.println this.objectComponent
+		}
+		if ( (this.objectVersion_1 != null) && (this.objectVersion_2 == null)){
+			System.err.println "Working with: ${objStr}"
+			System.err.println "v1 was not null, v2 was null"
+			System.err.println "Before: ${this.objectVersion_1}, ${this.objectVersion_2}"
+			this.objectVersion_2 = this.objectVersion_1
+			System.err.println "After: ${this.objectVersion_1}, ${this.objectVersion_2}"
+			System.err.println this.objectComponent
+		}
+		if ( (this.objectVersion_1 != null) && (this.objectVersion_2 != null) && (this.objectVersion_1 != this.objectVersion_2)){
+			  throw new Exception("Bad syntax in range. Both ends must identify the same version: #${objStr}#")
+		}
+
 	} else {
       throw new Exception("Bad syntax in object-identifier (too many hyphens): #${objStr}#")
 	}
@@ -238,6 +262,7 @@ class CiteUrn {
    */
   CiteUrn (String urnStr) {
     def components = urnStr.split(/:/)
+	def tempStr = ""
     boolean syntaxOk = true
     if (components.size() != 4) {
       syntaxOk =  false
@@ -267,9 +292,31 @@ class CiteUrn {
 			this.collection = parts[0]
 			Integer last = parts.size() - 1
 			initializeObjPart(parts[1..last].join(".")) // we've just removed the collection-ID
+			// Since the details might have changed, now we re-build the object-component
+			if (this.objectId != null){ // not a range
+				tempStr += this.collection
+				tempStr += ".${this.objectId}"
+				if (this.objectVersion != null){ tempStr += ".${this.objectVersion}" }
+				if (this.extendedRef != null){ tempStr += "@${this.extendedRef}" }
+				this.objectComponent = tempStr
+			} else { // a range
+				System.err.println "Versions when reconstructing: ${this.objectVersion_1}, ${this.objectVersion_2}"
+				tempStr += this.collection
+				tempStr += ".${this.objectId_1}"
+				if (this.objectVersion_1 != null){ tempStr += ".${this.objectVersion_1}" }
+				if (this.extendedRef_1 != null){ tempStr += "@${this.extendedRef_1}" }
+				tempStr += "-${this.objectId_2}"
+				if (this.objectVersion_2 != null){ tempStr += ".${this.objectVersion_2}" }
+				if (this.extendedRef_2 != null){ tempStr += "@${this.extendedRef_2}" }
+				this.objectComponent = tempStr
+			}
 			break
 		}
-
+		tempStr = "urn:cite:${this.ns}:${this.objectComponent}"
+		System.err.println "tempStr: ${tempStr}"
+		this.asString = Normalizer.normalize(tempStr, Form.NFC)
+		System.err.println "asString: ${this.asString}"
+			System.err.println "---------------------------------"
 
     } else {
       throw new Exception("CiteUrn: bad URN syntax: #${urnStr}#")
