@@ -10,7 +10,7 @@
             name="cite:collectionService">
             <attribute name="version">
                 <choice>
-                    <value>0.1</value>
+                    <value>1.0</value>
                 </choice>
             </attribute>
             <optional>
@@ -19,31 +19,14 @@
                    <oneOrMore>
                         <element
                             name="cite:extension">
-                            <attribute
-                                name="abbr"/>
-                            <attribute
-                                name="extensionUri"/>
+                        
                             
                             <attribute
                                 name="rdfType"/>
                             <attribute name="rdfUri"/>
                             
                            
-                            <attribute
-                                name="extendedCitation">
-                                <choice>
-                                    <value>true</value>
-                                    <value>false</value>
-                                </choice>
-                            </attribute>
-                            <oneOrMore>
-                                <element
-                                    name="cite:request">
-                                    <attribute
-                                        name="name"/>
-                                    <empty/>
-                                </element>
-                            </oneOrMore>
+                          
                         </element>
                     </oneOrMore>
                 </element>

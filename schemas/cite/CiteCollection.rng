@@ -16,15 +16,7 @@
                 name="label"/>
             <attribute
                 name="type"><value>ctsurn</value></attribute>
-            <optional>
-                <attribute
-                    name="join">
-                    <choice>
-                        <value>naturaljoin</value>
-                    </choice>
-                </attribute>
-            </optional>
-            <optional>
+        <optional>
                 <element
                     name="cite:indexRelation">
                     <attribute
@@ -46,14 +38,7 @@
                 name="label"/>
             <attribute
                 name="type"><value>citeurn</value></attribute>
-            <optional>
-                <attribute
-                    name="join">
-                    <choice>
-                        <value>naturaljoin</value>
-                    </choice>
-                </attribute>
-            </optional>
+            
             <optional>
                 <element
                     name="cite:indexRelation">
@@ -190,7 +175,7 @@
                 <element
                     name="cite:extendedBy">
                     <attribute
-                        name="abbr"/>
+                        name="extension"/>
                 </element>
             </zeroOrMore>
             
