@@ -21,6 +21,12 @@ class TestCiteUrnComponents {
 
   // Object, version, not range, no extendedRef
   @Test
+  void testTests() {
+	  assert true
+  }
+
+  // Object, version, not range, no extendedRef
+  @Test
   void testConstructor1() {
    CiteUrn versObj = new CiteUrn("urn:cite:hmt:vaimg.VA012RN_0013.v1")
    assert versObj.asString == "urn:cite:hmt:vaimg.VA012RN_0013.v1"

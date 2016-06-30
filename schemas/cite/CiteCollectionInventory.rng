@@ -22,8 +22,8 @@
                         
                             
                             <attribute
-                                name="rdfType"/>
-                            <attribute name="rdfUri"/>
+                                name="abbr"/>
+                            <attribute name="uri"/>
                             
                            
                           
