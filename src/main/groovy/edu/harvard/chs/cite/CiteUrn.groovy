@@ -110,20 +110,10 @@ class CiteUrn {
 		//		- If only one end has a version, give the other end the same version.
 		//		- If there are two versions, but different, throw and error.
 		if ( (this.objectVersion_1 == null) && (this.objectVersion_2 != null)){
-			System.err.println "Working with: ${objStr}"
-			System.err.println "v1 was null, v2 was not"
-			System.err.println "Before: ${this.objectVersion_1}, ${this.objectVersion_2}"
 			this.objectVersion_1 = this.objectVersion_2
-			System.err.println "After: ${this.objectVersion_1}, ${this.objectVersion_2}"
-			System.err.println this.objectComponent
 		}
 		if ( (this.objectVersion_1 != null) && (this.objectVersion_2 == null)){
-			System.err.println "Working with: ${objStr}"
-			System.err.println "v1 was not null, v2 was null"
-			System.err.println "Before: ${this.objectVersion_1}, ${this.objectVersion_2}"
 			this.objectVersion_2 = this.objectVersion_1
-			System.err.println "After: ${this.objectVersion_1}, ${this.objectVersion_2}"
-			System.err.println this.objectComponent
 		}
 		if ( (this.objectVersion_1 != null) && (this.objectVersion_2 != null) && (this.objectVersion_1 != this.objectVersion_2)){
 			  throw new Exception("Bad syntax in range. Both ends must identify the same version: #${objStr}#")
@@ -300,7 +290,6 @@ class CiteUrn {
 				if (this.extendedRef != null){ tempStr += "@${this.extendedRef}" }
 				this.objectComponent = tempStr
 			} else { // a range
-				System.err.println "Versions when reconstructing: ${this.objectVersion_1}, ${this.objectVersion_2}"
 				tempStr += this.collection
 				tempStr += ".${this.objectId_1}"
 				if (this.objectVersion_1 != null){ tempStr += ".${this.objectVersion_1}" }
