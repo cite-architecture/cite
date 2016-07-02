@@ -16,6 +16,9 @@
                 name="label"/>
             <attribute
                 name="type"><value>ctsurn</value></attribute>
+            <optional>
+                <attribute name="universalValue"></attribute>
+            </optional>
         <optional>
                 <element
                     name="cite:indexRelation">
@@ -38,7 +41,9 @@
                 name="label"/>
             <attribute
                 name="type"><value>citeurn</value></attribute>
-            
+            <optional>
+                <attribute name="universalValue"></attribute>
+            </optional>
             <optional>
                 <element
                     name="cite:indexRelation">
@@ -63,6 +68,9 @@
                 <ref
                     name="citedatachoice"/>
             </attribute>
+            <optional>
+                <attribute name="universalValue"></attribute>
+            </optional>
             <optional>
                 <element
                     name="cite:valueList">
