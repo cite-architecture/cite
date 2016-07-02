@@ -313,10 +313,7 @@ class CiteUrn {
 			break
 		}
 		tempStr = "urn:cite:${this.ns}:${this.objectComponent}"
-		System.err.println "tempStr: ${tempStr}"
 		this.asString = Normalizer.normalize(tempStr, Form.NFC)
-		System.err.println "asString: ${this.asString}"
-			System.err.println "---------------------------------"
 
     } else {
       throw new Exception("CiteUrn: bad URN syntax: #${urnStr}#")
