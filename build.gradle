@@ -11,7 +11,7 @@ apply from: "conf.gradle"
 group = "edu.harvard.chs"
 
 
-version = '1.4.1'
+version = '1.4.2'
 
 
 apply from: "versions.gradle"
