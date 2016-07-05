@@ -336,6 +336,26 @@ class CiteUrn {
     return this.objectComponent
   }
 
+  /** Gets the entire object component MINUS THE COLLECTION of the URN.
+   * This is useful for constructing ranges.
+   * @returns The required object component of the URN.
+   */
+  String getObjectWithoutCollection() {
+	  String tempStr = ""
+	  if ((this.hasObjectId()) && (this.isRange() == false)){
+		 tempStr = this.getObjectId()
+		 if (this.hasVersion()){
+				tempStr += "." + this.getObjectVersion()
+		 }
+		 if (this.hasExtendedRef()){
+				tempStr += "@" + this.getExtendedRef()
+		 }
+	  }
+
+	 return tempStr
+  }
+  
+
 
   // Extract parts of object component:
 
@@ -350,8 +370,8 @@ class CiteUrn {
 
 
   /** Extracts from the object component the optional identifier
-   * for a notional object.
-   * @returns The object identifier, or null if the
+   * for aj notional object.
+   * @retkurns The object identifier, or null if the
    * URN only identifies a collection.
    */
   String getObjectId() {

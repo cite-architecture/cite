@@ -17,6 +17,18 @@ class TestCtsUrnLib {
 
   }
 
+  @Test
+  void testCanWeHaveHyphens() {
+    CtsUrn urn = new CtsUrn("urn:cts:greekLit:tlg-0012.tlg-001.msA:2")
+	assert urn
+	
+    CtsUrn toomany = new CtsUrn("urn:cts:greekLit:tlg-0012.tlg-001.msA:2-3-4")
+
+	assert toomany
+
+
+
+  }
 
 
 }
