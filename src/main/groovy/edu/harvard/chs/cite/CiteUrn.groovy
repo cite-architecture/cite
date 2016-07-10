@@ -103,6 +103,13 @@ class CiteUrn {
       this.extendedRef_1 = tempMap["objectRef"]
       this.objectId_1 = tempMap["objectId"]
       this.objectVersion_1 = tempMap["objectVersion"]
+
+      if ((this.objectVersion_1  == null) && (this.extendedRef_1 != null)) {
+	throw new Exception("CiteUrn: illegal URN. Cannot have extended reference on object-level URN.")
+      }
+
+
+
       
       // Deal with end
       tempMap = parseObject(rangeParts[1])			
@@ -110,10 +117,15 @@ class CiteUrn {
       this.objectId_2 = tempMap["objectId"]
       this.objectVersion_2 = tempMap["objectVersion"]
 
+      if ((this.objectVersion_2  == null) && (this.extendedRef_2 != null)) {
+	throw new Exception("CiteUrn: illegal URN. Cannot have extended reference on object-level URN.")
+      }
+
+      
       // Let's sort out versions and ranges.
-      //		- Both sides can be object-only.
-      //		- If only one end has a version, give the other end the same version.
-      //		- If there are two versions, but different, throw and error.
+      // - Both sides can be object-only.
+      // - If only one end has a version, give the other end the same version.
+      // - If there are two versions, but different, throw and error.
       if ( (this.objectVersion_1 == null) && (this.objectVersion_2 != null)){
 	this.objectVersion_1 = this.objectVersion_2
       }
