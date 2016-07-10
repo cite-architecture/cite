@@ -454,4 +454,23 @@ class TestCiteUrnComponents {
    assert versObj.objectVersion_2 == "v1"
   }
 
+   // Are we enforcing that only versionedUrns can have extended references?
+  @Test
+  void testConstructor22() {
+   CiteUrn versObj = new CiteUrn("urn:cite:hmt:vaimg.VA024RN_0025@0.2,0.2,0.2,0.2")
+   assert versObj.asString == "urn:cite:hmt:vaimg.VA024RN_0025@0.2,0.2,0.2,0.2" 
+   assert versObj.collection == "vaimg"
+   assert versObj.extendedRef == "0.2,0.2,0.2,0.2" 
+   assert versObj.extendedRef_1 == null
+   assert versObj.extendedRef_2 == null
+   assert versObj.ns == "hmt"
+   assert versObj.objectComponent == "vaimg.VA024RN_0025@0.2,0.2,0.2,0.2"
+   assert versObj.objectId == "VA024RN_0025"
+   assert versObj.objectId_1 == null
+   assert versObj.objectId_2 == null
+   assert versObj.objectVersion == null
+   assert versObj.objectVersion_1 == null
+   assert versObj.objectVersion_2 == null
+  }
+
 }
