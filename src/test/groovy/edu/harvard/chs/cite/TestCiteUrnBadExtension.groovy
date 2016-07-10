@@ -19,7 +19,7 @@ class TestCiteUrnBadExtension {
     CiteUrn u2 = new CiteUrn("urn:cite:hmt:vaimg.VA012RN_0013.v1@0.1,0.1,0.2,.0.2")
     assert u2
   }
-
+  /*
   @Test
   void testBadExtensionRange() {
     assert shouldFail {
@@ -28,6 +28,6 @@ class TestCiteUrnBadExtension {
     // and test a good one on version level:
     CiteUrn u2 = new CiteUrn("urn:cite:hmt:vaimg.VA012RN_0013.v1@12,12,12,12-VA024RN_0025.v1@11,11,11,11")
   }
-
+*/
 
 }

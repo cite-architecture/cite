@@ -92,6 +92,11 @@ class CiteUrn {
       this.extendedRef = tempMap["objectRef"]
       this.objectId = tempMap["objectId"]
       this.objectVersion = tempMap["objectVersion"]
+
+      if ((this.objectVersion == null) && (this.extendedRef != null)) {
+	throw new Exception("CiteUrn: illegal URN. Cannot have extended reference on object-level URN.")
+      }
+      
     } else if (rangeParts.size() == 2) { // A range
       // Deal with Start
       tempMap = parseObject(rangeParts[0])			
