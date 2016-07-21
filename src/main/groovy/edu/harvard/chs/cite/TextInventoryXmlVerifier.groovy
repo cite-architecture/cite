@@ -1,4 +1,4 @@
-package edu.harvard.chs.cite
+package edu.harvard.chs.hocuspocus
 
 /**
 */
@@ -8,7 +8,7 @@ class TextInventoryXmlVerifier {
     static groovy.xml.Namespace ti = new groovy.xml.Namespace("http://chs.harvard.edu/xmlns/cts")
 
 
-    
+
   /** Verifies that all URNs for works and versions
    * agree with their parent element.  Adds a one-line text
    * description of each error found to errorList.
@@ -75,7 +75,7 @@ class TextInventoryXmlVerifier {
    */
   static ArrayList checkCtsNsDecl(groovy.util.Node root) {
     ArrayList errorList = []
-    
+
     def declaredAbbrs = []
     root[ti.ctsnamespace].each {
       declaredAbbrs.add(it.'@abbr')

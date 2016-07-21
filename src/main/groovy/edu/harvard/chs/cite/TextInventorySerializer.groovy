@@ -1,4 +1,4 @@
-package edu.harvard.chs.cite
+package edu.harvard.chs.hocuspocus
 
 import groovy.xml.StreamingMarkupBuilder
 
@@ -12,7 +12,7 @@ class TextInventorySerializer {
   TextInventorySerializer(TextInventory ti) {
     this.inv = ti
   }
-  
+
     /**  Serializes model of TextInventory as an XML string
     * validating against the TextInventory schema.
     * HIHGLY INCOMPLETE IMPLENTATION:  NOT FULLY VALID.

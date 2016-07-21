@@ -1,3 +1,3 @@
-package edu.harvard.chs.cite
+package edu.harvard.chs.hocuspocus
 
 enum VersionType { EDITION, TRANSLATION }
