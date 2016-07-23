@@ -9,12 +9,12 @@ permalink:        pretty
 title:            cite
 tagline:          'The CITE ibrary'
 description:      'cite is a JVM library for working with CTS URNs, TextInventories, and CITE URNs'
-baseurl: '/cite'
+baseurl: '/cite/'
 
 
 author:
   name:           'Neel Smith'
- 
+
 
 paginate:         5
 
@@ -24,8 +24,6 @@ github:
 version:          0.12.0
 
 links:
-  - title: Live specification
-    url: /specs/cite/Cite.html
   - title: API docs
     url: /api
   - title: Github project
@@ -34,4 +32,3 @@ links:
   - title: CITE architecture home page
     url: http://cite-architecture.github.io/
     external: true
-   
