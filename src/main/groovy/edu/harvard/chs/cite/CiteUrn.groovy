@@ -94,7 +94,7 @@ class CiteUrn {
       this.objectVersion = tempMap["objectVersion"]
 
       if ((this.objectVersion == null) && (this.extendedRef != null)) {
-	throw new Exception("CiteUrn: illegal URN. Cannot have extended reference on object-level URN.")
+	throw new Exception("CiteUrn: illegal object component ${objStr}. Cannot have extended reference on object-level URN.")
       }
       
     } else if (rangeParts.size() == 2) { // A range
@@ -105,7 +105,7 @@ class CiteUrn {
       this.objectVersion_1 = tempMap["objectVersion"]
 
       if ((this.objectVersion_1  == null) && (this.extendedRef_1 != null)) {
-	throw new Exception("CiteUrn: illegal URN. Cannot have extended reference on object-level URN.")
+	throw new Exception("CiteUrn: illegal object component ${objStr}. Cannot have extended reference on object-level URN.")
       }
 
 
@@ -118,7 +118,7 @@ class CiteUrn {
       this.objectVersion_2 = tempMap["objectVersion"]
 
       if ((this.objectVersion_2  == null) && (this.extendedRef_2 != null)) {
-	throw new Exception("CiteUrn: illegal URN. Cannot have extended reference on object-level URN.")
+	throw new Exception("CiteUrn: illegal object component ${objStr}. Cannot have extended reference on object-level URN.")
       }
 
       
