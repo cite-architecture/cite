@@ -1,7 +1,7 @@
 
 
 ext {
-    groovyVersion = '[2.0,)'
+    groovyVersion = '2.+'
     jingVersion = '20091111'
     junitVersion = '4.12'
     xmlunitVersion = '1.3'
