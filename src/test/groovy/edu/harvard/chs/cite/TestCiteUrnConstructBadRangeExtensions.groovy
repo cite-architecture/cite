@@ -14,11 +14,11 @@ class TestCiteUrnConstructBadRangeExtensions {
     }
   }
 
-  // But this is OK:
+  // But this is OK: 
   // Range Object, version-Noversions, extendedRef-noExtendedRef
   @Test
   void testConstructor1() {
-   
+
    CiteUrn versObj = new CiteUrn("urn:cite:hmt:vaimg.VA012RN_0013.v1@0.1,0.1,0.1,0.1-VA024RN_0025")
    assert versObj.asString == "urn:cite:hmt:vaimg.VA012RN_0013.v1@0.1,0.1,0.1,0.1-VA024RN_0025.v1"
    assert versObj.collection == "vaimg"

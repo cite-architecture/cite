@@ -85,10 +85,10 @@ class CiteUrn {
     // obj ref, check for extended ref
     def rangeParts = objStr.split("-")
 
-    def tempMap = [:] 
-	  
+    def tempMap = [:]
+
     if (rangeParts.size() == 1){ // Not a range
-      tempMap = parseObject(rangeParts[0])			
+      tempMap = parseObject(rangeParts[0])
       this.extendedRef = tempMap["objectRef"]
       this.objectId = tempMap["objectId"]
       this.objectVersion = tempMap["objectVersion"]
@@ -96,10 +96,10 @@ class CiteUrn {
       if ((this.objectVersion == null) && (this.extendedRef != null)) {
 	throw new Exception("CiteUrn: illegal object component ${objStr}. Cannot have extended reference on object-level URN.")
       }
-      
+
     } else if (rangeParts.size() == 2) { // A range
       // Deal with Start
-      tempMap = parseObject(rangeParts[0])			
+      tempMap = parseObject(rangeParts[0])
       this.extendedRef_1 = tempMap["objectRef"]
       this.objectId_1 = tempMap["objectId"]
       this.objectVersion_1 = tempMap["objectVersion"]
@@ -110,9 +110,9 @@ class CiteUrn {
 
 
 
-      
+
       // Deal with end
-      tempMap = parseObject(rangeParts[1])			
+      tempMap = parseObject(rangeParts[1])
       this.extendedRef_2 = tempMap["objectRef"]
       this.objectId_2 = tempMap["objectId"]
       this.objectVersion_2 = tempMap["objectVersion"]
@@ -121,7 +121,7 @@ class CiteUrn {
 	throw new Exception("CiteUrn: illegal object component ${objStr}. Cannot have extended reference on object-level URN.")
       }
 
-      
+
       // Let's sort out versions and ranges.
       // - Both sides can be object-only.
       // - If only one end has a version, give the other end the same version.
@@ -135,11 +135,11 @@ class CiteUrn {
       if ( (this.objectVersion_1 != null) && (this.objectVersion_2 != null) && (this.objectVersion_1 != this.objectVersion_2)){
 	throw new Exception("Bad syntax in range. Both ends must identify the same version: #${objStr}#")
       }
-      
+
     } else {
       throw new Exception("Bad syntax in object-identifier (too many hyphens): #${objStr}#")
     }
-    
+
   }
 
 
@@ -211,7 +211,7 @@ class CiteUrn {
    *       Otherwise there is no way to distinguish 'collection.object' from 'object.version'
    *
    * @param A String representing an object-identifier
-   * @returns Map. om.objectId om.objectVersion om.objectRef 
+   * @returns Map. om.objectId om.objectVersion om.objectRef
    **/
   Map parseObject(String objStr){
     def tempObjPlusVersion = ""
@@ -232,19 +232,19 @@ class CiteUrn {
     if (tempObjPlusVersion.split(/\./).size() > 2){
       throw new Exception("Bad syntax in object-identifier (too many components): #${objStr}#")
     }
-			
+
     if (tempObjPlusVersion.split(/\./).size() == 1){
       om["objectId"] = tempObjPlusVersion
-    } 
+    }
     if (tempObjPlusVersion.split(/\./).size() == 2){
       om["objectId"] = tempObjPlusVersion.split(/\./)[0]
       om["objectVersion"] = tempObjPlusVersion.split(/\./)[1]
-    } 
+    }
     // 3. we're good
     return om
   }
-  
-  /** 
+
+  /**
    * Returns the number of period-delimited elements in the Object component
    * of a URN. If it is a range, returns the level of the first element of the range.
    * @param String containing the object-component of a URN
@@ -322,7 +322,7 @@ class CiteUrn {
       }
       tempStr = "urn:cite:${this.ns}:${this.objectComponent}"
       this.asString = Normalizer.normalize(tempStr, Form.NFC)
-      
+
     } else {
       throw new Exception("CiteUrn: bad URN syntax: #${urnStr}#")
     }
@@ -372,7 +372,7 @@ class CiteUrn {
     }
     return tempStr
   }
-  
+
 
 
   // Extract parts of object component:
@@ -471,7 +471,7 @@ class CiteUrn {
    * @returns True if the URN has a version identifier.
    */
   boolean hasVersion() {
-    return (this.objectVersion != null)
+    return ( (this.objectVersion != null) || (this.objectVersion_1 != null) )
   }
 
 
@@ -555,10 +555,10 @@ class CiteUrn {
   String getRangeBegin(){
     String temp =  "${this.reduceToCollection()}.${this.getFirstObject()}"
     if (this.isRange() ){
-      if (this.objectVersion_1 != null){ 
+      if (this.objectVersion_1 != null){
 	temp += ".${this.objectVersion_1}"
       }
-      if (this.extendedRef_1 != null){ 
+      if (this.extendedRef_1 != null){
 	temp += "@${this.extendedRef_1}"
       }
     } else {
@@ -576,10 +576,10 @@ class CiteUrn {
   String getRangeEnd(){
     String temp = "${this.reduceToCollection()}.${this.getSecondObject()}"
     if (this.isRange() ){
-      if (this.objectVersion_2 != null){ 
+      if (this.objectVersion_2 != null){
 	temp += ".${this.objectVersion_2}"
       }
-      if (this.extendedRef_2 != null){ 
+      if (this.extendedRef_2 != null){
 	temp += "@${this.extendedRef_2}"
       }
     } else {
