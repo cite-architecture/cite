@@ -6,7 +6,8 @@ resolvers += "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases"
 //libraryDependencies += "edu.harvard.chs" % "cite" % "3.1.0"
 //libraryDependencies += "edu.unc.epidoc" % "transcoder" % "1.2-SNAPSHOT"
 
-libraryDependencies += "com.lihaoyi" % "ammonite" % "0.7.4" % "test" cross CrossVersion.full
+//libraryDependencies += "com.lihaoyi" % "ammonite" % "0.7.4" %  "test" cross CrossVersion.full
+libraryDependencies += "com.lihaoyi" % "ammonite" % "0.7.6" cross CrossVersion.full
 
 libraryDependencies += "com.lihaoyi" %% "ammonite-ops" % "0.7.4"
 

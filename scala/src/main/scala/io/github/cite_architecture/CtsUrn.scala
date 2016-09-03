@@ -18,9 +18,7 @@ package cite {
     require(components(0) == "urn", "Invalid URN syntax: " + urnString + ". First component must be 'urn'.")
     require(components(1) == "cts", "Invalid URN syntax: " + urnString + ". Second component must be 'cts'.")
     require(componentSyntaxOk, "Invalid URN syntax: " + urnString + ". Wrong number of components.")
-    require(workParts.size < 5, "Invalid URN syntax. Too many parts in work component " + workComponent )
-    require(passageSyntaxOk, "Invalid URN syntax.  Error in passage component " + passageComponent)
-
+    require((workParts.size < 5), "Invalid URN syntax. Too many parts in work component " + workComponent )
 
     def namespace = components(2)
 
@@ -45,6 +43,7 @@ package cite {
     val rangeBegin = if (passageParts.size > 1) passageParts(0) else ""
     val rangeEnd = if (passageParts.size > 1) passageParts(1) else ""
     val passageNode = if (passageParts.size == 1) passageParts(0) else ""
+    require(passageSyntaxOk, "Invalid URN syntax.  Error in passage component " + passageComponent)
 
     def isRange = {
       passageComponent contains "-"
@@ -60,10 +59,9 @@ package cite {
 
     def passageSyntaxOk = {
       passageParts.size match {
-        case 1 => true
-        case 2 => true // other constraints?
+        case 1 => if (passageComponent.contains("-")) false else true
+        case 2 => ((rangeBegin.size > 0) && (rangeEnd.size > 0))
       }
-
     }
 
 
