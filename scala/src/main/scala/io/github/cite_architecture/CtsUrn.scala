@@ -9,7 +9,7 @@ package cite {
 
 
   // The superclass of Urn objects, implemented by CtsUrn and CiteUrn
-  class Urn {}
+  sealed abstract class Urn {}
 
   case class CtsUrn  (val urnString: String) extends Urn {
     val components = urnString.split(":")
@@ -45,6 +45,10 @@ package cite {
         case 4 => if (urnString.takeRight(1) == ":") true else false
         case _ => false
       }
+    }
+
+    override def toString() = {
+      urnString
     }
   }
 

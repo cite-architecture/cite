@@ -1,10 +1,9 @@
 // Needed for specs2
 resolvers += "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases"
 // Repository for
-resolvers += "uh-nexus" at "http://beta.hpcc.uh.edu/nexus/content/groups/public"
+//resolvers += "uh-nexus" at "http://beta.hpcc.uh.edu/nexus/content/groups/public"
 
-libraryDependencies += "edu.harvard.chs" % "cite" % "3.1.0"
-
+//libraryDependencies += "edu.harvard.chs" % "cite" % "3.1.0"
 //libraryDependencies += "edu.unc.epidoc" % "transcoder" % "1.2-SNAPSHOT"
 
 libraryDependencies += "com.lihaoyi" % "ammonite" % "0.7.4" % "test" cross CrossVersion.full
