@@ -57,9 +57,8 @@ package cite {
     def subref(s: String) = {
       val psgSplit = passageComponent.split("@")
       psgSplit.size match {
-        case 1 =>  ""
         case 2 => psgSplit(1)
-        case _ => throw new IllegalArgumentException
+        case _ => ""
       }
     }
 
