@@ -45,9 +45,26 @@ package cite {
     val passageNode = if (passageParts.size == 1) passageParts(0) else ""
     require(passageSyntaxOk, "Invalid URN syntax.  Error in passage component " + passageComponent)
 
+    val passageNodeSubref = subref(passageNode)
+    val rangeBeginSubref = subref(rangeBegin)
+    val rangeEndSubref = subref(rangeEnd)
+
     def isRange = {
       passageComponent contains "-"
     }
+
+
+    def subref(s: String) = {
+      val psgSplit = passageComponent.split("@")
+      psgSplit.size match {
+        case 1 =>  ""
+        case 2 => psgSplit(1)
+        case _ => throw new IllegalArgumentException
+      }
+    }
+
+
+
 
     def componentSyntaxOk = {
       components.size match {
