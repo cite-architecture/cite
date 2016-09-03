@@ -14,15 +14,18 @@ package cite {
   case class CtsUrn  (val urnString: String) extends Urn {
     val components = urnString.split(":")
 
+    // Verify syntax of submitted String:
     require(components(0) == "urn", "Invalid URN syntax: " + urnString + ". First component must be 'urn'.")
-    require(components(1) == "cts", "Invalid URN syntax: " + urnString) + ". Second component must be 'cts'."
-    require(componentSyntaxOk, "Invalid URN syntax: " + urnString) + ". Wrong number of components."
+    require(components(1) == "cts", "Invalid URN syntax: " + urnString + ". Second component must be 'cts'.")
+    require(componentSyntaxOk, "Invalid URN syntax: " + urnString + ". Wrong number of components.")
+    require(workParts.size < 5, "Invalid URN syntax. Too many parts in work component " + workComponent )
+    require(passageSyntaxOk, "Invalid URN syntax.  Error in passage component " + passageComponent)
+
 
     def namespace = components(2)
+
     def workComponent = components(3)
     def workParts = workComponent.split("\\.")
-    require(workParts.size < 5, "Invalid URN syntax. Too many parts in work component " + workComponent )
-
     def workLevel = {
       workParts.size match {
         case 1 => WorkLevel.TextGroup
@@ -31,13 +34,21 @@ package cite {
         case 4 => WorkLevel.Exemplar
       }
     }
+
     def passageComponent = {
       components.size match {
         case 5 => components(4)
         case _ => ""
       }
     }
+    def passageParts = passageComponent.split("-")
+    val rangeBegin = if (passageParts.size > 1) passageParts(0) else ""
+    val rangeEnd = if (passageParts.size > 1) passageParts(1) else ""
+    val passageNode = if (passageParts.size == 1) passageParts(0) else ""
 
+    def isRange = {
+      passageComponent contains "-"
+    }
 
     def componentSyntaxOk = {
       components.size match {
@@ -46,6 +57,15 @@ package cite {
         case _ => false
       }
     }
+
+    def passageSyntaxOk = {
+      passageParts.size match {
+        case 1 => true
+        case 2 => true // other constraints?
+      }
+
+    }
+
 
     override def toString() = {
       urnString

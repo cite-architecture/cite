@@ -21,4 +21,4 @@ scalaVersion := "2.11.8"
 
 name := "cite"
 
-version := "0.9.0"
+version := "0.9.1"

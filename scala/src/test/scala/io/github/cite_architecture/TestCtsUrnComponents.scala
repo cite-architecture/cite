@@ -11,23 +11,40 @@ import org.specs2.specification.Scope
 
 class TestCtsUrnComponents extends Specification {
   class Context extends Scope {
-    val urnString = "urn:cts:greekLit:tlg0012.tlg001.msA:1.1"
-    val urn = CtsUrn(urnString)
+    val psgNode = CtsUrn( "urn:cts:greekLit:tlg0012.tlg001.msA:1.1")
+    val rangeNode = CtsUrn("urn:cts:greekLit:tlg0012.tlg001.msA:1.1-1.10")
   }
 
   "A CtsUrn" should {
     "have a namespace" in new Context {
-      urn.namespace == "greekLit"
+      psgNode.namespace == "greekLit"
     }
   }
   "A CtsUrn" should {
     "have a work component" in new Context {
-      urn.workComponent == "tlg0012.tlg001.msA"
+      psgNode.workComponent == "tlg0012.tlg001.msA"
     }
   }
   "A CtsUrn" should {
     "determine a work level" in new Context {
-      urn.workLevel == WorkLevel.Version
+      psgNode.workLevel == WorkLevel.Version
+    }
+  }
+  "The urn 'urn:cts:greekLit:tlg0012.tlg001.msA:1.1' " should {
+    "have a passage component" in new Context {
+      psgNode.passageComponent == "1.1"
+    }
+  }
+
+  "The passage node 1.1" should {
+    "not be a range" in new Context {
+      psgNode.isRange == false
+    }
+  }
+
+  "The passage node 1.1-1.10" should {
+    "be a range" in new Context {
+      rangeNode.isRange == true
     }
   }
   // etc etc etc  Many units to implement...
