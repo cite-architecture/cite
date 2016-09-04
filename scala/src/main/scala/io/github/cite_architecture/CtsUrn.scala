@@ -46,8 +46,16 @@ package cite {
     require(passageSyntaxOk, "Invalid URN syntax.  Error in passage component " + passageComponent)
 
     val passageNodeSubref = subref(passageNode)
+    val passageNodeSubrefText = subrefText(passageNode)
+    val passageNodeSubrefIndex = subrefIndex(passageNode)
+
     val rangeBeginSubref = subref(rangeBegin)
+    val rangeBeginSubrefText = subrefText(rangeBegin)
+    val rangeBeginSubrefIndex = subrefIndex(rangeBegin)
+
     val rangeEndSubref = subref(rangeEnd)
+    val rangeEndSubrefText = subrefText(rangeEnd)
+    val rangeEndSubrefIndex = subrefIndex(rangeEnd)
 
     def isRange = {
       passageComponent contains "-"
@@ -58,6 +66,24 @@ package cite {
       val psgSplit = passageComponent.split("@")
       psgSplit.size match {
         case 2 => psgSplit(1)
+        case _ => ""
+      }
+    }
+
+    def subrefText(s: String) = {
+      val psgSplit = passageComponent.split("@")
+      psgSplit.size match {
+        case 2 => psgSplit(0)
+        case _ => ""
+      }
+    }
+
+    // given a subref, extract an index if any
+    // value is a string but guaranteed to be a valid Int
+    def subrefIndex(subref: String) = {
+      val idxRE = """[^\[]+\[([^\]]+)\]""".r
+      subref match {
+        case idxRE(i) => i // test that i is an Int string
         case _ => ""
       }
     }

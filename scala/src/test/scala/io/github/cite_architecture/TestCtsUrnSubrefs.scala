@@ -35,8 +35,18 @@ import org.specs2.specification.Scope
     }
   }
   "The URN 'urn:cts:greekLit:tlg0012.tlg.001:1.1'" should {
+    "have an empty string for subref text" in new Context {
+      psgSubref.passageNodeSubrefText == ""
+    }
+  }
+  "The URN 'urn:cts:greekLit:tlg0012.tlg.001:1.1'" should {
     "have an empty string for range begin subref" in new Context {
       psgSubref.rangeBeginSubref == ""
+    }
+  }
+  "The URN 'urn:cts:greekLit:tlg0012.tlg.001:1.1'" should {
+    "have an empty string for range begin subref text" in new Context {
+      psgSubref.rangeBeginSubrefText == ""
     }
   }
   "The URN 'urn:cts:greekLit:tlg0012.tlg.001:1.1'" should {
@@ -44,7 +54,11 @@ import org.specs2.specification.Scope
       psgSubref.rangeEndSubref == ""
     }
   }
-
+  "The URN 'urn:cts:greekLit:tlg0012.tlg.001:1.1'" should {
+    "have an empty string for range end subref text" in new Context {
+      psgSubref.rangeEndSubrefText == ""
+    }
+  }
 
 
   "The URN 'urn:cts:greekLit:tlg0012.tlg.001:1.1@wrath'" should {
@@ -52,13 +66,25 @@ import org.specs2.specification.Scope
       psgSubref.passageNodeSubref == "wrath"
     }
   }
+  "The URN 'urn:cts:greekLit:tlg0012.tlg.001:1.1@wrath'" should {
+    "have subref text 'wrath'" in new Context {
+      psgSubref.passageNodeSubrefText == "wrath"
+    }
+  }
+
 
   "The URN 'urn:cts:greekLit:tlg0012.tlg.001:1.1@wrath[1]'" should {
     "have a subref" in new Context {
       psgSubrefIndexed.passageNodeSubref == "wrath[1]"
     }
   }
+  "The URN 'urn:cts:greekLit:tlg0012.tlg.001:1.1@wrath[1]'" should {
+    "have subref text 'wrath'" in new Context {
+      psgSubrefIndexed.passageNodeSubrefText == "wrath[1]"
+    }
+  }
 
+  // PICK UP HERE
 
   "The URN 'urn:cts:greekLit:tlg0012.tlg.001:1.1@wrath-1.10'" should {
     "have a subref on the range beginning"in new Context {
