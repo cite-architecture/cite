@@ -81,6 +81,8 @@ package cite {
     // given a subref, extract an index if any
     // value is a string but guaranteed to be a valid Int
     def subrefIndex(subref: String) = {
+      // hairball RE to extract indexing string
+      // from within square brackets.
       val idxRE = """[^\[]+\[([^\]]+)\]""".r
       subref match {
         case idxRE(i) => try {
@@ -91,9 +93,6 @@ package cite {
         case _ => None
       }
     }
-
-
-
 
     def componentSyntaxOk = {
       components.size match {
