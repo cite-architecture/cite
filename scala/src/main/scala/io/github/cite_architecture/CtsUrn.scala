@@ -83,8 +83,12 @@ package cite {
     def subrefIndex(subref: String) = {
       val idxRE = """[^\[]+\[([^\]]+)\]""".r
       subref match {
-        case idxRE(i) => i // test that i is an Int string
-        case _ => ""
+        case idxRE(i) => try {
+          i.toInt
+        } catch {
+          case e: NumberFormatException => None
+        }
+        case _ => None
       }
     }
 
