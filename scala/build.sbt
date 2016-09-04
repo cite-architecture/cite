@@ -23,3 +23,7 @@ scalaVersion := "2.11.8"
 name := "cite"
 
 version := "0.9.1"
+
+publishTo := Some("Sonatype Snapshots Nexus" at "http://beta.hpcc.uh.edu/nexus/content/repositories/releases/")
+
+credentials += Credentials(Path.userHome / "nexusauth.txt" )
