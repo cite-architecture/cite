@@ -297,9 +297,9 @@ class Cite2Urn {
 				this.collectionComponent = components[3]
 
 				// See about collection + [version]
-				if (collectionComponent.split(".").size() > 1){
-						this.collection = this.collectionComponent.split(".")[0]
-						this.collectionVersion = this.collectionComponent.split(".")[1]
+				if (collectionComponent.tokenize(".").size() > 1){
+						this.collection = this.collectionComponent.tokenize(".")[0]
+						this.collectionVersion = this.collectionComponent.tokenize(".")[1]
 				} else {
 					this.collection = this.collectionComponent
 					this.collectionVersion = null
@@ -312,14 +312,14 @@ class Cite2Urn {
 					// See about objectComponent
 
 					// range…
-					if (this.objectComponent.split("-").size() > 1){
+					if (this.objectComponent.tokenize("-").size() > 1){
 						this.objectId = null
 						this.extendedRef = null
-						String tempOC1 = this.objectComponent.split("-")[0]
-						String tempOC2 = this.objectComponent.split("-")[0]
+						String tempOC1 = this.objectComponent.tokenize("-")[0]
+						String tempOC2 = this.objectComponent.tokenize("-")[0]
 						if (tempOC1.contains("@")){
-								this.objectId_1 = tempOC1.split("@")[0]
-								this.extendedRef_1 = tempOC1.split("@")[1]
+								this.objectId_1 = tempOC1.tokenize("@")[0]
+								this.extendedRef_1 = tempOC1.tokenize("@")[1]
 						} else {
 							this.objectId_1 = tempOC1
 						}
@@ -352,6 +352,18 @@ class Cite2Urn {
 					this.objectId_2 = null
 					this.extendedRef_1 = null
 					this.extendedRef_2 = null
+				}
+
+				if (this.collectionVersion == null){
+					if (this.extendedRef != null){
+							throw new Exception("Bad CITE2 URN syntax: extended references allowed only on version-level URNs: ${urnStr}")
+					}
+					if (this.extendedRef_1 != null){
+							throw new Exception("Bad CITE2 URN syntax: extended references allowed only on version-level URNs: ${urnStr}")
+					}
+					if (this.extendedRef_1 != null){
+							throw new Exception("Bad CITE2 URN syntax: extended references allowed only on version-level URNs: ${urnStr}")
+					}
 				}
 
 			if (objectComponent == null){
