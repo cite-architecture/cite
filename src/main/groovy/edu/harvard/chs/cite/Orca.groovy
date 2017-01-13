@@ -11,7 +11,11 @@ class Orca {
   CtsUrn passageAnalyzed
   CiteUrn analysisObject
   String transformedText
-  
+	CtsUrn exemplarUrn
+	CtsUrn prevExemplarUrn
+	CtsUrn nextExemplarUrn
+	Integer sequence
+
 
   Orca(CiteUrn id, CtsUrn psg, CiteUrn analysis, String xformText) {
     this.analysisRecord = id
@@ -19,7 +23,5 @@ class Orca {
     this.analysisObject = analysis
     this.transformedText = xformText
   }
-  
+
 }
-
-
