@@ -76,4 +76,11 @@ class TestCite2UrnConstructVariousBadURNs {
 			Cite2Urn versObj = new Cite2Urn("urn:cite2:hmt:vaimg.rel1:123@12,12,12,12-124.1@13,13,13,13")
 		}
 	}
+
+	@Test
+	void testConstructor12() {
+		assert shouldFail{
+			Cite2Urn versObj = new Cite2Urn("urn:cite2:hmt:vaimg.rel1:123@12,12,12,12-124.1@13,13,13,13")
+		}
+	}
 }

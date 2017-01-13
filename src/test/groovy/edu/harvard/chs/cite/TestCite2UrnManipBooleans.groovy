@@ -49,9 +49,9 @@ class TestCite2UrnManip {
    assert notRange2.hasObjectId() == true
    assert notRange4.hasObjectId() == true
 
-   assert    range1.hasObjectId() == false
+   assert    range1.hasObjectId() == true
 
-   assert    range3.hasObjectId() == false
+   assert    range3.hasObjectId() == true
 
    assert    doesNotHave1.hasObjectId() == false
    assert    doesNotHave2.hasObjectId() == false

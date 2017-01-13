@@ -7,16 +7,15 @@ import java.text.Normalizer.Form
 /**
 * A class representing a reference to an object in a set of
 * objects with shared properties, expressed in the notation of the
-* CITE2 Object URN system. The set is a "collection", which mandatory
-* be identified alone, as a notional collection, or given a specific  This class parses URNs expressed as Strings,
-* version identifier. The CITE2 Object URN makes the components of the URN
+* CITE2 Object URN system. The set is a "collection", which may
+* be identified alone, as a notional collection, or given a specific version.
+* This class parses URNs expressed as Strings,
+* The CITE2 Object URN makes the components of the URN
 * programattically accessible.
 * Note that while the automatically generated groovydoc output does not
 * show get* methods for all the CtsUrn's member properties,
 * Groovy  compilation automatically creates those public methods.
-* urn:cite2:hmt:msAfolio.release1:12r@extendedRef
-
-
+* E.g. urn:cite2:hmt:msAfolio.release1:12r@extendedRef
 *
 */
 class Cite2Urn {
@@ -58,7 +57,6 @@ class Cite2Urn {
 
 	/** Identifier for the second object in a range. */
 	String objectId_2 = null
-
 
 	/** Type-specific extended reference separated by '@'
 	* from either an object- or version-level URN. */
@@ -234,7 +232,7 @@ class Cite2Urn {
 	}
 
 
-	/** Extracts from the object component the required identifier
+	/** Extracts from the collection ID
 	* for a CITE Collection.
 	* @returns The collection identifier.
 	*/
@@ -242,7 +240,15 @@ class Cite2Urn {
 		return this.collection
 	}
 
-	/** Returs the collection + verion (if present)
+	/** Extracts from the collection ID
+	* for a CITE Collection. May be null.
+	* @returns The collection identifier.
+	*/
+	String getCollectionVersion() {
+		return this.collectionVersion
+	}
+
+	/** Returns the collection + version (if present)
 	* for a CITE Collection.
 	* @returns The collection identifier.
 	*/
@@ -251,7 +257,7 @@ class Cite2Urn {
 	}
 
 	/** Gets the entire object component of the URN.
-	* @returns The required object component of the URN.
+	* @returns The object component of the URN. May be null.
 	*/
 	String getObjectComponent() {
 	return this.objectComponent
@@ -259,20 +265,11 @@ class Cite2Urn {
 
 	/** Extracts from the object component the optional identifier
 	* for an object.
-	* @retkurns The object identifier, or null if the
+	* @returns The object identifier, or null if the
 	* URN only identifies a collection, OR IS A RANGE
 	*/
 	String getObjectId() {
 			return this.objectId
-	}
-
-	/** Extracts from the object component the optional identifier
-	* for the version of an object.
-	* @returns The version identifier, or null if the
-	* URN only identifies a collection or notional object.
-	*/
-	String getcollectionVersion() {
-		return this.collectionVersion
 	}
 
 	/** Extracts from the object component the optional string
@@ -290,10 +287,8 @@ class Cite2Urn {
 	* or null if this URN is not a range.
 	*/
 	String getFirstObject() {
-	return this.objectId_1
+		return this.objectId_1
 	}
-
-
 
 	/** Gets the object identifier for the last object
 	* in a range.
@@ -301,7 +296,7 @@ class Cite2Urn {
 	* or null if this URN is not a range.
 	*/
 	String getSecondObject() {
-	return this.objectId_2
+		return this.objectId_2
 	}
 
 
@@ -311,10 +306,8 @@ class Cite2Urn {
 	* defined by a CITE Extension, or null if none is present.
 	*/
 	String getFirstExtended() {
-	return this.extendedRef_1
+		return this.extendedRef_1
 	}
-
-
 
 	/** Extracts from the second object in a range the optional string
 	* with a type-specific extended reference.
@@ -322,18 +315,18 @@ class Cite2Urn {
 	* defined by a CITE Extension, or null if none is present.
 	*/
 	String getSecondExtended() {
-	return this.extendedRef_2
+		return this.extendedRef_2
 	}
 
 
 
 	// tests on object component
 
-	/** Tests if the URN identifies a notional work.
-	* @returns True if the URN has a work identifier.
+	/** Tests if the URN identifies a notional or versioned collection.
+	* @returns True if the URN has an object identifier; returns TRUE for ranges.
 	*/
 	boolean hasObjectId() {
-	return (this.objectId != null)
+		return ((this.objectId != null) || (this.isRange()) )
 	}
 
 
@@ -346,7 +339,7 @@ class Cite2Urn {
 
 
 	/** Tests if the URN includes a type-specific extended reference.
-	* @returns True if the URN has an extended reference.
+	* @returns True if the URN has an extended reference, or if either end of a range has one.
 	*/
 	boolean hasExtendedRef() {
 		return ((this.extendedRef != null) || (this.extendedRef_1 != null) || (this.extendedRef_2 != null))
@@ -368,7 +361,7 @@ class Cite2Urn {
 	* @returns A Cite2Urn identifying a Collection.
 	*/
 	Cite2Urn reduceToCollection() {
-		return new Cite2Urn("urn:cite:${this.ns}:${this.collection}")
+		return new Cite2Urn("urn:cite:${this.ns}:${this.collection}:")
 	}
 
 	/** Creates a Cite2Urn identifying a Collection at the version-level from
@@ -403,7 +396,7 @@ class Cite2Urn {
 
 
 	/** Creates a Cite2Urn identifying a CITE Object from
-	* a given Cite2Urn.  If the source URN has an extended reference, OR VERSIONS,
+	* a given Cite2Urn.  If the source URN has an extended reference
 	* it is omitted. If the URN points to a range, returns both end-objects.
 	* @returns A Cite2Urn identifying an Object.
 	*/
@@ -429,18 +422,18 @@ class Cite2Urn {
 	*/
 
 	String getRangeBegin(){
-		String temp =  "${this.reduceToCollection()}.${this.getFirstObject()}"
+		String temp =  "${this.reduceToCollectionVersion()}:"
 		if (this.isRange() ){
-			if (this.collectionVersion_1 != null){
-				temp += ".${this.collectionVersion_1}"
-			}
-			if (this.extendedRef_1 != null){
+			temp += "${this.objectId_1}"
+			if ( this.extendedRef_1 != null){
 				temp += "@${this.extendedRef_1}"
 			}
 		} else {
-			temp = this.toString()
+			if(this.objectComponent != null){
+				temp += this.getObjectComponent()
+			}
 		}
-		return temp
+		return new Cite2Urn(temp)
 	}
 
 
@@ -450,18 +443,18 @@ class Cite2Urn {
 	*/
 
 	String getRangeEnd(){
-		String temp = "${this.reduceToCollection()}.${this.getSecondObject()}"
+		String temp =  "${this.reduceToCollectionVersion()}:"
 		if (this.isRange() ){
-			if (this.collectionVersion_2 != null){
-				temp += ".${this.collectionVersion_2}"
-			}
-			if (this.extendedRef_2 != null){
+			temp += "${this.objectId_2}"
+			if ( this.extendedRef_2 != null){
 				temp += "@${this.extendedRef_2}"
 			}
-			} else {
-				temp = this.toString()
+		} else {
+			if(this.objectComponent != null){
+				temp += this.getObjectComponent()
 			}
-		return temp
+		}
+		return new Cite2Urn(temp)
 	}
 
 
