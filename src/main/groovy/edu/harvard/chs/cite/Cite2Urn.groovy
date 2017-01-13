@@ -340,7 +340,7 @@ class Cite2Urn {
 	/** Tests if the URN identifies a version.
 	* @returns True if the URN has a version identifier.
 	*/
-	boolean hasVersion() {
+	boolean hasCollectionVersion() {
 	return (this.collectionVersion != null)
 	}
 
@@ -367,8 +367,8 @@ class Cite2Urn {
 	* a Cite2Urn at any level.
 	* @returns A Cite2Urn identifying a Collection.
 	*/
-	String reduceToCollection() {
-		return "urn:cite:${this.ns}:${this.collection}"
+	Cite2Urn reduceToCollection() {
+		return new Cite2Urn("urn:cite:${this.ns}:${this.collection}")
 	}
 
 	/** Creates a Cite2Urn identifying a Collection at the version-level from
@@ -376,28 +376,28 @@ class Cite2Urn {
 	* If the original URN does not have a version, returns a collection-level URN string.
 	* @returns A Cite2Urn identifying a Collection and its version
 	*/
-	String reduceToCollectionVersion() {
+	Cite2Urn reduceToCollectionVersion() {
 		String returnString = ""
 		if (this.collectionVersion != null){
 		 	returnString = "urn:cite:${this.ns}:${this.collection}.${this.collectionVersion}:"
 		} else {
 		 	returnString = "urn:cite:${this.ns}:${this.collection}:"
 		}
-		return returnString
+		return new Cite2Urn(returnString)
 	}
 
 	/** Creates a Cite2Urn at the Collection or Version level, depending on the original,
 	* stripping off the object-component
 	* @returns A Cite2Urn identifying a Collection and its version
 	*/
-	String getUrnWithoutObject() {
+	Cite2Urn getUrnWithoutObject() {
 		String returnString = ""
 		if (this.collectionVersion != null){
 		 	returnString = "urn:cite:${this.ns}:${this.collection}.${this.collectionVersion}:"
 		} else {
 		 	returnString = "urn:cite:${this.ns}:${this.collection}:"
 		}
-		return returnString
+		return new Cite2Urn(returnString)
 	}
 
 
@@ -407,41 +407,40 @@ class Cite2Urn {
 	* it is omitted. If the URN points to a range, returns both end-objects.
 	* @returns A Cite2Urn identifying an Object.
 	*/
-	String reduceToObject() {
-	String reducedUrn = "urn:cite:${this.ns}:${this.collection}"
-	if (this.collectionVersion != null){
-		reducedUrn += "${this.collectionVersion}"
+	Cite2Urn reduceToObject() {
+		String reducedUrn = "urn:cite:${this.ns}:${this.collection}"
+		if (this.collectionVersion != null){
+			reducedUrn += "${this.collectionVersion}"
+		}
+		reducedUrn += ":"
+		if (this.isRange()) {
+			reducedUrn += "${this.getFirstObject()}"
+			reducedUrn += "-${this.getSecondObject()}"
+		} else {
+			reducedUrn += this.getObjectId()
+		}
+		return new Cite2Urn (reducedUrn)
 	}
-	reducedUrn += ":"
-	if (this.isRange()) {
-	reducedUrn += "${this.getFirstObject()}"
-	reducedUrn += "-${this.getSecondObject()}"
-
-	} else {
-	reducedUrn += this.getObjectId()
-	}
-	return (reducedUrn)
-	}
 
 
-	/** Returns a CITE URN for the first part of a range. If "this" is not a range, just returns "this" as a string.
+	/** Returns the first part of a range. If "this" is not a range, just returns "this" as a string.
 	* @param URN a CITE URN.
 	* @returns String. A Cite2Urn identifying an Object.
 	*/
 
 	String getRangeBegin(){
-	String temp =  "${this.reduceToCollection()}.${this.getFirstObject()}"
-	if (this.isRange() ){
-	if (this.collectionVersion_1 != null){
-	temp += ".${this.collectionVersion_1}"
-	}
-	if (this.extendedRef_1 != null){
-	temp += "@${this.extendedRef_1}"
-	}
-	} else {
-	temp = this.toString()
-	}
-	return temp
+		String temp =  "${this.reduceToCollection()}.${this.getFirstObject()}"
+		if (this.isRange() ){
+			if (this.collectionVersion_1 != null){
+				temp += ".${this.collectionVersion_1}"
+			}
+			if (this.extendedRef_1 != null){
+				temp += "@${this.extendedRef_1}"
+			}
+		} else {
+			temp = this.toString()
+		}
+		return temp
 	}
 
 
