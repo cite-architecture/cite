@@ -42,5 +42,38 @@ class TestCite2UrnConstructVariousBadURNs {
 			Cite2Urn versObj = new Cite2Urn("urn:cite2:hmt:vaimg:dogs:123")
 		}
 	}
+	@Test
+	void testConstructor7() {
+		assert shouldFail{
+			Cite2Urn versObj = new Cite2Urn("urn:cite2:hmt:vaimg:123.1")
+		}
+	}
 
+	@Test
+	void testConstructor8() {
+		assert shouldFail{
+			Cite2Urn versObj = new Cite2Urn("urn:cite2:hmt:vaimg.rel1:123.1")
+		}
+	}
+
+	@Test
+	void testConstructor9() {
+		assert shouldFail{
+			Cite2Urn versObj = new Cite2Urn("urn:cite2:hmt:vaimg.rel1:123-124.1")
+		}
+	}
+
+	@Test
+	void testConstructor10() {
+		assert shouldFail{
+			Cite2Urn versObj = new Cite2Urn("urn:cite2:hmt:vaimg.rel1:123.1@12,12,12,12-124")
+		}
+	}
+
+	@Test
+	void testConstructor11() {
+		assert shouldFail{
+			Cite2Urn versObj = new Cite2Urn("urn:cite2:hmt:vaimg.rel1:123@12,12,12,12-124.1@13,13,13,13")
+		}
+	}
 }

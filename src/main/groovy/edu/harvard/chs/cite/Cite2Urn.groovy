@@ -73,186 +73,6 @@ class Cite2Urn {
 	String extendedRef_2 = null
 
 
-
-	/** Initializes values for all constituent parts of
-	* of the URN's object component.  It checks for the presence of ranges,
-	* and for each object (individual object or end points of a range),
-	* it checks for presence of versions and extended references.
-	* @param objStr The identifying String, optionally including
-	* extended reference, for either a single object or a range of
-	* objects. Does NOT include collection-ID!
-	*/
-	void initializeObjPart(String objStr)
-		throws Exception {
-		// first, check for range, then within each
-		// obj ref, check for extended ref
-		def rangeParts = objStr.split("-")
-
-		def tempMap = [:]
-
-		if (rangeParts.size() == 1){ // Not a range
-			tempMap = parseObject(rangeParts[0])
-			this.extendedRef = tempMap["objectRef"]
-			this.objectId = tempMap["objectId"]
-			this.collectionVersion = tempMap["collectionVersion"]
-
-			if ((this.collectionVersion == null) && (this.extendedRef != null)) {
-				throw new Exception("Cite2Urn: illegal object component ${objStr}. Cannot have extended reference on object-level URN.")
-			}
-
-		} else if (rangeParts.size() == 2) { // A range
-			// Deal with Start
-			tempMap = parseObject(rangeParts[0])
-			this.extendedRef_1 = tempMap["objectRef"]
-			this.objectId_1 = tempMap["objectId"]
-			this.collectionVersion_1 = tempMap["collectionVersion"]
-
-			if ((this.collectionVersion_1  == null) && (this.extendedRef_1 != null)) {
-				throw new Exception("Cite2Urn: illegal object component ${objStr}. Cannot have extended reference on object-level URN.")
-			}
-
-
-
-
-			// Deal with end
-			tempMap = parseObject(rangeParts[1])
-			this.extendedRef_2 = tempMap["objectRef"]
-			this.objectId_2 = tempMap["objectId"]
-			this.collectionVersion_2 = tempMap["collectionVersion"]
-
-			if ((this.collectionVersion_2  == null) && (this.extendedRef_2 != null)) {
-				throw new Exception("Cite2Urn: illegal object component ${objStr}. Cannot have extended reference on object-level URN.")
-			}
-
-
-			// Let's sort out versions and ranges.
-			// - Both sides can be object-only.
-			// - If only one end has a version, give the other end the same version.
-			// - If there are two versions, but different, throw and error.
-			if ( (this.collectionVersion_1 == null) && (this.collectionVersion_2 != null)){
-				this.collectionVersion_1 = this.collectionVersion_2
-			}
-			if ( (this.collectionVersion_1 != null) && (this.collectionVersion_2 == null)){
-				this.collectionVersion_2 = this.collectionVersion_1
-			}
-			if ( (this.collectionVersion_1 != null) && (this.collectionVersion_2 != null) && (this.collectionVersion_1 != this.collectionVersion_2)){
-				throw new Exception("Bad syntax in range. Both ends must identify the same version: #${objStr}#")
-			}
-
-		} else {
-			throw new Exception("Bad syntax in object-identifier (too many hyphens): #${objStr}#")
-		}
-
-	}
-
-
-	/** Initializes values for all constituent parts of
-	* of the URN's version component.  It checks for the presence of ranges,
-	* and for each version (individual version or end points of a range),
-	* it checks for presence of extended references.
-	* @param versionStr The identifying String, optionally including
-	* extended reference, for either a single version reference or a range of
-	* version references; the String should be prefixed with the object
-	* identifying String, separated by a period, e.g., "object.version".
-	*/
-	void initializeVersionPart(String versionStr) {
-	// first, check for range, then within each
-	// obj ref, check for extended ref
-	if (debug > 1) {
-	System.err.println "is it a range?"
-	}
-
-
-	def rangeParts = versionStr.split("-")
-	switch(rangeParts.size()) {
-
-	case 2:
-	def dotParts1 = rangeParts[0].split(/\./)
-	this.objectId_1 = dotParts1[0]
-	String remainder1 = dotParts1[1..-1].join(".")
-	def refParts1 = remainder1.split(/@/)
-	if (refParts1.size() == 2) {
-	this.extendedRef_1 = refParts1[1]
-	}
-	this.collectionVersion_1 = refParts1[0]
-
-	def dotParts2 = rangeParts[1].split(/\./)
-	this.objectId_2 = dotParts2[0]
-	String remainder2 = dotParts2[1..-1].join(".")
-	def refParts2 = remainder2.split(/@/)
-	if (refParts2.size() == 2) {
-	this.extendedRef_2 = refParts2[1]
-	}
-	this.collectionVersion_2 = refParts2[0]
-	break
-
-	case 1:
-	def dotParts = versionStr.split(/\./)
-	this.objectId = dotParts[0]
-	String remainder = dotParts[1..-1].join(".")
-	def refParts = remainder.split(/@/)
-	if (refParts.size() == 2) {
-	this.extendedRef = refParts[1]
-	}
-	this.collectionVersion = refParts[0]
-	break
-
-	default:
-	throw new Exception("Cite2Urn:initializeVersionPart: could not make sense of ${objStr}")
-	break
-	}
-
-
-	}
-
-
-	/** Method to parse the parts of an Object identifier:
-	* (1) object,  (2) subref
-	* We need to do this for single-object URNs, and each end of a range, so
-	* it makes sense to break it out.
-	* NOTE: Strip off the collection-ID before sending in the Object String.
-	*       Otherwise there is no way to distinguish 'collection.object' from 'object.version'
-	*
-	* @param A String representing an object-identifier
-	* @returns Map. om.objectId om.collectionVersion om.objectRef
-	**/
-	Map parseObject(String objStr){
-		def tempObj = ""
-		def om = [:]
-		om["objectId"] = null
-		om["objectRef"] = null
-
-		// 1. split off extendedRef, if any
-		if (objStr.contains("@")){
-			om["objectRef"] = objStr.split("@")[1]
-			tempObj = objStr.split("@")[0]
-			} else {
-				tempObj = objStr
-			}
-
-			if (tempObj.split(/\./).size() == 1){
-				om["objectId"] = tempObj
-			}
-			// 3. we're good
-			return om
-		}
-
-	/**
-	* Returns the number of period-delimited elements in the Object component
-	* of a URN. If it is a range, returns the level of the first element of the range.
-	* @param String containing the object-component of a URN
-	* @returns Integer
-	**/
-	Integer countLevel(String objectRef) {
-	String stripped = null
-	if ( objectRef.contains("-") ){
-	stripped = objectRef.split("-")[0].replaceAll(/@.+/,'')
-	} else {
-	stripped = objectRef.replaceAll(/@.+/,'')
-	}
-	return stripped.split(/\./).size()
-	}
-
 	/** Constructor using a String conforming to the
 	* syntax and semantics of the CITE2 URN specification at
 	* http://cite-architecture.github.io/Cite2Urn_spec/
@@ -366,6 +186,22 @@ class Cite2Urn {
 					}
 				}
 
+				if (this.objectId != null){
+					if (this.objectId.contains(".")){
+								throw new Exception("Bad CITE2 URN syntax: Object-id component cannot contain a '.' character: ${urnStr}")
+					}
+				}
+				if (this.objectId_1 != null){
+					if (this.objectId_1.contains(".")){
+								throw new Exception("Bad CITE2 URN syntax: Object-id component cannot contain a '.' character: ${urnStr}")
+					}
+				}
+				if (this.objectId_1 != null){
+					if (this.objectId_2.contains(".")){
+								throw new Exception("Bad CITE2 URN syntax: Object-id component cannot contain a '.' character: ${urnStr}")
+					}
+				}
+
 			if (objectComponent == null){
 				tempStr = "urn:cite2:${this.ns}:${this.collectionComponent}:"
 			} else {
@@ -398,6 +234,22 @@ class Cite2Urn {
 	}
 
 
+	/** Extracts from the object component the required identifier
+	* for a CITE Collection.
+	* @returns The collection identifier.
+	*/
+	String getNotionalCollection() {
+		return this.collection
+	}
+
+	/** Returs the collection + verion (if present)
+	* for a CITE Collection.
+	* @returns The collection identifier.
+	*/
+	String getCollectionComponent() {
+		return this.collectionComponent
+	}
+
 	/** Gets the entire object component of the URN.
 	* @returns The required object component of the URN.
 	*/
@@ -405,45 +257,13 @@ class Cite2Urn {
 	return this.objectComponent
 	}
 
-	/** Gets the entire object component MINUS THE COLLECTION of the URN.
-	* This is useful for constructing ranges.
-	* @returns The required object component of the URN.
-	*/
-	String getObjectWithoutCollection() {
-	String tempStr = ""
-	if ((this.hasObjectId()) && (this.isRange() == false)){
-	tempStr = this.getObjectId()
-	if (this.hasVersion()){
-	tempStr += "." + this.getcollectionVersion()
-	}
-	if (this.hasExtendedRef()){
-	tempStr += "@" + this.getExtendedRef()
-	}
-	}
-	return tempStr
-	}
-
-
-
-	// Extract parts of object component:
-
-
-	/** Extracts from the object component the required identifier
-	* for a CITE Collection.
-	* @returns The collection identifier.
-	*/
-	String getCollection() {
-	return this.collection
-	}
-
-
 	/** Extracts from the object component the optional identifier
-	* for aj notional object.
+	* for an object.
 	* @retkurns The object identifier, or null if the
-	* URN only identifies a collection.
+	* URN only identifies a collection, OR IS A RANGE
 	*/
 	String getObjectId() {
-	return this.objectId
+			return this.objectId
 	}
 
 	/** Extracts from the object component the optional identifier
@@ -452,7 +272,7 @@ class Cite2Urn {
 	* URN only identifies a collection or notional object.
 	*/
 	String getcollectionVersion() {
-	return this.collectionVersion
+		return this.collectionVersion
 	}
 
 	/** Extracts from the object component the optional string
@@ -461,7 +281,7 @@ class Cite2Urn {
 	* defined by a CITE Extension, or null if none is present.
 	*/
 	String getExtendedRef() {
-	return this.extendedRef
+		return this.extendedRef
 	}
 
 	/** Gets the object identifier for the first object
@@ -521,7 +341,7 @@ class Cite2Urn {
 	* @returns True if the URN has a version identifier.
 	*/
 	boolean hasVersion() {
-	return ( (this.collectionVersion != null) || (this.collectionVersion_1 != null) )
+	return (this.collectionVersion != null)
 	}
 
 
@@ -529,7 +349,7 @@ class Cite2Urn {
 	* @returns True if the URN has an extended reference.
 	*/
 	boolean hasExtendedRef() {
-	return (this.extendedRef != null)
+		return ((this.extendedRef != null) || (this.extendedRef_1 != null) || (this.extendedRef_2 != null))
 	}
 
 
@@ -538,7 +358,7 @@ class Cite2Urn {
 	* @returns True if the URN is a range.
 	*/
 	boolean isRange() {
-	return ((this.objectId_1 != null) && (this.objectId_2 != null))
+		return ((this.objectId_1 != null) && (this.objectId_2 != null))
 	}
 
 	// Manipulating URNs
@@ -548,7 +368,36 @@ class Cite2Urn {
 	* @returns A Cite2Urn identifying a Collection.
 	*/
 	String reduceToCollection() {
-	return "urn:cite:${this.ns}:${this.collection}"
+		return "urn:cite:${this.ns}:${this.collection}"
+	}
+
+	/** Creates a Cite2Urn identifying a Collection at the version-level from
+	* a Cite2Urn at any level.
+	* If the original URN does not have a version, returns a collection-level URN string.
+	* @returns A Cite2Urn identifying a Collection and its version
+	*/
+	String reduceToCollectionVersion() {
+		String returnString = ""
+		if (this.collectionVersion != null){
+		 	returnString = "urn:cite:${this.ns}:${this.collection}.${this.collectionVersion}:"
+		} else {
+		 	returnString = "urn:cite:${this.ns}:${this.collection}:"
+		}
+		return returnString
+	}
+
+	/** Creates a Cite2Urn at the Collection or Version level, depending on the original,
+	* stripping off the object-component
+	* @returns A Cite2Urn identifying a Collection and its version
+	*/
+	String getUrnWithoutObject() {
+		String returnString = ""
+		if (this.collectionVersion != null){
+		 	returnString = "urn:cite:${this.ns}:${this.collection}.${this.collectionVersion}:"
+		} else {
+		 	returnString = "urn:cite:${this.ns}:${this.collection}:"
+		}
+		return returnString
 	}
 
 
@@ -559,10 +408,14 @@ class Cite2Urn {
 	* @returns A Cite2Urn identifying an Object.
 	*/
 	String reduceToObject() {
-	String reducedUrn = "urn:cite:${this.ns}:${this.collection}."
+	String reducedUrn = "urn:cite:${this.ns}:${this.collection}"
+	if (this.collectionVersion != null){
+		reducedUrn += "${this.collectionVersion}"
+	}
+	reducedUrn += ":"
 	if (this.isRange()) {
 	reducedUrn += "${this.getFirstObject()}"
-	reducedUrn +=      "-${this.getSecondObject()}"
+	reducedUrn += "-${this.getSecondObject()}"
 
 	} else {
 	reducedUrn += this.getObjectId()
@@ -570,32 +423,6 @@ class Cite2Urn {
 	return (reducedUrn)
 	}
 
-	/** Creates a Cite2Urn identifying a VERSIONED CITE Object from
-	* a given Cite2Urn.  If the source URN has an extended reference
-	* it is omitted. If the URN points to a range, returns both end-objects and any versions.
-	* @returns A Cite2Urn identifying an Object and version.
-	*/
-	String reduceToVersion() {
-	String reducedUrn = "urn:cite:${this.ns}:${this.collection}."
-	if (this.isRange()) {
-	reducedUrn += "${this.getFirstObject()}"
-	if (this.collectionVersion_1 != null) {
-	reducedUrn += ".${this.collectionVersion_1}"
-	}
-	reducedUrn +=      "-${this.getSecondObject()}"
-	if (this.collectionVersion_2 != null) {
-	reducedUrn += ".${this.collectionVersion_2}"
-	}
-
-
-	} else {
-	reducedUrn += this.getObjectId()
-	if (this.hasVersion()) {
-	reducedUrn += "." + this.getcollectionVersion()
-	}
-	}
-	return (reducedUrn)
-	}
 
 	/** Returns a CITE URN for the first part of a range. If "this" is not a range, just returns "this" as a string.
 	* @param URN a CITE URN.
