@@ -316,7 +316,7 @@ class Cite2Urn {
 						this.objectId = null
 						this.extendedRef = null
 						String tempOC1 = this.objectComponent.tokenize("-")[0]
-						String tempOC2 = this.objectComponent.tokenize("-")[0]
+						String tempOC2 = this.objectComponent.tokenize("-")[1]
 						if (tempOC1.contains("@")){
 								this.objectId_1 = tempOC1.tokenize("@")[0]
 								this.extendedRef_1 = tempOC1.tokenize("@")[1]
@@ -324,7 +324,7 @@ class Cite2Urn {
 							this.objectId_1 = tempOC1
 						}
 						if (tempOC2.contains("@")){
-								this.objectId_2 = tempOC2.split("@")[0]
+								this.objectId_2 = tempOC2.tokenize("@")[0]
 								this.extendedRef_2 = tempOC2.split("@")[1]
 						} else {
 							this.objectId_2 = tempOC2
@@ -333,8 +333,8 @@ class Cite2Urn {
 					// … not range…
 					} else {
 						if (this.objectComponent.contains("@")){
-								this.objectId = this.objectComponent.split("@")[0]
-								this.extendedRef = this.objectComponent.split("@")[1]
+								this.objectId = this.objectComponent.tokenize("@")[0]
+								this.extendedRef = this.objectComponent.tokenize("@")[1]
 						} else {
 							  this.objectId = this.objectComponent
 								this.extendedRef = null
@@ -361,7 +361,7 @@ class Cite2Urn {
 					if (this.extendedRef_1 != null){
 							throw new Exception("Bad CITE2 URN syntax: extended references allowed only on version-level URNs: ${urnStr}")
 					}
-					if (this.extendedRef_1 != null){
+					if (this.extendedRef_2 != null){
 							throw new Exception("Bad CITE2 URN syntax: extended references allowed only on version-level URNs: ${urnStr}")
 					}
 				}
