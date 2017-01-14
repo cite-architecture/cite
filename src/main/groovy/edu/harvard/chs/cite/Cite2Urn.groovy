@@ -361,7 +361,7 @@ class Cite2Urn {
 	* @returns A Cite2Urn identifying a Collection.
 	*/
 	Cite2Urn reduceToCollection() {
-		return new Cite2Urn("urn:cite:${this.ns}:${this.collection}:")
+		return new Cite2Urn("urn:cite2:${this.ns}:${this.collection}:")
 	}
 
 	/** Creates a Cite2Urn identifying a Collection at the version-level from
@@ -372,9 +372,9 @@ class Cite2Urn {
 	Cite2Urn reduceToCollectionVersion() {
 		String returnString = ""
 		if (this.collectionVersion != null){
-		 	returnString = "urn:cite:${this.ns}:${this.collection}.${this.collectionVersion}:"
+		 	returnString = "urn:cite2:${this.ns}:${this.collection}.${this.collectionVersion}:"
 		} else {
-		 	returnString = "urn:cite:${this.ns}:${this.collection}:"
+		 	returnString = "urn:cite2:${this.ns}:${this.collection}:"
 		}
 		return new Cite2Urn(returnString)
 	}
@@ -386,9 +386,9 @@ class Cite2Urn {
 	Cite2Urn getUrnWithoutObject() {
 		String returnString = ""
 		if (this.collectionVersion != null){
-		 	returnString = "urn:cite:${this.ns}:${this.collection}.${this.collectionVersion}:"
+		 	returnString = "urn:cite2:${this.ns}:${this.collection}.${this.collectionVersion}:"
 		} else {
-		 	returnString = "urn:cite:${this.ns}:${this.collection}:"
+		 	returnString = "urn:cite2:${this.ns}:${this.collection}:"
 		}
 		return new Cite2Urn(returnString)
 	}
@@ -401,16 +401,18 @@ class Cite2Urn {
 	* @returns A Cite2Urn identifying an Object.
 	*/
 	Cite2Urn reduceToObject() {
-		String reducedUrn = "urn:cite:${this.ns}:${this.collection}"
+		String reducedUrn = "urn:cite2:${this.ns}:${this.collection}"
 		if (this.collectionVersion != null){
-			reducedUrn += "${this.collectionVersion}"
+			reducedUrn += ".${this.collectionVersion}"
 		}
 		reducedUrn += ":"
 		if (this.isRange()) {
 			reducedUrn += "${this.getFirstObject()}"
 			reducedUrn += "-${this.getSecondObject()}"
 		} else {
-			reducedUrn += this.getObjectId()
+			if (this.getObjectId() != null){
+				reducedUrn += this.getObjectId()
+			}
 		}
 		return new Cite2Urn (reducedUrn)
 	}
@@ -422,7 +424,7 @@ class Cite2Urn {
 	*/
 
 	String getRangeBegin(){
-		String temp =  "${this.reduceToCollectionVersion()}:"
+		String temp =  "${this.reduceToCollectionVersion()}"
 		if (this.isRange() ){
 			temp += "${this.objectId_1}"
 			if ( this.extendedRef_1 != null){
@@ -443,7 +445,7 @@ class Cite2Urn {
 	*/
 
 	String getRangeEnd(){
-		String temp =  "${this.reduceToCollectionVersion()}:"
+		String temp =  "${this.reduceToCollectionVersion()}"
 		if (this.isRange() ){
 			temp += "${this.objectId_2}"
 			if ( this.extendedRef_2 != null){
