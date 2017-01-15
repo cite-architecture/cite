@@ -83,4 +83,96 @@ class TestCite2UrnConstructVariousBadURNs {
 			Cite2Urn versObj = new Cite2Urn("urn:cite2:hmt:vaimg.rel1:123@12,12,12,12-124.1@13,13,13,13")
 		}
 	}
+
+	@Test
+	void testBadUrns1(){
+		assert shouldFail{
+			Cite2Urn versObj = new Cite2Urn("urn:cite2:hmt:msA.r1:.12r")
+		}
+	}
+
+	@Test
+	void testBadUrns2(){
+		assert shouldFail{
+			Cite2Urn versObj = new Cite2Urn("urn:cite2:hmt:msA.r1:12r.")
+		}
+	}
+
+	@Test
+	void testBadUrns3(){
+		assert shouldFail{
+			Cite2Urn versObj = new Cite2Urn("urn:cite2:hmt:msA..r1:12r")
+		}
+	}
+
+	@Test
+	void testBadUrns4(){
+		assert shouldFail{
+			Cite2Urn versObj = new Cite2Urn("urn:cite2:hmt:msA.r1.:12r")
+		}
+	}
+
+	@Test
+	void testBadUrns5(){
+		assert shouldFail{
+			Cite2Urn versObj = new Cite2Urn("urn:cite2:hmt:.msA.r1:12r")
+		}
+	}
+
+	@Test
+	void testBadUrns6(){
+		assert shouldFail{
+			Cite2Urn versObj = new Cite2Urn("urn:cite2:hmt:msA..r1:12r")
+		}
+	}
+	@Test
+	void testBadUrns7(){
+		assert shouldFail{
+			Cite2Urn versObj = new Cite2Urn("urn:cite2:hmt:msA.r1.:12r")
+		}
+	}
+	@Test
+	void testBadUrns8(){
+		assert shouldFail{
+			Cite2Urn versObj = new Cite2Urn("urn:cite2:hmt:.msA.r1:12r")
+		}
+	}
+
+	@Test
+	void testBadUrns9(){
+		assert shouldFail{
+			Cite2Urn versObj = new Cite2Urn("urn:cite2:hmt:msA.r1:12r-")
+		}
+	}
+	@Test
+	void testBadUrns10(){
+		assert shouldFail{
+			Cite2Urn versObj = new Cite2Urn("urn:cite2:hmt:msA.r1:-12r")
+		}
+	}
+	@Test
+	void testBadUrns11(){
+		assert shouldFail{
+			Cite2Urn versObj = new Cite2Urn("urn:cite2:hmt:msA.r1:12r-14v-22r")
+		}
+	}
+	@Test
+	void testBadUrns12(){
+		assert shouldFail{
+			Cite2Urn versObj = new Cite2Urn("urn:cite2:hmt:msA.r1:12r--14v")
+		}
+	}
+	@Test
+	void testBadUrns13(){
+		assert shouldFail{
+			Cite2Urn versObj = new Cite2Urn("urn:cite2:hmt:msA.:12r-14v")
+		}
+	}
+	@Test
+	void testBadUrns14(){
+		assert shouldFail{
+			Cite2Urn versObj = new Cite2Urn("urn:cite2:hmt:msA.rel1:12.r")
+		}
+	}
+
 }

@@ -79,7 +79,7 @@ class Cite2Urn {
 	*/
 	Cite2Urn (String urnStr)
 		throws Exception {
-		def components = urnStr.split(/:/)
+		def components = urnStr.tokenize(":")
 		def tempStr = ""
 		try{
 				if ( (components.size() < 4) || (components.size() > 5)) {
@@ -99,14 +99,27 @@ class Cite2Urn {
 					throw new Exception("A Cite2 urn must begin with 'urn:cite2': #${urnStr}# begins with urn:${components[1]}")
 				}
 				if (components[3].tokenize(".").size() > 2){
-					throw new Exception("A Cite2 Urn's collection component may consist of at most 2 parts: colleciton and [optional] version.")
-
+					throw new Exception("A Cite2 Urn's collection component may consist of at most 2 parts: collection and [optional] version. #${urnStr}#")
 				}
+				if (components[3].findAll(/\./).size() > 1){
+					throw new Exception("A Cite2 Urn's collection component may consist of at most 2 parts: collection and [optional] version. #${urnStr}#")
+				}
+					if ( (components[3].contains(".")) && (components[3].tokenize(".").size < 2) ){
+						throw new Exception("A Cite2 URN's collection component may contain a '.' character only between a Collection identifier and a Version identifier. #${urnStr}#")
+					}
 				if (components.size() > 4){
 					if (components[4].tokenize("-").size() > 2){
-						throw new Exception("A Cite2 URN's passage component can have at most 1 hyphen, indication a range.")
+						throw new Exception("A Cite2 URN's passage component may have at most 1 hyphen, indication a range. #${urnStr}#")
 					}
-
+					if (components[4].findAll(/\-/).size() > 1){
+						throw new Exception("A Cite2 URN's passage component may have at most 1 hyphen, indication a range. #${urnStr}#")
+					}
+					if ( (components[4].contains("-")) && (components[4].tokenize("-").size < 2) ){
+						throw new Exception("A Cite2 URN's passage component may contain a hyphen only between two elements of a range. #${urnStr}#")
+					}
+					if (components[4].contains(/\./)){
+						throw new Exception("A Cite2 URN's passage component may not contain a '.' character. #${urnStr}#")
+					}
 				}
 
 
