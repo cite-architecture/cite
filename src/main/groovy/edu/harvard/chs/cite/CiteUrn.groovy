@@ -588,6 +588,12 @@ class CiteUrn {
     return temp
   }
 
-
+/** Returns a Cite2 URN
+* @returns a Cite2Urn
+*/
+Cite2Urn toCite2(){
+	Cite2Converter c2c = new Cite2Converter()
+	return c2c.convert(this)
+}
 
 }

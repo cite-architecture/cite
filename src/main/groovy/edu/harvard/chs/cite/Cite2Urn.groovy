@@ -70,6 +70,14 @@ class Cite2Urn {
 	* from second node in a range in either an object- or version-level URN. */
 	String extendedRef_2 = null
 
+	/** Constructor using a CITE(1) URN object
+	*
+	* @param CITE URN
+	*/
+	Cite2Urn (CiteUrn c1urn)
+	throws Exception{
+			this( new Cite2Converter().convert(c1urn).toString())
+	}
 
 	/** Constructor using a String conforming to the
 	* syntax and semantics of the CITE2 URN specification at
