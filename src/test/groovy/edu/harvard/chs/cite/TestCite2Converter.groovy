@@ -4,8 +4,6 @@ import org.junit.Test
 import static groovy.test.GroovyAssert.shouldFail
 
 
-
-
 /** Class testing conversion from CITE to CITE2 urns */
 class TestCite2Converter extends GroovyTestCase {
 
@@ -13,7 +11,6 @@ class TestCite2Converter extends GroovyTestCase {
 Cite2Converter c2c = new Cite2Converter()
 
 @Test void testConversion1() {
-
 	 	CiteUrn curn = new CiteUrn("urn:cite:hmt:vaimg.123")
 		Cite2Urn c2urn = new Cite2Urn("urn:cite2:hmt:vaimg:123")
 		assert c2c.convert(curn).toString() == c2urn.toString()
