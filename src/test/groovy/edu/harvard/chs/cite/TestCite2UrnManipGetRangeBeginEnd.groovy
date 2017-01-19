@@ -11,7 +11,6 @@ import static groovy.test.GroovyAssert.shouldFail
 class TestCite2UrnManipGetRangeBeginEnd{
   @Test
   void testGetRangeBegin(){
-
    Cite2Urn range1 = new Cite2Urn("urn:cite2:hmt:vaimg:VA012RN_0013-VA024RN_0025")
    Cite2Urn range2 = new Cite2Urn("urn:cite2:hmt:vaimg.rel1:VA012RN_0013-VA024RN_0025")
    Cite2Urn range3 = new Cite2Urn("urn:cite2:hmt:vaimg.rel1:VA012RN_0013-VA024RN_0025")
@@ -24,6 +23,8 @@ class TestCite2UrnManipGetRangeBeginEnd{
    Cite2Urn rangeNot4 = new Cite2Urn("urn:cite2:hmt:vaimg.rel1:")
    Cite2Urn rangeNot5 = new Cite2Urn("urn:cite2:hmt:vaimg:")
 
+	 assert "${range1.getClass()}" == "class edu.harvard.chs.cite.Cite2Urn"
+	 assert "${range2.getClass()}" == "class edu.harvard.chs.cite.Cite2Urn"
 	 assert range1.getRangeBegin().toString() == "urn:cite2:hmt:vaimg:VA012RN_0013"
 	 assert range2.getRangeBegin().toString() == "urn:cite2:hmt:vaimg.rel1:VA012RN_0013"
 	 assert range3.getRangeBegin().toString() == "urn:cite2:hmt:vaimg.rel1:VA012RN_0013"
@@ -53,6 +54,8 @@ class TestCite2UrnManipGetRangeBeginEnd{
    Cite2Urn rangeNot4 = new Cite2Urn("urn:cite2:hmt:vaimg.rel1:")
    Cite2Urn rangeNot5 = new Cite2Urn("urn:cite2:hmt:vaimg:")
 
+	 assert "${range1.getClass()}" == "class edu.harvard.chs.cite.Cite2Urn"
+	 assert "${range2.getClass()}" == "class edu.harvard.chs.cite.Cite2Urn"
 	 assert range1.getRangeEnd().toString() == "urn:cite2:hmt:vaimg:VA024RN_0025"
 	 assert range2.getRangeEnd().toString() == "urn:cite2:hmt:vaimg.rel1:VA024RN_0025"
 	 assert range3.getRangeEnd().toString() == "urn:cite2:hmt:vaimg.rel1:VA024RN_0025"

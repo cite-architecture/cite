@@ -343,7 +343,7 @@ class Cite2Urn {
 
 	// tests on object component
 
-	/** Tests if the URN identifies a notional or versioned collection.
+	/** Tests if the URN identifies an object (as opposed to a Collection)
 	* @returns True if the URN has an object identifier; returns TRUE for ranges.
 	*/
 	boolean hasObjectId() {
@@ -441,10 +441,10 @@ class Cite2Urn {
 
 	/** Returns the first part of a range. If "this" is not a range, just returns "this" as a string.
 	* @param URN a CITE URN.
-	* @returns String. A Cite2Urn identifying an Object.
+	* @returns Cite2Urn. A Cite2Urn identifying an Object.
 	*/
 
-	String getRangeBegin(){
+	Cite2Urn getRangeBegin(){
 		String temp =  "${this.reduceToCollectionVersion()}"
 		if (this.isRange() ){
 			temp += "${this.objectId_1}"
@@ -465,7 +465,7 @@ class Cite2Urn {
 	* @returns String. A Cite2Urn identifying an Object.
 	*/
 
-	String getRangeEnd(){
+	Cite2Urn getRangeEnd(){
 		String temp =  "${this.reduceToCollectionVersion()}"
 		if (this.isRange() ){
 			temp += "${this.objectId_2}"
