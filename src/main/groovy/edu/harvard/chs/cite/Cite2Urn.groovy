@@ -94,18 +94,13 @@ class Cite2Urn {
 					throw new Exception("Bad URN syntax: A cite2 urn should have 4 or 5 components. #${urnStr}# has ${components.size()} ")
 				}
 
-				if ( components.size() == 4){
-					if (urnStr[-1..-1] != ":"){
-					throw new Exception("Bad URN syntax: If a Cite2 URN lacks an object-component, it must nevertheless have a trailing colon. ")
-					}
-				}
-
 				if (components[0] != 'urn') {
 					throw new Exception("A Cite2 urn must begin with 'urn': #${urnStr}# begins with ${components[0]}")
 				}
 				if (components[1] != 'cite2') {
 					throw new Exception("A Cite2 urn must begin with 'urn:cite2': #${urnStr}# begins with urn:${components[1]}")
 				}
+
 				if (components[3].tokenize(".").size() > 2){
 					throw new Exception("A Cite2 Urn's collection component may consist of at most 2 parts: collection and [optional] version. #${urnStr}#")
 				}
@@ -115,6 +110,11 @@ class Cite2Urn {
 					if ( (components[3].contains(".")) && (components[3].tokenize(".").size < 2) ){
 						throw new Exception("A Cite2 URN's collection component may contain a '.' character only between a Collection identifier and a Version identifier. #${urnStr}#")
 					}
+				if ( components.size() == 4){
+					if (urnStr[-1..-1] != ":"){
+					throw new Exception("Bad URN syntax: If a Cite2 URN lacks an object-component, it must nevertheless have a trailing colon. ")
+					}
+				}
 				if (components.size() > 4){
 					if (components[4].tokenize("-").size() > 2){
 						throw new Exception("A Cite2 URN's passage component may have at most 1 hyphen, indication a range. #${urnStr}#")
