@@ -266,7 +266,8 @@ class CiteUrn {
    *
    * @param A String representation of a CITE Object URN.
    */
-  CiteUrn (String urnStr) {
+  CiteUrn (String urnStrParam) {
+		String urnStr = URLDecoder.decode(urnStrParam)
     def components = urnStr.split(/:/)
     def tempStr = ""
     boolean syntaxOk = true
@@ -595,5 +596,35 @@ Cite2Urn toCite2(){
 	Cite2Converter c2c = new Cite2Converter()
 	return c2c.convert(this)
 }
+
+  /** Creates a String representation of the URN with any subreferences
+  * URL encoded.
+	* @returns String
+  */
+	String encodeSubref(){
+		String encodedUrn
+		if (this.hasExtendedRef()){
+			if (this.isRange()){
+				encodedUrn = this.reduceToCollectionVersion()
+				encodedUrn += this.objectId_1
+				if (this.extendedRef_1 != null){
+				  encodedUrn += URLEncoder.encode("@${this.extendedRef_1}", "UTF-8")
+				}
+				encodedUrn += "-"
+				encodedUrn += this.objectId_2
+				if (this.extendedRef_2 != null){
+				  encodedUrn += URLEncoder.encode("@${this.extendedRef_2}", "UTF-8")
+				}
+
+			} else {
+				encodedUrn = this.reduceToObject().toString()
+			  encodedUrn += URLEncoder.encode("@${this.extendedRef}", "UTF-8")
+			}
+
+		} else {
+			encodedUrn = this.toString()
+		}
+		return encodedUrn
+	}
 
 }

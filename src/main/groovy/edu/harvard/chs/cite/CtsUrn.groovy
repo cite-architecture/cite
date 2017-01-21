@@ -110,9 +110,9 @@ class CtsUrn {
    * syntax and semantics of the CTS URN specification.
    * @throws Exception if urnStr is not a syntactically valid CTS URN.
    */
-  CtsUrn (String urnStr) {
+  CtsUrn (String urnStrParam) {
     // reverse any URL encoding prior to parsing:
-    //this.rawString = URLDecoder.decode(urnStr)
+		String urnStr = URLDecoder.decode(urnStrParam)
 
 
     if (debug > 3) {

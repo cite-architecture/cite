@@ -85,8 +85,9 @@ class Cite2Urn {
 	*
 	* @param A String representation of a CITE Object URN.
 	*/
-	Cite2Urn (String urnStr)
+	Cite2Urn (String urnStrParam)
 		throws Exception {
+	  String urnStr = URLDecoder.decode(urnStrParam)
 		def components = urnStr.tokenize(":")
 		def tempStr = ""
 		try{
@@ -478,6 +479,36 @@ class Cite2Urn {
 			}
 		}
 		return new Cite2Urn(temp)
+	}
+
+  /** Creates a String representation of the URN with any subreferences
+  * URL encoded.
+	* @returns String
+  */
+	String encodeSubref(){
+		String encodedUrn
+		if (this.hasExtendedRef()){
+			if (this.isRange()){
+				encodedUrn = this.reduceToCollectionVersion()
+				encodedUrn += this.objectId_1
+				if (this.extendedRef_1 != null){
+				  encodedUrn += URLEncoder.encode("@${this.extendedRef_1}", "UTF-8")
+				}
+				encodedUrn += "-"
+				encodedUrn += this.objectId_2
+				if (this.extendedRef_2 != null){
+				  encodedUrn += URLEncoder.encode("@${this.extendedRef_2}", "UTF-8")
+				}
+
+			} else {
+				encodedUrn = this.reduceToObject().toString()
+			  encodedUrn += URLEncoder.encode("@${this.extendedRef}", "UTF-8")
+			}
+
+		} else {
+			encodedUrn = this.toString()
+		}
+		return encodedUrn
 	}
 
 
