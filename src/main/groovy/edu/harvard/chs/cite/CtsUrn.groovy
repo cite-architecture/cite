@@ -97,8 +97,9 @@ class CtsUrn {
     if (debug > 3) {
       System.err.println "From source string ${urnStr}, constructing normalized..."
     }
+		String decodedString = URLDecoder.decode(urnStr)
     // Normalized to NFC, per URN spec:
-    rawString = Normalizer.normalize(urnStr, Form.NFC)
+    rawString = Normalizer.normalize(decodedString, Form.NFC)
     try {
       this.initializeUrn(this.rawString)
     } catch (Exception e) {
@@ -119,7 +120,12 @@ class CtsUrn {
       System.err.println "From source string ${urnStr}, constructing normalized..."
     }
     // Normalized to NFC, per URN spec:
-    rawString = Normalizer.normalize(urnStr, Form.NFC)
+		System.err.println("About to do: ${urnStrParam}")
+		String decodedString = URLDecoder.decode(urnStrParam)
+		System.err.println("Got: ${decodedString}")
+    // Normalized to NFC, per URN spec:
+    rawString = Normalizer.normalize(decodedString, Form.NFC)
+  //  rawString = Normalizer.normalize(urnStr, Form.NFC)
     try {
       this.initializeUrn(this.rawString)
     } catch (Exception e) {
@@ -223,7 +229,7 @@ class CtsUrn {
   throws Exception {
     def components = urnString.split(":")
     if ((components[0] != 'urn') ||  (components[1] != 'cts') ) {
-      throw new Exception("InitializeUrn: Bad URN syntax: ${urnString}")
+      throw new Exception("InitializeUrn: Bad URN syntax (does not begin with 'urn:cts'): ${urnString}")
     }
 
     // exploit fall through: assign top-level,
@@ -1032,4 +1038,5 @@ subrefIdx2 ${subrefIdx2}
     }
     return encodedString
   }
+
 }

@@ -52,6 +52,7 @@ class TestCite2Encode extends GroovyTestCase {
 		Cite2Urn c2urn = new Cite2Urn("urn:cite2:hmt:vaimg.v1:123@μῆνιν-234")
 		String encodedUrnStr = c2urn.encodeSubref()
 		System.err.println("${c2urn} >> ${encodedUrnStr}")
+		System.err.println("${encodedUrnStr} >> ${new Cite2Urn(encodedUrnStr)}")
 		assert c2urn.toString() != encodedUrnStr
 		Cite2Urn encodedUrn = new Cite2Urn(encodedUrnStr)
 		assert c2urn.toString() == encodedUrn.toString()
